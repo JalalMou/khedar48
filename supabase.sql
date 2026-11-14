@@ -128,6 +128,42 @@ create policy "k48 photos read"   on storage.objects for select using (bucket_id
 create policy "k48 photos upload" on storage.objects for insert to authenticated
   with check (bucket_id = 'products' and public.is_admin());
 
+-- ---------- newsletter (anyone can sign up, only admin reads) ----------
+create table if not exists public.subscribers (
+  email       text primary key check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' and length(email) < 200),
+  lang        text not null default 'ar',
+  created_at  timestamptz not null default now()
+);
+alter table public.subscribers enable row level security;
+drop policy if exists subs_insert on public.subscribers;
+drop policy if exists subs_admin  on public.subscribers;
+create policy subs_insert on public.subscribers for insert to anon, authenticated with check (true);
+create policy subs_admin  on public.subscribers for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- ---------- order tracking without an account ----------
+-- A customer gets back ONE order (status, items, total, driver while on the way)
+-- only if they give its number AND either the phone used for it or the secret link token.
+create or replace function public.track_order(oid text, secret text) returns jsonb
+language sql stable security definer set search_path = public as $$
+  select jsonb_build_object(
+    'id', o.id, 'at', o.at, 'status', o.status,
+    'sub', o.data->'sub', 'disc', o.data->'disc', 'fee', o.data->'fee', 'total', o.data->'total',
+    'hood', o.data->>'hood', 'slot', o.data->>'slot', 'items', o.data->'items',
+    'driver', (select jsonb_build_object('n', s.name, 'phone', s.phone)
+               from public.staff s where s.user_id::text = o.driver and o.status in ('prep','road'))
+  )
+  from public.orders o
+  where upper(o.id) = upper(trim(oid))
+    and (
+      (length(coalesce(secret,'')) >= 10 and o.data->>'tk' = secret)
+      or (length(regexp_replace(coalesce(secret,''), '\D', '', 'g')) >= 9
+          and right(regexp_replace(o.data->>'phone', '\D', '', 'g'), 9) = right(regexp_replace(secret, '\D', '', 'g'), 9))
+    )
+  limit 1;
+$$;
+revoke all on function public.track_order(text, text) from public;
+grant execute on function public.track_order(text, text) to anon, authenticated;
+
 -- =====================================================================
 -- AFTER you created your admin user (Authentication → Users → Add user),
 -- run ONLY this line, with your email instead of TON_EMAIL:
