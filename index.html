@@ -29,7 +29,7 @@
   --f-d:"Alexandria","Noto Sans Arabic",system-ui,sans-serif;
   --f-b:"Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+@media (prefers-color-scheme: dark){:root[data-autodark]:not([data-theme="light"]){
   --bg:#0e1912;--bg-2:#142219;--card:#17281d;--line:#24402d;--fg:#eef6ec;--muted:#9fb59f;
   --green:#2cc068;--green-d:#1e9c51;--green-l:#173a24;--orange:#ff983b;--orange-d:#ff8519;--orange-l:#3b2611;
   --red:#ff6a5e;--blue:#5aa0ff;--shadow:0 10px 30px -14px rgba(0,0,0,.6);color-scheme:dark}}
@@ -297,7 +297,7 @@ td input[type=number],td input[type=text]{width:84px;border:1px solid var(--line
 /* ===== storefront v4: header menu, big hero, tiles, offers, steps, newsletter, dark-green footer ===== */
 :root{--g1:#1f9d45;--g2:#0f6b30;--g3:#0b4a24;--gl:#eaf6ec;--rd:#e53935}
 :root[data-theme="dark"]{--gl:#173a24}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--gl:#173a24}}
+@media (prefers-color-scheme: dark){:root[data-autodark]:not([data-theme="light"]){--gl:#173a24}}
 html[lang=fr] body{font-family:"Plus Jakarta Sans","Noto Sans Arabic",system-ui,sans-serif}
 html[lang=fr] h1,html[lang=fr] h2,html[lang=fr] h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif}
 .hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 95%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
@@ -618,6 +618,106 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
 .hb em{display:block;height:100%;background:linear-gradient(90deg,#22b04b,#7ed957);border-radius:5px}
 #v-admin .note{margin:0}
 .s-scrim,.a-burger{display:none}
+/* ===== v5: white storefront + branding sections (green only as accent) ===== */
+.ticker{background:var(--gl);color:var(--g2);font-weight:600}
+.ticker span::before{color:var(--g1)}
+.hero2{background:radial-gradient(900px 420px at 88% 8%,#e6f6e7 0%,transparent 65%),linear-gradient(180deg,#ffffff,#f5faf4)}
+[dir=rtl] .hero2{background:radial-gradient(900px 420px at 12% 8%,#e6f6e7 0%,transparent 65%),linear-gradient(180deg,#ffffff,#f5faf4)}
+.h2-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,56px);align-items:center;color:var(--fg);min-height:0;padding-block:clamp(28px,4.5vw,60px)}
+.h2-txt{display:flex;flex-direction:column;align-items:flex-start;gap:18px;min-width:0}
+.h2-kick{display:inline-flex;gap:8px;align-items:center;background:var(--gl);color:var(--g2);font-weight:700;font-size:14px;padding:6px 14px;border-radius:99px}
+.hero2 h1{color:var(--fg);text-shadow:none;font-style:normal;font-size:clamp(32px,4.2vw,54px)}
+.hero2 h1 em{font-style:normal;color:var(--g1)}
+.hero2 h1::after{background:var(--g1);opacity:.9}
+.h2-sub{margin:0;color:var(--muted);font-size:17px;max-width:46ch;line-height:1.75}
+.h2-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.h2-cta{background:var(--g1);color:#fff;box-shadow:0 14px 28px -14px rgba(31,157,69,.8)}
+.h2-wa{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:#fff;color:var(--fg);border-radius:99px;padding:14px 22px;font-weight:700;text-decoration:none;font-size:16px}
+.h2-wa svg{width:20px;height:20px;stroke:#25d366;fill:none;stroke-width:2}
+.h2-feats>div{color:var(--fg)}
+.h2-feats .ic{border-color:color-mix(in srgb,var(--g1) 40%,transparent);background:var(--gl)}
+.h2-feats svg{stroke:var(--g1)}
+.h2-art{position:relative;aspect-ratio:1.08;margin:14px}
+.h2-photo{position:absolute;inset:0;border-radius:34px;background:url("img/hero.jpg") center/cover;box-shadow:0 34px 60px -34px rgba(17,60,30,.55);outline:2px dashed color-mix(in srgb,var(--g1) 35%,transparent);outline-offset:12px}
+.h2-art .h2-badge{bottom:-10px;inset-inline-start:-10px;inset-inline-end:auto;display:block}
+.h2-chip{position:absolute;background:#fff;border-radius:14px;padding:10px 14px;font-weight:700;font-size:14px;box-shadow:0 16px 30px -16px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center;white-space:nowrap}
+.h2-chip.c1{top:22px;inset-inline-end:-16px}
+.h2-chip.c2{bottom:84px;inset-inline-end:-22px}
+.feats{background:#fff;border:1px solid var(--line);box-shadow:0 10px 26px -22px rgba(0,0,0,.4)}
+.ctab{background:linear-gradient(90deg,#f6fbf5,#e9f6ea);color:var(--fg);border:1px solid var(--line)}
+[dir=rtl] .ctab{background:linear-gradient(270deg,#f6fbf5,#e9f6ea)}
+.ctab .ph{opacity:.95}
+.news{background:#fff;color:var(--fg);border:1.5px solid var(--line);box-shadow:0 14px 34px -26px rgba(0,0,0,.4)}
+.news>svg{stroke:var(--g1)}
+.news p{color:var(--muted);opacity:1}
+.news input{border:1px solid var(--line);background:var(--bg-2)}
+footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
+.ft-logo b{color:var(--g2)}.ft-logo small{color:var(--muted)}
+.ft h4{color:var(--g2)}
+.ft p{opacity:1;color:var(--muted)}
+.ft button.l,.ft-c{color:var(--fg)}
+.ft button.l:hover{color:var(--g1)}
+.ft-c svg,.soc svg{stroke:var(--g1)}
+.ft-c b{color:var(--fg)}
+.ft-b{border-top:1px solid var(--line);opacity:1;color:var(--muted)}
+.ft .lnk-f{color:var(--g1)}
+.marq{overflow:hidden;border-block:1px solid var(--line);background:#fff;padding:14px 0;margin-top:30px}
+.marq-in{display:flex;align-items:center;width:max-content;animation:marq 40s linear infinite}
+[dir=rtl] .marq-in{animation-name:marqr}
+.marq span{font-family:var(--f-d);font-weight:800;font-size:clamp(20px,2.3vw,30px);color:var(--g2);padding-inline:20px;white-space:nowrap}
+.marq span:nth-of-type(3n+2){color:var(--g1)}
+.marq i{font-style:normal;color:#7ed957;font-size:20px}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes marqr{to{transform:translateX(50%)}}
+.tl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;position:relative;padding-top:6px}
+.tl::before{content:"";position:absolute;top:34px;inset-inline:10%;height:2px;background:repeating-linear-gradient(90deg,var(--g1) 0 10px,transparent 10px 18px);opacity:.45}
+.tl-i{position:relative;text-align:center;padding:0 8px}
+.tl-i .dot{width:58px;height:58px;border-radius:50%;background:#fff;border:2px solid var(--g1);display:grid;place-items:center;font-size:26px;margin:0 auto 12px;box-shadow:0 0 0 8px var(--bg)}
+.tl-i small{display:block;color:var(--g1);font-weight:800;font-size:13px}
+.tl-i b{display:block;font-size:17px;margin:2px 0 4px}
+.tl-i p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.eng{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.eng>div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 26px -22px rgba(0,0,0,.4)}
+.eng .e{font-size:28px;width:56px;height:56px;border-radius:16px;background:var(--gl);display:grid;place-items:center;margin-bottom:12px}
+.eng b{display:block;font-size:17px}
+.eng p{margin:6px 0 0;color:var(--muted);font-size:14.5px;line-height:1.65}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(22px,4vw,48px);align-items:center}
+.story .ph{position:relative;aspect-ratio:1.15;border-radius:30px;background:url("img/p-prem.jpg") center/cover;box-shadow:0 30px 60px -36px rgba(17,60,30,.6)}
+.story .ph span{position:absolute;bottom:16px;inset-inline-start:16px;background:#fff;color:var(--g2);font-weight:800;padding:8px 14px;border-radius:12px;box-shadow:0 10px 20px -12px rgba(0,0,0,.4)}
+.story h2{margin:12px 0 10px;font-size:clamp(24px,2.6vw,34px);font-weight:800}
+.story p{color:var(--muted);line-height:1.85;font-size:16px;margin:0 0 10px}
+.story .sig{font-weight:800;color:var(--g2)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+.stats div{background:var(--gl);border-radius:14px;padding:12px 8px;text-align:center}
+.stats b{display:block;font-size:24px;font-weight:800;color:var(--g2);font-family:"Plus Jakarta Sans",sans-serif;direction:ltr}
+.stats small{color:var(--fg);font-size:13px;font-weight:600}
+.zones{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;box-shadow:0 10px 26px -22px rgba(0,0,0,.4)}
+.zones .pin{width:66px;height:66px;border-radius:20px;background:var(--gl);display:grid;place-items:center;font-size:32px}
+.zones h2{margin:0;font-size:clamp(20px,2.2vw,26px)}
+.zones .hint{margin:2px 0 0}
+.zchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.zchips span{background:var(--bg-2);border:1px solid var(--line);border-radius:99px;padding:6px 13px;font-size:14px;font-weight:600}
+.appb{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:center;background:linear-gradient(135deg,#f2faf2,#ffffff 70%);border:1px solid var(--line);border-radius:24px;padding:26px 32px;overflow:hidden}
+.appb h2{margin:12px 0 6px;font-size:clamp(22px,2.4vw,30px)}
+.appb ol{margin:12px 0 16px;padding-inline-start:22px;line-height:2;font-weight:500}
+.phone{justify-self:center;width:180px;aspect-ratio:9/17;border-radius:32px;border:8px solid #17281d;background:linear-gradient(180deg,#ffffff,#eaf6ec);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 30px 50px -30px rgba(0,0,0,.6)}
+.phone img{width:84px;height:84px;border-radius:22px;box-shadow:0 10px 20px -10px rgba(0,0,0,.5)}
+.phone b{color:var(--g2);font-family:"Plus Jakarta Sans",sans-serif}
+#installBtn[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.marq-in{animation:none}}
+@media (max-width:900px){
+  .h2-in{grid-template-columns:minmax(0,1fr);gap:18px}
+  .h2-art{order:-1;aspect-ratio:1.5;margin:6px 6px 14px}
+  .h2-chip{font-size:12.5px;padding:7px 10px}.h2-chip.c1{top:10px;inset-inline-end:8px}.h2-chip.c2{bottom:12px;inset-inline-end:8px}
+  .h2-art .h2-badge{display:none}
+  .h2-sub{font-size:15.5px}
+  .tl{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}.tl::before{display:none}
+  .eng{grid-template-columns:repeat(2,minmax(0,1fr))}.eng>div{padding:16px}
+  .story{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .zones{grid-template-columns:minmax(0,1fr);padding:18px}
+  .appb{grid-template-columns:minmax(0,1fr);padding:20px}.phone{width:140px}
+}
 .a-dot[hidden],.badge[hidden],nav.tabs button[hidden],.fld[hidden]{display:none}
 @media (max-width:1320px){.k6{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1280px){.r3,.r3b{grid-template-columns:1fr 1fr}.r3>:last-child,.r3b>:last-child{grid-column:1/-1}}
@@ -682,7 +782,7 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
     <button data-nav="catalog"><svg viewBox="0 0 24 24"><path d="M3 10h18l-2 10H5zM8 10l4-6 4 6"/></svg><span data-t="navProducts"></span></button>
     <button data-nav="offersSec"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8zM7.5 7.5h.01"/></svg><span data-t="navPromos"></span></button>
     <button data-go="orders"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span data-t="navTrack"></span></button>
-    <button data-info="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></svg><span data-t="navAbout"></span></button>
+    <button data-nav="story"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></svg><span data-t="navAbout"></span></button>
     <button data-nav="contact"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg><span data-t="navContact"></span></button>
   </nav>
   <div class="hd-r">
@@ -695,16 +795,23 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
 <main>
 <!-- ============ SHOP ============ -->
 <div class="view" id="v-shop">
-  <section class="hero2" id="top"><div class="h2-bg" aria-hidden="true"></div>
-    <div class="wrap h2-in">
+  <section class="hero2" id="top">
+    <div class="wrap h2-in"><div class="h2-txt">
+      <span class="h2-kick">🌿 <span data-t="kicker"></span></span>
       <h1 data-th="heroTitle"></h1>
+      <p class="h2-sub" data-t="heroSub"></p>
       <div class="h2-feats">
         <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><span data-th="f1"></span></div>
         <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 15-14 0 9-6 15-14 15M5 19l7-7"/></svg></span><span data-th="f2"></span></div>
         <div><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9h.01M18 15h.01"/></svg></span><span data-th="f3"></span></div>
       </div>
-      <button class="h2-cta" data-nav="catalog"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span data-t="orderNow"></span><svg viewBox="0 0 24 24" class="arr"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="h2-ctas"><button class="h2-cta" data-nav="catalog"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span data-t="orderNow"></span><svg viewBox="0 0 24 24" class="arr"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <a class="h2-wa" href="https://wa.me/212713694399" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg>WhatsApp</a></div>
+    </div>
+    <div class="h2-art" aria-hidden="true"><div class="h2-photo"></div>
       <div class="h2-badge"><b data-th="freshDay"></b><span data-t="natural"></span></div>
+      <div class="h2-chip c1">⚡ <span data-t="chip1"></span></div>
+      <div class="h2-chip c2">🧺 <span data-t="chip2"></span></div></div>
     </div>
   </section>
 
@@ -720,6 +827,8 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
     <div class="offers" id="offers"></div>
   </div></section>
 
+  <div class="marq" aria-hidden="true"><div class="marq-in" id="marq"></div></div>
+
   <section class="s4"><div class="wrap">
     <div class="feats">
       <div><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span><b data-t="ft1"></b><small data-t="ft1s"></small></span></div>
@@ -732,6 +841,16 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
   <section class="s4" id="pans"><div class="wrap">
     <div class="s4h"><h2 class="ul" data-t="baskets"></h2><span class="hint" data-t="basketsHint"></span></div>
     <div class="pan-row" id="panRow"></div>
+  </div></section>
+
+  <section class="s4" id="journey"><div class="wrap">
+    <div class="s4h"><h2 class="ul" data-t="tlT"></h2><span class="hint" data-t="tlS"></span></div>
+    <div class="tl">
+      <div class="tl-i"><span class="dot">🌅</span><small data-t="tl1s"></small><b data-t="tl1t"></b><p data-t="tl1d"></p></div>
+      <div class="tl-i"><span class="dot">🔍</span><small data-t="tl2s"></small><b data-t="tl2t"></b><p data-t="tl2d"></p></div>
+      <div class="tl-i"><span class="dot">⚖️</span><small data-t="tl3s"></small><b data-t="tl3t"></b><p data-t="tl3d"></p></div>
+      <div class="tl-i"><span class="dot">🛵</span><small data-t="tl4s"></small><b data-t="tl4t"></b><p data-t="tl4d"></p></div>
+    </div>
   </div></section>
 
   <section class="s4"><div class="wrap">
@@ -756,9 +875,30 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
     </div>
   </div></section>
 
-  <section class="s4" id="why"><div class="wrap">
-    <div class="why"><div class="ph" aria-hidden="true"></div>
-      <div class="tx"><h2 data-t="why"></h2><ul><li data-t="w1"></li><li data-t="w2"></li><li data-t="w3"></li><li data-t="w4"></li></ul></div></div>
+  <section class="s4"><div class="wrap">
+    <div class="s4h"><h2 class="ul" data-t="engT"></h2></div>
+    <div class="eng">
+      <div><span class="e">🥬</span><b data-t="e1t"></b><p data-t="e1d"></p></div>
+      <div><span class="e">⚖️</span><b data-t="e2t"></b><p data-t="e2d"></p></div>
+      <div><span class="e">🏷️</span><b data-t="e3t"></b><p data-t="e3d"></p></div>
+      <div><span class="e">💬</span><b data-t="e4t"></b><p data-t="e4d"></p></div>
+    </div>
+  </div></section>
+
+  <section class="s4" id="story"><div class="wrap">
+    <div class="story"><div class="ph" aria-hidden="true"><span>Khedar48 · وجدة</span></div>
+      <div><span class="h2-kick">💚 <span data-t="storyK"></span></span><h2 data-t="storyT"></h2><p data-t="story1"></p><p data-t="story2"></p><p class="sig" data-t="sig"></p>
+        <div class="stats"><div><b class="num" id="stN"></b><small data-t="st1"></small></div><div><b class="num">≤60′</b><small data-t="st2"></small></div><div><b class="num">7/7</b><small data-t="st3"></small></div><div><b class="num">100%</b><small data-t="st4"></small></div></div></div></div>
+  </div></section>
+
+  <section class="s4"><div class="wrap">
+    <div class="zones"><span class="pin">📍</span><div><h2 data-t="zonesT"></h2><p class="hint" data-t="zonesS"></p><div class="zchips" id="zchips"></div></div></div>
+  </div></section>
+
+  <section class="s4"><div class="wrap">
+    <div class="appb"><div><span class="h2-kick">📱 <span data-t="appK"></span></span><h2 data-t="appT"></h2><p class="hint" data-t="appS"></p>
+      <ol><li data-t="app1"></li><li data-t="app2"></li></ol><button class="h2-cta" id="installBtn" hidden><span data-t="installBtn"></span></button></div>
+      <div class="phone"><img src="icons/icon-192.png" alt=""><b>Khedar48</b></div></div>
   </div></section>
 
   <section class="s4"><div class="wrap">
@@ -982,7 +1122,7 @@ body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.ta
       <p data-t="ftAbout"></p><div class="soc" id="social"></div></div>
     <div><h4 data-t="links"></h4><ul>
       <li><button class="l" data-go="shop" data-t="navHome"></button></li><li><button class="l" data-nav="catalog" data-t="navProducts"></button></li>
-      <li><button class="l" data-nav="offersSec" data-t="navPromos"></button></li><li><button class="l" data-info="about" data-t="navAbout"></button></li>
+      <li><button class="l" data-nav="offersSec" data-t="navPromos"></button></li><li><button class="l" data-nav="story" data-t="navAbout"></button></li>
       <li><button class="l" data-go="orders" data-t="myOrders"></button></li></ul></div>
     <div><h4 data-t="info"></h4><ul>
       <li><button class="l" data-info="delivery" data-t="iDelivery"></button></li><li><button class="l" data-info="payment" data-t="iPayment"></button></li>
@@ -1184,7 +1324,7 @@ let lang=store.get("lang","ar")==="fr"?"fr":"ar";
 const T={
  ar:{tagline:"الخضرة والفواكه فوجدة",navHome:"الرئيسية",navProducts:"المنتوجات",navPromos:"العروض",navAbout:"علينا",navContact:"اتصل بنا",
   city:"وجدة",cart:"السلة",myOrders:"طلباتي",
-  heroTitle:"الخضرة والفواكه الطرية<br>حتى لباب دارك فوجدة!",f1:"توصيل فـ<br>أقل من 60 دقيقة",f2:"منتوجات طرية<br>وجودة مضمونة",f3:"الخلاص<br>عند الاستلام",
+  heroTitle:"الخضرة والفواكه <em>الطرية</em><br>حتى لباب دارك فوجدة!",f1:"توصيل فـ<br>أقل من 60 دقيقة",f2:"منتوجات طرية<br>وجودة مضمونة",f3:"الخلاص<br>عند الاستلام",
   orderNow:"طلب دابا",freshDay:"طري<br>اليوم",natural:"100% طبيعي",
   cats:"الأصناف ديالنا",allCats:"شوف كاع المنتوجات",offers:"أحسن العروض",baskets:"القفف الجاهزة",basketsHint:"مختارة على حساب العائلة",
   catalog:"كاع المنتوجات",search:"قلّب على منتوج… طماطم، بنان",all:"الكل",favs:"المفضلة",nProducts:n=>`${n} منتوج`,results:q=>`نتائج "${q}"`,
@@ -1217,10 +1357,25 @@ const T={
   trackTitle:"تتبع طلب",trackHint:"دخّل رقم الطلب ورقم الهاتف اللي طلبتي بيه. ماخاصكش حساب.",trackBtn:"تتبع",trackNo:"مالقيناش هاد الطلب. تأكد من الرقم والتيليفون.",
   orderNoPh:"رقم الطلب (K48-…)",phonePh:"رقم الهاتف",trackLink:"رابط تتبع الطلب",copyLink:"نسخ الرابط",linkCopied:"تنسخ الرابط ✓",
   saveLink:"حتافظ بهاد الرابط: تقدر تتبع بيه الطلب من أي تيليفون.",navTrack:"تتبع الطلب",trackWa:"تتبع الطلب:",
+  kicker:"طري من سوق الجملة كل صباح",heroSub:"كنختارو ليك الخضرة والفواكه حبة بحبة، وكنوصلوها لدارك فنفس النهار، وكتخلص ملي توصلك.",chip1:"توصيل فأقل من 60 دقيقة",chip2:"سلعة طرية كل نهار",
+  marq:["طري","محلي","ديال الموسم","مختار حبة بحبة","توصيل سريع","الخلاص عند الاستلام","وجدة"],
+  tlT:"من السوق لدارك",tlS:"كيفاش كتوصلك الخضرة طرية كل نهار",
+  tl1s:"الصباح بكري",tl1t:"سوق الجملة",tl1d:"كنمشيو لسوق الجملة ديال وجدة ونختارو أحسن سلعة ديال النهار.",
+  tl2s:"قبل ما نفتحو",tl2t:"الفرز والتنقية",tl2d:"كنفرزو الخضرة والفواكه حبة بحبة، وكنحيدو أي حاجة ماشي فالمستوى.",
+  tl3s:"ملي تطلب",tl3t:"الوزن والتوجاد",tl3d:"كنوزنو بالضبط وكنوجدو الطلب ديالك بعناية.",
+  tl4s:"فأقل من 60 دقيقة",tl4t:"التوصيل لدارك",tl4d:"الموزع ديالنا كيوصلك، وكتخلص من بعد ما تشوف السلعة.",
+  engT:"الوعد ديالنا",e1t:"طراوة مضمونة",e1d:"إلا شي منتوج ماعجبكش، رفضو عند الباب وماتخلصوش.",e2t:"ميزان مضبوط",e2d:"كل منتوج كيتوزن بالضبط، بلا مفاجآت.",
+  e3t:"ثمن واضح",e3d:"الثمن اللي كتشوف فالموقع هو اللي كتخلص، وثمن التوصيل باين من الأول.",e4t:"قريبين منك",e4d:"كاتبنا فواتساب كل يوم من 7 الصباح حتى 10 الليل.",
+  storyK:"خضار 48",storyT:"الحكاية ديالنا",story1:"خضار 48 تولدات فوجدة بفكرة بسيطة: الخضرة والفواكه الطرية خاصها توصل لكل دار، بلا تعب وبلا ما تضيع الوقت فالسوق.",
+  story2:"كل صباح كنختارو السلعة بحال إلا كنختاروها لدارنا، وكنوصلوها ليك بثمن معقول.",sig:"— فريق خضار 48",
+  st1:"منتوج طري",st2:"للتوصيل",st3:"كل يوم",st4:"كاش عند الاستلام",
+  zonesT:"فين كنوصلو؟",zonesS:"كنوصلو لكاع حومات وجدة والنواحي:",zonesMore:"والنواحي…",
+  appK:"تطبيق",appT:"خضار 48 فتيليفونك",appS:"زيد الموقع لشاشة التيليفون وولّي تطلب بكليكة وحدة، بحال أي تطبيق.",
+  app1:"أندرويد: حل Chrome ← ⋮ ← «إضافة إلى الشاشة الرئيسية»",app2:"آيفون: حل Safari ← زر المشاركة ← «إضافة إلى الشاشة الرئيسية»",installBtn:"زيد التطبيق",
   close:"سدّ"},
  fr:{tagline:"Fruits & Légumes à Oujda",navHome:"Accueil",navProducts:"Produits",navPromos:"Promotions",navAbout:"À propos",navContact:"Contact",
   city:"Oujda",cart:"Panier",myOrders:"Mes commandes",
-  heroTitle:"Vos Fruits & Légumes Frais<br>Livrés à Domicile à Oujda !",f1:"Livraison en<br>≤ 60 minutes",f2:"Produits frais<br>et de qualité",f3:"Paiement<br>à la livraison",
+  heroTitle:"Vos Fruits & Légumes <em>Frais</em><br>Livrés à Domicile à Oujda !",f1:"Livraison en<br>≤ 60 minutes",f2:"Produits frais<br>et de qualité",f3:"Paiement<br>à la livraison",
   orderNow:"Commander maintenant",freshDay:"Frais<br>du jour",natural:"100% Naturel",
   cats:"Nos catégories",allCats:"Voir tous les produits",offers:"Nos meilleures offres",baskets:"Nos paniers",basketsHint:"Composés pour toute la famille",
   catalog:"Tous nos produits",search:"Rechercher un produit… tomate, banane",all:"Tout",favs:"Favoris",nProducts:n=>`${n} produits`,results:q=>`Résultats « ${q} »`,
@@ -1253,6 +1408,21 @@ const T={
   trackTitle:"Suivre une commande",trackHint:"Entrez le numéro de commande et le téléphone utilisé. Aucun compte nécessaire.",trackBtn:"Suivre",trackNo:"Commande introuvable. Vérifiez le numéro et le téléphone.",
   orderNoPh:"N° de commande (K48-…)",phonePh:"Téléphone",trackLink:"Lien de suivi",copyLink:"Copier le lien",linkCopied:"Lien copié ✓",
   saveLink:"Gardez ce lien : il permet de suivre la commande depuis n'importe quel téléphone.",navTrack:"Suivi commande",trackWa:"Suivi :",
+  kicker:"Frais du marché de gros chaque matin",heroSub:"Nous choisissons vos fruits et légumes un par un, nous les livrons chez vous le jour même, et vous payez à la réception.",chip1:"Livraison en moins de 60 min",chip2:"Arrivage frais chaque jour",
+  marq:["Frais","Local","De saison","Choisi à la main","Livraison rapide","Paiement à la livraison","Oujda"],
+  tlT:"Du marché à votre porte",tlS:"Comment vos produits arrivent frais chaque jour",
+  tl1s:"Tôt le matin",tl1t:"Marché de gros",tl1d:"Nous allons au marché de gros d'Oujda choisir les meilleurs produits du jour.",
+  tl2s:"Avant l'ouverture",tl2t:"Tri et sélection",tl2d:"Nous trions chaque fruit et légume et écartons tout ce qui n'est pas parfait.",
+  tl3s:"À votre commande",tl3t:"Pesée et préparation",tl3d:"Nous pesons avec précision et préparons votre commande avec soin.",
+  tl4s:"En moins de 60 min",tl4t:"Livraison chez vous",tl4d:"Notre livreur vous apporte la commande, vous payez après vérification.",
+  engT:"Nos engagements",e1t:"Fraîcheur garantie",e1d:"Un produit ne vous plaît pas ? Refusez-le à la porte, vous ne le payez pas.",e2t:"Poids exact",e2d:"Chaque produit est pesé avec précision, sans surprise.",
+  e3t:"Prix transparents",e3d:"Le prix affiché est le prix payé, frais de livraison indiqués dès le départ.",e4t:"Toujours joignables",e4d:"Écrivez-nous sur WhatsApp tous les jours de 7h à 22h.",
+  storyK:"Khedar48",storyT:"Notre histoire",story1:"Khedar48 est né à Oujda d'une idée simple : des fruits et légumes frais doivent arriver dans chaque foyer, sans fatigue et sans perdre de temps au marché.",
+  story2:"Chaque matin, nous choisissons les produits comme pour notre propre famille, et nous vous les livrons à prix juste.",sig:"— L'équipe Khedar48",
+  st1:"produits frais",st2:"de livraison",st3:"jours sur 7",st4:"paiement à la livraison",
+  zonesT:"Où livrons-nous ?",zonesS:"Nous livrons dans tous les quartiers d'Oujda et ses environs :",zonesMore:"et environs…",
+  appK:"Application",appT:"Khedar48 sur votre téléphone",appS:"Ajoutez le site à votre écran d'accueil et commandez en un clic, comme une application.",
+  app1:"Android : Chrome → ⋮ → « Ajouter à l'écran d'accueil »",app2:"iPhone : Safari → Partager → « Sur l'écran d'accueil »",installBtn:"Installer l'application",
   close:"Fermer"}};
 const t=(k,...a)=>{const v=T[lang][k]??T.ar[k];return typeof v==="function"?v(...a):v};
 const tr=t; // alias for event handlers, where "t" is the clicked element
@@ -1300,7 +1470,8 @@ const TILES=[
  {id:"citrus",ar:"الحوامض",fr:"Agrumes",e:"🍋",f:p=>["orange","mandarin","lemon"].includes(p.id)},
  {id:"panier",ar:"القفف",fr:"Paniers",e:"🧺",f:p=>p.c==="panier"},
  {id:"deals",ar:"التخفيضات",fr:"Promotions",e:"%",f:p=>+p.old>+p.p}];
-let tile="all",favs=store.get("favs",[]);
+let tile="all",favs=store.get("favs",[]),installEvt=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;if(view==="shop")renderShop()});
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
 function pcard(p){const im=safeImg(p.img),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id);
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im" style="background:radial-gradient(circle at 50% 55%,color-mix(in srgb,${safeColor(p.t)} 14%,var(--card)),var(--card) 70%)">
@@ -1328,6 +1499,10 @@ function renderShop(){
   $("#countLbl").textContent=t("nProducts",list.length);
   $("#grid").innerHTML=list.length?list.map(pcard).join(""):`<div class="empty"><div class="big">🔍</div>${t("noResult")}</div>`;
   const s=settings,sv={fee:money(s.fee),free:money(s.freeFrom)};
+  const mw=t("marq").map(w=>`<span>${esc(w)}</span><i>✦</i>`).join("");$("#marq").innerHTML=mw+mw;
+  $("#stN").textContent=`${products.filter(p=>p.on!==false).length}`;
+  $("#zchips").innerHTML=HOODS.filter(h=>h!=="أخرى").map((h,i)=>`<span>${esc(lang==="fr"?HOODS_FR[i]:h)}</span>`).join("")+`<span>${esc(t("zonesMore"))}</span>`;
+  $("#installBtn").hidden=!installEvt;
   $("#tkFree").textContent=lang==="fr"?`Livraison gratuite dès ${sv.free}`:`توصيل فابور فوق ${sv.free}`;
   const soc=[["ig","Instagram",'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/>'],["fb","Facebook",'<path d="M15 3h-3a4 4 0 00-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/>'],["tt","TikTok",'<path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.5 3 2.5 5 5.5 5"/>']];
   $("#social").innerHTML=soc.filter(([k])=>/^https:\/\//.test(s[k]||"")).map(([k,n,d])=>`<a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24">${d}</svg></a>`).join("");
@@ -1765,6 +1940,7 @@ document.addEventListener("click",async e=>{
     case "aBell":aTab="orders";oFilter="new";renderAdmin();window.scrollTo({top:0});break;
     case "clearQ":aQ="";$("#aQ").value="";renderAdmin();break;
     case "logout":case "drvOut":logout();break;
+    case "installBtn":if(installEvt){installEvt.prompt();installEvt=null;renderShop()}break;
     case "copySubs":await loadSubs();try{await navigator.clipboard.writeText((subs||[]).join("\n"));toast(`${subs.length} emails copiés`)}catch(err){toast("Copie impossible ici")}renderAdmin();break;
     case "askNotif":try{const r=await Notification.requestPermission();toast(r==="granted"?"Notifications activées ✓":"Notifications refusées")}catch(err){toast("Notifications non disponibles")}break;
     case "repCsv":{const R=per(+aPer);const rows=[["commande","date","client","telephone","quartier","total","statut","livreur","code"],
