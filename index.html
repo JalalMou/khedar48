@@ -428,6 +428,7 @@ footer.ft .ft-in{display:grid;grid-template-columns:1.5fr 1fr 1.25fr 1.25fr 1fr;
 .wa-fab{position:fixed;inset-inline-end:20px;bottom:24px;z-index:35;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
 .wa-fab svg{width:32px;height:32px;fill:#fff}
 .info p{line-height:1.8;margin:0 0 12px}
+.cred{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:4px;font-size:13px}.cred a{color:var(--k-g2,#0d7a35)}
 .trk{background:var(--gl);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
 .trk>b{font-size:18px;font-family:var(--f-d)}.trk p{margin:2px 0 10px}
 .trk-r{display:flex;gap:8px;flex-wrap:wrap}
@@ -1317,7 +1318,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
       <div class="ft-c">🕖 <span data-t="supportV"></span></div></div>
     <div><h4 data-t="k7Follow"></h4><div class="soc" id="social"></div><p class="hint k7-nosoc" id="noSoc" data-t="k7NoSoc"></p></div>
   </div>
-  <div class="ft-b"><span data-t="rights"></span> · <button class="l" data-info="terms" data-t="iTerms"></button> · <button class="l" data-info="privacy" data-t="iPrivacy"></button></div>
+  <div class="ft-b"><span data-t="rights"></span> · <button class="l" data-info="terms" data-t="iTerms"></button> · <button class="l" data-info="privacy" data-t="iPrivacy"></button> · <button class="l" data-info="credits">📷 Crédits photos</button></div>
 </footer>
 <a class="wa-fab" href="https://wa.me/212713694399" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 00-11.2 19.6L3 29l6.6-1.7A13 13 0 1016 3zm0 23.6a10.6 10.6 0 01-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1116 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 01-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 000-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7 6.3 6.3 0 001.3 3.3 14.3 14.3 0 005.5 4.9c2 .9 2.8.9 3.8.8a3.2 3.2 0 002.1-1.5 2.6 2.6 0 00.2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg></a>
 
@@ -1738,8 +1739,61 @@ function track(kind,oid){
   if(cloud&&SB){SB.from("events").insert(ev).then(({error})=>{if(error)console.warn(error)})}
   else{const l=store.get("ev",[]);l.push({...ev,at:Date.now()});store.set("ev",l.slice(-3000))}
 }
+// product photos: Wikimedia Commons, free licences (credits shown in the footer "Crédits photos")
+const PHOTO_CREDITS=[
+ ["tomato","Tomato_je.jpg","CC BY-SA 3.0","Softeis"],
+ ["potato","Agriculture-72254.jpg","CC0","Petr Kratochvil"],
+ ["onion","Mixed_onions.jpg","CC BY-SA 3.0","Colin"],
+ ["carrot","Carrots_001.jpg","CC BY-SA 4.0","Aastha12gogo"],
+ ["courgette","Starr-070730-7874-Cucurbita_pepo-green_zucchini-Foodland_Pukalani-Maui_%2824797124241%29.jpg","CC BY 3.0 US","Forest and Kim Starr"],
+ ["eggplant","Aubergine_violette.jpg","CC BY-SA 4.0","Cca Raheem"],
+ ["pepper","Green_Bell_Pepper.jpg","CC BY-SA 4.0","Gaurav Dhwaj Khadka"],
+ ["chili","Fresh_Red_Curly_Chili_Peppers_%28Capsicum_annuum%29_Pile.jpg","CC BY-SA 4.0","Undeka 11"],
+ ["cucumber","Ryerson_Market_cucumbers_on_sale.jpg","CC BY-SA 3.0","Jason Zhang"],
+ ["lettuce","ARS_romaine_lettuce.jpg","Public domain","USDA"],
+ ["garlic","Opened_garlic_bulb_with_garlic_clove.jpg","CC BY 2.0","Dubravko Sorić"],
+ ["peas","Green_pea_pods.jpg","CC0","Fumikas Sagisavas"],
+ ["beans","-2021-06-30_Broad_beans_in_the_pod%2C_Trimingham.JPG","CC BY-SA 4.0","Kolforn"],
+ ["corn","Liat_Portal_for_Foodie_Disorder_-_Cooked_Corn_on_the_Cob.jpg","CC BY-SA 4.0","HaJunkiyada"],
+ ["parsley","Petroselinum_crispum_003.JPG","CC BY-SA 3.0","H. Zell"],
+ ["coriander","Coriander_Leaves.jpg","CC BY-SA 4.0","Rupeshm364"],
+ ["mint","Fresh_Mint_leaves.jpg","CC BY-SA 4.0","Mangosapiens"],
+ ["ginger","Fresh_ginger_rhizome_01.jpg","CC BY-SA 4.0","Friday musa"],
+ ["apple","Red_Apple.jpg","CC BY 2.0","Abhijit Tembhekar"],
+ ["orange","Orange_Fruit_Close-up.jpg","CC BY-SA 3.0","freestock.ca"],
+ ["mandarin","2023_Mandarynki.jpg","CC BY-SA 4.0","Jacek Halicki"],
+ ["banana","Banana_isolated_on_white.jpg","CC BY 2.0","robin_24"],
+ ["grapes","Green_Grape_3.jpg","Public domain","Martin Kozák"],
+ ["pear","D%27anjou_pear.jpg","CC BY-SA 4.0","Rhododendrites"],
+ ["strawberry","FraiseFruitPhoto.jpg","CC BY-SA 3.0","FoeNyx"],
+ ["watermelon","Slice_of_Watermelon_from_Wilson_Farm%2C_Lexington_MA.jpg","CC BY-SA 3.0","John Phelan"],
+ ["melon","A_hami_melon_for_sale_at_a_Publix_market_in_Knoxville%2C_Tennessee.jpg","CC BY 4.0","Harrison Keely"],
+ ["lemon","Lemon.jpg","CC BY-SA 2.5","André Karwath"],
+ ["peach","Autumn_Red_peaches.jpg","Public domain","Jack Dykinga, USDA"],
+ ["kiwi","Kiwi_%28Actinidia_chinensis%29_1_Luc_Viatour.jpg","CC BY-SA 2.5","Luc Viatour"],
+ ["avocado","Avocado_Hass_-_single_and_halved.jpg","CC BY-SA 4.0","Ivar Leidus"],
+ ["mango","Mangos_-_single_and_halved.jpg","CC BY-SA 4.0","Ivar Leidus"],
+ ["pineapple","Pineapple_fruit_2.jpg","CC0","Wilfredor"],
+ ["coconut","Coconuts_-_single_and_cracked_open.jpg","CC BY-SA 4.0","Ivar Leidus"],
+ ["cut-frites","Truffle_oil_french_fries_%2833024792848%29.jpg","CC BY-SA 2.0","Tony Webster"],
+ ["cut-tajine","Chopped_vegetables_consisting_of_potatoes%2C_carrot_%2C_onions_and_greeen_pepper.jpg","CC BY-SA 4.0","Olgatladi2020"],
+ ["cut-couscous","A_tray_of_freshly_chopped_vegetables.jpg","CC BY-SA 4.0","Stephanie cheks"],
+ ["cut-soupe","Mirepoix_on_cutting_board.jpg","CC BY-SA 3.0","Pigup"],
+ ["cut-salade","Cucumber%2C_Tomato_and_Avocado_Salad_-_50409856177.jpg","CC0","Alabama Extension"],
+ ["cut-oignon","Chopped_onion.jpg","CC BY-SA 3.0","Tiia Monto"],
+ ["cut-carotte","Grated_Carrot.JPG","Public domain","Miansari66"],
+ ["cut-ail","Peeled_garlic_cloves.jpg","CC0","Fumikas Sagisavas"],
+ ["sp-cumin","Seeds_of_Cumin.jpg","CC BY-SA 4.0","Sanjay Acharya"],
+ ["sp-paprika","Aleva_paprika.jpg","CC BY-SA 4.0","Ljiljana Sundać"],
+ ["sp-curcuma","Curcuma_longa_roots.jpg","CC BY-SA 3.0","Simon A. Eugster"],
+ ["sp-ginger","Ginger_powder_2.jpg","CC BY 2.0 KR","경빈마마"],
+ ["sp-pepper","Ground_black_pepper.jpg","CC BY-SA 4.0","Eliška Jindříšková"],
+ ["sp-ras","Ras.el.hanout.jpg","CC BY-SA 4.0","Sarefo"],
+ ["oil-1l","Bottle_of_Extra_Virgin_Olive_Oil.jpg","CC BY-SA 4.0","Mervat Salman"]];
+const PHOTO_IDS=new Set(PHOTO_CREDITS.map(c=>c[0]));
+const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.id==="oil-5l"?"img/pr-oil-1l.jpg":"");
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
-function pcard(p){const im=safeImg(p.img),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
+function pcard(p){const im=photoOf(p),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im">
     ${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
     ${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
@@ -1785,14 +1839,17 @@ function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth"
 let mode="cart";const sheetOpen=()=>$("#sheet").classList.contains("open");
 function openSheet(m){mode=m;if(m==="checkout")track("checkout");(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 function closeSheet(){$("#sheet").classList.remove("open");$("#scrim").classList.remove("open")}
-function openInfo(k){if(!T.ar.infoBody[k])return;mode="info:"+k;const s=settings;
+function openCredits(){mode="info:credits";$("#shTitle").textContent=lang==="fr"?"Crédits photos":"مصادر الصور";
+  $("#shBody").innerHTML=`<div class="info"><p>${lang==="fr"?"Photos des produits : Wikimedia Commons, sous licences libres. Merci aux photographes :":"صور المنتوجات من Wikimedia Commons، بتراخيص حرة. شكراً للمصورين:"}</p><ul class="cred">${PHOTO_CREDITS.map(([id,f,l,a])=>`<li><b>${esc(nm(byId(id)||{n:id})||id)}</b> · <a href="https://commons.wikimedia.org/wiki/File:${esc(f)}" target="_blank" rel="noopener">${esc(a)}</a> · ${esc(l)}</li>`).join("")}</ul><p class="hint">CC BY / CC BY-SA : creativecommons.org/licenses</p></div>`;
+  $("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">${t("close")}</button>`;$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function openInfo(k){if(k==="credits"){openCredits();return}if(!T.ar.infoBody[k])return;mode="info:"+k;const s=settings;
   $("#shTitle").textContent=t("infoTitle")[k];$("#shBody").innerHTML=`<div class="info">${t("infoBody")[k]({fee:money(s.fee),free:money(s.freeFrom)})}</div>`;
   $("#shFoot").innerHTML=`<a class="btn b-wa block" href="https://wa.me/${WA}" target="_blank" rel="noopener">WhatsApp · <span dir="ltr">${WA_PRETTY}</span></a>`;
   $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 function renderCart(){
   $("#shTitle").textContent=t("yourCart");const L=lines();
   if(!L.length){$("#shBody").innerHTML=`<div class="empty"><div class="big">🧺</div><p>${t("emptyCart")}</p></div>`;$("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">${t("backShop")}</button>`;return}
-  $("#shBody").innerHTML=L.map(({it,q,sum})=>{const im=safeImg(it.img);return `<div class="line"><div class="th" style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(it.e)}</div>
+  $("#shBody").innerHTML=L.map(({it,q,sum})=>{const im=photoOf(it);return `<div class="line"><div class="th" style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(it.e)}</div>
     <div class="t"><b>${esc(nm(it))}</b><small class="num">${money(it.p)} · ${U4[lang][it.u]||""} · ${money(sum)}</small></div>${stepper(it.id)}</div>`}).join("")+
     `<div class="codebox"><input id="codeIn" placeholder="${esc(t("code"))}" value="${esc(promoCode)}" aria-label="${esc(t("code"))}" autocomplete="off"><button class="btn b-or sm" id="codeBtn">${t("apply")}</button></div><div id="codeMsg"></div>`;
   const tt=totals();const left=Math.max(0,(+settings.freeFrom||0)-(tt.sub-tt.disc));
@@ -1953,7 +2010,7 @@ function notifyText(o,st=o.status){
   return (M[st]||M.new)+track;
 }
 const notifyUrl=(o,st)=>`https://wa.me/${waNum(o.phone)}?text=${encodeURIComponent(notifyText(o,st))}`;
-const thumb=p=>{const im=safeImg(p?.img);return `<span class="th" style="${im?"":`background:color-mix(in srgb,${safeColor(p?.t)} 16%,var(--card))`}">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p?.e||"🥬")}</span>`};
+const thumb=p=>{const im=photoOf(p);return `<span class="th" style="${im?"":`background:color-mix(in srgb,${safeColor(p?.t)} 16%,var(--card))`}">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p?.e||"🥬")}</span>`};
 const minOf=p=>p.min!=null&&p.min!==""?+p.min:5;
 const lowStock=()=>products.filter(p=>typeof p.stock==="number"&&p.stock<=minOf(p)).sort((a,b)=>a.stock-b.stock);
 const unitCost=(id,price)=>{const p=byId(id);return p&&+p.cost>0?+p.cost:(+price||+p?.p||0)*(1-(+settings.margin||0)/100)};
