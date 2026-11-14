@@ -1482,6 +1482,28 @@ const hhmm=t=>{const d=new Date(t||0),td=d.toDateString()===new Date().toDateStr
 const stPill=s=>`<span class="ps ps-${esc(s)}">${AST[s]||esc(s)}</span>`;
 const aEmpty=t=>`<p class="a-empty">${t}</p>`;
 const waNum=ph=>esc(String(ph||"").replace(/^0/,"212").replace(/\D/g,""));
+/* ready-made WhatsApp message to the customer, in the language they ordered in, for the order's current (or given) status */
+const SITE="https://www.khedar48.com/";
+function notifyText(o,st=o.status){
+  const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"",id=o.id,dv=drivers.list?.[o.driver];
+  const link=o.tk?`${SITE}#t=${encodeURIComponent(id)}.${o.tk}`:"";
+  const tot=fr?`${(+o.total||0).toLocaleString("fr-MA",{minimumFractionDigits:2,maximumFractionDigits:2})} MAD`:`${fmt(o.total)} درهم`;
+  const M=fr?{
+    new:`Bonjour ${n}, nous avons bien reçu votre commande ${id} ✅ Total : ${tot} (paiement à la livraison). Nous la préparons très vite.`,
+    prep:`Bonjour ${n}, votre commande ${id} est en préparation 🧺 Nous choisissons vos produits les plus frais.`,
+    road:`Bonjour ${n}, votre commande ${id} est en route 🛵${dv?` avec ${dv.n} (${dv.phone})`:""}. Gardez votre téléphone près de vous. Total à payer : ${tot}.`,
+    done:`Merci ${n} ! Votre commande ${id} a été livrée 🌿 Bonne dégustation. Pour recommander : ${SITE}`,
+    cancel:`Bonjour ${n}, votre commande ${id} a été annulée. Pour toute question, répondez simplement à ce message.`}
+   :{
+    new:`مرحبا ${n}، توصلنا بالطلب ديالك ${id} ✅ المجموع: ${tot} (الخلاص عند الاستلام). غادي نوجدوه دغيا.`,
+    prep:`مرحبا ${n}، الطلب ديالك ${id} كيتوجد دابا 🧺 كنختارو ليك أطرى المنتوجات.`,
+    road:`مرحبا ${n}، الطلب ديالك ${id} خرج فالطريق 🛵${dv?` مع الموزع ${dv.n} (${dv.phone})`:""}. خلّي التيليفون قريب منك. المبلغ اللي غادي تخلص: ${tot}.`,
+    done:`شكراً ${n}! الطلب ${id} توصّل 🌿 بالصحة والراحة. باش تطلب مرة أخرى: ${SITE}`,
+    cancel:`مرحبا ${n}، الطلب ديالك ${id} تلغى. إلا عندك شي سؤال، جاوبنا هنا.`};
+  const track=link&&!["done","cancel"].includes(st)?`\n\n${fr?"Suivre la commande :":"تتبع الطلب:"} ${link}`:"";
+  return (M[st]||M.new)+track;
+}
+const notifyUrl=(o,st)=>`https://wa.me/${waNum(o.phone)}?text=${encodeURIComponent(notifyText(o,st))}`;
 const thumb=p=>{const im=safeImg(p?.img);return `<span class="th" style="${im?"":`background:color-mix(in srgb,${safeColor(p?.t)} 16%,var(--card))`}">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p?.e||"🥬")}</span>`};
 const minOf=p=>p.min!=null&&p.min!==""?+p.min:5;
 const lowStock=()=>products.filter(p=>typeof p.stock==="number"&&p.stock<=minOf(p)).sort((a,b)=>a.stock-b.stock);
@@ -1530,7 +1552,7 @@ function adminOrderCard(o){
    <div class="oc-t"><span>Total${o.disc?` <small class="hint num">(remise −${fmt(o.disc)})</small>`:""}${o.fee?` <small class="hint num">(livraison ${fmt(o.fee)})</small>`:""}</span><b class="num">${mad(o.total)}</b></div>
    <div class="seg" role="group" aria-label="Statut">${Object.keys(AST).map(k=>`<button class="ps-${k}" data-st="${k}" data-oid="${esc(o.id)}" aria-pressed="${o.status===k}">${AST[k]}</button>`).join("")}</div>
    <div class="oc-a"><select data-assign="${esc(o.id)}" aria-label="Livreur"><option value="">— Livreur —</option>${dOpts}</select>
-     <a class="btn b-wa sm" href="https://wa.me/${waNum(o.phone)}" target="_blank" rel="noopener">WhatsApp</a></div></article>`}
+     <a class="btn b-wa sm" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener" title="Message prêt : « ${esc(AST[o.status]||"")} »">📲 Informer le client</a></div></article>`}
 
 const A={};
 A.dash=({O,OR,OP,len,act})=>{
@@ -1678,7 +1700,7 @@ function drvCard(o,mine){return `<div class="ord drv-card"><div class="top"><spa
   <div class="top"><span>خاصك تجمع: <span class="big num">${fmt(o.total)} د.م</span></span>
   <span style="display:flex;gap:6px;flex-wrap:wrap">${mine?(o.status==="new"||o.status==="prep"?`<button class="btn b-gr sm" data-dst="road" data-oid="${esc(o.id)}">خرجت بالطلب</button>`:"")+(o.status==="road"?`<button class="btn b-or sm" data-dst="done" data-oid="${esc(o.id)}">تسلّم وتخلّص</button>`:"")
      :`<button class="btn b-or sm" data-take="${esc(o.id)}">خذ هاد الطلب</button>`}
-  <a class="btn b-wa sm" href="https://wa.me/${esc(String(o.phone).replace(/^0/,"212").replace(/\D/g,""))}" target="_blank" rel="noopener">واتساب</a></span></div></div>`}
+  <a class="btn b-wa sm" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener">📲 خبّر الزبون</a></span></div></div>`}
 function renderDriver(){
   $("#driverGate").hidden=isTeam();$("#driverBody").hidden=!isTeam();if(!isTeam())return;
   $("#drvPick").hidden=role==="driver";$("#drvOut").hidden=!cloud;
@@ -1718,8 +1740,11 @@ document.addEventListener("click",async e=>{
   if(D.at){aTab=D.at;sideOpen(false);renderAdmin();window.scrollTo({top:0});return}
   if(D.of){oFilter=D.of;renderAdmin();return}
   if(D.open){aTab="orders";oFilter="all";aQ=D.open;$("#aQ").value=aQ;renderAdmin();window.scrollTo({top:0});return}
-  if(D.st){const o=staffOrders().find(x=>x.id===D.oid);if(o&&o.status!==D.st){await setStatus(o,D.st);toast(`#${o.id} : ${AST[D.st]}`)}return}
-  if(D.dst){const o=staffOrders().find(x=>x.id===D.oid);if(o){await setStatus(o,D.dst);toast(D.dst==="done"?"مبروك، الطلب توصّل ✓":"بالتوفيق فالطريق")}return}
+  if(D.st){const o=staffOrders().find(x=>x.id===D.oid);if(o&&o.status!==D.st){await setStatus(o,D.st);toast(`#${o.id} : ${AST[D.st]} · 📲 pensez à informer le client`)}return}
+  if(D.dst){const o=staffOrders().find(x=>x.id===D.oid);if(o){
+    // one tap for the driver: open WhatsApp with the new-status message right away (before any await, so the browser allows it), then save the status
+    window.open(notifyUrl({...o,status:D.dst},D.dst),"_blank","noopener");
+    await setStatus(o,D.dst);toast(D.dst==="done"?"مبروك، الطلب توصّل ✓":"بالتوفيق فالطريق")}return}
   if(D.take){if(!me){toast("اختار سميتك اللول");$("#drvSel").focus();return}const o=staffOrders().find(x=>x.id===D.take);if(o){await patchOrder(o,{driver:me,status:"prep"});toast("الطلب ولى عندك")}return}
   if(D.catall){products.filter(p=>p.c===D.catall).forEach(p=>{p.on=D.v==="1";if(!p.on)delete cart[p.id]});saveCatalog("products");renderAll();toast(D.v==="1"?"Rayon activé":"Rayon désactivé");return}
   if(D.delp){products=products.filter(p=>p.id!==D.delp);saveCatalog("products");renderAll();toast("Produit supprimé");return}
