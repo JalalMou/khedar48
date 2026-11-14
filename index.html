@@ -15,7 +15,7 @@
 <meta property="og:description" content="الخضرة والفواكه الطرية حتى لباب دارك فوجدة">
 <meta property="og:image" content="img/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Amiri:wght@400;700&family=Poppins:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Cairo:wght@500;600;700;800;900&display=swap">
 <style>
 /* Layout: bright market app — green brand, citrus-orange actions. Customer shop, cart sheet, order tracking; staff get admin + driver views. */
 :root{
@@ -718,6 +718,180 @@ footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
   .zones{grid-template-columns:minmax(0,1fr);padding:18px}
   .appb{grid-template-columns:minmax(0,1fr);padding:20px}.phone{width:140px}
 }
+/* ===== v7 storefront, following the owner's mockup: vivid green + orange, logo, photo hero, cards with shadows ===== */
+:root{--k-g:#16a34a;--k-g2:#0d7a35;--k-g3:#0a5a28;--k-or:#f97316;--k-or2:#ea580c;--k-yel:#ffd21f;--k-bg:#ffffff;--k-soft:#f3faf4;--k-sh:0 10px 28px -18px rgba(10,60,30,.45)}
+html[lang=fr] body,html[lang=fr] h1,html[lang=fr] h2,html[lang=fr] h3{font-family:"Poppins","Plus Jakarta Sans",system-ui,sans-serif}
+html[lang=ar] body{font-family:"Cairo","Noto Sans Arabic",system-ui,sans-serif}
+html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3{font-family:"Cairo","Noto Sans Arabic",system-ui,sans-serif}
+html,body{background:var(--k-bg)}
+.k7-hd{background:#fff;border-bottom:1px solid #e8efe9;box-shadow:0 4px 18px -14px rgba(0,0,0,.35)}
+.k7-hd .hd-in{display:flex;align-items:center;gap:14px;padding-block:8px;max-width:1280px}
+.k7-logo{background:none;border:0;padding:0;flex:none;line-height:0}
+.k7-logo img{height:54px;width:auto}
+.k7-nav{display:flex;gap:2px;margin-inline:auto;flex-wrap:nowrap}
+.k7-nav button{background:none;border:0;border-radius:10px;padding:9px 12px;font-weight:600;font-size:14.5px;color:#1f2a22;white-space:nowrap}
+.k7-nav button:hover{background:var(--k-soft);color:var(--k-g2)}
+.k7-nav button.on{background:var(--k-g);color:#fff}
+.k7-act{display:flex;align-items:center;gap:8px;flex:none}
+.k7-act .langsw{border-radius:10px}
+.k7-act .langsw button{padding:7px 10px;min-width:34px;font-size:13px}
+.k7-ib{position:relative;width:42px;height:42px;border:0;background:none;border-radius:12px;display:grid;place-items:center;color:#1f2a22}
+.k7-ib:hover{background:var(--k-soft)}
+.k7-ib svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.k7-badge{position:absolute;top:2px;inset-inline-end:0;min-width:19px;height:19px;border-radius:10px;background:var(--k-or);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 4px;border:2px solid #fff}
+.k7-wa{display:inline-flex;align-items:center;gap:8px;background:var(--k-g2);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:10px 18px;font-size:14.5px;box-shadow:0 8px 18px -10px rgba(13,122,53,.9)}
+.k7-wa svg{width:20px;height:20px;fill:#fff}
+/* hero */
+.k7-hero{position:relative;background:url("img/hero.jpg") center/cover no-repeat;overflow:hidden}
+.k7-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.85) 38%,rgba(255,255,255,0) 66%)}
+[dir=rtl] .k7-hero::before{background:linear-gradient(270deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.85) 38%,rgba(255,255,255,0) 66%)}
+.k7-hero-in{position:relative;max-width:1280px;min-height:clamp(360px,34vw,470px);display:flex;align-items:center;padding-block:28px 74px}
+.k7-hero-tx{max-width:600px}
+.k7-hero-logo img{width:min(420px,80%);height:auto;display:block;margin-bottom:6px}
+.k7-hero h1{margin:0 0 16px;font-size:clamp(28px,3.2vw,42px);line-height:1.2;font-weight:800;font-style:italic;color:#0f2d1b}
+html[lang=ar] .k7-hero h1{font-style:normal;line-height:1.5}
+.k7-60{display:inline-flex;align-items:center;gap:10px;background:var(--k-yel);color:#0f2d1b;padding:4px 18px 4px 12px;border-radius:14px;transform:rotate(-2deg);box-shadow:0 8px 18px -10px rgba(0,0,0,.4);white-space:nowrap}
+.k7-60 .clock{font-style:normal;font-size:.9em}
+.k7-60 b{font-weight:900}
+.k7-checks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.k7-checks li{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#0f2d1b}
+.k7-checks li::before{content:"✓";width:22px;height:22px;border-radius:50%;background:var(--k-g);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:900;flex:none}
+/* feature bar overlapping the hero */
+.k7-feat{position:relative;margin-top:-46px;z-index:2;background:#fff;border-radius:20px;box-shadow:0 18px 40px -22px rgba(10,60,30,.5);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:16px 10px}
+.k7-feat>div{display:flex;align-items:center;gap:12px;padding:6px 16px;font-size:14.5px;font-weight:600;line-height:1.3;color:#1f2a22}
+.k7-feat>div+div{border-inline-start:1px solid #e6efe8}
+.k7-feat svg{width:40px;height:40px;stroke:var(--k-g);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* sections */
+.k7-sec{padding-top:26px}
+.k7-sec .wrap,.k7-trust .wrap,.k7-ft-in{max-width:1280px}
+.k7-cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.k7-cat{position:relative;background:#fff;border:0;border-radius:18px;box-shadow:var(--k-sh);padding:0 0 12px;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:800;font-size:16px;line-height:1.2;color:#1f2a22;transition:transform .15s}
+.k7-cat:hover{transform:translateY(-3px)}
+.k7-cat .ph{width:100%;aspect-ratio:1.55;background:#f6faf5 center/cover;display:grid;place-items:center;font-size:54px}
+.k7-cat .new{position:absolute;top:10px;inset-inline-start:10px;background:var(--k-or);color:#fff;font-size:12px;font-weight:800;padding:3px 10px;border-radius:8px;transform:rotate(-6deg)}
+.k7-2col{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:18px;align-items:stretch}
+.k7-card{background:#fff;border-radius:20px;box-shadow:var(--k-sh);border:1px solid #edf3ee;padding:18px 20px}
+.k7-cutban{position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(100deg,#f3faf4 0%,#fff7ef 100%);box-shadow:var(--k-sh);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:10px;padding:24px 26px}
+.k7-cutban h2{margin:0 0 12px;font-size:clamp(24px,2.5vw,34px);font-weight:800;line-height:1.15;font-style:italic;color:#0f2d1b}
+html[lang=ar] .k7-cutban h2{font-style:normal;line-height:1.4}
+.k7-ticks{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:6px}
+.k7-ticks li{display:flex;gap:8px;align-items:center;font-size:16px;font-weight:500}
+.k7-ticks li::before{content:"✔";color:var(--k-g);font-weight:900}
+.k7-cutban .art{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.k7-cutban .art span{aspect-ratio:1.25;background:#fff;border-radius:14px;box-shadow:0 8px 18px -12px rgba(0,0,0,.35);display:grid;place-items:center;font-size:40px;border:2px solid #eef4ee}
+.k7-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:99px;padding:13px 24px;font-weight:800;font-size:15.5px;color:#fff;text-decoration:none;transition:filter .15s,transform .15s}
+.k7-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.k7-btn.or{background:linear-gradient(90deg,var(--k-or2),var(--k-or));box-shadow:0 10px 22px -12px rgba(234,88,12,.9)}
+.k7-btn.gr{background:linear-gradient(90deg,var(--k-g3),var(--k-g));box-shadow:0 10px 22px -12px rgba(13,122,53,.9)}
+.k7-btn.block{width:100%}
+.k7-ch{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.k7-ch .ic{font-size:30px}
+.k7-ch h3{margin:0;font-size:21px;font-weight:800;color:var(--k-g2)}
+.k7-ch small{color:var(--k-g);font-weight:600}
+.k7-steps ol{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:8px}
+.k7-steps li{display:flex;align-items:center;gap:10px;background:#f7faf7;border-radius:10px;padding:8px 10px;font-weight:600;font-size:14.5px}
+.k7-steps li i{width:26px;height:26px;border-radius:50%;background:var(--k-g2);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px;flex:none}
+.k7-rh{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.k7-rh h2{margin:0;font-size:clamp(22px,2.3vw,30px);font-weight:800;color:#0f2d1b}
+.k7-rh p{margin:2px 0 0;color:#4f5d53;font-size:14.5px}
+.k7-more{background:#fff;border:1px solid #e3ece5;border-radius:99px;padding:7px 14px;font-weight:700;font-size:13.5px;color:#1f2a22;box-shadow:0 6px 14px -12px rgba(0,0,0,.4)}
+.k7-row4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.k7-row6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+/* product card (shared) */
+.pc{border-radius:16px;border:1px solid #edf2ee;box-shadow:var(--k-sh);padding:10px}
+.pc-im{aspect-ratio:1.3;border-radius:12px;font-size:66px;background:transparent!important}
+.pc-n{text-align:center;font-weight:700;font-size:15.5px}
+.pc-u{display:none}
+.pc-f{margin-top:6px;align-items:center}
+.pc-p b{color:var(--k-or2);font-size:18px;font-weight:800}
+.pc-p b.red{color:#dc2626}
+.pc-p small{color:var(--k-or2);font-weight:700;font-size:13px}
+.pc-p s{display:block;font-size:12px}
+.cbtn{background:var(--k-g);border-radius:10px;width:42px;height:36px;box-shadow:0 6px 12px -8px rgba(13,122,53,.9)}
+.pc .step{background:var(--k-g);height:36px;border-radius:10px}
+.pc .off{background:#dc2626}
+.k7-packs .pc-im{aspect-ratio:1.35;padding:0;overflow:hidden}
+.k7-packs .pc-im img{border-radius:12px}
+/* tracking card */
+.k7-trk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px}
+.k7-trk input{min-width:0;border:1px solid #dfe8e1;border-radius:12px;padding:11px 12px;font-size:14px;background:#fff}
+.k7-sbtn{width:48px;border:0;border-radius:12px;background:var(--k-g);display:grid;place-items:center}
+.k7-sbtn svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.2}
+.k7-stp{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;position:relative}
+.k7-stp::before{content:"";position:absolute;top:17px;inset-inline:12%;height:3px;background:#dfe6e0;border-radius:3px}
+.k7-stp div{position:relative;text-align:center;font-size:12.5px;font-weight:600;color:#6b766e}
+.k7-stp i{width:36px;height:36px;border-radius:50%;background:#cfd6d1;color:#fff;display:grid;place-items:center;margin:0 auto 6px;font-style:normal;font-size:16px;border:3px solid #fff;box-shadow:0 0 0 1px #dfe6e0}
+.k7-stp div.on i{background:var(--k-g)}
+.k7-stp div.on{color:#0f2d1b}
+.k7-stp-info{margin:8px 0 0;font-size:13.5px}
+.k7-stp-info a{color:var(--k-g2);font-weight:700}
+/* trust strip */
+.k7-trust{margin-top:26px;background:linear-gradient(180deg,#fff,#eef8ef);border-block:1px solid #e3efe5}
+.k7-trust .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding-block:16px}
+.k7-trust .wrap>div{display:flex;align-items:center;gap:10px;justify-content:center}
+.k7-trust span{font-size:28px}
+.k7-trust b{font-size:14.5px;line-height:1.25;color:#1f2a22}
+/* promo banner */
+.k7-promo{position:relative;overflow:hidden;border-radius:22px;background:linear-gradient(100deg,#e8f6ea 0%,#f9fff6 60%,#eaf7ec 100%);box-shadow:var(--k-sh);display:grid;grid-template-columns:200px minmax(0,1fr) auto;align-items:center;gap:20px;padding:16px 24px;border:1px solid #dcefdf}
+.k7-promo .ph{height:120px;border-radius:16px;background:url("img/p-veg.jpg") center/cover}
+.k7-promo h2{margin:0 0 10px;font-size:clamp(20px,2.2vw,28px);font-weight:800;font-style:italic;color:var(--k-g3)}
+html[lang=ar] .k7-promo h2{font-style:normal}
+.k7-free{background:linear-gradient(135deg,var(--k-or),var(--k-or2));color:#fff;border-radius:18px;padding:14px 22px;text-align:center;transform:rotate(-4deg);box-shadow:0 14px 26px -14px rgba(234,88,12,.9);font-weight:800;line-height:1.15}
+.k7-free b{display:block;font-size:26px;font-weight:900}
+.k7-free small{display:block;font-size:14px}
+/* catalog + cta */
+.k7-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+#shopSec .srch{margin:0;min-width:260px;border-radius:99px}
+.k7-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#f5fbf6;border:1px solid #e1efe4;border-radius:22px;padding:20px 26px}
+.k7-cta h2{margin:0;font-size:clamp(22px,2.4vw,30px);font-weight:800;font-style:italic;color:var(--k-g3)}
+html[lang=ar] .k7-cta h2{font-style:normal}
+.k7-cta p{margin:2px 0 0;color:#4f5d53}
+.k7-cta-b{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.k7-cta-b .ou{color:#6b766e;font-weight:600}
+/* footer */
+.k7-ft{position:relative;margin-top:60px;background:linear-gradient(180deg,#0e6b30,#0a4f24)!important;color:#e7f3ea!important;border:0!important}
+.k7-wave{position:absolute;top:-38px;inset-inline:0;height:40px;background:radial-gradient(120% 100% at 50% 100%,#0e6b30 60%,transparent 61%)}
+.k7-ft-in{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.25fr .9fr;gap:24px;padding-block:34px 22px}
+footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch}
+.k7-ft-logo{background:#fff;border-radius:16px;padding:8px 12px;display:inline-block;line-height:0}
+.k7-ft-logo img{height:64px;width:auto}
+.k7-ft p{color:#cfe6d6!important;line-height:1.6;font-size:14px;max-width:34ch}
+.k7-ft h4{color:#fff!important;font-size:16px;margin:4px 0 10px}
+.k7-ft ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.k7-ft button.l{background:none;border:0;padding:0;color:#e7f3ea;font-size:14px;text-align:start}
+.k7-ft button.l::before{content:"→ ";color:#9fd8ae}
+[dir=rtl] .k7-ft button.l::before{content:"← "}
+.k7-ft button.l:hover{color:#fff;text-decoration:underline}
+.k7-ft .ft-c{color:#e7f3ea!important;display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:14px;text-decoration:none;line-height:1.4}
+.k7-ft .ft-c b{color:#fff}
+.k7-ft .soc svg{stroke:#fff;width:28px;height:28px}
+.k7-ft .soc a{background:rgba(255,255,255,.12);border-radius:10px;padding:6px;line-height:0}
+.k7-nosoc{color:#bfe0c8!important;font-size:13px}
+.k7-ft .ft-b{border-top:1px solid rgba(255,255,255,.15)!important;color:#cfe6d6!important;opacity:1}
+.k7-ft .ft-b button.l::before{content:none}
+.k7-ft .lnk-f{color:#ffd21f!important;text-decoration:none}
+.wa-fab{background:#25d366;width:58px;height:58px}
+.wa-fab svg{fill:#fff}
+.ticker{display:none}
+@media (max-width:1240px){.k7-nav button{padding:8px 8px;font-size:13.5px}.k7-row6{grid-template-columns:repeat(3,minmax(0,1fr))}.k7-cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1080px){.k7-nav{display:none}.k7-act{margin-inline-start:auto}.k7-2col{grid-template-columns:minmax(0,1fr)}.k7-trust .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+  .k7-logo img{height:44px}.k7-wa span{display:none}.k7-wa{padding:10px}
+  .k7-hero::before,[dir=rtl] .k7-hero::before{background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.88) 60%,rgba(255,255,255,.55) 100%)}
+  .k7-hero-in{min-height:0;padding-block:18px 64px}
+  .k7-feat{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
+  .k7-feat>div{padding:6px;font-size:13px}.k7-feat>div+div{border:0}.k7-feat svg{width:32px;height:32px}
+  .k7-cats{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.k7-cat{font-size:13.5px}.k7-cat .ph{font-size:40px}
+  .k7-cutban{grid-template-columns:minmax(0,1fr);padding:18px}.k7-cutban .art{order:-1}
+  .k7-row4,.k7-row6{display:flex;overflow-x:auto;gap:12px;scrollbar-width:none;padding-bottom:6px}.k7-row4::-webkit-scrollbar,.k7-row6::-webkit-scrollbar{display:none}
+  .k7-row4 .pc,.k7-row6 .pc{flex:0 0 46%}
+  .k7-trk{grid-template-columns:minmax(0,1fr) auto}.k7-trk input:first-child{grid-column:1/-1}
+  .k7-trust .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .k7-promo{grid-template-columns:minmax(0,1fr);text-align:start}.k7-promo .ph{height:110px}.k7-free{justify-self:start}
+  .k7-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #shopSec .srch{min-width:0;flex:1 1 100%}
+  .k7-ft-in{grid-template-columns:repeat(2,minmax(0,1fr))}.k7-ft-brand{grid-column:1/-1}
+}
 /* admin: traffic & conversion */
 .r2b{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px}
 .kmini4{gap:10px;margin-bottom:14px}
@@ -800,139 +974,103 @@ footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
   </symbol>
 </defs></svg>
 
-<div class="ticker"><div class="wrap"><span id="tkFree"></span><span data-t="ft1s"></span><span data-t="ft3"></span><span data-t="supportV"></span></div></div>
-
-<header class="hd"><div class="wrap hd-in">
-  <button class="logo2" data-go="shop" aria-label="Khedar48"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#leaf2"/></svg><span><b>Khedar48</b><small data-t="tagline"></small></span></button>
-  <nav class="mnav" aria-label="Menu">
-    <button data-nav="top" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg><span data-t="navHome"></span></button>
-    <button data-nav="catalog"><svg viewBox="0 0 24 24"><path d="M3 10h18l-2 10H5zM8 10l4-6 4 6"/></svg><span data-t="navProducts"></span></button>
-    <button data-nav="offersSec"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8zM7.5 7.5h.01"/></svg><span data-t="navPromos"></span></button>
-    <button data-go="orders"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span data-t="navTrack"></span></button>
-    <button data-nav="story"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></svg><span data-t="navAbout"></span></button>
-    <button data-nav="contact"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg><span data-t="navContact"></span></button>
+<header class="hd k7-hd"><div class="wrap hd-in">
+  <button class="k7-logo" data-go="shop" aria-label="Khedar48"><img src="img/logo.jpg" alt="Khedar48 · Fruits & Légumes Frais à Oujda" width="900" height="347"></button>
+  <nav class="k7-nav" aria-label="Menu">
+    <button data-nav="top" class="on" data-t="navHome"></button>
+    <button data-show="veg" data-t="k7Veg"></button>
+    <button data-show="fruit" data-t="k7Fruit"></button>
+    <button data-show="cut" data-t="k7Cut"></button>
+    <button data-show="panier" data-t="k7Packs"></button>
+    <button data-show="spice" data-t="k7Spice"></button>
+    <button data-show="oil" data-t="k7Oil"></button>
   </nav>
-  <div class="hd-r">
+  <div class="k7-act">
     <div class="langsw" role="group" aria-label="Langue / اللغة"><button data-lang="ar" aria-pressed="true">ع</button><button data-lang="fr" aria-pressed="false">FR</button></div>
-    <span class="city"><svg viewBox="0 0 24 24" class="i"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-t="city"></span></span>
-    <button class="cartbtn" data-cart><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span class="cl" data-t="cart"></span> <span class="num">(<span data-count2>0</span>)</span></button>
+    <button class="k7-ib" data-search data-ta="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+    <button class="k7-ib" data-cart data-ta="cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span class="k7-badge num" data-count2>0</span></button>
+    <a class="k7-wa" href="https://wa.me/212713694399" target="_blank" rel="noopener"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 00-11.2 19.6L3 29l6.6-1.7A13 13 0 1016 3zm0 23.6a10.6 10.6 0 01-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1116 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 01-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 000-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7 6.3 6.3 0 001.3 3.3 14.3 14.3 0 005.5 4.9c2 .9 2.8.9 3.8.8a3.2 3.2 0 002.1-1.5 2.6 2.6 0 00.2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg><span data-t="k7Order"></span></a>
   </div>
 </div></header>
 
 <main>
 <!-- ============ SHOP ============ -->
 <div class="view" id="v-shop">
-  <section class="hero2" id="top">
-    <div class="wrap h2-in"><div class="h2-txt">
-      <span class="h2-kick">🌿 <span data-t="kicker"></span></span>
-      <h1 data-th="heroTitle"></h1>
-      <p class="h2-sub" data-t="heroSub"></p>
-      <div class="h2-feats">
-        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><span data-th="f1"></span></div>
-        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 15-14 0 9-6 15-14 15M5 19l7-7"/></svg></span><span data-th="f2"></span></div>
-        <div><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9h.01M18 15h.01"/></svg></span><span data-th="f3"></span></div>
-      </div>
-      <div class="h2-ctas"><button class="h2-cta" data-nav="catalog"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span data-t="orderNow"></span><svg viewBox="0 0 24 24" class="arr"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <a class="h2-wa" href="https://wa.me/212713694399" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg>WhatsApp</a></div>
-    </div>
-    <div class="h2-art" aria-hidden="true"><div class="h2-photo"></div>
-      <div class="h2-badge"><b data-th="freshDay"></b><span data-t="natural"></span></div>
-      <div class="h2-chip c1">⚡ <span data-t="chip1"></span></div>
-      <div class="h2-chip c2">🧺 <span data-t="chip2"></span></div></div>
-    </div>
-  </section>
-
-  <div class="wrap"><div class="promos" id="promos" aria-label="Promotions"></div></div>
-
-  <section class="s4"><div class="wrap">
-    <div class="s4h"><h2 data-t="cats"></h2><button class="more" data-nav="catalog"><span data-t="allCats"></span> <span class="arrw">→</span></button></div>
-    <div class="tiles" id="tiles"></div>
-  </div></section>
-
-  <section class="s4" id="offersSec"><div class="wrap">
-    <div class="s4h"><h2 class="ul" data-t="offers"></h2></div>
-    <div class="offers" id="offers"></div>
-  </div></section>
-
-  <div class="marq" aria-hidden="true"><div class="marq-in" id="marq"></div></div>
-
-  <section class="s4"><div class="wrap">
-    <div class="feats">
-      <div><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span><b data-t="ft1"></b><small data-t="ft1s"></small></span></div>
-      <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 17c0-6 4-10 10-10 0 6-4 10-10 10M7 17l5-5"/></svg><span><b data-t="ft2"></b><small data-t="ft2s"></small></span></div>
-      <div><svg viewBox="0 0 24 24"><circle cx="15" cy="7" r="4"/><path d="M15 5.5v3M2 14h4l4 2h4a2 2 0 010 4H9M6 14v7H2"/></svg><span><b data-t="ft3"></b><small data-t="ft3s"></small></span></div>
-      <div><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L16 9.5"/></svg><span><b data-t="ft4"></b><small data-t="ft4s"></small></span></div>
+  <section class="k7-hero" id="top"><div class="wrap k7-hero-in">
+    <div class="k7-hero-tx">
+      <div class="k7-hero-logo"><img src="img/logo.jpg" alt="" width="900" height="347"></div>
+      <h1><span data-t="k7H1"></span> <span class="k7-60"><span class="clock">⏱</span><b data-t="k7H60"></b></span></h1>
+      <ul class="k7-checks"><li data-t="k7C1"></li><li data-t="k7C2"></li><li data-t="k7C3"></li></ul>
     </div>
   </div></section>
 
-  <section class="s4" id="pans"><div class="wrap">
-    <div class="s4h"><h2 class="ul" data-t="baskets"></h2><span class="hint" data-t="basketsHint"></span></div>
-    <div class="pan-row" id="panRow"></div>
-  </div></section>
+  <div class="wrap"><div class="k7-feat">
+    <div><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span data-th="k7F1"></span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M2 14h4l4 2h4a2 2 0 010 4H9M6 14v7H2M14 4c2 0 4 1.5 4 4s-2 3-2 5h-4c0-2-2-2.5-2-5s2-4 4-4z"/></svg><span data-th="k7F2"></span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 15-14 0 9-6 15-14 15M5 19l7-7"/></svg><span data-th="k7F3"></span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM17 16v1a3 3 0 01-3 3h-2"/></svg><span data-th="k7F4"></span></div>
+  </div></div>
 
-  <section class="s4" id="journey"><div class="wrap">
-    <div class="s4h"><h2 class="ul" data-t="tlT"></h2><span class="hint" data-t="tlS"></span></div>
-    <div class="tl">
-      <div class="tl-i"><span class="dot">🌅</span><small data-t="tl1s"></small><b data-t="tl1t"></b><p data-t="tl1d"></p></div>
-      <div class="tl-i"><span class="dot">🔍</span><small data-t="tl2s"></small><b data-t="tl2t"></b><p data-t="tl2d"></p></div>
-      <div class="tl-i"><span class="dot">⚖️</span><small data-t="tl3s"></small><b data-t="tl3t"></b><p data-t="tl3d"></p></div>
-      <div class="tl-i"><span class="dot">🛵</span><small data-t="tl4s"></small><b data-t="tl4t"></b><p data-t="tl4d"></p></div>
+  <section class="k7-sec"><div class="wrap"><div class="k7-cats" id="k7Cats"></div></div></section>
+
+  <section class="k7-sec"><div class="wrap k7-2col">
+    <div class="k7-cutban">
+      <div class="tx"><h2 data-th="k7CutT"></h2>
+        <ul class="k7-ticks"><li data-t="k7CutL1"></li><li data-t="k7CutL2"></li><li data-t="k7CutL3"></li></ul>
+        <button class="k7-btn or" data-show="cut"><span data-t="k7CutBtn"></span> <span class="arrw">→</span></button></div>
+      <div class="art" aria-hidden="true"><span>🥕</span><span>🥔</span><span>🥒</span><span>🧅</span><span>🍅</span><span>🌿</span></div>
+    </div>
+    <div class="k7-card k7-steps">
+      <div class="k7-ch"><span class="ic">🧺</span><div><h3 data-t="k7StepsT"></h3><small data-t="k7StepsS"></small></div></div>
+      <ol><li><i>1</i><span data-t="k7S1"></span></li><li><i>2</i><span data-t="k7S2"></span></li><li><i>3</i><span data-t="k7S3"></span></li></ol>
+      <button class="k7-btn gr block" data-show="all"><span data-t="orderNow"></span> <span class="arrw">→</span></button>
     </div>
   </div></section>
 
-  <section class="s4"><div class="wrap">
-    <div class="ctab"><div class="ph" aria-hidden="true"></div><h3 data-th="ctaTitle"></h3>
-      <button class="h2-cta" data-nav="catalog"><span data-t="orderNow"></span><svg viewBox="0 0 24 24" class="arr"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+  <section class="k7-sec" id="pans"><div class="wrap k7-2col">
+    <div class="k7-card k7-packs">
+      <div class="k7-rh"><div><h2>⭐ <span data-t="k7PacksT"></span></h2><p data-t="k7PacksS"></p></div><button class="k7-more" data-show="panier"><span data-t="k7AllPacks"></span> <span class="arrw">→</span></button></div>
+      <div class="k7-row4" id="packRow"></div>
+    </div>
+    <div class="k7-card k7-track">
+      <div class="k7-ch"><span class="ic">📍</span><div><h3 data-t="k7TrackT"></h3></div></div>
+      <form id="hTrk" class="k7-trk"><input id="hTrkId" dir="ltr" autocomplete="off" data-tp="orderNoPh" data-ta="orderNoPh" required><input id="hTrkPh" type="tel" dir="ltr" inputmode="tel" data-tp="phonePh" data-ta="phonePh" required><button class="k7-sbtn" data-ta="trackBtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button></form>
+      <p class="err" id="hTrkErr" role="alert"></p>
+      <div class="k7-stp" id="hTrkStp"></div>
+    </div>
   </div></section>
 
-  <section class="s4" id="catalog"><div class="wrap">
-    <div class="s4h"><h2 class="ul" id="catTitle"></h2><span class="hint num" id="countLbl"></span></div>
-    <label class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" data-tp="search" autocomplete="off"></label>
+  <div class="k7-trust"><div class="wrap">
+    <div><span>🌿</span><b data-th="k7T1"></b></div><div><span>⏱</span><b data-th="k7T2"></b></div><div><span>💵</span><b data-th="k7T3"></b></div><div><span>🛡️</span><b data-th="k7T4"></b></div><div><span>🍃</span><b data-th="k7T5"></b></div>
+  </div></div>
+
+  <section class="k7-sec"><div class="wrap">
+    <div class="k7-rh"><div><h2>🍊 <span data-t="k7FruitT"></span></h2><p data-t="k7FruitS"></p></div><button class="k7-more" data-show="fruit"><span data-t="k7AllFruit"></span> <span class="arrw">→</span></button></div>
+    <div class="k7-row6" id="fruitRow"></div>
+  </div></section>
+
+  <section class="k7-sec"><div class="wrap">
+    <div class="k7-rh"><div><h2>🥬 <span data-t="k7VegT"></span></h2><p data-t="k7VegS"></p></div><button class="k7-more" data-show="veg"><span data-t="k7AllVeg"></span> <span class="arrw">→</span></button></div>
+    <div class="k7-row6" id="vegRow"></div>
+  </div></section>
+
+  <section class="k7-sec"><div class="wrap"><div class="k7-promo">
+    <div class="ph" aria-hidden="true"></div>
+    <div class="tx"><h2 data-th="k7PromoT"></h2><ul class="k7-checks dark"><li data-t="k7PromoL1"></li><li data-t="k7PromoL2"></li><li id="k7PromoL3"></li></ul></div>
+    <div class="k7-free" id="k7Free"></div>
+  </div></div></section>
+
+  <section class="k7-sec" id="shopSec"><div class="wrap">
+    <div class="k7-rh"><div><h2 id="catTitle"></h2><p class="hint num" id="countLbl"></p></div>
+      <label class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" data-tp="search" autocomplete="off"></label></div>
     <div class="filters" id="filters"></div>
-    <div class="grid4" id="grid"></div>
+    <div class="grid4 k7-grid" id="grid"></div>
   </div></section>
 
-  <section class="s4"><div class="wrap">
-    <div class="s4h"><h2 class="ul" data-t="how"></h2></div>
-    <div class="steps4">
-      <div class="st4"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><i class="n">1</i></span><b data-t="h1"></b><p data-t="h1s"></p></div>
-      <div class="st4"><span class="ic"><svg viewBox="0 0 24 24"><path d="M8 3h8v4H8zM6 5H5a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1V6a1 1 0 00-1-1h-1M8 12h8M8 16h5"/></svg><i class="n">2</i></span><b data-t="h2"></b><p data-t="h2s"></p></div>
-      <div class="st4"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><i class="n">3</i></span><b data-t="h3"></b><p data-t="h3s"></p></div>
-      <div class="st4"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg><i class="n">4</i></span><b data-t="h4"></b><p data-t="h4s"></p></div>
-    </div>
-  </div></section>
-
-  <section class="s4"><div class="wrap">
-    <div class="s4h"><h2 class="ul" data-t="engT"></h2></div>
-    <div class="eng">
-      <div><span class="e">🥬</span><b data-t="e1t"></b><p data-t="e1d"></p></div>
-      <div><span class="e">⚖️</span><b data-t="e2t"></b><p data-t="e2d"></p></div>
-      <div><span class="e">🏷️</span><b data-t="e3t"></b><p data-t="e3d"></p></div>
-      <div><span class="e">💬</span><b data-t="e4t"></b><p data-t="e4d"></p></div>
-    </div>
-  </div></section>
-
-  <section class="s4" id="story"><div class="wrap">
-    <div class="story"><div class="ph" aria-hidden="true"><span>Khedar48 · وجدة</span></div>
-      <div><span class="h2-kick">💚 <span data-t="storyK"></span></span><h2 data-t="storyT"></h2><p data-t="story1"></p><p data-t="story2"></p><p class="sig" data-t="sig"></p>
-        <div class="stats"><div><b class="num" id="stN"></b><small data-t="st1"></small></div><div><b class="num">≤60′</b><small data-t="st2"></small></div><div><b class="num">7/7</b><small data-t="st3"></small></div><div><b class="num">100%</b><small data-t="st4"></small></div></div></div></div>
-  </div></section>
-
-  <section class="s4"><div class="wrap">
-    <div class="zones"><span class="pin">📍</span><div><h2 data-t="zonesT"></h2><p class="hint" data-t="zonesS"></p><div class="zchips" id="zchips"></div></div></div>
-  </div></section>
-
-  <section class="s4"><div class="wrap">
-    <div class="appb"><div><span class="h2-kick">📱 <span data-t="appK"></span></span><h2 data-t="appT"></h2><p class="hint" data-t="appS"></p>
-      <ol><li data-t="app1"></li><li data-t="app2"></li></ol><button class="h2-cta" id="installBtn" hidden><span data-t="installBtn"></span></button></div>
-      <div class="phone"><img src="icons/icon-192.png" alt=""><b>Khedar48</b></div></div>
-  </div></section>
-
-  <section class="s4"><div class="wrap">
-    <div class="news"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      <div><h3 data-t="newsT"></h3><p data-t="newsS"></p></div>
-      <form id="newsForm"><input id="newsEmail" type="email" autocomplete="email" data-tp="email" data-ta="email" required><button><span data-t="subscribe"></span> <span class="arrw">→</span></button></form></div>
-  </div></section>
+  <section class="k7-sec"><div class="wrap"><div class="k7-cta">
+    <div><h2 data-t="k7CtaT"></h2><p data-t="k7CtaS"></p></div>
+    <div class="k7-cta-b"><a class="k7-btn gr" href="https://wa.me/212713694399" target="_blank" rel="noopener">💬 <span data-t="k7CtaWa"></span></a><span class="ou" data-t="k7Or"></span><button class="k7-btn or" data-show="all">🛒 <span data-t="k7CtaSite"></span></button></div>
+  </div></div></section>
 </div>
 
 <!-- ============ MY ORDERS ============ -->
@@ -1162,23 +1300,24 @@ footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
 </div>
 </main>
 
-<footer class="ft" id="contact">
-  <div class="wrap ft-in">
-    <div><div class="logo2 ft-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#leaf2"/></svg><span><b>Khedar48</b><small data-t="tagline"></small></span></div>
-      <p data-t="ftAbout"></p><div class="soc" id="social"></div></div>
-    <div><h4 data-t="links"></h4><ul>
-      <li><button class="l" data-go="shop" data-t="navHome"></button></li><li><button class="l" data-nav="catalog" data-t="navProducts"></button></li>
-      <li><button class="l" data-nav="offersSec" data-t="navPromos"></button></li><li><button class="l" data-nav="story" data-t="navAbout"></button></li>
-      <li><button class="l" data-go="orders" data-t="myOrders"></button></li></ul></div>
-    <div><h4 data-t="info"></h4><ul>
-      <li><button class="l" data-info="delivery" data-t="iDelivery"></button></li><li><button class="l" data-info="payment" data-t="iPayment"></button></li>
-      <li><button class="l" data-info="terms" data-t="iTerms"></button></li><li><button class="l" data-info="privacy" data-t="iPrivacy"></button></li></ul></div>
-    <div><h4 data-t="help"></h4>
-      <a class="ft-c" href="https://wa.me/212713694399" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg><span>WhatsApp<br><b dir="ltr">+212 713-694399</b></span></a>
-      <div class="ft-c"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM17 16v1a3 3 0 01-3 3h-2"/></svg><span><span data-t="support"></span><br><b data-t="supportV"></b></span></div></div>
-    <div><h4 data-t="zone"></h4><div class="ft-c"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-t="zoneV"></span></div></div>
+<footer class="ft k7-ft" id="contact">
+  <div class="k7-wave" aria-hidden="true"></div>
+  <div class="wrap k7-ft-in">
+    <div class="k7-ft-brand"><div class="k7-ft-logo"><img src="img/logo.jpg" alt="Khedar48" width="900" height="347"></div><p data-t="k7FtAbout"></p></div>
+    <div><h4 data-t="k7Quick"></h4><ul>
+      <li><button class="l" data-nav="top" data-t="navHome"></button></li><li><button class="l" data-show="veg" data-t="k7Veg"></button></li><li><button class="l" data-show="fruit" data-t="k7Fruit"></button></li>
+      <li><button class="l" data-show="cut" data-t="k7Cut"></button></li><li><button class="l" data-show="panier" data-t="k7Packs"></button></li><li><button class="l" data-show="spice" data-t="k7Spice"></button></li><li><button class="l" data-show="oil" data-t="k7Oil"></button></li></ul></div>
+    <div><h4 data-t="k7Client"></h4><ul>
+      <li><button class="l" data-go="orders" data-t="navTrack"></button></li><li><button class="l" data-show="all" data-t="k7Order"></button></li>
+      <li><button class="l" data-info="delivery" data-t="iDelivery"></button></li><li><button class="l" data-info="payment" data-t="iPayment"></button></li><li><button class="lnk-f l" id="teamLink" data-go="login"></button></li></ul></div>
+    <div><h4 data-t="k7Contact"></h4>
+      <a class="ft-c" href="https://wa.me/212713694399" target="_blank" rel="noopener">💬 <span>WhatsApp : <b dir="ltr">+212 713-694399</b></span></a>
+      <div class="ft-c">📍 <span data-t="k7Zone"></span></div>
+      <div class="ft-c">💵 <span data-t="iPayment"></span></div>
+      <div class="ft-c">🕖 <span data-t="supportV"></span></div></div>
+    <div><h4 data-t="k7Follow"></h4><div class="soc" id="social"></div><p class="hint k7-nosoc" id="noSoc" data-t="k7NoSoc"></p></div>
   </div>
-  <div class="ft-b"><span data-t="rights"></span> · <span dir="ltr">khedar48.com</span> · <button class="lnk-f" id="teamLink" data-go="login"></button></div>
+  <div class="ft-b"><span data-t="rights"></span> · <button class="l" data-info="terms" data-t="iTerms"></button> · <button class="l" data-info="privacy" data-t="iPrivacy"></button></div>
 </footer>
 <a class="wa-fab" href="https://wa.me/212713694399" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 00-11.2 19.6L3 29l6.6-1.7A13 13 0 1016 3zm0 23.6a10.6 10.6 0 01-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1116 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 01-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 000-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7 6.3 6.3 0 001.3 3.3 14.3 14.3 0 005.5 4.9c2 .9 2.8.9 3.8.8a3.2 3.2 0 002.1-1.5 2.6 2.6 0 00.2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg></a>
 
@@ -1205,7 +1344,7 @@ const WA="212713694399",WA_PRETTY="+212 713-694399",DEF_SET={fee:15,freeFrom:200
 const CATS=[
  {id:"veg",n:"الخضرة",e:"🥬",bg:"#e3f5df"},{id:"fruit",n:"الفواكه",e:"🍎",bg:"#ffe7e1"},
  {id:"herb",n:"الربيع",e:"🌿",bg:"#e0f3e8"},{id:"exotic",n:"المستوردة",e:"🥭",bg:"#fff1d6"},
- {id:"panier",n:"القفف",e:"🧺",bg:"#f3ead9"},{id:"deals",n:"التخفيضات",e:"🔥",bg:"#ffe3cc"}];
+ {id:"cut",n:"مقطعة وفريت",e:"🔪",bg:"#f4efe4"},{id:"spice",n:"العطرية",e:"🌶️",bg:"#fbe6d4"},{id:"oil",n:"زيت الزيتون",e:"🫒",bg:"#eef0d6"},{id:"panier",n:"القفف",e:"🧺",bg:"#f3ead9"},{id:"deals",n:"التخفيضات",e:"🔥",bg:"#ffe3cc"}];
 const UNITS={kg:"للكيلو",pc:"للحبة",bunch:"للحزمة",basket:"للقفة"};
 const STEP={kg:.5,pc:1,bunch:1,basket:1};
 const STATUS={new:"جديد",prep:"كيتوجد",road:"فالطريق",done:"توصّل",cancel:"ملغى"};
@@ -1232,6 +1371,30 @@ const DEF_PRODUCTS=[
  ["lemon","حامض","fruit",8,"kg","🍋","#efd13d"],["peach","خوخ","fruit",15,"kg","🍑","#f29a76"],
  ["kiwi","كيوي","exotic",25,"kg","🥝","#7fae3a"],["avocado","أفوكا","exotic",25,"kg","🥑","#5f8f3a",{old:30}],["mango","مانگا","exotic",35,"kg","🥭","#f4a637"],["pineapple","أناناس","exotic",30,"pc","🍍","#e3b83a"],["coconut","كوكو","exotic",15,"pc","🥥","#8a6a4a"]
 ].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
+// ready-to-cook range (washed, peeled, cut the same day); also merged into an older catalog until an admin saves it once
+const CUT_DEF=[
+ ["cut-frites","بطاطا مقطعة فريت","cut",12,"kg","🍟","#e9c46a",{fr:"Frites coupées (prêtes à frire)",d:{ar:"بطاطا مقشرة ومقطعة، غير قليها",fr:"Pommes de terre épluchées et taillées, prêtes à frire"},hot:true}],
+ ["cut-tajine","خضرة مقطعة للطاجين","cut",18,"kg","🥘","#d98a4e",{fr:"Légumes coupés pour tajine",d:{ar:"خيزو، بطاطا، كرعة، بصلة وطماطم",fr:"Carottes, pommes de terre, courgettes, oignon, tomate"}}],
+ ["cut-couscous","خضرة مقطعة للكسكس","cut",20,"kg","🍲","#c9a15a",{fr:"Légumes coupés pour couscous",d:{ar:"خيزو، لفت، كرعة، قرع، كرنب",fr:"Carottes, navets, courgettes, potiron, chou"}}],
+ ["cut-soupe","خضرة مقطعة للحريرة والسوبة","cut",16,"kg","🥣","#b5835a",{fr:"Légumes coupés pour harira & soupe",d:{ar:"كرافس، معدنوس، قزبر، بصلة، طماطم",fr:"Céleri, persil, coriandre, oignon, tomate"}}],
+ ["cut-salade","شلاضة مغربية مقطعة","cut",22,"kg","🥗","#7fb069",{fr:"Salade marocaine coupée",d:{ar:"طماطم، خيار وبصلة مقطعين رقاق",fr:"Tomates, concombre et oignon finement coupés"}}],
+ ["cut-oignon","بصلة مقطعة","cut",10,"kg","🧅","#c98a5a",{fr:"Oignons émincés",d:{ar:"مقشرة ومقطعة، بلا دموع",fr:"Épluchés et émincés, sans larmes"}}],
+ ["cut-carotte","خيزو محكوك","cut",12,"kg","🥕","#ef8a2f",{fr:"Carottes râpées",d:{ar:"واجد للشلاضة",fr:"Prêtes pour vos salades"}}],
+ ["cut-ail","ثوم مقشر","cut",45,"kg","🧄","#d8cbb0",{fr:"Ail épluché",d:{ar:"فصوص مقشرة ونقية",fr:"Gousses épluchées et propres"}}]
+].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
+// spices and olive oil (prices are starting values, to be set in the admin)
+const SPICE_OIL_DEF=[
+ ["sp-cumin","كمون مطحون (100غ)","spice",12,"pc","🧂","#b07a3b",{fr:"Cumin moulu (100 g)"}],
+ ["sp-paprika","تحميرة حلوة (100غ)","spice",10,"pc","🌶️","#c4422e",{fr:"Paprika doux (100 g)"}],
+ ["sp-curcuma","خرقوم (100غ)","spice",10,"pc","🟡","#e0a526",{fr:"Curcuma (100 g)"}],
+ ["sp-ginger","سكنجبير مطحون (100غ)","spice",12,"pc","🫚","#c9a15a",{fr:"Gingembre moulu (100 g)"}],
+ ["sp-pepper","إبزار كحل (100غ)","spice",15,"pc","⚫","#3d3a35",{fr:"Poivre noir (100 g)"}],
+ ["sp-ras","راس الحانوت (100غ)","spice",18,"pc","🧂","#9a5b2c",{fr:"Ras el hanout (100 g)"}],
+ ["oil-1l","زيت الزيتون البلدية (1 لتر)","oil",70,"pc","🫒","#7a8b2c",{fr:"Huile d'olive beldi (1 L)"}],
+ ["oil-5l","زيت الزيتون البلدية (5 لتر)","oil",330,"pc","🫒","#6b7a22",{fr:"Huile d'olive beldi (5 L)"}]
+].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
+const EXTRA_DEF=[...CUT_DEF,...SPICE_OIL_DEF];
+const withCut=list=>(+settings.seedV||0)>=2?list:[...list,...EXTRA_DEF.filter(d=>!list.some(p=>p.id===d.id)).map(d=>({...d}))];
 const DEF_PROMOS={codes:{WELCOME48:{k:"pct",v:10,min:100,on:true},KHEDAR20:{k:"amt",v:20,min:250,on:true}},
  banners:[{b:"-10%",t:"على أول طلب ليك",s:"دخّل الكود WELCOME48",c:"or"},{b:"0 د",t:"توصيل فابور",s:"على كل طلب فوق 200 درهم",c:"gr"},{b:"-20 د",t:"على القفف الكبار",s:"بالكود KHEDAR20 فوق 250 درهم",c:"li"}]};
 
@@ -1301,10 +1464,12 @@ async function onUser(u){
 async function loadCatalog(){
   const {data,error}=await SB.from("catalog").select("id,data");if(error)throw error;
   const m=Object.fromEntries((data||[]).map(r=>[r.id,r.data||{}]));
-  if(Array.isArray(m.products?.items)&&m.products.items.length)products=m.products.items.map(x=>({...x}));else if(role==="admin")saveCatalog("products");
+  if(m.settings)settings={...DEF_SET,...m.settings};else if(role==="admin")saveCatalog("settings");
+  if(Array.isArray(m.products?.items)&&m.products.items.length)products=withCut(m.products.items.map(x=>({...x})));else if(role==="admin")saveCatalog("products");
   if(m.promos)promos={codes:{...(m.promos.codes||{})},banners:[...(m.promos.banners||[])]};else if(role==="admin")saveCatalog("promos");
   if(m.drivers)drivers={list:{...(m.drivers.list||{})}};else if(role==="admin")saveCatalog("drivers");
-  if(m.settings)settings={...DEF_SET,...m.settings};else if(role==="admin")saveCatalog("settings");
+  // first admin visit after the ready-to-cook range was added: store it in the shared catalog once
+  if(role==="admin"&&(+settings.seedV||0)<2&&m.products){settings={...settings,seedV:2};saveCatalog("products");saveCatalog("settings")}
   renderAll();
 }
 async function loadOrders(){
@@ -1361,6 +1526,7 @@ function loadLocal(){
   const pr=store.get("c:promos",null);if(pr?.codes)promos=pr;
   const dv=store.get("c:drivers",null);if(dv?.list)drivers=dv;
   const st=store.get("c:settings",null);if(st)settings={...DEF_SET,...st};
+  products=withCut(products);
   myOrders=store.get("orders",[]);
 }
 const staffOrders=()=>cloud?allOrders:myOrders;
@@ -1368,7 +1534,7 @@ const staffOrders=()=>cloud?allOrders:myOrders;
 /* ---------------- language (Arabic by default, French on demand) ---------------- */
 let lang=store.get("lang","ar")==="fr"?"fr":"ar";
 const T={
- ar:{tagline:"الخضرة والفواكه فوجدة",navHome:"الرئيسية",navProducts:"المنتوجات",navPromos:"العروض",navAbout:"علينا",navContact:"اتصل بنا",
+ ar:{tagline:"الخضرة والفواكه · وجدة",navHome:"الرئيسية",navProducts:"المنتوجات",navPromos:"العروض",navAbout:"علينا",navContact:"اتصل بنا",
   city:"وجدة",cart:"السلة",myOrders:"طلباتي",
   heroTitle:"الخضرة والفواكه <em>الطرية</em><br>حتى لباب دارك فوجدة!",f1:"توصيل فـ<br>أقل من 60 دقيقة",f2:"منتوجات طرية<br>وجودة مضمونة",f3:"الخلاص<br>عند الاستلام",
   orderNow:"طلب دابا",freshDay:"طري<br>اليوم",natural:"100% طبيعي",
@@ -1418,8 +1584,27 @@ const T={
   zonesT:"فين كنوصلو؟",zonesS:"كنوصلو لكاع حومات وجدة والنواحي:",zonesMore:"والنواحي…",
   appK:"تطبيق",appT:"خضار 48 فتيليفونك",appS:"زيد الموقع لشاشة التيليفون وولّي تطلب بكليكة وحدة، بحال أي تطبيق.",
   app1:"أندرويد: حل Chrome ← ⋮ ← «إضافة إلى الشاشة الرئيسية»",app2:"آيفون: حل Safari ← زر المشاركة ← «إضافة إلى الشاشة الرئيسية»",installBtn:"زيد التطبيق",
+  lxShop:"المتجر",lxCut:"مقطعة وفريت",lxBaskets:"القفف",lxTitle:"الخضرة والفواكه <em>الطرية</em>،<br>كيفما كتستاهلها.",lxCutCta:"اكتشف الخضرة المقطعة",
+  lxP1:"من السوق كل صباح",lxP1s:"مختارة حبة بحبة",lxP2:"فأقل من 60 دقيقة",lxP2s:"لكاع حومات وجدة",lxP3:"الخلاص عند الاستلام",lxP3s:"كتشوف عاد كتخلص",
+  lxCutOver:"جديد · واجدة للطياب",lxCutT:"خضرة مقطعة وفريت",lxCutS:"مغسولة، مقشرة ومقطعة نفس النهار. حلّ الباكية وبدا الطياب.",
+  lxShopOver:"المتجر",lxBasketsOver:"مختارة ليك",lxStoryT:"من السوق ديال وجدة<br>حتى لطبلة ديالك.",lxBest:"الأكثر طلباً",
+  k7Veg:"الخضرة",k7Fruit:"الفواكه",k7Cut:"خضرة مقطعة",k7Packs:"القفف والباكات",k7Spice:"العطرية",k7Oil:"زيت الزيتون",k7Order:"طلب دابا",k7New:"جديد",
+  k7H1:"منتوجاتك الطرية فوجدة، كتوصلك فأقل من",k7H60:"60 دقيقة!",k7C1:"طرية وديال الموسم",k7C2:"مقطعة وواجدة للطياب",k7C3:"باكات اقتصادية",
+  k7F1:"التوصيل فوجدة<br>فأقل من 60 دقيقة",k7F2:"الخلاص<br>عند الاستلام",k7F3:"منتوجات طرية<br>وجودة مضمونة",k7F4:"مساعدة فواتساب<br>كل يوم",
+  k7CutT:"خضرة مقطعة<br>وواجدة للطياب!",k7CutL1:"مغسولة، مقشرة ومقطعة",k7CutL2:"كتربح الوقت",k7CutL3:"ديما طرية",k7CutBtn:"اكتشف الخضرة المقطعة",
+  k7StepsT:"دوز طلبك",k7StepsS:"ف 3 مراحل ساهلين",k7S1:"اختار المنتوجات ديالك",k7S2:"عمّر المعلومات ديالك",k7S3:"أكّد وخلّص عند الاستلام",
+  k7PacksT:"القفف والباكات ديالنا",k7PacksS:"قفف متنوعة، عملية واقتصادية لكاع العائلة.",k7AllPacks:"شوف كاع الباكات",
+  k7TrackT:"تتبع الطلب ديالي",
+  k7T1:"منتوجات طرية<br>وجودة عالية",k7T2:"توصيل سريع<br>فوجدة (≤ 60 دقيقة)",k7T3:"الخلاص<br>عند الاستلام",k7T4:"الرضى<br>مضمون",k7T5:"منتوجات<br>ديال الموسم",
+  k7FruitT:"الفواكه ديال الموسم",k7FruitS:"فواكه طرية وبنينة، مختارة كل نهار.",k7AllFruit:"شوف كاع الفواكه",
+  k7VegT:"الخضرة الطرية",k7VegS:"اختيار كبير ديال الخضرة الطرية لطياب كل نهار.",k7AllVeg:"شوف كاع الخضرة",
+  k7PromoT:"باكات مربحة<br>والتوصيل فابور فوجدة!",k7PromoL1:"باكات عائلية",k7PromoL2:"توفير مضمون",k7PromoL3:v=>`التوصيل فابور فوق ${v}`,
+  k7FreeA:"التوصيل",k7FreeB:"فابور",k7FreeC:v=>`فوجدة فوق ${v}`,
+  k7CtaT:"طلب دابا!",k7CtaS:"ساهل، سريع وعملي.",k7CtaWa:"طلب فواتساب",k7Or:"ولا",k7CtaSite:"طلب من الموقع",
+  k7FtAbout:"منتوجاتك الطرية فوجدة: خضرة، فواكه، خضرة مقطعة، باكات وعطرية، كتوصلك بسرعة وبجودة وطراوة مضمونين.",
+  k7Quick:"روابط سريعة",k7Client:"فضاء الزبون",k7Contact:"اتصل بنا",k7Follow:"تابعنا",k7Zone:"التوصيل فوجدة (≤ 60 دقيقة)",k7NoSoc:"قريباً على إنستغرام وفيسبوك",
   close:"سدّ"},
- fr:{tagline:"Fruits & Légumes à Oujda",navHome:"Accueil",navProducts:"Produits",navPromos:"Promotions",navAbout:"À propos",navContact:"Contact",
+ fr:{tagline:"Primeur · Oujda",navHome:"Accueil",navProducts:"Produits",navPromos:"Promotions",navAbout:"À propos",navContact:"Contact",
   city:"Oujda",cart:"Panier",myOrders:"Mes commandes",
   heroTitle:"Vos Fruits & Légumes <em>Frais</em><br>Livrés à Domicile à Oujda !",f1:"Livraison en<br>≤ 60 minutes",f2:"Produits frais<br>et de qualité",f3:"Paiement<br>à la livraison",
   orderNow:"Commander maintenant",freshDay:"Frais<br>du jour",natural:"100% Naturel",
@@ -1433,7 +1618,7 @@ const T={
   newsT:"Restez informé de nos promotions !",newsS:"Recevez nos offres spéciales et nouveautés chaque semaine.",email:"Votre adresse email",subscribe:"S'inscrire",subOk:"Inscription confirmée ✓ Merci !",subBad:"Entrez un email valide",
   ftAbout:"Votre marché frais en ligne à Oujda. Commandez vos fruits et légumes et recevez-les chez vous en ≤ 60 minutes.",links:"Liens utiles",info:"Informations",help:"Besoin d'aide ?",zone:"Zone de livraison",zoneV:"Oujda et environs",
   iDelivery:"Livraison",iPayment:"Paiement à la livraison",iTerms:"Conditions générales",iPrivacy:"Politique de confidentialité",support:"Service client",supportV:"7j/7 de 7h à 22h",
-  rights:"© 2026 Khedar48 — Tous droits réservés.",team:"Espace équipe",teamOut:"Quitter l'espace équipe",
+  rights:"© 2026 Khedar48. Tous droits réservés.",team:"Espace équipe",teamOut:"Quitter l'espace équipe",
   added:n=>`${n} ajouté au panier`,yourCart:"Votre panier",emptyCart:"Votre panier est vide.<br>Ajoutez des fruits ou des légumes.",backShop:"Retour à la boutique",code:"Code promo",apply:"Appliquer",
   sub:"Sous-total",disc:"Remise",delivery:"Livraison",free:"Gratuite",total:"Total",addMore:v=>`Encore ${v} pour la livraison gratuite`,freeOk:"🎉 Livraison gratuite pour cette commande",checkout:v=>`Commander · ${v}`,
   codeBad:"Ce code n'est pas valide",codeMin:v=>`Code valable dès ${v}`,codePct:v=>`Remise de ${v}%`,codeAmt:v=>`Remise de ${v}`,
@@ -1469,6 +1654,25 @@ const T={
   zonesT:"Où livrons-nous ?",zonesS:"Nous livrons dans tous les quartiers d'Oujda et ses environs :",zonesMore:"et environs…",
   appK:"Application",appT:"Khedar48 sur votre téléphone",appS:"Ajoutez le site à votre écran d'accueil et commandez en un clic, comme une application.",
   app1:"Android : Chrome → ⋮ → « Ajouter à l'écran d'accueil »",app2:"iPhone : Safari → Partager → « Sur l'écran d'accueil »",installBtn:"Installer l'application",
+  lxShop:"Boutique",lxCut:"Prêt à cuisiner",lxBaskets:"Paniers",lxTitle:"Fruits & légumes <em>d'exception</em>,<br>livrés chez vous.",lxCutCta:"Découvrir le prêt à cuisiner",
+  lxP1:"Du marché chaque matin",lxP1s:"Choisis un par un",lxP2:"En moins de 60 min",lxP2s:"Partout à Oujda",lxP3:"Paiement à la livraison",lxP3s:"Vous vérifiez, puis vous payez",
+  lxCutOver:"Nouveau · Prêt à cuisiner",lxCutT:"Légumes coupés & frites",lxCutS:"Lavés, épluchés et taillés le jour même. Ouvrez, cuisinez.",
+  lxShopOver:"La boutique",lxBasketsOver:"Sélection",lxStoryT:"Du marché d'Oujda<br>à votre table.",lxBest:"Le plus demandé",
+  k7Veg:"Légumes",k7Fruit:"Fruits",k7Cut:"Légumes découpés",k7Packs:"Packs & Qoffas",k7Spice:"Épices",k7Oil:"Huile d'olive",k7Order:"Commander",k7New:"Nouveau",
+  k7H1:"Vos produits frais à Oujda, livrés en moins de",k7H60:"60 minutes !",k7C1:"Frais & de saison",k7C2:"Découpés et prêts à cuisiner",k7C3:"Packs économiques",
+  k7F1:"Livraison à Oujda<br>en moins de 60 minutes",k7F2:"Paiement<br>à la livraison",k7F3:"Produits frais<br>et de qualité",k7F4:"Assistance<br>WhatsApp 7j/7",
+  k7CutT:"Légumes découpés<br>et prêts à cuisiner !",k7CutL1:"Lavés, épluchés et découpés",k7CutL2:"Gain de temps",k7CutL3:"Toujours frais",k7CutBtn:"Découvrir les légumes découpés",
+  k7StepsT:"Passer une commande",k7StepsS:"en 3 étapes simples",k7S1:"Choisissez vos produits",k7S2:"Renseignez vos informations",k7S3:"Confirmez et payez à la livraison",
+  k7PacksT:"Nos Packs & Qoffas",k7PacksS:"Des paniers variés, pratiques et économiques pour toute la famille.",k7AllPacks:"Voir tous les packs",
+  k7TrackT:"Suivre ma commande",
+  k7T1:"Produits frais<br>de qualité",k7T2:"Livraison rapide<br>à Oujda (≤ 60 min)",k7T3:"Paiement<br>à la livraison",k7T4:"Satisfaction<br>garantie",k7T5:"Produits<br>de saison",
+  k7FruitT:"Nos fruits de saison",k7FruitS:"Des fruits frais, savoureux et de saison, sélectionnés chaque jour.",k7AllFruit:"Voir tous les fruits",
+  k7VegT:"Nos légumes frais",k7VegS:"Une large sélection de légumes frais et de qualité, idéal pour vos recettes du quotidien.",k7AllVeg:"Voir tous les légumes",
+  k7PromoT:"Packs avantageux<br>& livraison gratuite à Oujda !",k7PromoL1:"Packs familiaux",k7PromoL2:"Économies garanties",k7PromoL3:v=>`Livraison gratuite dès ${v}`,
+  k7FreeA:"Livraison",k7FreeB:"GRATUITE",k7FreeC:v=>`à Oujda dès ${v}`,
+  k7CtaT:"Commandez dès maintenant !",k7CtaS:"C'est simple, rapide et pratique.",k7CtaWa:"Commander sur WhatsApp",k7Or:"ou",k7CtaSite:"Commander sur le site",
+  k7FtAbout:"Vos produits frais à Oujda : légumes, fruits, légumes découpés, packs et épices, livrés rapidement, avec qualité et fraîcheur garanties.",
+  k7Quick:"Liens rapides",k7Client:"Espace client",k7Contact:"Nous contacter",k7Follow:"Suivez-nous",k7Zone:"Livraison à Oujda (≤ 60 minutes)",k7NoSoc:"Bientôt sur Instagram et Facebook",
   close:"Fermer"}};
 const t=(k,...a)=>{const v=T[lang][k]??T.ar[k];return typeof v==="function"?v(...a):v};
 const tr=t; // alias for event handlers, where "t" is the clicked element
@@ -1507,15 +1711,13 @@ function stepper(id){const it=byId(id);const q=cart[id]||0;
 
 /* ---------------- shop ---------------- */
 const TILES=[
- {id:"fruit",ar:"الفواكه",fr:"Fruits",e:"🍎",f:p=>p.c==="fruit"},
- {id:"veg",ar:"الخضرة",fr:"Légumes",e:"🥕",f:p=>p.c==="veg"},
- {id:"herb",ar:"الربيع والتوابل",fr:"Herbes & Épices",e:"🌿",f:p=>p.c==="herb"},
- {id:"salad",ar:"السلطة",fr:"Salades",e:"🥬",f:p=>["lettuce","cucumber","tomato","pepper"].includes(p.id)},
- {id:"pdt",ar:"البطاطا والبصلة",fr:"Pomme de terre & Oignon",e:"🥔",f:p=>["potato","onion","garlic"].includes(p.id)},
- {id:"exotic",ar:"المستوردة",fr:"Exotiques",e:"🥑",f:p=>p.c==="exotic"},
- {id:"citrus",ar:"الحوامض",fr:"Agrumes",e:"🍋",f:p=>["orange","mandarin","lemon"].includes(p.id)},
- {id:"panier",ar:"القفف",fr:"Paniers",e:"🧺",f:p=>p.c==="panier"},
- {id:"deals",ar:"التخفيضات",fr:"Promotions",e:"%",f:p=>+p.old>+p.p}];
+ {id:"veg",ar:"الخضرة",fr:"Légumes",e:"🥬",img:"img/p-veg.jpg",f:p=>p.c==="veg"||p.c==="herb"},
+ {id:"fruit",ar:"الفواكه",fr:"Fruits",e:"🍎",img:"img/p-fruit.jpg",f:p=>p.c==="fruit"||p.c==="exotic"},
+ {id:"cut",ar:"خضرة مقطعة",fr:"Légumes découpés",e:"🥕",isNew:true,f:p=>p.c==="cut"},
+ {id:"panier",ar:"القفف والباكات",fr:"Packs & Qoffas",e:"🧺",img:"img/p-fam.jpg",f:p=>p.c==="panier"},
+ {id:"spice",ar:"العطرية والتوابل",fr:"Épices & aromates",e:"🌶️",f:p=>p.c==="spice"},
+ {id:"oil",ar:"زيت الزيتون",fr:"Huile d'olive",e:"🫒",f:p=>p.c==="oil"},
+ {id:"deals",ar:"التخفيضات",fr:"Promotions",e:"%",hide:true,f:p=>+p.old>+p.p}];
 let tile="all",favs=store.get("favs",[]),installEvt=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;if(view==="shop")renderShop()});
 
@@ -1537,40 +1739,46 @@ function track(kind,oid){
   else{const l=store.get("ev",[]);l.push({...ev,at:Date.now()});store.set("ev",l.slice(-3000))}
 }
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
-function pcard(p){const im=safeImg(p.img),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id);
-  return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im" style="background:radial-gradient(circle at 50% 55%,color-mix(in srgb,${safeColor(p.t)} 14%,var(--card)),var(--card) 70%)">
+function pcard(p){const im=safeImg(p.img),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
+  return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im">
     ${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
     ${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
-    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b><small class="pc-u">${p.c==="panier"&&p.kg?`${esc(p.kg)} ${t("kg")} · ${esc(p.cnt||"")} ${t("products")}`:U4[lang][p.u]||""}</small>
-    <div class="pc-f"><span class="pc-p num"><b class="${off?"red":""}">${money(p.p)}</b>${off?`<s>${money(p.old)}</s>`:""}</span>${p.on===false?`<span class="hint">${t("unavailable")}</span>`:stepper(p.id)}</div></article>`}
+    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>
+    <div class="pc-f"><span class="pc-p num"><b class="${off?"red":""}">${dh(p.p)}</b>${per?`<small>/${t("kg")}</small>`:""}${off?`<s>${dh(p.old)}</s>`:""}</span>${p.on===false?`<span class="hint">${t("unavailable")}</span>`:stepper(p.id)}</div></article>`}
+const dh=n=>lang==="fr"?`${fmt(n)} DH`:`${fmt(n)} درهم`;
 function renderShop(){
-  $("#promos").innerHTML=(promos.banners||[]).map(b=>`<div class="promo pr-${["or","gr","li","bl"].includes(b.c)?b.c:"gr"}" dir="rtl"><span class="big num">${esc(b.b)}</span><span><b>${esc(b.t)}</b><small>${esc(b.s).replace(/\b([A-Z0-9]{4,})\b/g,"<code>$1</code>")}</small></span></div>`).join("");
-  $("#tiles").innerHTML=TILES.map(c=>`<button class="tile" data-tile="${c.id}" aria-pressed="${tile===c.id}">${c.e==="%"?`<span class="pct">%</span>`:`<span class="e" aria-hidden="true">${c.e}</span>`}<span>${c[lang]}</span></button>`).join("");
   const live=products.filter(p=>p.on!==false);
-  const offers=[...live.filter(p=>p.c!=="panier"&&+p.old>+p.p),...live.filter(p=>p.c!=="panier"&&!(+p.old>+p.p))].slice(0,6);
-  $("#offers").innerHTML=offers.map(pcard).join("");
-  const pans=live.filter(p=>p.c==="panier");
-  $("#panRow").innerHTML=pans.map(p=>{const im=safeImg(p.img);return `<article class="pan"><div class="im" style="${im?`background-image:url('${esc(im)}')`:""}">${p.hot?`<span class="tag">${t("mostOrdered")}</span>`:""}</div>
-    <div class="bd"><h3>${esc(nm(p))}</h3><div class="meta">${p.kg?`<span class="chip-s num">${esc(p.kg)} ${t("kg")}</span>`:""}${p.cnt?`<span class="chip-s num">${esc(p.cnt)} ${t("products")}</span>`:""}</div>
-    <div class="ft"><span class="pc-p num"><b>${money(p.p)}</b></span>${stepper(p.id)}</div></div></article>`}).join("");
-  $("#pans").hidden=!pans.length;
-  const chips=[{id:"all",l:t("all")},{id:"fav",l:`♥ ${t("favs")}`},...TILES.map(c=>({id:c.id,l:c[lang]}))];
+  $("#k7Cats").innerHTML=TILES.filter(c=>!c.hide).map(c=>`<button class="k7-cat" data-show="${c.id}">${c.isNew?`<span class="new">${t("k7New")}</span>`:""}<span class="ph" style="${c.img?`background-image:url('${c.img}')`:`background:linear-gradient(135deg,#f3faf4,#fff3e6)`}">${c.img?"":c.e}</span><span>${c[lang]}</span></button>`).join("");
+  $("#packRow").innerHTML=live.filter(p=>p.c==="panier").slice(0,4).map(pcard).join("");
+  const pick=(cs)=>{const L=live.filter(p=>cs.includes(p.c));return [...L.filter(p=>+p.old>+p.p),...L.filter(p=>!(+p.old>+p.p))].slice(0,6)};
+  $("#fruitRow").innerHTML=pick(["fruit"]).map(pcard).join("");
+  $("#vegRow").innerHTML=pick(["veg"]).map(pcard).join("");
+  const s=settings;
+  $("#k7Free").innerHTML=`<small>${t("k7FreeA")}</small><b>${t("k7FreeB")}</b><small>${t("k7FreeC",dh(s.freeFrom))}</small>`;
+  $("#k7PromoL3").textContent=t("k7PromoL3",dh(s.freeFrom));
+  const chips=[{id:"all",l:t("all")},...TILES.map(c=>({id:c.id,l:c[lang]})),{id:"fav",l:`♥ ${t("favs")}`}];
   $("#filters").innerHTML=chips.map(c=>`<button class="fchip" data-tile="${c.id}" aria-pressed="${tile===c.id}">${esc(c.l)}</button>`).join("");
   const q=query.trim().toLowerCase(),T4=TILES.find(c=>c.id===tile);
-  let list=q?products.filter(p=>[p.n,pn(p)].some(s=>String(s).toLowerCase().includes(q)))
+  let list=q?products.filter(p=>[p.n,pn(p)].some(x=>String(x).toLowerCase().includes(q)))
     :tile==="fav"?products.filter(p=>favs.includes(p.id)):T4?products.filter(T4.f):products.filter(p=>p.c!=="panier");
   $("#catTitle").textContent=q?t("results",query.trim()):T4?T4[lang]:tile==="fav"?t("favs"):t("catalog");
   $("#countLbl").textContent=t("nProducts",list.length);
   $("#grid").innerHTML=list.length?list.map(pcard).join(""):`<div class="empty"><div class="big">🔍</div>${t("noResult")}</div>`;
-  const s=settings,sv={fee:money(s.fee),free:money(s.freeFrom)};
-  const mw=t("marq").map(w=>`<span>${esc(w)}</span><i>✦</i>`).join("");$("#marq").innerHTML=mw+mw;
-  $("#stN").textContent=`${products.filter(p=>p.on!==false).length}`;
-  $("#zchips").innerHTML=HOODS.filter(h=>h!=="أخرى").map((h,i)=>`<span>${esc(lang==="fr"?HOODS_FR[i]:h)}</span>`).join("")+`<span>${esc(t("zonesMore"))}</span>`;
-  $("#installBtn").hidden=!installEvt;
-  $("#tkFree").textContent=lang==="fr"?`Livraison gratuite dès ${sv.free}`:`توصيل فابور فوق ${sv.free}`;
   const soc=[["ig","Instagram",'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/>'],["fb","Facebook",'<path d="M15 3h-3a4 4 0 00-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/>'],["tt","TikTok",'<path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.5 3 2.5 5 5.5 5"/>']];
-  $("#social").innerHTML=soc.filter(([k])=>/^https:\/\//.test(s[k]||"")).map(([k,n,d])=>`<a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24">${d}</svg></a>`).join("");
+  const S2=soc.filter(([k])=>/^https:\/\//.test(s[k]||""));
+  $("#social").innerHTML=S2.map(([k,n,d])=>`<a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24">${d}</svg></a>`).join("");
+  $("#noSoc").hidden=!!S2.length;
+  renderHomeTrack();
 }
+/* home "Suivre ma commande" card: shows the last order this browser placed or looked up */
+let homeTrack=null;
+function renderHomeTrack(){
+  const o=homeTrack||Object.values(trackRes)[0]||myOrders.find(x=>!x.ex);
+  const i=o&&o.status!=="cancel"?FLOW.indexOf(o.status):-1,ic=["✓","🧺","🛵","🏠"];
+  $("#hTrkStp").innerHTML=FLOW.map((s,k)=>`<div class="${k<=i?"on":""}"><i>${ic[k]}</i>${t("steps")[k]}</div>`).join("")+
+    (o?`<p class="k7-stp-info" style="grid-column:1/-1"><b class="num">${esc(o.id)}</b> · ${lang==="fr"?AST[o.status]||"":STATUS[o.status]||""} · <a href="#orders" data-go="orders">${t("navTrack")} →</a></p>`:"");
+}
+function showCat(id){tile=id==="all"?"all":id;query="";const q=$("#q");if(q)q.value="";if(view!=="shop")show("shop");renderShop();goSec("shopSec")}
 function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
 
 /* ---------------- sheet ---------------- */
@@ -1691,7 +1899,7 @@ function renderMine(){
 /* ---------------- admin (FR) ---------------- */
 const AST={new:"Nouvelle",prep:"En préparation",road:"En livraison",done:"Livrée",cancel:"Annulée"};
 const ACTIVE=["new","prep","road"];
-const CATFR={veg:"Légumes",fruit:"Fruits",herb:"Herbes",exotic:"Exotiques",panier:"Paniers",deals:"Promos"};
+const CATFR={veg:"Légumes",fruit:"Fruits",herb:"Herbes",exotic:"Exotiques",cut:"Prêt à cuisiner",spice:"Épices",oil:"Huile d'olive",panier:"Paniers",deals:"Promos"};
 const UFR={kg:"kg",pc:"pcs",bunch:"botte",basket:"panier"};
 const FRN={tomato:"Tomate",potato:"Pomme de terre",onion:"Oignon",carrot:"Carotte",courgette:"Courgette",eggplant:"Aubergine",pepper:"Poivron",chili:"Piment",cucumber:"Concombre",lettuce:"Laitue",garlic:"Ail",peas:"Petits pois",beans:"Fèves",corn:"Maïs",parsley:"Persil",coriander:"Coriandre",mint:"Menthe",ginger:"Gingembre",apple:"Pomme",orange:"Orange",mandarin:"Mandarine",banana:"Banane",grapes:"Raisin",pear:"Poire",strawberry:"Fraise",watermelon:"Pastèque",melon:"Melon",lemon:"Citron",peach:"Pêche",kiwi:"Kiwi",avocado:"Avocat",mango:"Mangue",pineapple:"Ananas",coconut:"Noix de coco","p-fam":"Panier Famille","p-big":"Grand panier","p-prem":"Panier Premium","p-premp":"Panier Premium +","p-veg":"Panier Légumes","p-fruit":"Panier Fruits"};
 const ICON={
@@ -1926,7 +2134,7 @@ A.products=({OR})=>{
      <td>${UFR[p.u]||""}</td><td class="num">${s?s.c:0}</td>
      <td><input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="${esc(pn(p))} disponible"></td>
      <td>${p.c==="panier"?"":`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
-  if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
+  if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
 };
 A.stock=()=>{
   const tracked=products.filter(p=>typeof p.stock==="number"),low=lowStock(),out=tracked.filter(p=>p.stock<=0);
@@ -2037,8 +2245,10 @@ document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a");if(!t)return;const D=t.dataset;
   if(D.add){addOne(D.add);return}if(D.sub){subOne(D.sub);return}
   if(D.lang){setLang(D.lang);return}
+  if(D.show){closeSheet();showCat(D.show);return}
+  if("search" in D){showCat(tile);setTimeout(()=>$("#q")?.focus(),350);return}
   if(D.copylink){try{await navigator.clipboard.writeText(D.copylink);toast(tr("linkCopied"))}catch(err){toast(D.copylink)}return}
-  if(D.tile){tile=tile===D.tile&&D.tile!=="all"&&t.classList.contains("tile")?"all":D.tile;query="";$("#q").value="";renderShop();if(t.classList.contains("tile"))goSec("catalog");return}
+  if(D.tile){tile=tile===D.tile&&D.tile!=="all"&&t.classList.contains("tile")?"all":D.tile;query="";$("#q").value="";renderShop();goSec("shopSec");return}
   if(D.fav){favs=favs.includes(D.fav)?favs.filter(x=>x!==D.fav):[...favs,D.fav];store.set("favs",favs);renderShop();return}
   if(D.info){closeSheet();openInfo(D.info);return}
   if(D.nav){if(view!=="shop")show("shop");if(D.nav==="top")window.scrollTo({top:0,behavior:"smooth"});else goSec(D.nav);return}
@@ -2085,7 +2295,7 @@ document.addEventListener("click",async e=>{
 });
 $("#scrim").addEventListener("click",closeSheet);
 $("#sScrim").addEventListener("click",()=>sideOpen(false));
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSheet();sideOpen(false)}if(e.key==="Enter"&&e.target.id==="q"){e.preventDefault();goSec("catalog")}if(e.key==="Enter"&&e.target.id==="codeIn")$("#codeBtn").click()
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSheet();sideOpen(false)}if(e.key==="Enter"&&e.target.id==="q"){e.preventDefault();goSec("shopSec")}if(e.key==="Enter"&&e.target.id==="codeIn")$("#codeBtn").click()
   if(e.key==="Enter"&&e.target.id==="aQ"&&!["orders","clients","products","stock"].includes(aTab)){aTab=products.some(p=>qMatch(p.n,pn(p)))&&!staffOrders().some(o=>qMatch(o.id,o.name,o.phone,o.hood,o.addr))?"products":"orders";oFilter="all";renderAdmin()}});
 $("#q").addEventListener("input",e=>{query=e.target.value;renderShop()});
 $("#aQ").addEventListener("input",e=>{aQ=e.target.value;if(["orders","clients","products","stock"].includes(aTab))renderAdmin()});
@@ -2124,16 +2334,21 @@ $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const E=$
   if(!cloud){role="admin";staff=true;show("admin");return}
   const b=$("#lgBtn");b.disabled=true;b.textContent="Connexion…";
   try{pendingGo="__team";const {error}=await SB.auth.signInWithPassword({email:$("#lgE").value.trim(),password:$("#lgP").value});if(error)throw error;$("#lgP").value=""}
-  catch(err){pendingGo=null;const m=String(err?.message||"");E.textContent=/invalid/i.test(m)?"Email ou mot de passe incorrect.":/not confirmed/i.test(m)?"Email pas encore confirmé (voir README, étape « Confirm email »).":/rate|many/i.test(m)?"Trop d'essais, réessayez plus tard.":"Connexion impossible, vérifiez Internet."}
+  catch(err){pendingGo=null;const m=String(err?.message||"");E.textContent=/disabled/i.test(m)?"La connexion par email est désactivée dans Supabase (Authentication → Sign In / Providers → Email).":/invalid/i.test(m)?"Email ou mot de passe incorrect.":/not confirmed/i.test(m)?"Email pas encore confirmé (voir README, étape « Confirm email »).":/rate|many/i.test(m)?"Trop d'essais, réessayez plus tard.":"Connexion impossible, vérifiez Internet."}
   finally{b.disabled=false;b.textContent="Se connecter"}});
 async function logout(){if(!cloud){show("shop");return}try{await SB.auth.signOut()}catch(e){}me="";show("shop");toast("Déconnecté · تخرجتي")}
-$("#newsForm").addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
+$("#newsForm")?.addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
   try{if(await subscribeNews($("#newsEmail").value.trim()))e.target.reset()}finally{b.disabled=false}});
 $("#setForm").addEventListener("submit",e=>{e.preventDefault();
   const link=id=>{const v=$(id).value.trim();return /^https:\/\/[^\s"'<>]+$/.test(v)?v:""};
   settings={fee:Math.max(0,+$("#setFee").value||0),freeFrom:Math.max(0,+$("#setFree").value||0),margin:Math.min(90,Math.max(0,+$("#setMargin").value||0)),ig:link("#setIg"),fb:link("#setFb"),tt:link("#setTt")};
   document.activeElement?.blur?.();saveCatalog("settings");renderAll();toast("Paramètres enregistrés")});
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(/^t=/.test(h)&&(cloud||SBC===null))trackFromHash(h);else show(h)});
+$("#hTrk").addEventListener("submit",async e=>{e.preventDefault();const E=$("#hTrkErr");E.textContent="";
+  const id=$("#hTrkId").value.trim().toUpperCase(),ph=$("#hTrkPh").value.trim();if(!id||digits(ph).length<9){E.textContent=tr("trackNo");return}
+  const b=e.target.querySelector("button");b.disabled=true;
+  try{const o=await fetchTrack(id,ph);if(!o){E.textContent=tr("trackNo");return}rememberTrack(o.id,ph);trackRes[o.id]=o;homeTrack=o;renderHomeTrack()}
+  catch(err){console.warn(err);E.textContent=tr("eSave").split(".")[0]}finally{b.disabled=false}});
 $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("#trkErr");E.textContent="";
   const id=$("#trkId").value.trim().toUpperCase(),ph=$("#trkPh").value.trim();if(!id||digits(ph).length<9){E.textContent=tr("trackNo");return}
   const b=e.target.querySelector("button");b.disabled=true;
