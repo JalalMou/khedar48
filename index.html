@@ -718,6 +718,33 @@ footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
   .zones{grid-template-columns:minmax(0,1fr);padding:18px}
   .appb{grid-template-columns:minmax(0,1fr);padding:20px}.phone{width:140px}
 }
+/* admin: traffic & conversion */
+.r2b{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px}
+.kmini4{gap:10px;margin-bottom:14px}
+.kmini4 .kc{padding:12px;box-shadow:none;background:var(--bg-2);border-color:transparent}
+.kmini4 .kc b{font-size:clamp(18px,1.5vw,24px)}
+.kmini4 .kc-i{width:38px;height:38px}.kmini4 .kc-i svg{width:20px;height:20px}
+.fn{display:grid;gap:10px}
+.fn-r{display:grid;grid-template-columns:minmax(120px,30%) 1fr 56px 52px;gap:10px;align-items:center;font-size:14px}
+.fn-r span{font-weight:600}
+.fn-r i{height:26px;border-radius:8px;background:var(--bg-2);overflow:hidden}
+.fn-r em{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#1a9e44,#7ed957)}
+.fn-r:nth-child(2) em{background:linear-gradient(90deg,#2f80ed,#7fb3ff)}
+.fn-r:nth-child(3) em{background:linear-gradient(90deg,#f5b400,#ffd666)}
+.fn-r:nth-child(4) em{background:linear-gradient(90deg,#ff8519,#ffb36b)}
+.fn-r b{text-align:end;font-size:16px}
+.fn-r small{color:var(--muted);text-align:end}
+.fn-t{margin:6px 0 0;font-size:14px}.fn-t b{color:#1a9e44;font-size:17px}
+.ly{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.ly div{background:var(--bg-2);border-radius:12px;padding:10px 12px}
+.ly b{display:block;font-size:22px;font-weight:800;color:#1a9e44}
+.ly small{font-size:12.5px;color:var(--muted);line-height:1.3;display:block}
+.ly-l .dl{margin-bottom:6px}
+.lg{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+.lg i{display:inline-block;width:12px;height:4px;border-radius:2px;margin-inline-end:4px}
+.lg i.v{background:#1a9e44}.lg i.o{background:#ff8519}
+@media (max-width:1100px){.r2b{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.fn-r{grid-template-columns:minmax(90px,34%) 1fr 40px 44px;font-size:13px}.ly{grid-template-columns:minmax(0,1fr)}}
 .a-dot[hidden],.badge[hidden],nav.tabs button[hidden],.fld[hidden]{display:none}
 @media (max-width:1320px){.k6{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1280px){.r3,.r3b{grid-template-columns:1fr 1fr}.r3>:last-child,.r3b>:last-child{grid-column:1/-1}}
@@ -953,8 +980,27 @@ footer.ft{background:#f6f9f5;color:var(--fg);border-top:1px solid var(--line)}
             <div class="card"><div class="c-h"><h3>Top produits <span id="topPer">du jour</span></h3><button class="more" data-at="reports">Voir tout →</button></div><div id="topList"></div></div>
             <div class="card"><div class="c-h"><h3>Stock faible <span id="lowN"></span></h3><button class="more" data-at="stock">Voir tout →</button></div><div id="lowList"></div></div>
           </div>
+          <div class="r2b">
+            <div class="card"><div class="c-h"><h3>Trafic &amp; conversion <span class="hint" id="trSub"></span></h3><button class="more" data-at="traffic">Voir tout →</button></div><div class="k4 kmini4" id="trK"></div><div id="funnel"></div></div>
+            <div class="card"><div class="c-h"><h3>Clients fidèles</h3><button class="more" data-at="clients">Voir tout →</button></div><div id="loyal"></div></div>
+          </div>
         </div>
 
+
+        <!-- traffic -->
+        <div data-ap="traffic" hidden>
+          <div class="pg-h"><h2>Trafic &amp; conversion</h2><p class="hint" id="trPer"></p></div>
+          <div class="k6" id="trK6"></div>
+          <div class="r2">
+            <div class="card"><div class="c-h"><h3>Visiteurs et commandes par jour</h3><span class="lg"><i class="v"></i>Visiteurs <i class="o"></i>Commandes</span></div><div id="trChart"></div></div>
+            <div class="card"><div class="c-h"><h3>Entonnoir de conversion</h3></div><div id="funnel2"></div><p class="hint" style="margin:10px 0 0">Chaque étape compte les visites qui sont allées au moins jusque-là.</p></div>
+          </div>
+          <div class="r2">
+            <div class="card"><div class="c-h"><h3>Appareils</h3></div><div id="trDev"></div></div>
+            <div class="card"><div class="c-h"><h3>D'où viennent les visiteurs</h3></div><div id="trSrc" class="hbs"></div><p class="hint" style="margin:10px 0 0">Astuce : ajoutez <b>?utm_source=instagram</b> à vos liens (bio, pubs) pour les reconnaître ici.</p></div>
+          </div>
+          <p class="hint" id="trNote">Visiteurs comptés de façon anonyme (un identifiant au hasard par navigateur, sans données personnelles). L'équipe connectée n'est pas comptée.</p>
+        </div>
         <!-- orders -->
         <div data-ap="orders" hidden>
           <div class="pg-h"><h2>Commandes</h2><p class="hint">Changez le statut, assignez un livreur, contactez le client.</p></div>
@@ -1248,7 +1294,7 @@ async function onUser(u){
     try{const {data,error}=await SB.from("staff").select("role").eq("user_id",u.id).maybeSingle();if(error)throw error;const r=data?.role;role=r==="admin"||r==="driver"?r:null}catch(e){console.warn(e)}
     staff=role==="admin";if(role==="driver")me=u.id;
     if(!role)toast("Ce compte n'a pas d'accès équipe")}
-  await subscribe();renderAll();if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
+  await subscribe();renderAll();if(!isTeam())track("visit");if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
   if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?"admin":role==="driver"?"driver":"login");
     if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut()}}
 }
@@ -1451,7 +1497,7 @@ function promoFor(sub){const k=(promoCode||"").toUpperCase();const c=promos.code
   const d=c.k==="pct"?Math.round(sub*(+c.v||0))/100:+c.v||0;return{d:Math.min(d,sub),ok:c.k==="pct"?t("codePct",c.v):t("codeAmt",money(c.v))}}
 function totals(){const sub=lines().reduce((a,l)=>a+l.sum,0);const pr=promoFor(sub);const after=sub-pr.d;const fee=sub===0||after>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{sub,disc:pr.d,pr,fee,total:after+fee}}
 function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart()}
-function addOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur)toast(t("added",nm(it)))}
+function addOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart")}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=1?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n})}
 const CART_SVG=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>`;
@@ -1472,6 +1518,24 @@ const TILES=[
  {id:"deals",ar:"التخفيضات",fr:"Promotions",e:"%",f:p=>+p.old>+p.p}];
 let tile="all",favs=store.get("favs",[]),installEvt=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;if(view==="shop")renderShop()});
+
+/* ---------------- anonymous traffic analytics ----------------
+   vid = random id kept in this browser (new vs returning visitor), sid = random id for this visit.
+   One event per kind per visit: visit, cart, checkout, order. No personal data, no IP. Team members are not counted. */
+const rid=()=>{const a=new Uint8Array(10);crypto.getRandomValues(a);return [...a].map(b=>b.toString(16).padStart(2,"0")).join("")};
+let VID=store.get("vid",""),VNEW=false;if(!VID){VID=rid();store.set("vid",VID);VNEW=true}
+const SID=(()=>{try{let s=sessionStorage.getItem("k48:sid");if(!s){s=rid();sessionStorage.setItem("k48:sid",s)}return s}catch(e){return rid()}})();
+const sentEv=(()=>{try{return new Set(JSON.parse(sessionStorage.getItem("k48:ev")||"[]"))}catch(e){return new Set()}})();
+function track(kind,oid){
+  if(cloud&&isTeam())return;
+  if(kind!=="order"){if(sentEv.has(kind))return;sentEv.add(kind);try{sessionStorage.setItem("k48:ev",JSON.stringify([...sentEv]))}catch(e){}}
+  const w=innerWidth,device=w<768?"mobile":w<1100?"tablet":"desktop";
+  let src=new URLSearchParams(location.search).get("utm_source")||"";
+  if(!src&&document.referrer){try{const h=new URL(document.referrer).hostname.replace(/^www\./,"");if(!location.hostname.replace(/^www\./,"").endsWith(h))src=h}catch(e){}}
+  const ev={vid:VID,sid:SID,kind,is_new:VNEW,device,lang,src:src.slice(0,60).toLowerCase(),oid:oid||null};
+  if(cloud&&SB){SB.from("events").insert(ev).then(({error})=>{if(error)console.warn(error)})}
+  else{const l=store.get("ev",[]);l.push({...ev,at:Date.now()});store.set("ev",l.slice(-3000))}
+}
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
 function pcard(p){const im=safeImg(p.img),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id);
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im" style="background:radial-gradient(circle at 50% 55%,color-mix(in srgb,${safeColor(p.t)} 14%,var(--card)),var(--card) 70%)">
@@ -1511,7 +1575,7 @@ function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth"
 
 /* ---------------- sheet ---------------- */
 let mode="cart";const sheetOpen=()=>$("#sheet").classList.contains("open");
-function openSheet(m){mode=m;(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function openSheet(m){mode=m;if(m==="checkout")track("checkout");(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 function closeSheet(){$("#sheet").classList.remove("open");$("#scrim").classList.remove("open")}
 function openInfo(k){if(!T.ar.infoBody[k])return;mode="info:"+k;const s=settings;
   $("#shTitle").textContent=t("infoTitle")[k];$("#shBody").innerHTML=`<div class="info">${t("infoBody")[k]({fee:money(s.fee),free:money(s.freeFrom)})}</div>`;
@@ -1561,6 +1625,7 @@ async function placeOrder(){
       ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
     catch(e){console.warn(e);b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
   }else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
+  track("order",id);
   cart={};promoCode="";store.set("cart",cart);store.set("promo","");renderShop();renderBadges();
   rememberTrack(id,tk);const link=trackUrl(id,tk);
   // the WhatsApp message goes to the shop, so it stays in Arabic
@@ -1645,8 +1710,9 @@ const ICON={
  truck:"M2 6h12v10H2zM14 9h4l3 3.5V16h-7M6 19.5a2 2 0 100-4 2 2 0 000 4zM17 19.5a2 2 0 100-4 2 2 0 000 4z",
  x:"M12 21a9 9 0 100-18 9 9 0 000 18zM9 9l6 6M15 9l-6 6",
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
- bars:"M5 20v-6M10 20V10M15 20V6M20 20V3"};
-const NAV=[["dash","Tableau de bord","home"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["settings","Paramètres","gear"]];
+ bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
+ eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["settings","Paramètres","gear"]];
 let aPer="1",chartPer="7",aQ="";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -1750,6 +1816,74 @@ A.dash=({O,OR,OP,len,act})=>{
   const low=lowStock();$("#lowN").textContent=`(${low.length})`;
   $("#lowList").innerHTML=low.length?low.slice(0,4).map(p=>`<div class="ls">${thumb(p)}<b>${esc(pn(p))}</b><span class="ls-q num">${fmt(p.stock)} ${UFR[p.u]}</span></div>`).join("")
     :products.some(p=>typeof p.stock==="number")?aEmpty("Tout est en stock ✓"):`${aEmpty("Le stock n'est pas encore suivi.")}<button class="btn b-gh sm" data-at="stock">Saisir le stock</button>`;
+  const an=getAnalytics(len);
+  $("#trSub").textContent=`· ${perLbl(len).toLowerCase()}`;
+  $("#trK").innerHTML=an.err?"":trafficKpis(an,OR,4);
+  $("#funnel").innerHTML=an.err?aEmpty(an.err):an.cur?funnelHtml(an.cur):aEmpty("Chargement…");
+  $("#loyal").innerHTML=loyalHtml(O,OR);
+};
+
+/* ---------------- traffic & conversion ---------------- */
+// analytics come from the SQL function analytics(); in demo mode they are computed from events kept in this browser
+const anaCache={};
+function aggEvents(L,t0,t1){
+  const e=L.filter(x=>x.at>=t0&&x.at<t1),u=(f,k)=>new Set(e.filter(f).map(x=>x[k])).size;
+  const dayKey=t=>{const d=new Date(t);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
+  const days={};e.forEach(x=>{const k=dayKey(x.at),d=days[k]=days[k]||{d:k,v:new Set(),o:new Set()};d.v.add(x.vid);if(x.kind==="order")d.o.add(x.sid)});
+  const dev={},src={};e.filter(x=>x.kind==="visit").forEach(x=>{(dev[x.device||"desktop"]=dev[x.device||"desktop"]||new Set()).add(x.vid);(src[x.src||"direct"]=src[x.src||"direct"]||new Set()).add(x.sid)});
+  return{visitors:u(()=>true,"vid"),sessions:u(x=>x.kind==="visit","sid"),new_visitors:u(x=>x.kind==="visit"&&x.is_new,"vid"),returning:u(x=>x.kind==="visit"&&!x.is_new,"vid"),
+    carts:u(x=>x.kind==="cart","sid"),checkouts:u(x=>x.kind==="checkout","sid"),orders:u(x=>x.kind==="order","sid"),
+    days:Object.values(days).map(d=>({d:d.d,v:d.v.size,o:d.o.size})).sort((a,b)=>a.d<b.d?-1:1),
+    devices:Object.fromEntries(Object.entries(dev).map(([k,s])=>[k,s.size])),
+    sources:Object.entries(src).map(([s,n])=>({s,n:n.size})).sort((a,b)=>b.n-a.n).slice(0,8)}}
+function getAnalytics(len){
+  const key=`${len}:${new Date().toDateString()}`,c=anaCache[key];
+  if(c&&Date.now()-c.t<60000)return c;
+  const R=per(len),P=per(len,1),slot=anaCache[key]=c?{...c}:{t:0};slot.t=Date.now();
+  if(!cloud){const L=store.get("ev",[]);Object.assign(slot,{cur:aggEvents(L,...R),prev:aggEvents(L,...P),err:""});return slot}
+  const call=r=>SB.rpc("analytics",{t0:new Date(r[0]).toISOString(),t1:new Date(r[1]).toISOString()}).then(({data,error})=>{if(error)throw error;return data});
+  Promise.all([call(R),call(P)]).then(([cur,prev])=>{Object.assign(slot,{cur,prev,err:""});if(["dash","traffic"].includes(aTab)&&view==="admin")renderAdmin()})
+    .catch(e=>{console.warn(e);slot.err="Statistiques indisponibles : exécutez la partie « traffic analytics » du script supabase.sql.";if(view==="admin")renderAdmin()});
+  return slot;
+}
+const pctf=(a,b)=>b?Math.round(a/b*1000)/10:0;
+function trafficKpis(an,OR,n){
+  const c=an.cur||{},p=an.prev||{},rate=pctf(c.orders,c.visitors),prate=pctf(p.orders,p.visitors),ret=pctf(c.returning,(c.new_visitors||0)+(c.returning||0));
+  const K=[["Visiteurs","eye",c.visitors||0,p.visitors||0],["Taux de conversion","chart",rate,prate,"%"],["Nouveaux visiteurs","users",c.new_visitors||0,p.new_visitors||0],["Visiteurs récurrents","users",c.returning||0,p.returning||0,"",`${ret}% des visiteurs`],
+    ["Visites","bars",c.sessions||0,p.sessions||0],["Paniers abandonnés","x",Math.max(0,(c.carts||0)-(c.orders||0)),Math.max(0,(p.carts||0)-(p.orders||0)),"","",1]].slice(0,n);
+  return K.map(([l,i,v,pv,suf,sub,inv])=>`<div class="kc"><span class="kc-i ${inv?"r":"g"}">${ic(i)}</span><div><small>${l}</small><b class="num">${an.cur?`${fmt(v)}${suf||""}`:"…"}</b>${an.cur?delta(v,pv,inv):""}${sub?` <span class="vs">${sub}</span>`:""}</div></div>`).join("")}
+function funnelHtml(c){
+  const st=[["Visiteurs",c.visitors||0],["Ajout au panier",c.carts||0],["Commande commencée",c.checkouts||0],["Commandes passées",c.orders||0]],top=Math.max(1,st[0][1]);
+  return `<div class="fn">${st.map(([n,v],i)=>`<div class="fn-r"><span>${n}</span><i><em style="width:${Math.max(v?3:0,v/top*100)}%"></em></i><b class="num">${v}</b><small class="num">${i?`${pctf(v,st[i-1][1])}%`:""}</small></div>`).join("")}
+    <p class="fn-t">Taux de conversion global : <b class="num">${pctf(c.orders,c.visitors)}%</b></p></div>`}
+function loyalHtml(O,OR){
+  const by={};O.filter(o=>o.status!=="cancel").forEach(o=>{const k=digits(o.phone).slice(-9)||o.name;const c=by[k]=by[k]||{name:o.name,n:0,sum:0,first:Infinity,last:0};c.n++;c.sum+=+o.total||0;c.first=Math.min(c.first,o.at||0);c.last=Math.max(c.last,o.at||0)});
+  const all=Object.values(by),rep=all.filter(c=>c.n>=2),buyers=new Set(OR.filter(o=>o.status!=="cancel").map(o=>digits(o.phone).slice(-9)||o.name));
+  const back=[...buyers].filter(k=>by[k]&&by[k].first<per(+aPer)[0]).length;
+  return `<div class="ly"><div><b class="num">${rep.length}</b><small>clients ont commandé 2 fois ou plus</small></div><div><b class="num">${pctf(rep.length,all.length)}%</b><small>taux de fidélité</small></div><div><b class="num">${back}</b><small>clients revenus sur la période</small></div></div>
+    ${rep.length?`<div class="ly-l">${rep.sort((a,b)=>b.n-a.n||b.sum-a.sum).slice(0,4).map(c=>`<div class="dl"><span class="av">${esc(initial(c.name))}</span><span class="dl-n"><b>${esc(c.name)}</b><small class="hint num">${c.n} commandes · ${mad(c.sum)}</small></span><span class="tagx g">Fidèle</span></div>`).join("")}</div>`:aEmpty("Pas encore de client revenu. Ils apparaîtront ici dès leur 2ᵉ commande.")}`}
+function chart2(rows){
+  if(!rows.length)return aEmpty("Pas encore de visites sur cette période.");
+  const W=640,H=250,L=40,Rr=14,T=14,B=30,n=rows.length,mx=niceMax(Math.max(...rows.map(r=>r.v)));
+  const x=i=>L+(n<2?(W-L-Rr)/2:i*(W-L-Rr)/(n-1)),y=v=>T+(H-T-B)*(1-v/mx),path=k=>rows.map((r,i)=>`${i?"L":"M"}${x(i).toFixed(1)} ${y(r[k]).toFixed(1)}`).join("");
+  const lbl=d=>{const [yy,mm,dd]=d.split("-");return `${dd}/${mm}`},step=n>10?Math.ceil(n/7):1;
+  return `<svg class="lc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Visiteurs et commandes par jour">
+   ${[0,1,2,3,4].map(k=>{const t=mx*k/4;return `<line x1="${L}" x2="${W-Rr}" y1="${y(t)}" y2="${y(t)}" class="lc-g"/><text x="${L-10}" y="${y(t)+4}" text-anchor="end" class="lc-t">${Math.round(t)}</text>`}).join("")}
+   <path d="${path("v")}" fill="none" stroke="#1a9e44" stroke-width="3" stroke-linejoin="round"/><path d="${path("o")}" fill="none" stroke="#ff8519" stroke-width="3" stroke-linejoin="round"/>
+   ${rows.map((r,i)=>`<circle cx="${x(i)}" cy="${y(r.v)}" r="4" fill="#1a9e44"><title>${lbl(r.d)} : ${r.v} visiteurs, ${r.o} commandes</title></circle><circle cx="${x(i)}" cy="${y(r.o)}" r="4" fill="#ff8519"><title>${lbl(r.d)} : ${r.o} commandes</title></circle>`).join("")}
+   ${rows.map((r,i)=>i%step===0||i===n-1?`<text x="${x(i)}" y="${H-8}" text-anchor="middle" class="lc-t">${lbl(r.d)}</text>`:"").join("")}</svg>`}
+A.traffic=({OR,len})=>{
+  const an=getAnalytics(len);$("#trPer").textContent=`Période : ${perLbl(len).toLowerCase()} · comparé à la période précédente.`;
+  if(an.err){$("#trK6").innerHTML="";["#trChart","#funnel2","#trDev","#trSrc"].forEach(s=>$(s).innerHTML=aEmpty(an.err));return}
+  $("#trK6").innerHTML=trafficKpis(an,OR,6);
+  const c=an.cur;if(!c){["#trChart","#funnel2","#trDev","#trSrc"].forEach(s=>$(s).innerHTML=aEmpty("Chargement…"));return}
+  const map={};(c.days||[]).forEach(d=>map[d.d]=d);
+  const rows=[...Array(Math.max(len,7))].map((_,i)=>{const d=new Date(per(1,Math.max(len,7)-1-i)[0]),k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;return map[k]||{d:k,v:0,o:0}});
+  $("#trChart").innerHTML=chart2(rows);
+  $("#funnel2").innerHTML=funnelHtml(c);
+  const dv=c.devices||{};$("#trDev").innerHTML=donut([{n:"Mobile",v:dv.mobile||0,c:"#1a9e44"},{n:"Ordinateur",v:dv.desktop||0,c:"#2f80ed"},{n:"Tablette",v:dv.tablet||0,c:"#f5b400"}]).replace(/commande(s?)<\/text>/,"visiteur$1</text>");
+  const S=c.sources||[],mx=Math.max(1,...S.map(s=>s.n)),nice={direct:"Direct / WhatsApp","l.instagram.com":"Instagram","instagram.com":"Instagram","m.facebook.com":"Facebook","l.facebook.com":"Facebook","facebook.com":"Facebook","google.com":"Google","google.co.ma":"Google","tiktok.com":"TikTok"};
+  $("#trSrc").innerHTML=S.length?S.map(s=>`<div class="hb"><span>${esc(nice[s.s]||s.s)}</span><i><em style="width:${s.n/mx*100}%"></em></i><b class="num">${s.n}</b></div>`).join(""):aEmpty("Pas encore de visites.");
 };
 A.orders=({O})=>{
   const F={active:"En cours",new:"Nouvelles",prep:"En préparation",road:"En livraison",done:"Livrées",cancel:"Annulées",all:"Toutes"};
@@ -2008,7 +2142,7 @@ $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
 
 loadLocal();
 show(location.hash.slice(1)||"shop");
-initCloud().then(()=>{if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
+initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>

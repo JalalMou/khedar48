@@ -164,6 +164,55 @@ $$;
 revoke all on function public.track_order(text, text) from public;
 grant execute on function public.track_order(text, text) to anon, authenticated;
 
+-- ---------- traffic analytics (anonymous: a random id per browser, no IP, no personal data) ----------
+create table if not exists public.events (
+  id      bigint generated always as identity primary key,
+  at      timestamptz not null default now(),
+  vid     text not null check (length(vid) between 8 and 40),   -- random id kept by the browser
+  sid     text not null check (length(sid) between 8 and 40),   -- random id per visit (tab session)
+  kind    text not null check (kind in ('visit','cart','checkout','order')),
+  is_new  boolean not null default false,
+  device  text check (device in ('mobile','tablet','desktop')),
+  lang    text check (lang in ('ar','fr')),
+  src     text check (length(src) <= 60),
+  oid     text check (length(oid) <= 20)
+);
+create index if not exists events_at_idx on public.events(at);
+alter table public.events enable row level security;
+drop policy if exists events_insert on public.events;
+drop policy if exists events_admin  on public.events;
+create policy events_insert on public.events for insert to anon, authenticated with check (at > now() - interval '5 minutes');
+create policy events_admin  on public.events for select to authenticated using (public.is_admin());
+
+create or replace function public.analytics(t0 timestamptz, t1 timestamptz) returns jsonb
+language plpgsql stable security definer set search_path = public as $$
+declare r jsonb;
+begin
+  if not public.is_admin() then raise exception 'forbidden'; end if;
+  with e as (select * from public.events where at >= t0 and at < t1)
+  select jsonb_build_object(
+    'visitors',     (select count(distinct vid) from e),
+    'sessions',     (select count(distinct sid) from e where kind = 'visit'),
+    'new_visitors', (select count(distinct vid) from e where kind = 'visit' and is_new),
+    'returning',    (select count(distinct vid) from e where kind = 'visit' and not is_new),
+    'carts',        (select count(distinct sid) from e where kind = 'cart'),
+    'checkouts',    (select count(distinct sid) from e where kind = 'checkout'),
+    'orders',       (select count(distinct sid) from e where kind = 'order'),
+    'days', (select coalesce(jsonb_agg(jsonb_build_object('d', d, 'v', v, 'o', o) order by d), '[]'::jsonb) from (
+              select to_char((at at time zone 'Africa/Casablanca')::date, 'YYYY-MM-DD') d,
+                     count(distinct vid) v, count(distinct sid) filter (where kind = 'order') o
+              from e group by 1) s),
+    'devices', (select coalesce(jsonb_object_agg(k, n), '{}'::jsonb) from (
+              select coalesce(device, 'desktop') k, count(distinct vid) n from e where kind = 'visit' group by 1) s),
+    'sources', (select coalesce(jsonb_agg(jsonb_build_object('s', k, 'n', n) order by n desc), '[]'::jsonb) from (
+              select coalesce(nullif(src, ''), 'direct') k, count(distinct sid) n from e where kind = 'visit'
+              group by 1 order by 2 desc limit 8) s)
+  ) into r;
+  return r;
+end $$;
+revoke all on function public.analytics(timestamptz, timestamptz) from public, anon;
+grant execute on function public.analytics(timestamptz, timestamptz) to authenticated;
+
 -- =====================================================================
 -- AFTER you created your admin user (Authentication → Users → Add user),
 -- run ONLY this line, with your email instead of TON_EMAIL:
