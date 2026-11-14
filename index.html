@@ -428,6 +428,7 @@ footer.ft .ft-in{display:grid;grid-template-columns:1.5fr 1fr 1.25fr 1.25fr 1fr;
 .wa-fab{position:fixed;inset-inline-end:20px;bottom:24px;z-index:35;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
 .wa-fab svg{width:32px;height:32px;fill:#fff}
 .info p{line-height:1.8;margin:0 0 12px}
+.pc.soon .pc-im{opacity:.85}.soon-l{display:block;width:100%;text-align:center;background:#fff7ed;color:#c2410c;border:1px dashed #fdba74;border-radius:10px;padding:8px;font-weight:700;font-size:13.5px}
 .cred{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:4px;font-size:13px}.cred a{color:var(--k-g2,#0d7a35)}
 .trk{background:var(--gl);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
 .trk>b{font-size:18px;font-family:var(--f-d)}.trk p{margin:2px 0 10px}
@@ -1374,25 +1375,25 @@ const DEF_PRODUCTS=[
 ].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
 // ready-to-cook range (washed, peeled, cut the same day); also merged into an older catalog until an admin saves it once
 const CUT_DEF=[
- ["cut-frites","بطاطا مقطعة فريت","cut",12,"kg","🍟","#e9c46a",{fr:"Frites coupées (prêtes à frire)",d:{ar:"بطاطا مقشرة ومقطعة، غير قليها",fr:"Pommes de terre épluchées et taillées, prêtes à frire"},hot:true}],
- ["cut-tajine","خضرة مقطعة للطاجين","cut",18,"kg","🥘","#d98a4e",{fr:"Légumes coupés pour tajine",d:{ar:"خيزو، بطاطا، كرعة، بصلة وطماطم",fr:"Carottes, pommes de terre, courgettes, oignon, tomate"}}],
- ["cut-couscous","خضرة مقطعة للكسكس","cut",20,"kg","🍲","#c9a15a",{fr:"Légumes coupés pour couscous",d:{ar:"خيزو، لفت، كرعة، قرع، كرنب",fr:"Carottes, navets, courgettes, potiron, chou"}}],
- ["cut-soupe","خضرة مقطعة للحريرة والسوبة","cut",16,"kg","🥣","#b5835a",{fr:"Légumes coupés pour harira & soupe",d:{ar:"كرافس، معدنوس، قزبر، بصلة، طماطم",fr:"Céleri, persil, coriandre, oignon, tomate"}}],
- ["cut-salade","شلاضة مغربية مقطعة","cut",22,"kg","🥗","#7fb069",{fr:"Salade marocaine coupée",d:{ar:"طماطم، خيار وبصلة مقطعين رقاق",fr:"Tomates, concombre et oignon finement coupés"}}],
- ["cut-oignon","بصلة مقطعة","cut",10,"kg","🧅","#c98a5a",{fr:"Oignons émincés",d:{ar:"مقشرة ومقطعة، بلا دموع",fr:"Épluchés et émincés, sans larmes"}}],
- ["cut-carotte","خيزو محكوك","cut",12,"kg","🥕","#ef8a2f",{fr:"Carottes râpées",d:{ar:"واجد للشلاضة",fr:"Prêtes pour vos salades"}}],
- ["cut-ail","ثوم مقشر","cut",45,"kg","🧄","#d8cbb0",{fr:"Ail épluché",d:{ar:"فصوص مقشرة ونقية",fr:"Gousses épluchées et propres"}}]
+ ["cut-frites","بطاطا مقطعة فريت","cut",0,"kg","🍟","#e9c46a",{fr:"Frites coupées (prêtes à frire)",d:{ar:"بطاطا مقشرة ومقطعة، غير قليها",fr:"Pommes de terre épluchées et taillées, prêtes à frire"},hot:true}],
+ ["cut-tajine","خضرة مقطعة للطاجين","cut",0,"kg","🥘","#d98a4e",{fr:"Légumes coupés pour tajine",d:{ar:"خيزو، بطاطا، كرعة، بصلة وطماطم",fr:"Carottes, pommes de terre, courgettes, oignon, tomate"}}],
+ ["cut-couscous","خضرة مقطعة للكسكس","cut",0,"kg","🍲","#c9a15a",{fr:"Légumes coupés pour couscous",d:{ar:"خيزو، لفت، كرعة، قرع، كرنب",fr:"Carottes, navets, courgettes, potiron, chou"}}],
+ ["cut-soupe","خضرة مقطعة للحريرة والسوبة","cut",0,"kg","🥣","#b5835a",{fr:"Légumes coupés pour harira & soupe",d:{ar:"كرافس، معدنوس، قزبر، بصلة، طماطم",fr:"Céleri, persil, coriandre, oignon, tomate"}}],
+ ["cut-salade","شلاضة مغربية مقطعة","cut",0,"kg","🥗","#7fb069",{fr:"Salade marocaine coupée",d:{ar:"طماطم، خيار وبصلة مقطعين رقاق",fr:"Tomates, concombre et oignon finement coupés"}}],
+ ["cut-oignon","بصلة مقطعة","cut",0,"kg","🧅","#c98a5a",{fr:"Oignons émincés",d:{ar:"مقشرة ومقطعة، بلا دموع",fr:"Épluchés et émincés, sans larmes"}}],
+ ["cut-carotte","خيزو محكوك","cut",0,"kg","🥕","#ef8a2f",{fr:"Carottes râpées",d:{ar:"واجد للشلاضة",fr:"Prêtes pour vos salades"}}],
+ ["cut-ail","ثوم مقشر","cut",0,"kg","🧄","#d8cbb0",{fr:"Ail épluché",d:{ar:"فصوص مقشرة ونقية",fr:"Gousses épluchées et propres"}}]
 ].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
 // spices and olive oil (prices are starting values, to be set in the admin)
 const SPICE_OIL_DEF=[
- ["sp-cumin","كمون مطحون (100غ)","spice",12,"pc","🧂","#b07a3b",{fr:"Cumin moulu (100 g)"}],
- ["sp-paprika","تحميرة حلوة (100غ)","spice",10,"pc","🌶️","#c4422e",{fr:"Paprika doux (100 g)"}],
- ["sp-curcuma","خرقوم (100غ)","spice",10,"pc","🟡","#e0a526",{fr:"Curcuma (100 g)"}],
- ["sp-ginger","سكنجبير مطحون (100غ)","spice",12,"pc","🫚","#c9a15a",{fr:"Gingembre moulu (100 g)"}],
- ["sp-pepper","إبزار كحل (100غ)","spice",15,"pc","⚫","#3d3a35",{fr:"Poivre noir (100 g)"}],
- ["sp-ras","راس الحانوت (100غ)","spice",18,"pc","🧂","#9a5b2c",{fr:"Ras el hanout (100 g)"}],
- ["oil-1l","زيت الزيتون البلدية (1 لتر)","oil",70,"pc","🫒","#7a8b2c",{fr:"Huile d'olive beldi (1 L)"}],
- ["oil-5l","زيت الزيتون البلدية (5 لتر)","oil",330,"pc","🫒","#6b7a22",{fr:"Huile d'olive beldi (5 L)"}]
+ ["sp-cumin","كمون مطحون (100غ)","spice",0,"pc","🧂","#b07a3b",{fr:"Cumin moulu (100 g)"}],
+ ["sp-paprika","تحميرة حلوة (100غ)","spice",0,"pc","🌶️","#c4422e",{fr:"Paprika doux (100 g)"}],
+ ["sp-curcuma","خرقوم (100غ)","spice",0,"pc","🟡","#e0a526",{fr:"Curcuma (100 g)"}],
+ ["sp-ginger","سكنجبير مطحون (100غ)","spice",0,"pc","🫚","#c9a15a",{fr:"Gingembre moulu (100 g)"}],
+ ["sp-pepper","إبزار كحل (100غ)","spice",0,"pc","⚫","#3d3a35",{fr:"Poivre noir (100 g)"}],
+ ["sp-ras","راس الحانوت (100غ)","spice",0,"pc","🧂","#9a5b2c",{fr:"Ras el hanout (100 g)"}],
+ ["oil-1l","زيت الزيتون البلدية (1 لتر)","oil",0,"pc","🫒","#7a8b2c",{fr:"Huile d'olive beldi (1 L)"}],
+ ["oil-5l","زيت الزيتون البلدية (5 لتر)","oil",0,"pc","🫒","#6b7a22",{fr:"Huile d'olive beldi (5 L)"}]
 ].map(([id,n,c,p,u,e,t,x])=>({id,n,c,p,u,e,t,on:true,...(x||{})}));
 const EXTRA_DEF=[...CUT_DEF,...SPICE_OIL_DEF];
 const withCut=list=>(+settings.seedV||0)>=2?list:[...list,...EXTRA_DEF.filter(d=>!list.some(p=>p.id===d.id)).map(d=>({...d}))];
@@ -1604,6 +1605,7 @@ const T={
   k7CtaT:"طلب دابا!",k7CtaS:"ساهل، سريع وعملي.",k7CtaWa:"طلب فواتساب",k7Or:"ولا",k7CtaSite:"طلب من الموقع",
   k7FtAbout:"منتوجاتك الطرية فوجدة: خضرة، فواكه، خضرة مقطعة، باكات وعطرية، كتوصلك بسرعة وبجودة وطراوة مضمونين.",
   k7Quick:"روابط سريعة",k7Client:"فضاء الزبون",k7Contact:"اتصل بنا",k7Follow:"تابعنا",k7Zone:"التوصيل فوجدة (≤ 60 دقيقة)",k7NoSoc:"قريباً على إنستغرام وفيسبوك",
+  soon:"السعر قريباً",
   close:"سدّ"},
  fr:{tagline:"Primeur · Oujda",navHome:"Accueil",navProducts:"Produits",navPromos:"Promotions",navAbout:"À propos",navContact:"Contact",
   city:"Oujda",cart:"Panier",myOrders:"Mes commandes",
@@ -1674,6 +1676,7 @@ const T={
   k7CtaT:"Commandez dès maintenant !",k7CtaS:"C'est simple, rapide et pratique.",k7CtaWa:"Commander sur WhatsApp",k7Or:"ou",k7CtaSite:"Commander sur le site",
   k7FtAbout:"Vos produits frais à Oujda : légumes, fruits, légumes découpés, packs et épices, livrés rapidement, avec qualité et fraîcheur garanties.",
   k7Quick:"Liens rapides",k7Client:"Espace client",k7Contact:"Nous contacter",k7Follow:"Suivez-nous",k7Zone:"Livraison à Oujda (≤ 60 minutes)",k7NoSoc:"Bientôt sur Instagram et Facebook",
+  soon:"Prix bientôt",
   close:"Fermer"}};
 const t=(k,...a)=>{const v=T[lang][k]??T.ar[k];return typeof v==="function"?v(...a):v};
 const tr=t; // alias for event handlers, where "t" is the clicked element
@@ -1696,13 +1699,13 @@ function applyLang(){
 function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")&&openInfo(mode.slice(5))}
 
 /* ---------------- cart & pricing ---------------- */
-function lines(){return Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const it=byId(id);return it&&it.on!==false?{it,q,sum:it.p*q}:null}).filter(Boolean)}
+function lines(){return Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const it=byId(id);return it&&it.on!==false&&+it.p>0?{it,q,sum:it.p*q}:null}).filter(Boolean)}
 function promoFor(sub){const k=(promoCode||"").toUpperCase();const c=promos.codes?.[k];
   if(!k)return{d:0};if(!c||!c.on)return{d:0,err:t("codeBad")};if(sub<(+c.min||0))return{d:0,err:t("codeMin",money(c.min))};
   const d=c.k==="pct"?Math.round(sub*(+c.v||0))/100:+c.v||0;return{d:Math.min(d,sub),ok:c.k==="pct"?t("codePct",c.v):t("codeAmt",money(c.v))}}
 function totals(){const sub=lines().reduce((a,l)=>a+l.sum,0);const pr=promoFor(sub);const after=sub-pr.d;const fee=sub===0||after>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{sub,disc:pr.d,pr,fee,total:after+fee}}
 function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart()}
-function addOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart")}}
+function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart")}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=1?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n})}
 const CART_SVG=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>`;
@@ -1793,7 +1796,12 @@ const PHOTO_CREDITS=[
 const PHOTO_IDS=new Set(PHOTO_CREDITS.map(c=>c[0]));
 const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.id==="oil-5l"?"img/pr-oil-1l.jpg":"");
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
-function pcard(p){const im=photoOf(p),off=+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
+// a product without a price yet (0 DH) is shown but cannot be ordered
+const priced=p=>+p?.p>0;
+function pcard(p){const im=photoOf(p),off=priced(p)&&+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
+  if(!priced(p))return `<article class="pc soon"><div class="pc-im">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
+    <button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
+    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b><div class="pc-f"><span class="soon-l">${t("soon")}</span></div></article>`;
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im">
     ${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
     ${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
