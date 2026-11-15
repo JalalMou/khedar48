@@ -746,10 +746,15 @@ html,body{background:var(--k-bg)}
 .k7-wa{display:inline-flex;align-items:center;gap:8px;background:var(--k-g2);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:10px 18px;font-size:14.5px;box-shadow:0 8px 18px -10px rgba(13,122,53,.9)}
 .k7-wa svg{width:20px;height:20px;fill:#fff}
 /* hero */
-.k7-hero{position:relative;background:url("img/hero.jpg") center/cover no-repeat;overflow:hidden}
-.k7-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.85) 38%,rgba(255,255,255,0) 66%)}
-[dir=rtl] .k7-hero::before{background:linear-gradient(270deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.85) 38%,rgba(255,255,255,0) 66%)}
-.k7-hero-in{position:relative;max-width:1280px;min-height:clamp(360px,34vw,470px);display:flex;align-items:center;padding-block:28px 74px}
+.k7-hero{position:relative;background:#eef5ea;overflow:hidden}
+.k7-slides{position:absolute;inset:0;z-index:0}
+.k7-slides i{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform:scale(1.1);transition:opacity 1.4s ease,transform 7s ease-out}
+.k7-slides i.on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.k7-slides i{transform:none!important;transition:opacity .6s}}
+.k7-hero::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,rgba(6,28,14,.82) 0%,rgba(6,28,14,.5) 42%,rgba(6,28,14,0) 72%)}
+.k7-hero-logo{display:none}
+[dir=rtl] .k7-hero::before{background:linear-gradient(270deg,rgba(6,28,14,.82) 0%,rgba(6,28,14,.5) 42%,rgba(6,28,14,0) 72%)}
+.k7-hero-in{position:relative;z-index:2;max-width:1280px;min-height:clamp(360px,34vw,470px);display:flex;align-items:center;padding-block:28px 74px}
 .k7-hero-tx{max-width:600px}
 .k7-hero-logo img{width:min(420px,80%);height:auto;display:block;margin-bottom:6px}
 .k7-hero h1{margin:0 0 16px;font-size:clamp(28px,3.2vw,42px);line-height:1.2;font-weight:800;font-style:italic;color:#0f2d1b}
@@ -760,6 +765,24 @@ html[lang=ar] .k7-hero h1{font-style:normal;line-height:1.5}
 .k7-checks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
 .k7-checks li{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#0f2d1b}
 .k7-checks li::before{content:"✓";width:22px;height:22px;border-radius:50%;background:var(--k-g);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:900;flex:none}
+.k7-hero h1{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.35);margin-bottom:12px}
+.k7-hero .k7-checks li{color:#fff}
+.k7-hero-tx{min-height:250px}
+.k7-hero .k7-60{text-shadow:none}
+.k7-kick{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);color:#fff;font-weight:800;font-size:13.5px;padding:6px 14px;border-radius:99px;margin-bottom:14px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.k7-sub{color:rgba(255,255,255,.92);font-size:clamp(15px,1.4vw,18px);margin:0;max-width:480px;line-height:1.7}
+.k7-sl-cta{margin-top:22px}
+.k7-sl-tx.in>*{animation:k7up .7s cubic-bezier(.2,.7,.2,1) both}
+.k7-sl-tx.in>:nth-child(2){animation-delay:.08s}.k7-sl-tx.in>:nth-child(3){animation-delay:.16s}.k7-sl-tx.in>:nth-child(4){animation-delay:.24s}
+@keyframes k7up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.k7-dots{display:flex;gap:7px;margin-top:26px}
+.k7-dots button{position:relative;overflow:hidden;width:9px;height:9px;border-radius:99px;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:width .35s}
+.k7-dots button i{position:absolute;inset:0;background:var(--k-or);transform:scaleX(0);transform-origin:left}
+[dir=rtl] .k7-dots button i{transform-origin:right}
+.k7-dots button[aria-current=true]{width:38px}
+.k7-dots button[aria-current=true] i{animation:k7prog 6s linear forwards}
+@keyframes k7prog{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.k7-sl-tx.in>*{animation:none}.k7-dots button[aria-current=true] i{animation:none;transform:none}}
 /* feature bar overlapping the hero */
 .k7-feat{position:relative;margin-top:-46px;z-index:2;background:#fff;border-radius:20px;box-shadow:0 18px 40px -22px rgba(10,60,30,.5);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:16px 10px}
 .k7-feat>div{display:flex;align-items:center;gap:12px;padding:6px 16px;font-size:14.5px;font-weight:600;line-height:1.3;color:#1f2a22}
@@ -881,8 +904,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 @media (max-width:1080px){.k7-nav{display:none}.k7-act{margin-inline-start:auto}.k7-2col{grid-template-columns:minmax(0,1fr)}.k7-trust .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:760px){
   .k7-logo img{height:44px}.k7-wa span{display:none}.k7-wa{padding:10px}
-  .k7-hero::before,[dir=rtl] .k7-hero::before{background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.88) 60%,rgba(255,255,255,.55) 100%)}
-  .k7-hero-in{min-height:0;padding-block:18px 64px}
+  .k7-hero::before,[dir=rtl] .k7-hero::before{background:linear-gradient(0deg,rgba(6,28,14,.88) 0%,rgba(6,28,14,.55) 55%,rgba(6,28,14,.05) 100%)}
+  .k7-hero-in{min-height:0;padding-block:170px 64px}
   .k7-feat{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
   .k7-feat>div{padding:6px;font-size:13px}.k7-feat>div+div{border:0}.k7-feat svg{width:32px;height:32px}
   .k7-cats{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.k7-cat{font-size:13.5px}.k7-cat .ph{font-size:40px}
@@ -979,7 +1002,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 </defs></svg>
 
 <header class="hd k7-hd"><div class="wrap hd-in">
-  <button class="k7-logo" data-go="shop" aria-label="Khedar48"><img src="img/logo.jpg" alt="Khedar48 · Fruits & Légumes Frais à Oujda" width="900" height="347"></button>
+  <button class="k7-logo" data-go="shop" aria-label="Khedar48"><img src="img/logo.png" alt="Khedar48 · Fruits & Légumes Frais à Oujda" width="980" height="272"></button>
   <nav class="k7-nav" aria-label="Menu">
     <button data-nav="top" class="on" data-t="navHome"></button>
     <button data-show="veg" data-t="k7Veg"></button>
@@ -1000,11 +1023,12 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 <main>
 <!-- ============ SHOP ============ -->
 <div class="view" id="v-shop">
-  <section class="k7-hero" id="top"><div class="wrap k7-hero-in">
+  <section class="k7-hero" id="top">
+    <div class="k7-slides" id="k7Slides" aria-hidden="true"><i class="on" style="background-image:url(img/hero.jpg)"></i><i data-bg="img/sl-fruit.jpg"></i><i data-bg="img/sl-cut.jpg"></i><i data-bg="img/sl-veg.jpg"></i><i data-bg="img/sl-onion.jpg"></i><i data-bg="img/sl-spice.jpg"></i></div>
+    <div class="wrap k7-hero-in">
     <div class="k7-hero-tx">
-      <div class="k7-hero-logo"><img src="img/logo.jpg" alt="" width="900" height="347"></div>
-      <h1><span data-t="k7H1"></span> <span class="k7-60"><span class="clock">⏱</span><b data-t="k7H60"></b></span></h1>
-      <ul class="k7-checks"><li data-t="k7C1"></li><li data-t="k7C2"></li><li data-t="k7C3"></li></ul>
+      <div class="k7-sl-tx" id="k7SlTx" aria-live="polite"></div>
+      <div class="k7-dots" id="k7Dots"></div>
     </div>
   </div></section>
 
@@ -1307,7 +1331,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 <footer class="ft k7-ft" id="contact">
   <div class="k7-wave" aria-hidden="true"></div>
   <div class="wrap k7-ft-in">
-    <div class="k7-ft-brand"><div class="k7-ft-logo"><img src="img/logo.jpg" alt="Khedar48" width="900" height="347"></div><p data-t="k7FtAbout"></p></div>
+    <div class="k7-ft-brand"><div class="k7-ft-logo"><img src="img/logo.png" alt="Khedar48" width="980" height="272"></div><p data-t="k7FtAbout"></p></div>
     <div><h4 data-t="k7Quick"></h4><ul>
       <li><button class="l" data-nav="top" data-t="navHome"></button></li><li><button class="l" data-show="veg" data-t="k7Veg"></button></li><li><button class="l" data-show="fruit" data-t="k7Fruit"></button></li>
       <li><button class="l" data-show="cut" data-t="k7Cut"></button></li><li><button class="l" data-show="panier" data-t="k7Packs"></button></li><li><button class="l" data-show="spice" data-t="k7Spice"></button></li><li><button class="l" data-show="oil" data-t="k7Oil"></button></li></ul></div>
@@ -1698,7 +1722,35 @@ function applyLang(){
   $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
   document.title=lang==="fr"?"Khedar48 — Fruits & légumes frais livrés à Oujda":"خضار 48 · Khedar48 — الخضرة والفواكه حتى لباب دارك فوجدة";
 }
-function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")&&openInfo(mode.slice(5))}
+/* hero slider: 6 slides (photo + kicker + title + text + button), auto every 6s, swipe, pause on hover */
+let slideRender=()=>{};
+(function slides(){
+  const box=$("#k7Slides"),dots=$("#k7Dots"),tx=$("#k7SlTx"),hero=$("#top");if(!box||!dots||!tx)return;
+  const SL=[
+    {cat:"all",ar:["🚚 توصيل فوجدة","__H1__","__CHECKS__","طلب دابا"],fr:["🚚 Livraison à Oujda","__H1__","__CHECKS__","Commander"]},
+    {cat:"fruit",ar:["🍊 فواكه الموسم","فواكه طرية، كل نهار","مختارة وحدة بوحدة من السوق، حلوة وطرية.","تسوق الفواكه"],fr:["🍊 Fruits de saison","Des fruits frais, chaque jour","Choisis un par un au marché, sucrés et juteux.","Voir les fruits"]},
+    {cat:"cut",ar:["🔪 جديد","خضرة مقطعة وواجدة للطياب","طاجين، كسكس، شربة، فريت… غير حط فالكاسرونة.","شوف المقطّع"],fr:["🔪 Nouveau","Légumes découpés, prêts à cuisiner","Tajine, couscous, soupe, frites… il ne reste qu'à cuire.","Voir le prêt à cuisiner"]},
+    {cat:"veg",ar:["🥒 الخضرة","من الفلاح حتى لباب دارك","خضرة طرية، جودة مضمونة وثمن معقول.","تسوق الخضرة"],fr:["🥒 Légumes","Du producteur à votre porte","Légumes frais, qualité garantie, prix juste.","Voir les légumes"]},
+    {cat:"panier",ar:["🧺 الباكات","باكات اقتصادية للعائلة","كلشي لي محتاج للسيمانة فباك واحد، بثمن مزيان.","شوف الباكات"],fr:["🧺 Packs","Des packs économiques pour la famille","Tout pour la semaine dans un seul pack, à bon prix.","Voir les packs"]},
+    {cat:"spice",ar:["🌶️ التوابل والزيت","توابل بلدية وزيت زيتون بكر","ريحة ومذاق ديال الدار فكل طبسيل.","شوف التوابل"],fr:["🌶️ Épices & huile","Épices du terroir & huile d'olive vierge","Le goût de la maison dans chaque plat.","Voir les épices"]}];
+  const im=[...box.children];let cur=0,timer=0;
+  const load=el=>{if(el&&el.dataset.bg){el.style.backgroundImage=`url(${el.dataset.bg})`;delete el.dataset.bg}};load(im[1]);
+  dots.innerHTML=im.map((_,k)=>`<button type="button" aria-label="${k+1}"><i></i></button>`).join("");
+  const draw=()=>{const s=SL[cur],L=s[lang]||s.ar;
+    const h1=L[1]==="__H1__"?`${esc(t("k7H1"))} <span class="k7-60"><span class="clock">⏱</span><b>${esc(t("k7H60"))}</b></span>`:esc(L[1]);
+    const sub=L[2]==="__CHECKS__"?`<ul class="k7-checks"><li>${esc(t("k7C1"))}</li><li>${esc(t("k7C2"))}</li><li>${esc(t("k7C3"))}</li></ul>`:`<p class="k7-sub">${esc(L[2])}</p>`;
+    tx.innerHTML=`<span class="k7-kick">${esc(L[0])}</span><h1>${h1}</h1>${sub}<button class="k7-btn or k7-sl-cta" data-show="${s.cat}">${esc(L[3])} <span class="arrw">→</span></button>`;
+    tx.classList.remove("in");void tx.offsetWidth;tx.classList.add("in")};
+  const go=n=>{cur=(n+im.length)%im.length;load(im[cur]);load(im[(cur+1)%im.length]);
+    im.forEach((x,k)=>x.classList.toggle("on",k===cur));[...dots.children].forEach((d,k)=>d.setAttribute("aria-current",k===cur));
+    hero.style.setProperty("--sl-dur","6s");draw()};
+  const play=()=>{clearInterval(timer);timer=setInterval(()=>{if(!document.hidden)go(cur+1)},6000)};
+  dots.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;go([...dots.children].indexOf(b));play()});
+    let x0=null;hero.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+  hero.addEventListener("touchend",e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)<45)return;const fwd=document.dir==="rtl"?dx>0:dx<0;go(cur+(fwd?1:-1));play()},{passive:true});
+  slideRender=draw;go(0);play();
+})();
+function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();slideRender();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")&&openInfo(mode.slice(5))}
 
 /* ---------------- cart & pricing ---------------- */
 function lines(){return Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const it=byId(id);return it&&it.on!==false&&+it.p>0?{it,q,sum:it.p*q}:null}).filter(Boolean)}
