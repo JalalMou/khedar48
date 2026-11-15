@@ -99,6 +99,14 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-sum{background:#eef8f0;border-radius:14px;padding:12px 14px;margin-bottom:14px}.abo-sum b{font-size:24px;color:#1a9e44}.abo-sum small{display:block;color:#4b5f52;margin-top:2px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
+/* packs admin */
+.pk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pk-card{display:flex;flex-direction:column;gap:6px}.pk-card.sel{outline:2px solid #1a9e44;outline-offset:-2px}
+.pk-ci{display:flex;gap:10px;align-items:center}.pk-ci>div{flex:1;min-width:0}.pk-ci small{display:block}
+.pk-cs{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin:6px 0}
+.pk-wish{background:#fff8ef;border-radius:10px;padding:8px 10px;font-size:13.5px;margin:0 0 12px}.pk-wish.sm{display:inline-block;padding:3px 8px;margin:4px 0 0;font-size:12px}
+.abo-cust{margin:0;background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px}
+@media (max-width:1000px){.pk-grid{grid-template-columns:minmax(0,1fr)}}
 /* pack detail */
 .pk-see{align-self:flex-start;border:0;background:#fff3e6;color:#c25a00;font:inherit;font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 10px;margin:4px 0 4px;cursor:pointer}
 .pk-hero{border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:#f3faf4;display:grid;place-items:center;font-size:80px;margin-bottom:12px}.pk-hero img{width:100%;height:100%;object-fit:cover}
@@ -1257,11 +1265,6 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="pg-h"><h2>Produits</h2><p class="hint">Prix, promotions, disponibilité et photos. Le nom arabe est celui que voient les clients. Un produit à 0 MAD n'est pas visible à la commande.</p></div>
           <div class="filters" id="pFilters"></div>
           <div class="card"><div class="tbl"><table><thead><tr><th>Produit</th><th>Nom (FR)</th><th>Catégorie</th><th>Prix (MAD)</th><th>Ancien prix</th><th>Unité</th><th>Ventes</th><th>Dispo</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div></div>
-          <div class="card" id="pkCard"><div class="c-h"><h3>🧺 Contenu des paniers</h3><select id="pkSel" aria-label="Panier" style="max-width:280px"></select></div>
-            <p class="hint" style="margin:-6px 0 12px">Ce que le client voit quand il ouvre une qoffa sur le site.</p>
-            <div id="pkList"></div>
-            <form class="row-form" id="pkAdd" style="margin-top:12px"><div class="fld"><label for="pkProd">Produit</label><select id="pkProd"></select></div><div class="fld"><label for="pkQ">Quantité</label><input id="pkQ" type="number" min="0.25" step="0.25" value="1" class="num"></div><button class="btn b-gr">Ajouter au panier</button></form>
-            <p class="hint" id="pkSum" style="margin:10px 0 0"></p></div>
           <div class="card"><h3>Ajouter un produit</h3>
             <form class="row-form" id="newProd">
               <div class="fld"><label for="npN">Nom (arabe)</label><input id="npN" required placeholder="لفت" dir="rtl"></div>
@@ -1348,6 +1351,20 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
             <div class="tbl"><table><thead><tr><th>Date</th><th>Catégorie</th><th>Libellé</th><th>Montant</th><th></th></tr></thead><tbody id="expRows"></tbody></table></div></div>
           <div class="card"><h3>Résultat par mois</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Mois</th><th>Commandes livrées</th><th>Encaissé</th><th>Dépenses</th><th>Résultat</th><th>Marge</th></tr></thead><tbody id="cpMonths"></tbody></table></div>
             <p class="hint" style="margin:10px 0 0">Encaissé = total des commandes livrées (payées à la livraison). Résultat = encaissé − dépenses. Notez vos achats de marchandise comme dépenses pour avoir le vrai bénéfice.</p></div>
+        </div>
+
+        <!-- packs -->
+        <div data-ap="packs" hidden>
+          <div class="pg-h"><h2>Packs (qoffa)</h2><p class="hint">Créez vos packs (Pack Famille, Pack Premium…), leur prix et les produits qu'ils contiennent. Ils s'affichent sur le site et servent aux abonnements.</p></div>
+          <div class="card"><h3>➕ Créer un pack</h3><form class="row-form" id="pkNew" style="margin-top:12px"><div class="fld"><label for="pnN">Nom (arabe)</label><input id="pnN" dir="rtl" placeholder="قفة العائلة" required></div><div class="fld"><label for="pnF">Nom (FR)</label><input id="pnF" placeholder="Pack Famille"></div><div class="fld"><label for="pnP">Prix (MAD)</label><input id="pnP" type="number" min="0" step="1" class="num" required></div><button class="btn b-gr">Créer le pack</button></form></div>
+          <div class="pk-grid" id="pkGrid"></div>
+          <div class="card" id="pkCard"><div class="c-h"><h3>✏️ Modifier le pack</h3><select id="pkSel" aria-label="Panier" style="max-width:280px"></select></div>
+            <p class="hint" style="margin:-6px 0 12px">Ce que le client voit quand il ouvre la qoffa sur le site, et ce que le livreur prépare pour les abonnés.</p>
+            <div id="pkMeta"></div>
+            <div id="pkList"></div>
+            <form class="row-form" id="pkAdd" style="margin-top:12px"><div class="fld"><label for="pkProd">Produit</label><select id="pkProd"></select></div><div class="fld"><label for="pkQ">Quantité</label><input id="pkQ" type="number" min="0.25" step="0.25" value="1" class="num"></div><button class="btn b-gr">Ajouter au panier</button></form>
+            <p class="hint" id="pkSum" style="margin:10px 0 0"></p></div>
+          <div class="card"><h3>🎯 Packs personnalisés (abonnés)</h3><p class="hint" style="margin:2px 0 12px">Packs faits sur mesure pour un abonné. Ils ne s'affichent pas sur le site.</p><div class="pk-grid" id="pkPriv"></div></div>
         </div>
 
         <!-- subscriptions -->
@@ -2069,6 +2086,7 @@ function renderPlans(){const box=$("#aboPlans");if(!box)return;const fr=lang==="
       <div class="abo-pr">${pr?`<b class="num">${dh(pl.price)}</b><small>${t("aboPer")}</small>`:`<span class="soon-l">${t("soon")}</span>`}</div>
       <p class="abo-sub">${esc(t("aboDel",n))}${pr?` · ${fr?"soit":"يعني"} <b class="num">${dh(Math.round(pl.price/n))}</b> ${fr?"la livraison":"للتوصيلة"}`:""}</p>
       ${inc.length?`<ul class="abo-inc">${inc.slice(0,5).map(({it,q})=>`<li><span>${esc(nm(it))}</span><b class="num">${qtyL(it,q)}</b></li>`).join("")}${inc.length>5?`<li class="hint">+ ${inc.length-5} ${fr?"autres":"منتوجات خرين"}</li>`:""}</ul>`:""}
+      ${pl.pack==="custom"?`<p class="abo-cust">✍️ ${fr?"Panier sur mesure : vous écrivez votre liste, nous la préparons chaque semaine.":"قفة على مقاسك: كتب الليستة ديالك ونوجدوها ليك كل سيمانة."}</p>`:""}
       ${pk?`<button class="lnk abo-see" data-pack="${esc(pk.id)}">👀 ${t("aboSee")}</button>`:""}
       <button class="btn b-or block" data-abo="${esc(pl.id)}" ${pr?"":"disabled"}>${t("aboGo")}</button></article>`}).join("")}
 function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))return;mode="abo:"+id;const fr=lang==="fr",d=store.get("profile",{}),n=planDel(pl),today=new Date().getDay();
@@ -2081,6 +2099,7 @@ function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))re
     <div class="fld"><label for="abAddr">${t("addr")}</label><input id="abAddr" value="${esc(d.addr||"")}" placeholder="${esc(t("addrPh"))}"></div>
     <div class="fld"><label for="abDay">${fr?"Jour de livraison chaque semaine":"نهار التوصيل كل سيمانة"}</label><select id="abDay">${WDAY[fr?"fr":"ar"].map((w,i)=>`<option value="${i}" ${i===(today+1)%7?"selected":""}>${w}</option>`).join("")}</select></div>
     <div class="fld"><label for="abSlot">${t("slot")}</label><select id="abSlot">${SLOTS.slice(1).map((s,i)=>`<option value="${i+1}">${fr?SLOTS_FR[i+1]:s}</option>`).join("")}</select></div>
+    <div class="fld"><label for="abWish">${pl.pack==="custom"?(fr?"Votre liste chaque semaine":"شنو بغيتي فالقفة ديالك كل سيمانة؟"):(fr?"Vous voulez changer quelque chose dans le panier ? (facultatif)":"بغيتي تبدل شي حاجة فالقفة؟ (اختياري)")}</label><textarea id="abWish" rows="3" maxlength="500" placeholder="${fr?"Ex. : 2 kg tomates, 3 kg pommes de terre, 1 kg oignons, persil…":"مثلا: 2 كيلو طماطم، 3 كيلو بطاطا، 1 كيلو بصلة، معدنوس…"}"></textarea></div>
     <div class="fld"><label for="abNote">${t("note")}</label><textarea id="abNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
     <p class="abo-pay">💵 ${fr?`Paiement : <b>${dh(pl.price)}</b> une fois par mois, en espèces à la première livraison du mois. Pause ou arrêt à tout moment sur WhatsApp.`:`الخلاص: <b>${dh(pl.price)}</b> مرة وحدة فالشهر، كاش فأول توصيلة ديال الشهر. تقدر توقف ولا تلغي وقتما بغيتي فالواتساب.`}</p>
     <div class="err" id="abErr" role="alert"></div></form>`;
@@ -2088,19 +2107,20 @@ function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))re
   $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 async function submitAbo(){const id0=mode.slice(4),pl=plans.find(x=>x.id===id0);if(!pl)return;const fr=lang==="fr",E=$("#abErr");E.textContent="";
   const name=$("#abName").value.trim(),phone=$("#abPhone").value.replace(/[\s.-]+/g,""),hood=$("#abHood").value,addr=$("#abAddr").value.trim(),note=$("#abNote").value.trim().slice(0,300);
-  const day=+$("#abDay").value,slot=SLOTS[+$("#abSlot").value]||SLOTS[1];
+  const day=+$("#abDay").value,slot=SLOTS[+$("#abSlot").value]||SLOTS[1],wish=$("#abWish").value.trim().slice(0,500);
+  if(pl.pack==="custom"&&wish.length<3){E.textContent=fr?"Écrivez ce que vous voulez dans votre panier.":"كتب شنو بغيتي فالقفة ديالك.";$("#abWish").focus();return}
   if(!name){E.textContent=t("eName");$("#abName").focus();return}
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#abPhone").focus();return}
   if(!addr){E.textContent=t("eAddr");$("#abAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
   const id="S48-"+Date.now().toString(36).slice(-6).toUpperCase();
-  const data={name,phone,hood,addr,note,day,slot,lang,plan:pl.id,planN:pl.n,price:+pl.price,per:+pl.per||1,pack:pl.pack||"",pay:{}};
+  const data={name,phone,hood,addr,note,day,slot,lang,plan:pl.id,planN:pl.n,price:+pl.price,per:+pl.per||1,pack:pl.pack||"",wish,pay:{}};
   const b=$("#aboSubmit");b.disabled=true;
   try{if(cloud){if(!uid)throw new Error("no-auth");ok(await SB.from("subscriptions").insert({id,uid,status:"new",data}))}
     else{const L=store.get("abos",[]);L.unshift({id,uid:"local",at:Date.now(),status:"new",data});store.set("abos",L)}}
   catch(e){console.warn(e);b.disabled=false;E.textContent=t("eSave");return}
   pix("purchase",[{item_id:pl.id,item_name:pl.fr||pl.n,quantity:1,price:+pl.price}],+pl.price,id);
-  const msg=[`🔁 اشتراك جديد ${id}`,`${pl.n} · ${fmt(pl.price)} د.م فالشهر (${planDel(pl)} توصيلات)`,"",`الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,`نهار التوصيل: ${WDAY.ar[day]} · ${slot}`,note?`ملاحظة: ${note}`:""].filter(Boolean).join("\n");
+  const msg=[`🔁 اشتراك جديد ${id}`,`${pl.n} · ${fmt(pl.price)} د.م فالشهر (${planDel(pl)} توصيلات)`,"",`الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,`نهار التوصيل: ${WDAY.ar[day]} · ${slot}`,wish?`الليستة: ${wish}`:"",note?`ملاحظة: ${note}`:""].filter(Boolean).join("\n");
   mode="done";$("#shTitle").textContent=fr?"Abonnement envoyé":"توصلنا بالاشتراك";
   $("#shBody").innerHTML=`<div class="done-box"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h3 style="font-size:22px;margin:.2em 0">${esc(t("thanks",name))}</h3>
@@ -2264,7 +2284,7 @@ const ICON={
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
-const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["abo","Abonnements","layers"],["settings","Paramètres","gear"]];
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["settings","Paramètres","gear"]];
 let aPer="1",chartPer="7",aQ="";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -2477,7 +2497,7 @@ let pFilter="all";
 A.products=({OR})=>{
   const PF={all:["Tous",()=>true],zero:["Sans prix (invisibles)",p=>!(+p.p>0)],off:["Désactivés",p=>p.on===false]};if(!PF[pFilter])pFilter="all";
   $("#pFilters").innerHTML=Object.entries(PF).map(([k,[l,fn]])=>`<button class="fchip" data-pf="${k}" aria-pressed="${pFilter===k}">${l} <span class="num">${products.filter(fn).length}</span></button>`).join("");
-  const ps=prodSales(OR),L=products.filter(p=>qMatch(p.n,pn(p))&&PF[pFilter][1](p));
+  const ps=prodSales(OR),L=products.filter(p=>!p.priv&&qMatch(p.n,pn(p))&&PF[pFilter][1](p));
   $("#pRows").innerHTML=L.map(p=>{const im=safeImg(p.img),s=ps.find(x=>x.id===p.id);
     return `<tr><td><div class="pcell">${thumb(p)}<span><b dir="rtl">${esc(p.n)}</b>${canUpload()?`<label class="upl">📷 ${im?"Changer":"Ajouter"} la photo<input type="file" accept="image/*" data-photo="${esc(p.id)}"></label>`:""}</span></div></td>
      <td><input type="text" value="${esc(p.fr||FRN[p.id]||"")}" data-fr="${esc(p.id)}" aria-label="Nom français de ${esc(p.n)}" style="width:130px"></td>
@@ -2487,7 +2507,6 @@ A.products=({OR})=>{
      <td>${UFR[p.u]||""}</td><td class="num">${s?s.c:0}</td>
      <td><input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="${esc(pn(p))} disponible"></td>
      <td>${p.c==="panier"?`<button class="btn b-gh sm" data-pkedit="${esc(p.id)}">🧺 Contenu (${(p.inc||[]).length})</button>`:`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
-  renderPackEd();
   if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
 };
 A.stock=()=>{
@@ -2615,6 +2634,8 @@ function packMeta(P){const inc=packInc(P);P.kg=Math.round(inc.filter(x=>x.it.u==
 function renderPackEd(){const packs=products.filter(p=>p.c==="panier"),card=$("#pkCard");card.hidden=!packs.length;if(!packs.length)return;
   if(!packs.some(p=>p.id===pkCur))pkCur=packs[0].id;const P=byId(pkCur),inc=Array.isArray(P.inc)?P.inc:[];
   if(document.activeElement?.closest?.("#pkCard"))return;
+  const wa=P.priv?(abos||[]).find(a=>a.data?.pack===P.id):null;
+  $("#pkMeta").innerHTML=`<div class="row-form" style="margin-bottom:14px"><div class="fld"><label>Nom (arabe)</label><input dir="rtl" value="${esc(P.n)}" data-pkm="n"></div><div class="fld"><label>Nom (FR)</label><input value="${esc(P.fr||"")}" data-pkm="fr"></div><div class="fld"><label>Prix (MAD)</label><input type="number" min="0" step="1" class="num" value="${+P.p||0}" data-pkm="p"></div><div class="fld"><label>Ancien prix</label><input type="number" min="0" step="1" class="num" value="${+P.old||""}" placeholder="—" data-pkm="old"></div></div><div class="row-form" style="margin-bottom:14px"><div class="fld" style="flex:1"><label>Description (arabe)</label><input dir="rtl" value="${esc(P.d?.ar||"")}" data-pkm="dar" placeholder="قفة كاملة للعائلة ديال 4 ناس"></div><div class="fld" style="flex:1"><label>Description (FR)</label><input value="${esc(P.d?.fr||"")}" data-pkm="dfr" placeholder="Panier complet pour une famille de 4"></div>${canUpload()?`<label class="upl" style="align-self:end">📷 ${photoOf(P)?"Changer":"Ajouter"} la photo<input type="file" accept="image/*" data-photo="${esc(P.id)}"></label>`:""}</div>${wa?`<p class="pk-wish">✍️ Demande de ${esc(wa.data.name)} : ${esc(wa.data.wish||"(aucune liste écrite)")}</p>`:""}`;
   $("#pkSel").innerHTML=packs.map(p=>`<option value="${esc(p.id)}" ${p.id===pkCur?"selected":""}>${esc(pn(p)||p.n)} (${(p.inc||[]).length} produits)</option>`).join("");
   $("#pkList").innerHTML=inc.length?`<div class="tbl"><table><thead><tr><th>Produit</th><th>Quantité</th><th>Unité</th><th>Valeur</th><th></th></tr></thead><tbody>${inc.map(([i,q],k)=>{const it=byId(i);
       return `<tr><td><div class="pcell">${thumb(it)}<b>${esc(it?pn(it)||it.n:i)}</b></div></td><td><input type="number" min="0.25" step="0.25" value="${+q}" data-pkq="${k}" class="num" aria-label="Quantité"></td><td>${UFR[it?.u]||""}</td><td class="num">${it&&+it.p>0?mad(it.p*q):"—"}</td><td><button class="btn b-gh sm" data-pkdel="${k}">Retirer</button></td></tr>`}).join("")}</tbody></table></div>`
@@ -2641,7 +2662,7 @@ async function aboOrder(a){
   const x=a.data||{},pk=byId(x.pack),inc=packInc(pk),ph=x.phone||"";
   const items=inc.length?inc.map(({it,q})=>[it.id,q,it.n,0]):[[pk?.id||x.plan,1,pk?.n||x.planN||"اشتراك",0]];
   const id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
-  const o={at:Date.now(),name:x.name,phone:ph,hood:x.hood,addr:x.addr,slot:x.slot||SLOTS[1],note:`🔁 اشتراك ${a.id} · ${x.planN||""}${x.note?` · ${x.note}`:""}`,lang:x.lang||"ar",tk,
+  const o={at:Date.now(),name:x.name,phone:ph,hood:x.hood,addr:x.addr,slot:x.slot||SLOTS[1],note:`🔁 اشتراك ${a.id} · ${x.planN||""}${x.wish&&!byId(x.pack)?.priv?` · ✍️ ${x.wish}`:""}${x.note?` · ${x.note}`:""}`.slice(0,600),lang:x.lang||"ar",tk,
     items,sub:0,disc:0,code:"",fee:0,total:0,status:"new",driver:"",sub_id:a.id};
   try{if(cloud){ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
     else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
@@ -2661,7 +2682,7 @@ A.abo=()=>{
   const L=abos.filter(a=>qMatch(a.id,a.data?.name,a.data?.phone,a.data?.hood));
   $("#aboRows").innerHTML=L.map(a=>{const x=a.data||{},py=x.pay?.[ym],wkDone=(+x.last||0)>=wk;
     return `<tr><td><b>${esc(x.name)}</b><br><a href="tel:${esc(x.phone)}" class="num hint">${esc(x.phone)}</a><br><small class="hint num">${esc(a.id)}</small></td>
-     <td>${esc(x.planN||x.plan)}<br><small class="hint num">${mad(x.price)} / mois</small></td>
+     <td>${esc(x.planN||x.plan)}<br><small class="hint num">${mad(x.price)} / mois</small>${x.wish?`<br><small class="pk-wish sm" title="${esc(x.wish)}">✍️ ${esc(String(x.wish).slice(0,70))}${String(x.wish).length>70?"…":""}</small>`:""}<br><button class="lnk" style="color:var(--acc-d)" data-abopk="${esc(a.id)}">🧺 ${byId(x.pack)?.priv?"Modifier son pack":"Pack perso"}</button></td>
      <td>${esc(WDAY.fr[+x.day]||"—")}<br><small class="hint">${esc(x.slot||"")}</small></td>
      <td><select data-abost="${esc(a.id)}" aria-label="Statut">${Object.entries(AST2).map(([k,v])=>`<option value="${k}" ${a.status===k?"selected":""}>${v}</option>`).join("")}</select></td>
      <td>${py?`<button class="tagx g" data-abopay="${esc(a.id)}" title="Annuler le paiement">✓ Payé ${mad(py.a)}</button>`:`<button class="btn b-gh sm" data-abopay="${esc(a.id)}">Marquer payé</button>`}</td>
@@ -2669,13 +2690,32 @@ A.abo=()=>{
      <td><div style="display:flex;gap:6px;flex-wrap:wrap">${wkDone?`<span class="tagx g">Semaine ✓</span>`:`<button class="btn b-gr sm" data-aboord="${esc(a.id)}" ${a.status==="active"?"":"disabled"}>Commande</button>`}<a class="btn b-wa sm" href="https://wa.me/${waNum(x.phone)}" target="_blank" rel="noopener">WhatsApp</a></div></td></tr>`}).join("")
     ||`<tr><td colspan="7" class="hint">Aucun abonné pour l'instant. Les demandes du site apparaissent ici.</td></tr>`;
   if(document.activeElement?.closest?.("#planRows,#planAdd"))return;
-  const packs=products.filter(p=>p.c==="panier"),po=v=>`<option value="">— Aucun —</option>`+packs.map(p=>`<option value="${esc(p.id)}" ${p.id===v?"selected":""}>${esc(pn(p)||p.n)}</option>`).join("");
+  const packs=products.filter(p=>p.c==="panier"),po=v=>`<option value="">— Aucun —</option><option value="custom" ${v==="custom"?"selected":""}>✍️ Sur mesure (le client écrit sa liste)</option>`+packs.filter(p=>!p.priv).map(p=>`<option value="${esc(p.id)}" ${p.id===v?"selected":""}>${esc(pn(p)||p.n)}</option>`).join("");
   $("#planRows").innerHTML=plans.map((pl,i)=>`<tr><td><input value="${esc(pl.n)}" data-plf="n" data-pli="${i}" dir="rtl" style="width:150px" aria-label="Nom arabe"></td><td><input value="${esc(pl.fr||"")}" data-plf="fr" data-pli="${i}" style="width:150px" aria-label="Nom FR"></td>
     <td><input type="number" min="0" step="1" value="${+pl.price||0}" data-plf="price" data-pli="${i}" class="num" aria-label="Prix par mois"></td>
     <td><select data-plf="per" data-pli="${i}" aria-label="Livraisons par semaine"><option value="1" ${+pl.per!==2?"selected":""}>1 / semaine</option><option value="2" ${+pl.per===2?"selected":""}>2 / semaine</option></select></td>
-    <td><select data-plf="pack" data-pli="${i}" aria-label="Panier livré">${po(pl.pack)}</select></td>
+    <td><select data-plf="pack" data-pli="${i}" aria-label="Panier livré">${po(pl.pack)}</select>${byId(pl.pack)?` <button class="lnk" style="color:var(--acc-d)" data-pkedit="${esc(pl.pack)}">✏️</button>`:""}</td>
     <td><input type="checkbox" class="sw" ${pl.on!==false?"checked":""} data-plf="on" data-pli="${i}" aria-label="Visible"></td><td><button class="btn b-gh sm" data-pldel="${i}">Supprimer</button></td></tr>`).join("")||`<tr><td colspan="7" class="hint">Aucune formule.</td></tr>`;
 };
+A.packs=()=>{
+  if(abos===null){abos=[];loadAbos().then(()=>{if(aTab==="packs")renderAdmin()})}
+  const packs=products.filter(p=>p.c==="panier");
+  const card=p=>{const I=packInc(p),kg=I.filter(x=>x.it.u==="kg").reduce((a,x)=>a+x.q,0),val=I.reduce((a,x)=>a+(+x.it.p||0)*x.q,0),
+      used=plans.filter(pl=>pl.pack===p.id),nAb=abos.filter(a=>a.data?.pack===p.id&&a.status==="active").length;
+    return `<div class="card pk-card ${p.id===pkCur?"sel":""}"><div class="pk-ci">${thumb(p)}<div><b>${esc(pn(p)||p.n)}</b><small class="hint" dir="rtl">${esc(p.n)}</small></div>${p.priv?"":`<input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="Visible sur le site" title="Visible sur le site">`}</div>
+      <div class="pk-cs"><span><b class="num">${+p.p>0?mad(p.p):"—"}</b> prix</span><span><b class="num">${I.length}</b> produits</span><span>≈ <b class="num">${fmt(kg)} kg</b></span><span><b class="num">${mad(val)}</b> au détail</span></div>
+      ${used.length||nAb?`<small class="hint">${used.length?`Abonnement : ${used.map(pl=>esc(pl.fr||pl.n)).join(", ")}`:""}${nAb?` · ${nAb} abonné${nAb>1?"s":""} actif${nAb>1?"s":""}`:""}</small>`:""}
+      ${!I.length?`<small class="err">Vide : ajoutez ses produits</small>`:+p.p>0?"":`<small class="err">Sans prix : invisible sur le site</small>`}
+      <div class="cc-a"><button class="btn b-gr sm" data-pkedit="${esc(p.id)}">✏️ Modifier</button><button class="btn b-gh sm" data-delpk="${esc(p.id)}">Supprimer</button></div></div>`};
+  $("#pkGrid").innerHTML=packs.filter(p=>!p.priv).map(card).join("")||aEmpty("Aucun pack. Créez le premier ci-dessus.");
+  const pv=packs.filter(p=>p.priv);$("#pkPriv").innerHTML=pv.length?pv.map(card).join(""):aEmpty("Aucun pack personnalisé. Dans « Abonnements », bouton « 🧺 Pack perso » sur un abonné.");
+  renderPackEd();
+};
+async function aboPack(a){const x=a.data||{};let P=byId(x.pack);
+  if(!P||!P.priv){const base=P,id="pk-"+rid().slice(0,8);
+    P={id,n:`قفة ${x.name||""}`.slice(0,60),fr:`Panier ${x.name||""}`.slice(0,60),c:"panier",u:"basket",p:Math.round((+x.price||0)/Math.max(1,(+x.per||1)*4)),e:"🧺",t:"#c99a5b",on:false,priv:true,inc:base&&Array.isArray(base.inc)?base.inc.map(r=>[...r]):[]};
+    products.push(P);packMeta(P);saveCatalog("products");await patchAbo(a,{data:{...x,pack:id}})}
+  pkCur=P.id;aTab="packs";renderAdmin();setTimeout(()=>$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"}),50);toast("Pack personnalisé : ajoutez ses produits")}
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
@@ -2755,8 +2795,12 @@ document.addEventListener("click",async e=>{
     if(pay[ym]){if(!confirm(`Annuler le paiement de ${x.name} pour ce mois ?`))return;delete pay[ym]}
     else{const v=prompt(`Montant reçu de ${x.name} pour ce mois (MAD) :`,String(+x.price||""));if(v===null)return;const n=Math.round((+String(v).replace(",",".")||0)*100)/100;if(!(n>0)){toast("Montant invalide");return}pay[ym]={a:n,at:Date.now()}}
     if(await patchAbo(a,{data:{...x,pay}})){renderAdmin();toast(pay[ym]?"Paiement enregistré":"Paiement annulé")}return}
+  if(D.delpk){const p=byId(D.delpk);if(!p)return;const used=plans.filter(pl=>pl.pack===p.id).length+(abos||[]).filter(a=>a.data?.pack===p.id&&a.status!=="cancel").length;
+    if(!confirm(`Supprimer le pack « ${pn(p)||p.n} » ? Cette action est définitive.${used?"\n⚠️ Il est utilisé par un abonnement.":""}`))return;
+    products=products.filter(x=>x.id!==p.id);delete cart[p.id];if(pkCur===p.id)pkCur="";saveCatalog("products");renderAll();toast("Pack supprimé");return}
+  if(D.abopk){const a=abos?.find(x=>x.id===D.abopk);if(a)await aboPack(a);return}
   if(D.pldel){const pl=plans[+D.pldel];if(pl&&confirm(`Supprimer la formule « ${pl.fr||pl.n} » ? Les abonnés existants ne sont pas supprimés.`)){plans.splice(+D.pldel,1);saveCatalog("plans");renderAll()}return}
-  if(D.pkedit){pkCur=D.pkedit;renderAdmin();$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(D.pkedit){pkCur=D.pkedit;aTab="packs";sideOpen(false);renderAdmin();$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"});return}
   if(D.pkdel){const P=byId(pkCur);if(P&&Array.isArray(P.inc)){P.inc.splice(+D.pkdel,1);packMeta(P);saveCatalog("products");renderAll();toast("Produit retiré du panier")}return}
   if(D.open){aTab="orders";oFilter="all";aQ=D.open;$("#aQ").value=aQ;renderAdmin();window.scrollTo({top:0});return}
   if(D.st){const o=staffOrders().find(x=>x.id===D.oid);if(o&&o.status!==D.st){await setStatus(o,D.st);toast(`#${o.id} : ${AST[D.st]} · 📲 pensez à informer le client`)}return}
@@ -2810,6 +2854,8 @@ document.addEventListener("change",async e=>{
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
   if(D.abost){const a=abos?.find(x=>x.id===D.abost);if(a&&await patchAbo(a,{status:t.value})){renderAdmin();toast(`Abonnement : ${AST2[t.value]}`)}return}
   if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):String(t.value).trim().slice(0,60);saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
+  if(D.pkm){const P=byId(pkCur);if(!P)return;const k=D.pkm,v=String(t.value).trim();if(k==="p"||k==="old")P[k]=Math.max(0,+v||0);else if(k==="dar"||k==="dfr")P.d={...(P.d||{}),[k==="dar"?"ar":"fr"]:v.slice(0,160)};else P[k]=v.slice(0,60);
+    if(k==="old"&&!P.old)delete P.old;saveCatalog("products");t.blur?.();renderAll();toast("Pack enregistré");return}
   if(t.id==="pkSel"){pkCur=t.value;renderAdmin();return}
   if(D.pkq){const P=byId(pkCur),k=+D.pkq;if(P?.inc?.[k]){const q=Math.round((+t.value||0)*100)/100;if(q>0)P.inc[k][1]=q;else P.inc.splice(k,1);packMeta(P);saveCatalog("products");t.blur();renderAll();toast("Quantité enregistrée")}return}
   if(D.price){const p=byId(D.price);p.p=Math.max(0,+t.value||0);saveCatalog("products");renderShop();toast(`Prix ${pn(p)} : ${mad(p.p)}`)}
@@ -2848,6 +2894,9 @@ $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const E=$
 async function logout(){if(!cloud){show("shop");return}try{await SB.auth.signOut()}catch(e){}me="";show("shop");toast("Déconnecté · تخرجتي")}
 $("#newsForm")?.addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
   try{if(await subscribeNews($("#newsEmail").value.trim()))e.target.reset()}finally{b.disabled=false}});
+$("#pkNew").addEventListener("submit",e=>{e.preventDefault();const n=$("#pnN").value.trim().slice(0,60),fr=$("#pnF").value.trim().slice(0,60),p=Math.max(0,+$("#pnP").value||0);if(!n)return;
+  const id="pk-"+rid().slice(0,8);products.push({id,n,fr,c:"panier",u:"basket",p,e:"🧺",t:"#c99a5b",on:true,inc:[]});pkCur=id;saveCatalog("products");e.target.reset();document.activeElement?.blur?.();renderAll();
+  setTimeout(()=>$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"}),50);toast("Pack créé : ajoutez ses produits")});
 $("#planAdd").addEventListener("submit",e=>{e.preventDefault();const n=$("#plN").value.trim().slice(0,60),fr=$("#plF").value.trim().slice(0,60),price=Math.max(0,+$("#plP").value||0);if(!n)return;
   plans.push({id:"abo-"+rid().slice(0,6),n,fr,price,per:1,pack:"",on:true});saveCatalog("plans");e.target.reset();document.activeElement?.blur?.();renderAll();toast("Formule ajoutée")});
 $("#pkAdd").addEventListener("submit",e=>{e.preventDefault();const P=byId(pkCur),id=$("#pkProd").value,q=Math.round((+$("#pkQ").value||0)*100)/100,it=byId(id);
