@@ -82,6 +82,23 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .block{width:100%}
 .sm{padding:7px 12px;font-size:13px;border-radius:10px}
 
+/* subscriptions */
+.abo-box{background:linear-gradient(135deg,#f1f9f2,#fff8ef);border:1px solid #e3efe5;border-radius:26px;padding:clamp(18px,3vw,34px)}
+.abo-hd{text-align:center;max-width:720px;margin:0 auto 22px}.abo-hd h2{margin:10px 0 8px;font-size:clamp(24px,3vw,34px);color:#0f2d1b}.abo-hd p{margin:0;color:#4b5f52}
+.abo-kick{display:inline-block;background:#fff;border:1px solid #f1d9bd;color:#c25a00;font-weight:800;font-size:13px;border-radius:99px;padding:6px 14px}
+.abo-how{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.abo-how li{background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;font-weight:700;box-shadow:0 6px 16px -14px rgba(0,0,0,.5)}
+.abo-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.abo-c{position:relative;background:#fff;border:1px solid #e8efe9;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 18px 36px -30px rgba(17,60,30,.6)}
+.abo-c.hot{border:2px solid #ff8519}.abo-hot{position:absolute;top:-12px;inset-inline-start:16px;background:#ff8519;color:#fff;font-size:12px;font-weight:800;border-radius:99px;padding:4px 12px}
+.abo-im{aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#f3faf4;display:grid;place-items:center;font-size:54px}.abo-im img{width:100%;height:100%;object-fit:cover}
+.abo-c h3{margin:4px 0 0;font-size:18px}.abo-pr b{font-size:28px;color:#1a9e44}.abo-pr small{color:var(--muted);margin-inline-start:4px}
+.abo-sub{margin:0;font-size:13.5px;color:#4b5f52}
+.abo-inc{list-style:none;margin:2px 0;padding:10px 12px;background:#f7faf7;border-radius:12px;font-size:13.5px}.abo-inc li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}.abo-inc b{color:#c25a00}
+.abo-see{align-self:flex-start;font-weight:700;color:#1a9e44;background:none;border:0;cursor:pointer;padding:0;font:inherit;font-size:13.5px}
+.abo-c .btn{margin-top:auto}.abo-c .btn[disabled]{opacity:.5;cursor:not-allowed}
+.abo-sum{background:#eef8f0;border-radius:14px;padding:12px 14px;margin-bottom:14px}.abo-sum b{font-size:24px;color:#1a9e44}.abo-sum small{display:block;color:#4b5f52;margin-top:2px}
+.abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
+@media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
 /* pack detail */
 .pk-see{align-self:flex-start;border:0;background:#fff3e6;color:#c25a00;font:inherit;font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 10px;margin:4px 0 4px;cursor:pointer}
 .pk-hero{border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:#f3faf4;display:grid;place-items:center;font-size:80px;margin-bottom:12px}.pk-hero img{width:100%;height:100%;object-fit:cover}
@@ -1035,6 +1052,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
     <button data-show="panier" data-t="k7Packs"></button>
     <button data-show="spice" data-t="k7Spice"></button>
     <button data-show="oil" data-t="k7Oil"></button>
+    <button data-nav="abo" data-t="navAbo"></button>
   </nav>
   <div class="k7-act">
     <div class="langsw" role="group" aria-label="Langue / اللغة"><button data-lang="ar" aria-pressed="true">ع</button><button data-lang="fr" aria-pressed="false">FR</button></div>
@@ -1091,6 +1109,12 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
       <div class="k7-stp" id="hTrkStp"></div>
     </div>
   </div></section>
+
+  <section class="k7-sec" id="abo" hidden><div class="wrap"><div class="abo-box">
+    <div class="abo-hd"><span class="abo-kick">🔁 <span data-t="aboKick"></span></span><h2 data-t="aboT"></h2><p data-t="aboS"></p>
+      <ul class="abo-how"><li>📅 <span data-t="aboH1"></span></li><li>🚚 <span data-t="aboH2"></span></li><li>💵 <span data-t="aboH3"></span></li><li>⏸️ <span data-t="aboH4"></span></li></ul></div>
+    <div class="abo-plans" id="aboPlans"></div>
+  </div></div></section>
 
   <div class="k7-trust"><div class="wrap">
     <div><span>🌿</span><b data-th="k7T1"></b></div><div><span>⏱</span><b data-th="k7T2"></b></div><div><span>💵</span><b data-th="k7T3"></b></div><div><span>🛡️</span><b data-th="k7T4"></b></div><div><span>🍃</span><b data-th="k7T5"></b></div>
@@ -1326,6 +1350,18 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
             <p class="hint" style="margin:10px 0 0">Encaissé = total des commandes livrées (payées à la livraison). Résultat = encaissé − dépenses. Notez vos achats de marchandise comme dépenses pour avoir le vrai bénéfice.</p></div>
         </div>
 
+        <!-- subscriptions -->
+        <div data-ap="abo" hidden>
+          <div class="pg-h"><h2>Abonnements</h2><p class="hint">Les clients s'abonnent sur le site : une qoffa chaque semaine, un paiement par mois. <span class="err" id="aboErr2"></span></p></div>
+          <div class="k6" id="aboK" style="grid-template-columns:repeat(3,minmax(0,1fr))"></div>
+          <div class="card"><div class="c-h"><h3>📦 Livraisons d'abonnement aujourd'hui</h3><button class="btn b-gh sm" id="aboReload" type="button">↻ Actualiser</button></div><div id="aboToday"></div></div>
+          <div class="card"><h3>Abonnés</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Client</th><th>Formule</th><th>Jour</th><th>Statut</th><th>Paiement du mois</th><th>Prochaine livraison</th><th></th></tr></thead><tbody id="aboRows"></tbody></table></div>
+            <p class="hint" style="margin:10px 0 0">« Commande » crée la livraison de la semaine (total 0 MAD, déjà payé dans l'abonnement) avec le contenu de la qoffa. « Marquer payé » enregistre le paiement du mois dans la comptabilité des abonnements.</p></div>
+          <div class="card"><h3>Formules d'abonnement</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Nom (arabe)</th><th>Nom (FR)</th><th>Prix / mois (MAD)</th><th>Livraisons</th><th>Qoffa livrée</th><th>Visible</th><th></th></tr></thead><tbody id="planRows"></tbody></table></div>
+            <form class="row-form" id="planAdd" style="margin-top:14px"><div class="fld"><label for="plN">Nom (arabe)</label><input id="plN" dir="rtl" placeholder="اشتراك الخضرة" required></div><div class="fld"><label for="plF">Nom (FR)</label><input id="plF" placeholder="Abonnement Légumes"></div><div class="fld"><label for="plP">Prix / mois</label><input id="plP" type="number" min="0" step="1" class="num" required></div><button class="btn b-gr">Ajouter la formule</button></form>
+            <p class="hint" style="margin:10px 0 0">Une formule à 0 MAD s'affiche « Prix bientôt » et on ne peut pas encore s'y abonner.</p></div>
+        </div>
+
         <!-- settings -->
         <div data-ap="settings" hidden>
           <div class="pg-h"><h2>Paramètres</h2></div>
@@ -1518,7 +1554,7 @@ const ok=({error})=>{if(error)throw error};
 function setSync(s){sync=s;const n=$("#syncNote");n.className="note "+(s==="live"?"live":s==="error"||s==="slow"?"bad":"");
   n.querySelector("span").textContent={live:"Connecté à Supabase · commandes et prix partagés en direct",slow:"La base de données ne répond pas, les infos peuvent être anciennes",error:"Problème de connexion à Supabase (vérifiez la config et le script SQL)",local:"Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur"}[s]}
 function saveCatalog(name){
-  const body={products:{items:products},promos,drivers,settings}[name];
+  const body={products:{items:products},promos,drivers,settings,plans:{items:plans}}[name];
   if(!cloud){store.set("c:"+name,name==="products"?products:body);return Promise.resolve()}
   return SB.from("catalog").upsert({id:name,data:clean(body),updated_at:new Date().toISOString()}).then(ok).catch(e=>{console.warn(e);toast(failMsg())});
 }
@@ -1559,6 +1595,7 @@ async function loadCatalog(){
   if(Array.isArray(m.products?.items)&&m.products.items.length)products=withCut(m.products.items.map(x=>({...x})));else if(role==="admin")saveCatalog("products");
   if(m.promos)promos={codes:{...(m.promos.codes||{})},banners:[...(m.promos.banners||[])]};else if(role==="admin")saveCatalog("promos");
   if(m.drivers)drivers={list:{...(m.drivers.list||{})}};else if(role==="admin")saveCatalog("drivers");
+  if(Array.isArray(m.plans?.items))plans=m.plans.items.map(x=>({...x}));else if(role==="admin")saveCatalog("plans");
   // first admin visit after the ready-to-cook range was added: store it in the shared catalog once
   if(role==="admin"&&(+settings.seedV||0)<2&&m.products){settings={...settings,seedV:2};saveCatalog("products");saveCatalog("settings")}
   renderAll();initPixels();
@@ -1617,6 +1654,7 @@ function loadLocal(){
   const pr=store.get("c:promos",null);if(pr?.codes)promos=pr;
   const dv=store.get("c:drivers",null);if(dv?.list)drivers=dv;
   const st=store.get("c:settings",null);if(st)settings={...DEF_SET,...st};
+  const pl=store.get("c:plans",null);if(Array.isArray(pl?.items))plans=pl.items;
   products=withCut(products);
   myOrders=store.get("orders",[]);
 }
@@ -1680,6 +1718,7 @@ const T={
   lxCutOver:"جديد · واجدة للطياب",lxCutT:"خضرة مقطعة وفريت",lxCutS:"مغسولة، مقشرة ومقطعة نفس النهار. حلّ الباكية وبدا الطياب.",
   lxShopOver:"المتجر",lxBasketsOver:"مختارة ليك",lxStoryT:"من السوق ديال وجدة<br>حتى لطبلة ديالك.",lxBest:"الأكثر طلباً",
   k7Veg:"الخضرة",k7Fruit:"الفواكه",k7Cut:"خضرة مقطعة",k7Packs:"القفف والباكات",k7Spice:"العطرية",k7Oil:"زيت الزيتون",k7Order:"طلب دابا",k7New:"جديد",
+  aboKick:"اشتراك شهري",aboT:"القفة ديالك كل سيمانة، بلا ما تفكر",aboS:"اختار الاشتراك والنهار، ونجيبو ليك القفة ديالك كل سيمانة. كتخلص مرة وحدة فالشهر.",aboH1:"توصيلة كل سيمانة فالنهار اللي بغيتي",aboH2:"التوصيل فابور",aboH3:"خلاص واحد فالشهر",aboH4:"توقف ولا تلغي وقتما بغيتي",aboPer:"/ الشهر",aboDel:n=>`${n} توصيلات فالشهر`,aboGo:"اشترك دابا",aboSee:"شوف شنو فالقفة",navAbo:"الاشتراك",
   k7H1:"منتوجاتك الطرية فوجدة، كتوصلك فأقل من",k7H60:"60 دقيقة!",k7C1:"طرية وديال الموسم",k7C2:"مقطعة وواجدة للطياب",k7C3:"باكات اقتصادية",
   k7F1:"التوصيل فوجدة<br>فأقل من 60 دقيقة",k7F2:"الخلاص<br>عند الاستلام",k7F3:"منتوجات طرية<br>وجودة مضمونة",k7F4:"مساعدة فواتساب<br>كل يوم",
   k7CutT:"خضرة مقطعة<br>وواجدة للطياب!",k7CutL1:"مغسولة، مقشرة ومقطعة",k7CutL2:"كتربح الوقت",k7CutL3:"ديما طرية",k7CutBtn:"اكتشف الخضرة المقطعة",
@@ -1751,6 +1790,7 @@ const T={
   lxCutOver:"Nouveau · Prêt à cuisiner",lxCutT:"Légumes coupés & frites",lxCutS:"Lavés, épluchés et taillés le jour même. Ouvrez, cuisinez.",
   lxShopOver:"La boutique",lxBasketsOver:"Sélection",lxStoryT:"Du marché d'Oujda<br>à votre table.",lxBest:"Le plus demandé",
   k7Veg:"Légumes",k7Fruit:"Fruits",k7Cut:"Légumes découpés",k7Packs:"Packs & Qoffas",k7Spice:"Épices",k7Oil:"Huile d'olive",k7Order:"Commander",k7New:"Nouveau",
+  aboKick:"Abonnement mensuel",aboT:"Votre panier chaque semaine, sans y penser",aboS:"Choisissez une formule et un jour : nous livrons votre panier chaque semaine. Vous payez une seule fois par mois.",aboH1:"Une livraison par semaine, le jour de votre choix",aboH2:"Livraison offerte",aboH3:"Un seul paiement par mois",aboH4:"Pause ou arrêt quand vous voulez",aboPer:"/ mois",aboDel:n=>`${n} livraisons par mois`,aboGo:"S'abonner",aboSee:"Voir le contenu",navAbo:"Abonnement",
   k7H1:"Vos produits frais à Oujda, livrés en moins de",k7H60:"60 minutes !",k7C1:"Frais & de saison",k7C2:"Découpés et prêts à cuisiner",k7C3:"Packs économiques",
   k7F1:"Livraison à Oujda<br>en moins de 60 minutes",k7F2:"Paiement<br>à la livraison",k7F3:"Produits frais<br>et de qualité",k7F4:"Assistance<br>WhatsApp 7j/7",
   k7CutT:"Légumes découpés<br>et prêts à cuisiner !",k7CutL1:"Lavés, épluchés et découpés",k7CutL2:"Gain de temps",k7CutL3:"Toujours frais",k7CutBtn:"Découvrir les légumes découpés",
@@ -1813,7 +1853,7 @@ let slideRender=()=>{};
   hero.addEventListener("touchend",e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)<45)return;const fwd=document.dir==="rtl"?dx>0:dx<0;go(cur+(fwd?1:-1));play()},{passive:true});
   slideRender=draw;go(0);play();
 })();
-function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();slideRender();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")?openInfo(mode.slice(5)):mode.startsWith("pack:")&&openPack(mode.slice(5))}
+function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();slideRender();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")?openInfo(mode.slice(5)):mode.startsWith("pack:")?openPack(mode.slice(5)):mode.startsWith("abo:")&&openAbo(mode.slice(4))}
 
 /* ---------------- cart & pricing ---------------- */
 function lines(){return Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const it=byId(id);return it&&it.on!==false&&+it.p>0?{it,q,sum:it.p*q}:null}).filter(Boolean)}
@@ -1974,7 +2014,7 @@ const dh=n=>lang==="fr"?`${fmt(n)} DH`:`${fmt(n)} درهم`;
 function renderShop(){
   const live=products.filter(p=>p.on!==false);
   $("#k7Cats").innerHTML=TILES.filter(c=>!c.hide).map(c=>`<button class="k7-cat" data-show="${c.id}">${c.isNew?`<span class="new">${t("k7New")}</span>`:""}<span class="ph" style="${c.img?`background-image:url('${c.img}')`:`background:linear-gradient(135deg,#f3faf4,#fff3e6)`}">${c.img?"":c.e}</span><span>${c[lang]}</span></button>`).join("");
-  $("#packRow").innerHTML=live.filter(p=>p.c==="panier").slice(0,4).map(pcard).join("");
+  $("#packRow").innerHTML=live.filter(p=>p.c==="panier").slice(0,4).map(pcard).join("");renderPlans();
   const pick=(cs)=>{const L=live.filter(p=>cs.includes(p.c));return [...L.filter(p=>+p.old>+p.p),...L.filter(p=>!(+p.old>+p.p))].slice(0,6)};
   $("#fruitRow").innerHTML=pick(["fruit"]).map(pcard).join("");
   $("#vegRow").innerHTML=pick(["veg"]).map(pcard).join("");
@@ -2009,6 +2049,64 @@ function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth"
 /* ---------------- sheet ---------------- */
 let mode="cart";const sheetOpen=()=>$("#sheet").classList.contains("open");
 function openSheet(m){mode=m;if(m==="checkout"){track("checkout");pix("checkout",pixItems(lines()),totals().total)}(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+/* ---------------- monthly subscriptions (abonnements) ----------------
+   Plans live in catalog row 'plans' (set by the admin). A customer subscribes without an account;
+   the shop delivers the plan's qoffa every week on the chosen day and collects one payment per month. */
+const DEF_PLANS=[
+  {id:"abo-veg",n:"اشتراك الخضرة",fr:"Abonnement Légumes",price:0,per:1,pack:"p-veg",on:true},
+  {id:"abo-fam",n:"اشتراك العائلة",fr:"Abonnement Famille",price:0,per:1,pack:"p-fam",on:true,hot:true},
+  {id:"abo-prem",n:"اشتراك بريميوم",fr:"Abonnement Premium",price:0,per:1,pack:"p-prem",on:true}];
+let plans=DEF_PLANS.map(x=>({...x}));
+const WDAY={ar:["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"],fr:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]};
+const planN=pl=>lang==="fr"?pl.fr||pl.n:pl.n;
+const planDel=pl=>Math.max(1,+pl.per||1)*4;
+function renderPlans(){const box=$("#aboPlans");if(!box)return;const fr=lang==="fr",L=plans.filter(pl=>pl.on!==false);
+  $("#abo").hidden=!L.length;
+  box.innerHTML=L.map(pl=>{const pk=byId(pl.pack),im=pk?photoOf(pk):"",inc=packInc(pk),pr=+pl.price>0,n=planDel(pl);
+    return `<article class="abo-c ${pl.hot?"hot":""}">${pl.hot?`<span class="abo-hot">${fr?"Le plus choisi":"الأكثر طلباً"}</span>`:""}
+      <div class="abo-im">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:"🧺"}</div>
+      <h3>${esc(planN(pl))}</h3>
+      <div class="abo-pr">${pr?`<b class="num">${dh(pl.price)}</b><small>${t("aboPer")}</small>`:`<span class="soon-l">${t("soon")}</span>`}</div>
+      <p class="abo-sub">${esc(t("aboDel",n))}${pr?` · ${fr?"soit":"يعني"} <b class="num">${dh(Math.round(pl.price/n))}</b> ${fr?"la livraison":"للتوصيلة"}`:""}</p>
+      ${inc.length?`<ul class="abo-inc">${inc.slice(0,5).map(({it,q})=>`<li><span>${esc(nm(it))}</span><b class="num">${qtyL(it,q)}</b></li>`).join("")}${inc.length>5?`<li class="hint">+ ${inc.length-5} ${fr?"autres":"منتوجات خرين"}</li>`:""}</ul>`:""}
+      ${pk?`<button class="lnk abo-see" data-pack="${esc(pk.id)}">👀 ${t("aboSee")}</button>`:""}
+      <button class="btn b-or block" data-abo="${esc(pl.id)}" ${pr?"":"disabled"}>${t("aboGo")}</button></article>`}).join("")}
+function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))return;mode="abo:"+id;const fr=lang==="fr",d=store.get("profile",{}),n=planDel(pl),today=new Date().getDay();
+  $("#shTitle").textContent=planN(pl);
+  $("#shBody").innerHTML=`<div class="abo-sum"><div><b class="num">${dh(pl.price)}</b> ${t("aboPer")}</div><small>${esc(t("aboDel",n))} · ${fr?"livraison offerte":"التوصيل فابور"}</small></div>
+   <form class="form" id="aboForm" novalidate>
+    <div class="fld"><label for="abName">${t("name")}</label><input id="abName" autocomplete="name" value="${esc(d.name||"")}" placeholder="${esc(t("namePh"))}"></div>
+    <div class="fld"><label for="abPhone">${t("phone")}</label><input id="abPhone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" value="${esc(d.phone||"")}" placeholder="06 12 34 56 78"></div>
+    <div class="fld"><label for="abHood">${t("hood")}</label><select id="abHood">${HOODS.map((h,i)=>`<option value="${esc(h)}" ${d.hood===h?"selected":""}>${fr?HOODS_FR[i]||h:h}</option>`).join("")}</select></div>
+    <div class="fld"><label for="abAddr">${t("addr")}</label><input id="abAddr" value="${esc(d.addr||"")}" placeholder="${esc(t("addrPh"))}"></div>
+    <div class="fld"><label for="abDay">${fr?"Jour de livraison chaque semaine":"نهار التوصيل كل سيمانة"}</label><select id="abDay">${WDAY[fr?"fr":"ar"].map((w,i)=>`<option value="${i}" ${i===(today+1)%7?"selected":""}>${w}</option>`).join("")}</select></div>
+    <div class="fld"><label for="abSlot">${t("slot")}</label><select id="abSlot">${SLOTS.slice(1).map((s,i)=>`<option value="${i+1}">${fr?SLOTS_FR[i+1]:s}</option>`).join("")}</select></div>
+    <div class="fld"><label for="abNote">${t("note")}</label><textarea id="abNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
+    <p class="abo-pay">💵 ${fr?`Paiement : <b>${dh(pl.price)}</b> une fois par mois, en espèces à la première livraison du mois. Pause ou arrêt à tout moment sur WhatsApp.`:`الخلاص: <b>${dh(pl.price)}</b> مرة وحدة فالشهر، كاش فأول توصيلة ديال الشهر. تقدر توقف ولا تلغي وقتما بغيتي فالواتساب.`}</p>
+    <div class="err" id="abErr" role="alert"></div></form>`;
+  $("#shFoot").innerHTML=`<button class="btn b-or block" id="aboSubmit">${fr?"Confirmer l'abonnement":"أكد الاشتراك"}</button>`;
+  $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+async function submitAbo(){const id0=mode.slice(4),pl=plans.find(x=>x.id===id0);if(!pl)return;const fr=lang==="fr",E=$("#abErr");E.textContent="";
+  const name=$("#abName").value.trim(),phone=$("#abPhone").value.replace(/[\s.-]+/g,""),hood=$("#abHood").value,addr=$("#abAddr").value.trim(),note=$("#abNote").value.trim().slice(0,300);
+  const day=+$("#abDay").value,slot=SLOTS[+$("#abSlot").value]||SLOTS[1];
+  if(!name){E.textContent=t("eName");$("#abName").focus();return}
+  if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#abPhone").focus();return}
+  if(!addr){E.textContent=t("eAddr");$("#abAddr").focus();return}
+  store.set("profile",{name,phone,hood,addr});
+  const id="S48-"+Date.now().toString(36).slice(-6).toUpperCase();
+  const data={name,phone,hood,addr,note,day,slot,lang,plan:pl.id,planN:pl.n,price:+pl.price,per:+pl.per||1,pack:pl.pack||"",pay:{}};
+  const b=$("#aboSubmit");b.disabled=true;
+  try{if(cloud){if(!uid)throw new Error("no-auth");ok(await SB.from("subscriptions").insert({id,uid,status:"new",data}))}
+    else{const L=store.get("abos",[]);L.unshift({id,uid:"local",at:Date.now(),status:"new",data});store.set("abos",L)}}
+  catch(e){console.warn(e);b.disabled=false;E.textContent=t("eSave");return}
+  pix("purchase",[{item_id:pl.id,item_name:pl.fr||pl.n,quantity:1,price:+pl.price}],+pl.price,id);
+  const msg=[`🔁 اشتراك جديد ${id}`,`${pl.n} · ${fmt(pl.price)} د.م فالشهر (${planDel(pl)} توصيلات)`,"",`الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,`نهار التوصيل: ${WDAY.ar[day]} · ${slot}`,note?`ملاحظة: ${note}`:""].filter(Boolean).join("\n");
+  mode="done";$("#shTitle").textContent=fr?"Abonnement envoyé":"توصلنا بالاشتراك";
+  $("#shBody").innerHTML=`<div class="done-box"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h3 style="font-size:22px;margin:.2em 0">${esc(t("thanks",name))}</h3>
+    <p class="hint">${fr?`Votre demande d'abonnement <b>${esc(id)}</b> est bien reçue. Nous vous appelons pour confirmer la première livraison (${esc(WDAY.fr[day])}).`:`توصلنا بطلب الاشتراك ديالك <b>${esc(id)}</b>. غادي نتاصلو بيك باش نأكدو أول توصيلة (نهار ${esc(WDAY.ar[day])}).`}</p>
+    <a class="btn b-wa block" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${t("sendWa")}</a></div>`;
+  $("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">${t("backShop")}</button>`}
 /* pack (qoffa) detail: what is inside, set by the admin in Produits → Contenu des paniers */
 const packInc=p=>(Array.isArray(p?.inc)?p.inc:[]).map(([i,q])=>({it:byId(i),q:+q})).filter(x=>x.it&&x.q>0);
 function openPack(id){const p=byId(id);if(!p)return;mode="pack:"+id;const fr=lang==="fr",im=photoOf(p),inc=packInc(p);
@@ -2166,7 +2264,7 @@ const ICON={
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
-const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["settings","Paramètres","gear"]];
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["abo","Abonnements","layers"],["settings","Paramètres","gear"]];
 let aPer="1",chartPer="7",aQ="";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -2182,7 +2280,7 @@ const SITE="https://www.khedar48.com/";
 function notifyText(o,st=o.status){
   const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"",id=o.id,dv=drivers.list?.[o.driver];
   const link=o.tk?`${SITE}#t=${encodeURIComponent(id)}.${o.tk}`:"";
-  const tot=fr?`${(+o.total||0).toLocaleString("fr-MA",{minimumFractionDigits:2,maximumFractionDigits:2})} MAD`:`${fmt(o.total)} درهم`;
+  const tot=o.sub_id?(fr?"déjà payé (abonnement)":"مخلص فالاشتراك"):fr?`${(+o.total||0).toLocaleString("fr-MA",{minimumFractionDigits:2,maximumFractionDigits:2})} MAD`:`${fmt(o.total)} درهم`;
   const M=fr?{
     new:`Bonjour ${n}, nous avons bien reçu votre commande ${id} ✅ Total : ${tot} (paiement à la livraison). Nous la préparons très vite.`,
     prep:`Bonjour ${n}, votre commande ${id} est en préparation 🧺 Nous choisissons vos produits les plus frais.`,
@@ -2491,13 +2589,15 @@ const dayT=d=>new Date(String(d)+"T12:00:00").getTime();
 const ymd=t=>{const d=new Date(t);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
 A.compta=({O,R,len})=>{
   if(expenses===null){expenses=[];loadExp().then(()=>{if(aTab==="compta")renderAdmin()})}
+  if(abos===null){abos=[];loadAbos().then(()=>{if(aTab==="compta")renderAdmin()})}
+  const aboIn=(t0,t1)=>abos.reduce((s,a)=>s+Object.values(a.data?.pay||{}).filter(p=>p.at>=t0&&p.at<t1).reduce((x,p)=>x+(+p.a||0),0),0);
   const sel=$("#exCat");if(!sel.options.length)sel.innerHTML=Object.entries(EXCAT).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
   if(!$("#exDay").value)$("#exDay").value=ymd(Date.now());
   $("#cpPer").textContent=`Période : ${perLbl(len).toLowerCase()} (changez-la en haut à droite).`;
   $("#exErr").textContent=expErr;
   const E=expenses.filter(e=>{const t=dayT(e.day);return t>=R[0]&&t<R[1]}),dep=E.reduce((a,e)=>a+e.amount,0);
-  const done=O.filter(o=>o.status==="done"&&inR(o,R)),cash=done.reduce((a,o)=>a+(+o.total||0),0),res=cash-dep,buy=E.filter(e=>e.cat==="stock").reduce((a,e)=>a+e.amount,0);
-  $("#cpK").innerHTML=kmini([["Encaissé (livré)",mad(cash),"coins"],["Dépenses",(dep?"−":"")+mad(dep),"wallet","r"],["Résultat net",mad(res),"bars",res<0?"r":"g"],["Marge nette",cash?`${Math.round(res/cash*100)} %`:"—","chart"],["Achats marchandise",mad(buy),"box"],["Dépense / jour",mad(dep/Math.max(1,len)),"wallet"]]);
+  const done=O.filter(o=>o.status==="done"&&inR(o,R)),aCash=aboIn(R[0],R[1]),cash=done.reduce((a,o)=>a+(+o.total||0),0)+aCash,res=cash-dep,buy=E.filter(e=>e.cat==="stock").reduce((a,e)=>a+e.amount,0);
+  $("#cpK").innerHTML=kmini([[aCash?`Encaissé (dont ${mad(aCash)} abonnements)`:"Encaissé (livré)",mad(cash),"coins"],["Dépenses",(dep?"−":"")+mad(dep),"wallet","r"],["Résultat net",mad(res),"bars",res<0?"r":"g"],["Marge nette",cash?`${Math.round(res/cash*100)} %`:"—","chart"],["Achats marchandise",mad(buy),"box"],["Dépense / jour",mad(dep/Math.max(1,len)),"wallet"]]);
   const byC={};E.forEach(e=>byC[e.cat]=(byC[e.cat]||0)+e.amount);const BC=Object.entries(byC).sort((a,b)=>b[1]-a[1]),mx=Math.max(1,...BC.map(x=>x[1]));
   $("#cpCat").innerHTML=BC.length?BC.map(([k,v])=>`<div class="hb"><span>${esc(EXCAT[k]||k)}</span><i><em style="width:${v/mx*100}%;background:#e5533d"></em></i><b class="num">${mad(v)}</b></div>`).join(""):aEmpty("Aucune dépense sur cette période.");
   const m2=Math.max(1,cash,dep);
@@ -2505,7 +2605,7 @@ A.compta=({O,R,len})=>{
     <p class="fn-t">Résultat : <b class="num" style="color:${res<0?"#c0392b":"#1a9e44"}">${res<0?"−":""}${mad(Math.abs(res))}</b></p>`;
   $("#expRows").innerHTML=E.sort((a,b)=>a.day<b.day?1:-1).map(e=>`<tr><td class="num">${new Date(dayT(e.day)).toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit",year:"numeric"})}</td><td>${esc(EXCAT[e.cat]||e.cat)}</td><td>${esc(e.label)}</td><td class="num"><b>${mad(e.amount)}</b></td><td><button class="btn b-gh sm" data-delx="${esc(e.id)}">Supprimer</button></td></tr>`).join("")||`<tr><td colspan="5" class="hint">Aucune dépense sur cette période. Ajoutez-en une avec le formulaire.</td></tr>`;
   const now=new Date();$("#cpMonths").innerHTML=[...Array(6)].map((_,i)=>{const s=new Date(now.getFullYear(),now.getMonth()-i,1).getTime(),e=new Date(now.getFullYear(),now.getMonth()-i+1,1).getTime();
-    const c=O.filter(o=>o.status==="done"&&o.at>=s&&o.at<e),ca=c.reduce((a,o)=>a+(+o.total||0),0),d=expenses.filter(x=>{const t=dayT(x.day);return t>=s&&t<e}).reduce((a,x)=>a+x.amount,0),r=ca-d;
+    const c=O.filter(o=>o.status==="done"&&o.at>=s&&o.at<e),ca=c.reduce((a,o)=>a+(+o.total||0),0)+aboIn(s,e),d=expenses.filter(x=>{const t=dayT(x.day);return t>=s&&t<e}).reduce((a,x)=>a+x.amount,0),r=ca-d;
     const lbl=new Date(s).toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
     return `<tr><td>${lbl.charAt(0).toUpperCase()+lbl.slice(1)}</td><td class="num">${c.length}</td><td class="num">${mad(ca)}</td><td class="num">${d?"−":""}${mad(d)}</td><td class="num"><b style="color:${r<0?"#c0392b":"inherit"}">${r<0?"−":""}${mad(Math.abs(r))}</b></td><td class="num">${ca?Math.round(r/ca*100)+" %":"—"}</td></tr>`}).join("");
 };
@@ -2524,6 +2624,58 @@ function renderPackEd(){const packs=products.filter(p=>p.c==="panier"),card=$("#
   const I=packInc(P),kg=I.filter(x=>x.it.u==="kg").reduce((a,x)=>a+x.q,0),val=I.reduce((a,x)=>a+(+x.it.p||0)*x.q,0);
   $("#pkSum").innerHTML=I.length?`Poids ≈ <b class="num">${fmt(kg)} kg</b> · Valeur au détail : <b class="num">${mad(val)}</b> · Prix du panier : <b class="num">${mad(P.p)}</b>${+P.p>0&&val>0?` · ${val>P.p?`le client économise <b class="num">${mad(val-P.p)}</b>`:`<span style="color:#c0392b">le panier coûte plus cher que les produits séparés</span>`}`:""}`:"";
 }
+/* ---------------- admin: subscriptions ---------------- */
+const AST2={new:"Nouveau",active:"Actif",paused:"En pause",cancel:"Arrêté"};
+let abos=null,aboErr="";
+async function loadAbos(){if(!cloud){abos=store.get("abos",[]);aboErr="";return}
+  const {data,error}=await SB.from("subscriptions").select("*").order("at",{ascending:false}).limit(2000);
+  if(error){console.warn(error);abos=[];aboErr="La table « subscriptions » n'existe pas encore : exécutez la partie « abonnements » du script SQL dans Supabase.";return}
+  aboErr="";abos=(data||[]).map(r=>({...r,at:new Date(r.at).getTime()}))}
+async function patchAbo(a,patch){
+  if(!cloud){Object.assign(a,patch);store.set("abos",abos);return true}
+  const {error}=await SB.from("subscriptions").update(patch).eq("id",a.id);if(error){console.warn(error);toast("Enregistrement impossible");return false}Object.assign(a,patch);return true}
+const ymKey=(t=Date.now())=>{const d=new Date(t);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`};
+const weekStart=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getTime()};
+function nextDel(day){const d=new Date();d.setHours(0,0,0,0);const k=((+day)-d.getDay()+7)%7;d.setDate(d.getDate()+k);return d}
+async function aboOrder(a){
+  const x=a.data||{},pk=byId(x.pack),inc=packInc(pk),ph=x.phone||"";
+  const items=inc.length?inc.map(({it,q})=>[it.id,q,it.n,0]):[[pk?.id||x.plan,1,pk?.n||x.planN||"اشتراك",0]];
+  const id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
+  const o={at:Date.now(),name:x.name,phone:ph,hood:x.hood,addr:x.addr,slot:x.slot||SLOTS[1],note:`🔁 اشتراك ${a.id} · ${x.planN||""}${x.note?` · ${x.note}`:""}`,lang:x.lang||"ar",tk,
+    items,sub:0,disc:0,code:"",fee:0,total:0,status:"new",driver:"",sub_id:a.id};
+  try{if(cloud){ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
+    else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
+    await patchAbo(a,{data:{...x,last:Date.now(),nOrd:(+x.nOrd||0)+1}});renderAll();toast(`Commande #${id} créée pour ${x.name}`)}
+  catch(e){console.warn(e);toast("Création de la commande impossible")}}
+A.abo=()=>{
+  if(abos===null){abos=[];loadAbos().then(()=>{if(aTab==="abo")renderAdmin()})}
+  const ym=ymKey(),wk=weekStart(),act=abos.filter(a=>a.status==="active"),mrr=act.reduce((s,a)=>s+(+a.data?.price||0),0);
+  const paid=act.filter(a=>a.data?.pay?.[ym]),cash=abos.reduce((s,a)=>s+(+a.data?.pay?.[ym]?.a||0),0),today=new Date().getDay();
+  $("#aboErr2").textContent=aboErr;
+  $("#aboK").innerHTML=kmini([["Abonnés actifs",act.length,"users"],["Nouvelles demandes",abos.filter(a=>a.status==="new").length,"orders","r"],["Revenu mensuel (actifs)",mad(mrr),"coins"],
+    ["Encaissé ce mois",mad(cash),"wallet"],["Pas encore payé (ce mois)",act.length-paid.length,"x","r"],["Livraisons aujourd'hui",act.filter(a=>+a.data?.day===today).length,"truck"]]);
+  const T=act.filter(a=>+a.data?.day===today);
+  $("#aboToday").innerHTML=T.length?T.map(a=>{const x=a.data||{},done=(+x.last||0)>=per(1)[0];
+    return `<div class="dl"><span class="av">${esc(initial(x.name))}</span><span class="dl-n"><b>${esc(x.name)}</b><small class="hint">${esc(x.planN||"")} · ${esc(x.hood||"")} · ${esc(x.slot||"")}</small></span>
+      ${done?`<span class="tagx g">Commande créée ✓</span>`:`<button class="btn b-gr sm" data-aboord="${esc(a.id)}">Créer la commande</button>`}</div>`}).join(""):aEmpty("Aucune livraison d'abonnement prévue aujourd'hui.");
+  const L=abos.filter(a=>qMatch(a.id,a.data?.name,a.data?.phone,a.data?.hood));
+  $("#aboRows").innerHTML=L.map(a=>{const x=a.data||{},py=x.pay?.[ym],wkDone=(+x.last||0)>=wk;
+    return `<tr><td><b>${esc(x.name)}</b><br><a href="tel:${esc(x.phone)}" class="num hint">${esc(x.phone)}</a><br><small class="hint num">${esc(a.id)}</small></td>
+     <td>${esc(x.planN||x.plan)}<br><small class="hint num">${mad(x.price)} / mois</small></td>
+     <td>${esc(WDAY.fr[+x.day]||"—")}<br><small class="hint">${esc(x.slot||"")}</small></td>
+     <td><select data-abost="${esc(a.id)}" aria-label="Statut">${Object.entries(AST2).map(([k,v])=>`<option value="${k}" ${a.status===k?"selected":""}>${v}</option>`).join("")}</select></td>
+     <td>${py?`<button class="tagx g" data-abopay="${esc(a.id)}" title="Annuler le paiement">✓ Payé ${mad(py.a)}</button>`:`<button class="btn b-gh sm" data-abopay="${esc(a.id)}">Marquer payé</button>`}</td>
+     <td class="num">${a.status==="active"?nextDel(x.day).toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"2-digit"}):"—"}<br><small class="hint">${+x.nOrd||0} livraison${(+x.nOrd||0)>1?"s":""}</small></td>
+     <td><div style="display:flex;gap:6px;flex-wrap:wrap">${wkDone?`<span class="tagx g">Semaine ✓</span>`:`<button class="btn b-gr sm" data-aboord="${esc(a.id)}" ${a.status==="active"?"":"disabled"}>Commande</button>`}<a class="btn b-wa sm" href="https://wa.me/${waNum(x.phone)}" target="_blank" rel="noopener">WhatsApp</a></div></td></tr>`}).join("")
+    ||`<tr><td colspan="7" class="hint">Aucun abonné pour l'instant. Les demandes du site apparaissent ici.</td></tr>`;
+  if(document.activeElement?.closest?.("#planRows,#planAdd"))return;
+  const packs=products.filter(p=>p.c==="panier"),po=v=>`<option value="">— Aucun —</option>`+packs.map(p=>`<option value="${esc(p.id)}" ${p.id===v?"selected":""}>${esc(pn(p)||p.n)}</option>`).join("");
+  $("#planRows").innerHTML=plans.map((pl,i)=>`<tr><td><input value="${esc(pl.n)}" data-plf="n" data-pli="${i}" dir="rtl" style="width:150px" aria-label="Nom arabe"></td><td><input value="${esc(pl.fr||"")}" data-plf="fr" data-pli="${i}" style="width:150px" aria-label="Nom FR"></td>
+    <td><input type="number" min="0" step="1" value="${+pl.price||0}" data-plf="price" data-pli="${i}" class="num" aria-label="Prix par mois"></td>
+    <td><select data-plf="per" data-pli="${i}" aria-label="Livraisons par semaine"><option value="1" ${+pl.per!==2?"selected":""}>1 / semaine</option><option value="2" ${+pl.per===2?"selected":""}>2 / semaine</option></select></td>
+    <td><select data-plf="pack" data-pli="${i}" aria-label="Panier livré">${po(pl.pack)}</select></td>
+    <td><input type="checkbox" class="sw" ${pl.on!==false?"checked":""} data-plf="on" data-pli="${i}" aria-label="Visible"></td><td><button class="btn b-gh sm" data-pldel="${i}">Supprimer</button></td></tr>`).join("")||`<tr><td colspan="7" class="hint">Aucune formule.</td></tr>`;
+};
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
@@ -2581,6 +2733,7 @@ const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ما�
 document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a");if(!t)return;const D=t.dataset;
   if(D.pack){openPack(D.pack);return}
+  if(D.abo){openAbo(D.abo);return}
   if(D.add){addOne(D.add);return}if(D.sub){subOne(D.sub);return}
   if(D.lang){setLang(D.lang);return}
   if(D.show){closeSheet();showCat(D.show);return}
@@ -2597,6 +2750,12 @@ document.addEventListener("click",async e=>{
   if(D.at){aTab=D.at;sideOpen(false);renderAdmin();window.scrollTo({top:0});return}
   if(D.of){oFilter=D.of;renderAdmin();return}
   if(D.pf){pFilter=D.pf;renderAdmin();return}
+  if(D.aboord){const a=abos?.find(x=>x.id===D.aboord);if(a){t.disabled=true;await aboOrder(a)}return}
+  if(D.abopay){const a=abos?.find(x=>x.id===D.abopay);if(!a)return;const x=a.data||{},ym=ymKey(),pay={...(x.pay||{})};
+    if(pay[ym]){if(!confirm(`Annuler le paiement de ${x.name} pour ce mois ?`))return;delete pay[ym]}
+    else{const v=prompt(`Montant reçu de ${x.name} pour ce mois (MAD) :`,String(+x.price||""));if(v===null)return;const n=Math.round((+String(v).replace(",",".")||0)*100)/100;if(!(n>0)){toast("Montant invalide");return}pay[ym]={a:n,at:Date.now()}}
+    if(await patchAbo(a,{data:{...x,pay}})){renderAdmin();toast(pay[ym]?"Paiement enregistré":"Paiement annulé")}return}
+  if(D.pldel){const pl=plans[+D.pldel];if(pl&&confirm(`Supprimer la formule « ${pl.fr||pl.n} » ? Les abonnés existants ne sont pas supprimés.`)){plans.splice(+D.pldel,1);saveCatalog("plans");renderAll()}return}
   if(D.pkedit){pkCur=D.pkedit;renderAdmin();$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"});return}
   if(D.pkdel){const P=byId(pkCur);if(P&&Array.isArray(P.inc)){P.inc.splice(+D.pkdel,1);packMeta(P);saveCatalog("products");renderAll();toast("Produit retiré du panier")}return}
   if(D.open){aTab="orders";oFilter="all";aQ=D.open;$("#aQ").value=aQ;renderAdmin();window.scrollTo({top:0});return}
@@ -2619,6 +2778,8 @@ document.addEventListener("click",async e=>{
     case "toCheckout":openSheet("checkout");break;
     case "backCart":openSheet("cart");break;
     case "placeOrder":placeOrder();break;
+    case "aboSubmit":submitAbo();break;
+    case "aboReload":abos=null;renderAdmin();break;
     case "seeOrders":closeSheet();show("orders");break;
 
     case "codeBtn":promoCode=$("#codeIn").value.trim().toUpperCase();store.set("promo",promoCode);renderCart();break;
@@ -2647,6 +2808,8 @@ document.addEventListener("change",async e=>{
   const t=e.target,D=t.dataset;
   if(t.id==="aPer"){aPer=t.value;renderAdmin();return}
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
+  if(D.abost){const a=abos?.find(x=>x.id===D.abost);if(a&&await patchAbo(a,{status:t.value})){renderAdmin();toast(`Abonnement : ${AST2[t.value]}`)}return}
+  if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):String(t.value).trim().slice(0,60);saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
   if(t.id==="pkSel"){pkCur=t.value;renderAdmin();return}
   if(D.pkq){const P=byId(pkCur),k=+D.pkq;if(P?.inc?.[k]){const q=Math.round((+t.value||0)*100)/100;if(q>0)P.inc[k][1]=q;else P.inc.splice(k,1);packMeta(P);saveCatalog("products");t.blur();renderAll();toast("Quantité enregistrée")}return}
   if(D.price){const p=byId(D.price);p.p=Math.max(0,+t.value||0);saveCatalog("products");renderShop();toast(`Prix ${pn(p)} : ${mad(p.p)}`)}
@@ -2685,6 +2848,8 @@ $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const E=$
 async function logout(){if(!cloud){show("shop");return}try{await SB.auth.signOut()}catch(e){}me="";show("shop");toast("Déconnecté · تخرجتي")}
 $("#newsForm")?.addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
   try{if(await subscribeNews($("#newsEmail").value.trim()))e.target.reset()}finally{b.disabled=false}});
+$("#planAdd").addEventListener("submit",e=>{e.preventDefault();const n=$("#plN").value.trim().slice(0,60),fr=$("#plF").value.trim().slice(0,60),price=Math.max(0,+$("#plP").value||0);if(!n)return;
+  plans.push({id:"abo-"+rid().slice(0,6),n,fr,price,per:1,pack:"",on:true});saveCatalog("plans");e.target.reset();document.activeElement?.blur?.();renderAll();toast("Formule ajoutée")});
 $("#pkAdd").addEventListener("submit",e=>{e.preventDefault();const P=byId(pkCur),id=$("#pkProd").value,q=Math.round((+$("#pkQ").value||0)*100)/100,it=byId(id);
   if(!P||!it||!(q>0)){toast("Choisissez un produit et une quantité");return}P.inc=Array.isArray(P.inc)?P.inc:[];const ex=P.inc.find(x=>x[0]===id);if(ex)ex[1]=q;else P.inc.push([id,q]);
   packMeta(P);saveCatalog("products");document.activeElement?.blur?.();renderAll();toast(`${pn(it)||it.n} · ${fmt(q)} ${UFR[it.u]} ajouté à ${pn(P)||P.n}`)});
