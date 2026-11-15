@@ -82,6 +82,16 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .block{width:100%}
 .sm{padding:7px 12px;font-size:13px;border-radius:10px}
 
+/* pack detail */
+.pk-see{align-self:flex-start;border:0;background:#fff3e6;color:#c25a00;font:inherit;font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 10px;margin:4px 0 4px;cursor:pointer}
+.pk-hero{border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:#f3faf4;display:grid;place-items:center;font-size:80px;margin-bottom:12px}.pk-hero img{width:100%;height:100%;object-fit:cover}
+.pk-pr{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}.pk-pr b{font-size:26px;color:#1a9e44}.pk-pr s{color:var(--muted)}
+.pk-tags{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.pk-tags span{background:#f2f7f3;border-radius:99px;padding:5px 11px;font-size:12.5px;font-weight:700}
+.pk-h{margin:14px 0 6px;font-size:16px}
+.pk-it{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.pk-it .th{width:44px;height:44px;border-radius:10px;background:#f3faf4 center/cover no-repeat;display:grid;place-items:center;font-size:24px}
+.pk-it b{font-size:14.5px}.pk-it .q{font-weight:800;color:#c25a00;white-space:nowrap}
+.pk-save{background:#eef8f0;border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px}
 /* hero */
 .hero{padding-block:16px 6px}
 .hero-card{position:relative;border-radius:28px;overflow:hidden;min-height:330px;display:flex;align-items:center;background:var(--green-d)}
@@ -365,7 +375,8 @@ body.adm-on .hd,body.adm-on .wa-fab,body.adm-on footer.ft{display:none}
 .pc-im .emo{filter:drop-shadow(0 10px 10px rgba(0,0,0,.18));transition:transform .2s}
 .pc:hover .emo{transform:scale(1.07)}
 .pc .off{position:absolute;top:6px;inset-inline-start:6px;background:var(--rd);color:#fff;font-weight:800;font-size:14px;padding:2px 9px;border-radius:8px}
-.pc .fav{position:absolute;top:2px;inset-inline-end:2px;width:34px;height:34px;border:0;background:none;display:grid;place-items:center;color:var(--fg);padding:0}
+.pc-open{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;z-index:1;padding:0}
+.pc .fav{z-index:2;position:absolute;top:2px;inset-inline-end:2px;width:34px;height:34px;border:0;background:none;display:grid;place-items:center;color:var(--fg);padding:0}
 .fav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 .fav[aria-pressed="true"] svg{fill:var(--rd);stroke:var(--rd)}
 .pc-n{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -461,7 +472,7 @@ footer.ft .ft-in{display:grid;grid-template-columns:1.5fr 1fr 1.25fr 1.25fr 1fr;
   .h2-in{min-height:0}
   [dir] .h2-bg{opacity:.35;-webkit-mask-image:none;mask-image:none}
 }
-@media (max-width:420px){.langsw button{padding:7px 9px;min-width:34px}.logo2 small{display:none}}
+@media (max-width:420px){.langsw button{padding:7px 9px;min-width:34px}.k7-act [data-search]{display:none}.k7-act{gap:6px}.logo2 small{display:none}}
 /* ===== admin: French, LTR, sidebar dashboard ===== */
 body.adm-on{padding-bottom:0}
 body.adm-on .ticker,body.adm-on header.bar,body.adm-on footer,body.adm-on nav.tabs{display:none}
@@ -916,7 +927,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 @media (max-width:1240px){.k7-nav button{padding:8px 8px;font-size:13.5px}.k7-row6{grid-template-columns:repeat(3,minmax(0,1fr))}.k7-cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1080px){.k7-nav{display:none}.k7-act{margin-inline-start:auto}.k7-2col{grid-template-columns:minmax(0,1fr)}.k7-trust .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:760px){
-  .k7-logo img{height:44px}.k7-wa span{display:none}.k7-wa{padding:10px}
+  .k7-logo img{height:auto;width:min(150px,34vw)}.k7-hd .hd-in{gap:8px}.k7-wa span{display:none}.k7-wa{padding:10px}
   .k7-hero::before,[dir=rtl] .k7-hero::before{background:linear-gradient(0deg,rgba(6,28,14,.88) 0%,rgba(6,28,14,.55) 55%,rgba(6,28,14,.05) 100%)}
   .k7-hero-in{min-height:0;padding-block:170px 64px}
   .k7-feat{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
@@ -1222,6 +1233,11 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="pg-h"><h2>Produits</h2><p class="hint">Prix, promotions, disponibilité et photos. Le nom arabe est celui que voient les clients. Un produit à 0 MAD n'est pas visible à la commande.</p></div>
           <div class="filters" id="pFilters"></div>
           <div class="card"><div class="tbl"><table><thead><tr><th>Produit</th><th>Nom (FR)</th><th>Catégorie</th><th>Prix (MAD)</th><th>Ancien prix</th><th>Unité</th><th>Ventes</th><th>Dispo</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div></div>
+          <div class="card" id="pkCard"><div class="c-h"><h3>🧺 Contenu des paniers</h3><select id="pkSel" aria-label="Panier" style="max-width:280px"></select></div>
+            <p class="hint" style="margin:-6px 0 12px">Ce que le client voit quand il ouvre une qoffa sur le site.</p>
+            <div id="pkList"></div>
+            <form class="row-form" id="pkAdd" style="margin-top:12px"><div class="fld"><label for="pkProd">Produit</label><select id="pkProd"></select></div><div class="fld"><label for="pkQ">Quantité</label><input id="pkQ" type="number" min="0.25" step="0.25" value="1" class="num"></div><button class="btn b-gr">Ajouter au panier</button></form>
+            <p class="hint" id="pkSum" style="margin:10px 0 0"></p></div>
           <div class="card"><h3>Ajouter un produit</h3>
             <form class="row-form" id="newProd">
               <div class="fld"><label for="npN">Nom (arabe)</label><input id="npN" required placeholder="لفت" dir="rtl"></div>
@@ -1797,7 +1813,7 @@ let slideRender=()=>{};
   hero.addEventListener("touchend",e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)<45)return;const fwd=document.dir==="rtl"?dx>0:dx<0;go(cur+(fwd?1:-1));play()},{passive:true});
   slideRender=draw;go(0);play();
 })();
-function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();slideRender();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")&&openInfo(mode.slice(5))}
+function setLang(l){lang=l==="fr"?"fr":"ar";store.set("lang",lang);applyLang();renderAll();slideRender();if(sheetOpen())mode==="cart"?renderCart():mode==="checkout"?renderCheckout():mode.startsWith("info:")?openInfo(mode.slice(5)):mode.startsWith("pack:")&&openPack(mode.slice(5))}
 
 /* ---------------- cart & pricing ---------------- */
 function lines(){return Object.entries(cart).filter(([,q])=>q>0).map(([id,q])=>{const it=byId(id);return it&&it.on!==false&&+it.p>0?{it,q,sum:it.p*q}:null}).filter(Boolean)}
@@ -1805,7 +1821,7 @@ function promoFor(sub){const k=(promoCode||"").toUpperCase();const c=promos.code
   if(!k)return{d:0};if(!c||!c.on)return{d:0,err:t("codeBad")};if(sub<(+c.min||0))return{d:0,err:t("codeMin",money(c.min))};
   const d=c.k==="pct"?Math.round(sub*(+c.v||0))/100:+c.v||0;return{d:Math.min(d,sub),ok:c.k==="pct"?t("codePct",c.v):t("codeAmt",money(c.v))}}
 function totals(){const sub=lines().reduce((a,l)=>a+l.sum,0);const pr=promoFor(sub);const after=sub-pr.d;const fee=sub===0||after>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{sub,disc:pr.d,pr,fee,total:after+fee}}
-function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart()}
+function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart();else if(sheetOpen()&&mode.startsWith("pack:"))openPack(mode.slice(5))}
 function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=1?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n})}
@@ -1944,14 +1960,15 @@ const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
 // a product without a price yet (0 DH) is shown but cannot be ordered
 const priced=p=>+p?.p>0;
-function pcard(p){const im=photoOf(p),off=priced(p)&&+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg";
-  if(!priced(p))return `<article class="pc soon"><div class="pc-im">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
+function pcard(p){const im=photoOf(p),off=priced(p)&&+p.old>+p.p?Math.round((1-p.p/p.old)*100):0,fv=favs.includes(p.id),per=p.u==="kg",pk=p.c==="panier";
+  const pkO=pk?`<button class="pc-open" data-pack="${esc(p.id)}" aria-label="${esc(nm(p))}"></button>`:"",pkS=pk?`<button class="pk-see" data-pack="${esc(p.id)}">👀 ${lang==="fr"?"Voir le contenu":"شوف شنو فيها"}</button>`:"";
+  if(!priced(p))return `<article class="pc soon"><div class="pc-im">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}${pkO}
     <button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
-    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b><div class="pc-f"><span class="soon-l">${t("soon")}</span></div></article>`;
+    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>${pkS}<div class="pc-f"><span class="soon-l">${t("soon")}</span></div></article>`;
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im">
     ${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
-    ${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
-    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>
+    ${pkO}${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
+    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>${pkS}
     <div class="pc-f"><span class="pc-p num"><b class="${off?"red":""}">${dh(p.p)}</b>${per?`<small>/${t("kg")}</small>`:""}${off?`<s>${dh(p.old)}</s>`:""}</span>${p.on===false?`<span class="hint">${t("unavailable")}</span>`:stepper(p.id)}</div></article>`}
 const dh=n=>lang==="fr"?`${fmt(n)} DH`:`${fmt(n)} درهم`;
 function renderShop(){
@@ -1992,6 +2009,24 @@ function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth"
 /* ---------------- sheet ---------------- */
 let mode="cart";const sheetOpen=()=>$("#sheet").classList.contains("open");
 function openSheet(m){mode=m;if(m==="checkout"){track("checkout");pix("checkout",pixItems(lines()),totals().total)}(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+/* pack (qoffa) detail: what is inside, set by the admin in Produits → Contenu des paniers */
+const packInc=p=>(Array.isArray(p?.inc)?p.inc:[]).map(([i,q])=>({it:byId(i),q:+q})).filter(x=>x.it&&x.q>0);
+function openPack(id){const p=byId(id);if(!p)return;mode="pack:"+id;const fr=lang==="fr",im=photoOf(p),inc=packInc(p);
+  const kg=inc.filter(x=>x.it.u==="kg").reduce((a,x)=>a+x.q,0),val=inc.reduce((a,x)=>a+x.it.p*x.q,0),allP=inc.length&&inc.every(x=>+x.it.p>0);
+  $("#shTitle").textContent=nm(p);
+  $("#shBody").innerHTML=`<div class="pk-hero">${im?`<img src="${esc(im)}" alt="">`:esc(p.e||"🧺")}</div>
+    ${priced(p)?`<div class="pk-pr"><b class="num">${dh(p.p)}</b>${+p.old>+p.p?`<s class="num">${dh(p.old)}</s>`:""}</div>`:`<p><span class="soon-l">${t("soon")}</span></p>`}
+    ${p.d?.[lang]?`<p class="hint" style="margin:0 0 6px">${esc(p.d[lang])}</p>`:""}
+    ${inc.length?`<div class="pk-tags"><span>🧺 ${inc.length} ${fr?"produits":"منتوج"}</span>${kg?`<span>⚖️ ≈ ${fmt(kg)} ${fr?"kg":"كيلو"}</span>`:""}<span>🌿 ${fr?"Frais du jour":"طري ديال النهار"}</span></div>`:""}
+    <h4 class="pk-h">${fr?"Ce qu'il y a dans ce panier":"شنو كاين فهاد القفة"}</h4>
+    ${inc.length?inc.map(({it,q})=>{const pi=photoOf(it);return `<div class="pk-it"><span class="th" style="${pi?`background-image:url('${esc(pi)}')`:""}">${pi?"":esc(it.e||"🥬")}</span><b>${esc(nm(it))}</b><span class="q num">${qtyL(it,q)}</span></div>`}).join("")
+      :`<p class="hint">${fr?"Le contenu de ce panier sera affiché très bientôt. Demandez-nous sur WhatsApp.":"المحتوى غادي يبان قريباً. سولنا فالواتساب."}</p>`}
+    ${allP&&priced(p)&&val>p.p?`<div class="pk-save">💰 ${fr?`Acheté séparément : <b class="num">${dh(val)}</b> · vous économisez <b class="num">${dh(val-p.p)}</b>`:`إلا شريتيهم بوحدهم: <b class="num">${dh(val)}</b> · كتربح <b class="num">${dh(val-p.p)}</b>`}</div>`:""}
+    ${inc.length?`<p class="hint" style="margin:10px 0 0">${fr?"Le contenu peut varier légèrement selon l'arrivage du jour.":"المحتوى يقدر يتبدل شوية على حساب السوق ديال النهار."}</p>`:""}`;
+  $("#shFoot").innerHTML=priced(p)&&p.on!==false?(cart[id]?`<div style="display:flex;gap:10px;align-items:center">${stepper(id)}<button class="btn b-or" style="flex:1" data-cart>${fr?"Voir le panier":"شوف السلة"}</button></div>`
+      :`<button class="btn b-or block" data-add="${esc(id)}">${fr?"Ajouter au panier":"زيد للسلة"} · ${dh(p.p)}</button>`)
+    :`<a class="btn b-wa block" href="https://wa.me/${WA}" target="_blank" rel="noopener">WhatsApp · <span dir="ltr">${WA_PRETTY}</span></a>`;
+  $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 function closeSheet(){$("#sheet").classList.remove("open");$("#scrim").classList.remove("open")}
 function openCredits(){mode="info:credits";$("#shTitle").textContent=lang==="fr"?"Crédits photos":"مصادر الصور";
   $("#shBody").innerHTML=`<div class="info"><p>${lang==="fr"?"Photos des produits : Wikimedia Commons, sous licences libres. Merci aux photographes :":"صور المنتوجات من Wikimedia Commons، بتراخيص حرة. شكراً للمصورين:"}</p><ul class="cred">${PHOTO_CREDITS.map(([id,f,l,a])=>`<li><b>${esc(nm(byId(id)||{n:id})||id)}</b> · <a href="https://commons.wikimedia.org/wiki/File:${esc(f)}" target="_blank" rel="noopener">${esc(a)}</a> · ${esc(l)}</li>`).join("")}</ul><p class="hint">CC BY / CC BY-SA : creativecommons.org/licenses</p></div>`;
@@ -2353,7 +2388,8 @@ A.products=({OR})=>{
      <td><input type="number" min="0" step="0.5" value="${+p.old||""}" data-old="${esc(p.id)}" aria-label="Ancien prix ${esc(pn(p))}" class="num" placeholder="—"></td>
      <td>${UFR[p.u]||""}</td><td class="num">${s?s.c:0}</td>
      <td><input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="${esc(pn(p))} disponible"></td>
-     <td>${p.c==="panier"?"":`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
+     <td>${p.c==="panier"?`<button class="btn b-gh sm" data-pkedit="${esc(p.id)}">🧺 Contenu (${(p.inc||[]).length})</button>`:`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
+  renderPackEd();
   if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
 };
 A.stock=()=>{
@@ -2473,6 +2509,21 @@ A.compta=({O,R,len})=>{
     const lbl=new Date(s).toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
     return `<tr><td>${lbl.charAt(0).toUpperCase()+lbl.slice(1)}</td><td class="num">${c.length}</td><td class="num">${mad(ca)}</td><td class="num">${d?"−":""}${mad(d)}</td><td class="num"><b style="color:${r<0?"#c0392b":"inherit"}">${r<0?"−":""}${mad(Math.abs(r))}</b></td><td class="num">${ca?Math.round(r/ca*100)+" %":"—"}</td></tr>`}).join("");
 };
+/* admin: contents of each pack (product + quantity) */
+let pkCur="";
+function packMeta(P){const inc=packInc(P);P.kg=Math.round(inc.filter(x=>x.it.u==="kg").reduce((a,x)=>a+x.q,0)*100)/100;P.cnt=inc.length}
+function renderPackEd(){const packs=products.filter(p=>p.c==="panier"),card=$("#pkCard");card.hidden=!packs.length;if(!packs.length)return;
+  if(!packs.some(p=>p.id===pkCur))pkCur=packs[0].id;const P=byId(pkCur),inc=Array.isArray(P.inc)?P.inc:[];
+  if(document.activeElement?.closest?.("#pkCard"))return;
+  $("#pkSel").innerHTML=packs.map(p=>`<option value="${esc(p.id)}" ${p.id===pkCur?"selected":""}>${esc(pn(p)||p.n)} (${(p.inc||[]).length} produits)</option>`).join("");
+  $("#pkList").innerHTML=inc.length?`<div class="tbl"><table><thead><tr><th>Produit</th><th>Quantité</th><th>Unité</th><th>Valeur</th><th></th></tr></thead><tbody>${inc.map(([i,q],k)=>{const it=byId(i);
+      return `<tr><td><div class="pcell">${thumb(it)}<b>${esc(it?pn(it)||it.n:i)}</b></div></td><td><input type="number" min="0.25" step="0.25" value="${+q}" data-pkq="${k}" class="num" aria-label="Quantité"></td><td>${UFR[it?.u]||""}</td><td class="num">${it&&+it.p>0?mad(it.p*q):"—"}</td><td><button class="btn b-gh sm" data-pkdel="${k}">Retirer</button></td></tr>`}).join("")}</tbody></table></div>`
+    :aEmpty("Ce panier est vide. Ajoutez ses produits ci-dessous (ex. : Tomate · 1 kg).");
+  const opts=CATS.filter(c=>!["panier","deals"].includes(c.id)).map(c=>{const L=products.filter(p=>p.c===c.id);return L.length?`<optgroup label="${esc(CATFR[c.id]||c.id)}">${L.map(p=>`<option value="${esc(p.id)}">${esc(pn(p)||p.n)} (${UFR[p.u]})</option>`).join("")}</optgroup>`:""}).join("");
+  if($("#pkProd").dataset.v!==String(products.length)){$("#pkProd").innerHTML=opts;$("#pkProd").dataset.v=products.length}
+  const I=packInc(P),kg=I.filter(x=>x.it.u==="kg").reduce((a,x)=>a+x.q,0),val=I.reduce((a,x)=>a+(+x.it.p||0)*x.q,0);
+  $("#pkSum").innerHTML=I.length?`Poids ≈ <b class="num">${fmt(kg)} kg</b> · Valeur au détail : <b class="num">${mad(val)}</b> · Prix du panier : <b class="num">${mad(P.p)}</b>${+P.p>0&&val>0?` · ${val>P.p?`le client économise <b class="num">${mad(val-P.p)}</b>`:`<span style="color:#c0392b">le panier coûte plus cher que les produits séparés</span>`}`:""}`:"";
+}
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
@@ -2529,6 +2580,7 @@ const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ما�
 
 document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a");if(!t)return;const D=t.dataset;
+  if(D.pack){openPack(D.pack);return}
   if(D.add){addOne(D.add);return}if(D.sub){subOne(D.sub);return}
   if(D.lang){setLang(D.lang);return}
   if(D.show){closeSheet();showCat(D.show);return}
@@ -2545,6 +2597,8 @@ document.addEventListener("click",async e=>{
   if(D.at){aTab=D.at;sideOpen(false);renderAdmin();window.scrollTo({top:0});return}
   if(D.of){oFilter=D.of;renderAdmin();return}
   if(D.pf){pFilter=D.pf;renderAdmin();return}
+  if(D.pkedit){pkCur=D.pkedit;renderAdmin();$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(D.pkdel){const P=byId(pkCur);if(P&&Array.isArray(P.inc)){P.inc.splice(+D.pkdel,1);packMeta(P);saveCatalog("products");renderAll();toast("Produit retiré du panier")}return}
   if(D.open){aTab="orders";oFilter="all";aQ=D.open;$("#aQ").value=aQ;renderAdmin();window.scrollTo({top:0});return}
   if(D.st){const o=staffOrders().find(x=>x.id===D.oid);if(o&&o.status!==D.st){await setStatus(o,D.st);toast(`#${o.id} : ${AST[D.st]} · 📲 pensez à informer le client`)}return}
   if(D.dst){const o=staffOrders().find(x=>x.id===D.oid);if(o){
@@ -2593,6 +2647,8 @@ document.addEventListener("change",async e=>{
   const t=e.target,D=t.dataset;
   if(t.id==="aPer"){aPer=t.value;renderAdmin();return}
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
+  if(t.id==="pkSel"){pkCur=t.value;renderAdmin();return}
+  if(D.pkq){const P=byId(pkCur),k=+D.pkq;if(P?.inc?.[k]){const q=Math.round((+t.value||0)*100)/100;if(q>0)P.inc[k][1]=q;else P.inc.splice(k,1);packMeta(P);saveCatalog("products");t.blur();renderAll();toast("Quantité enregistrée")}return}
   if(D.price){const p=byId(D.price);p.p=Math.max(0,+t.value||0);saveCatalog("products");renderShop();toast(`Prix ${pn(p)} : ${mad(p.p)}`)}
   if(D.old!==undefined&&t.matches("[data-old]")){const p=byId(D.old);const v=+t.value||0;if(v>0)p.old=v;else delete p.old;saveCatalog("products");renderShop()}
   if(t.matches("[data-fr]")){const p=byId(D.fr);const v=t.value.trim();if(v)p.fr=v;else delete p.fr;saveCatalog("products")}
@@ -2629,6 +2685,9 @@ $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const E=$
 async function logout(){if(!cloud){show("shop");return}try{await SB.auth.signOut()}catch(e){}me="";show("shop");toast("Déconnecté · تخرجتي")}
 $("#newsForm")?.addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
   try{if(await subscribeNews($("#newsEmail").value.trim()))e.target.reset()}finally{b.disabled=false}});
+$("#pkAdd").addEventListener("submit",e=>{e.preventDefault();const P=byId(pkCur),id=$("#pkProd").value,q=Math.round((+$("#pkQ").value||0)*100)/100,it=byId(id);
+  if(!P||!it||!(q>0)){toast("Choisissez un produit et une quantité");return}P.inc=Array.isArray(P.inc)?P.inc:[];const ex=P.inc.find(x=>x[0]===id);if(ex)ex[1]=q;else P.inc.push([id,q]);
+  packMeta(P);saveCatalog("products");document.activeElement?.blur?.();renderAll();toast(`${pn(it)||it.n} · ${fmt(q)} ${UFR[it.u]} ajouté à ${pn(P)||P.n}`)});
 $("#expForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("#exErr"),b=e.target.querySelector("button");E.textContent="";
   const x={day:$("#exDay").value,cat:$("#exCat").value,label:$("#exLbl").value.trim().slice(0,80),amount:Math.round((+$("#exAmt").value||0)*100)/100};
   if(!/^\d{4}-\d{2}-\d{2}$/.test(x.day)||!EXCAT[x.cat]||!x.label||!(x.amount>0)){E.textContent="Remplissez la date, le libellé et un montant positif.";return}
