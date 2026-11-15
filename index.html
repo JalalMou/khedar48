@@ -1984,8 +1984,8 @@ function renderShop(){
   const chips=[{id:"all",l:t("all")},...TILES.map(c=>({id:c.id,l:c[lang]})),{id:"fav",l:`♥ ${t("favs")}`}];
   $("#filters").innerHTML=chips.map(c=>`<button class="fchip" data-tile="${c.id}" aria-pressed="${tile===c.id}">${esc(c.l)}</button>`).join("");
   const q=query.trim().toLowerCase(),T4=TILES.find(c=>c.id===tile);
-  let list=q?products.filter(p=>[p.n,pn(p)].some(x=>String(x).toLowerCase().includes(q)))
-    :tile==="fav"?products.filter(p=>favs.includes(p.id)):T4?products.filter(T4.f):products.filter(p=>p.c!=="panier");
+  let list=q?live.filter(p=>[p.n,pn(p)].some(x=>String(x).toLowerCase().includes(q)))
+    :tile==="fav"?live.filter(p=>favs.includes(p.id)):T4?live.filter(T4.f):live.filter(p=>p.c!=="panier");
   $("#catTitle").textContent=q?t("results",query.trim()):T4?T4[lang]:tile==="fav"?t("favs"):t("catalog");
   $("#countLbl").textContent=t("nProducts",list.length);
   $("#grid").innerHTML=list.length?list.map(pcard).join(""):`<div class="empty"><div class="big">🔍</div>${t("noResult")}</div>`;
