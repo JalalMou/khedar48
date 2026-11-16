@@ -99,6 +99,42 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-sum{background:#eef8f0;border-radius:14px;padding:12px 14px;margin-bottom:14px}.abo-sum b{font-size:24px;color:#1a9e44}.abo-sum small{display:block;color:#4b5f52;margin-top:2px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
+/* driver app */
+body.drv-on .hd,body.drv-on footer.ft,body.drv-on nav.tabs,body.drv-on .wa-fab,body.drv-on .cbar{display:none}
+body.drv-on{padding-bottom:0;background:#f2f6f3}
+.dv{min-height:100vh;max-width:760px;margin:0 auto;background:#f2f6f3}
+.dv-hd{background:linear-gradient(160deg,#16843a,#0b5a2b);color:#fff;padding:14px 16px 64px;border-radius:0 0 28px 28px;position:relative}
+.dv-top{display:flex;align-items:center;gap:8px}.dv-logo{height:34px;width:auto}.dv-tag{font-size:12.5px;font-weight:700;background:rgba(255,255,255,.15);border-radius:99px;padding:4px 10px;margin-inline-start:auto}
+.dv-ib{width:40px;height:40px;border-radius:12px;border:0;background:rgba(255,255,255,.14);display:grid;place-items:center;cursor:pointer}.dv-ib svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dv-hi{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:16px;flex-wrap:wrap}.dv-hi h1{margin:0;font-size:26px}.dv-hi p{margin:2px 0 0;opacity:.85;font-size:14px}
+.dv-pick{min-width:180px;margin:0}.dv-pick label{color:#e3f3e7}.dv-pick select{border:0;color:#132018;background:#fff}
+.dv-k{position:absolute;left:12px;right:12px;bottom:-46px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.dv-k div{background:#fff;color:#132018;border-radius:16px;padding:10px 8px;text-align:center;box-shadow:0 14px 26px -18px rgba(0,0,0,.5)}
+.dv-k b{display:block;font-size:22px;line-height:1.2}.dv-k small{font-size:11.5px;color:#5b6b61;font-weight:700}.dv-k .o b{color:#e8701a}.dv-k .g b{color:#1a9e44}
+.dv-b{padding:62px 12px 30px}
+.dv-tabs{display:flex;gap:6px;background:#fff;border-radius:16px;padding:5px;margin-bottom:14px;box-shadow:0 10px 20px -18px rgba(0,0,0,.5)}
+.dv-tabs button{flex:1;white-space:nowrap;border:0;background:none;border-radius:12px;padding:11px 6px;font:inherit;font-weight:800;font-size:14px;color:#4b5b51;cursor:pointer}
+.dv-tabs button[aria-selected=true]{background:#1a9e44;color:#fff}.dv-tabs em{font-style:normal;background:rgba(0,0,0,.08);border-radius:99px;padding:1px 7px;margin-inline-start:4px;font-size:12px}.dv-tabs [aria-selected=true] em{background:rgba(255,255,255,.25)}
+.dv-c{background:#fff;border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 14px 28px -24px rgba(0,0,0,.6);border:1px solid #e6eee8}
+.dv-c.road{border-color:#ffb877}
+.dv-ch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.dv-id{font-weight:800}.dv-st{border-radius:99px;padding:3px 10px;font-size:12.5px;font-weight:800;background:#eef1ef}
+.dv-st.new{background:#e6f0ff;color:#2f6fd6}.dv-st.prep{background:#fff6dd;color:#a86b00}.dv-st.road{background:#fff0e3;color:#d2600f}.dv-st.done{background:#e6f6ea;color:#1a8a3c}
+.dv-slot{margin-inline-start:auto;font-size:12.5px;font-weight:700;color:#4b5b51;background:#f2f6f3;border-radius:99px;padding:3px 10px}
+.dv-cu{display:flex;align-items:center;gap:10px;margin:12px 0 8px}.dv-av{width:42px;height:42px;border-radius:50%;background:#e6f6ea;color:#1a8a3c;display:grid;place-items:center;font-weight:900;font-size:18px;flex:none}
+.dv-cu b{display:block;font-size:16px}.dv-cu small{color:#5b6b61}
+.dv-ad{background:#f7faf8;border-radius:14px;padding:10px 12px;font-size:14.5px;line-height:1.5}.dv-ad .hint{font-size:13px}
+.dv-qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.dv-qa a{display:flex;align-items:center;justify-content:center;gap:6px;border-radius:14px;padding:11px 6px;font-weight:800;font-size:13.5px;text-decoration:none;border:1.5px solid #e1e8e3;color:#132018;background:#fff}
+.dv-qa a.wa{border-color:#bfe9cc;color:#128c4a}.dv-qa a.call{border-color:#cfe0ff;color:#2f6fd6}
+.dv-it{margin:4px 0 10px}.dv-it summary{cursor:pointer;font-weight:800;font-size:14px;padding:6px 0;list-style:none}.dv-it summary::-webkit-details-marker{display:none}.dv-it summary::after{content:" ▾";color:#8a978f}.dv-it[open] summary::after{content:" ▴"}
+.dv-it ul{margin:4px 0 0;padding:0 18px;font-size:14px;line-height:1.8}
+.dv-cash{display:flex;justify-content:space-between;align-items:center;background:#fff4ea;border:1.5px dashed #ffb877;border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.dv-cash span{font-weight:700;color:#7a4a1c}.dv-cash b{font-size:24px;color:#e8701a}.dv-cash.paid{background:#eef8f0;border-color:#9fd8ad}.dv-cash.paid b{font-size:15px;color:#1a8a3c}
+.dv-go{width:100%;border:0;border-radius:16px;padding:16px;font:inherit;font-size:17px;font-weight:900;color:#fff;cursor:pointer;background:linear-gradient(180deg,#25a645,#0e7a35);box-shadow:0 14px 24px -14px rgba(14,122,53,.9)}
+.dv-go.or{background:linear-gradient(180deg,#ff9a3c,#e8701a);box-shadow:0 14px 24px -14px rgba(232,112,26,.9)}.dv-go.bl{background:linear-gradient(180deg,#3d86f0,#2563c9)}
+.dv-empty{text-align:center;padding:40px 16px;color:#5b6b61}.dv-empty div{font-size:54px}
+.dv-gate{max-width:420px;margin:70px auto 0;background:#fff;border-radius:24px;padding:28px;text-align:center;box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}.dv-gate img{border-radius:22px}
+@media (max-width:420px){.dv-k b{font-size:19px}.dv-k small{font-size:10.5px}.dv-qa a{font-size:12.5px}}
 /* team login */
 body.lg-on .hd,body.lg-on footer.ft,body.lg-on nav.tabs,body.lg-on .wa-fab,body.lg-on .cbar{display:none}
 body.lg-on{padding-bottom:0}
@@ -1467,18 +1503,21 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 </div>
 
 <!-- ============ DRIVER ============ -->
-<div class="view wrap" id="v-driver" hidden>
-  <section class="sec">
-    <div class="sh"><h2>تطبيق <i>الموزع</i></h2><span class="hint" id="drvWho"></span></div>
-    <div id="driverGate" class="gate" hidden><svg width="70" height="70"><use href="#logo"/></svg><p>هاد الصفحة غير للموزعين ديال خضار 48.</p><button class="btn b-gr" data-go="login">دخول الفريق</button></div>
-    <div id="driverBody">
-      <div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px"><div class="fld" id="drvPick" style="max-width:320px;flex:1"><label for="drvSel">شكون نتا؟</label><select id="drvSel"></select></div>
-        <button class="btn b-gh sm" id="drvOut">خروج</button></div>
-      <div class="kpis" id="drvKpis"></div>
-      <h3 style="margin:6px 0 10px">الطلبات ديالي</h3><div id="drvMine"></div>
-      <h3 style="margin:18px 0 10px">طلبات بلا موزع</h3><div id="drvFree"></div>
-    </div>
-  </section>
+<div class="view" id="v-driver" hidden>
+  <div class="dv" dir="rtl" lang="ar">
+    <header class="dv-hd">
+      <div class="dv-top"><img class="dv-logo" src="img/logo-dark.png" alt="Khedar48" width="600" height="166"><span class="dv-tag">🛵 تطبيق الموزع</span>
+        <button class="dv-ib" id="drvRefresh" aria-label="تحديث"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg></button>
+        <button class="dv-ib" id="drvOut" aria-label="خروج"><svg viewBox="0 0 24 24"><path d="M15 17l5-5-5-5M20 12H9M11 3H5a2 2 0 00-2 2v14a2 2 0 002 2h6"/></svg></button></div>
+      <div class="dv-hi"><div><h1 id="drvWho">مرحبا 👋</h1><p id="drvDate"></p></div><div class="fld dv-pick" id="drvPick"><label for="drvSel">شكون نتا؟</label><select id="drvSel"></select></div></div>
+      <div class="dv-k" id="drvKpis"></div>
+    </header>
+    <div id="driverGate" class="dv-gate" hidden><img src="icons/icon-192.png" alt="" width="96" height="96"><h2>تطبيق الموزع</h2><p>هاد الصفحة غير للموزعين ديال خضار 48.</p><button class="lg-go" data-go="login">دخول الموزع</button></div>
+    <main id="driverBody" class="dv-b">
+      <div class="dv-tabs" role="tablist" id="drvTabs"></div>
+      <div id="drvList"></div>
+    </main>
+  </div>
 </div>
 
 <!-- ============ TEAM LOGIN ============ -->
@@ -1680,6 +1719,7 @@ async function onUser(u){
     if(!role)toast("Ce compte n'a pas d'accès équipe")}
   await subscribe();renderAll();if(!isTeam())track("visit");if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
   if(!pendingGo&&ADMIN_URL&&view==="login"&&role==="admin")pendingGo="admin";
+  if(!pendingGo&&LIV_URL&&view==="login"&&(role==="driver"||role==="admin"))pendingGo="driver";
   if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?"admin":role==="driver"?"driver":"login");
     if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut()}}
 }
@@ -2829,23 +2869,37 @@ const sideOpen=on=>{$("#side").classList.toggle("open",on);$("#sScrim").classLis
 function toggleTheme(){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark"}
 
 /* ---------------- driver ---------------- */
-function drvCard(o,mine){return `<div class="ord drv-card"><div class="top"><span class="id num">${esc(o.id)}</span><span class="st st-${esc(o.status)}">${STATUS[o.status]}</span></div>
-  <div class="addr"><b>${esc(o.name)}</b> · <span class="num" dir="ltr">${esc(o.phone)}</span><br>${esc(o.hood)} · ${esc(o.addr)}<br><span class="hint">${esc(o.slot)}${o.note?" · "+esc(o.note):""}</span></div>
-  ${itemsHtml(o)}
-  <div class="top"><span>خاصك تجمع: <span class="big num">${fmt(o.total)} د.م</span></span>
-  <span style="display:flex;gap:6px;flex-wrap:wrap">${mine?(o.status==="new"||o.status==="prep"?`<button class="btn b-gr sm" data-dst="road" data-oid="${esc(o.id)}">خرجت بالطلب</button>`:"")+(o.status==="road"?`<button class="btn b-or sm" data-dst="done" data-oid="${esc(o.id)}">تسلّم وتخلّص</button>`:"")
-     :`<button class="btn b-or sm" data-take="${esc(o.id)}">خذ هاد الطلب</button>`}
-  <a class="btn b-wa sm" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener">📲 خبّر الزبون</a></span></div></div>`}
+let drvTab="mine";
+const mapUrl=o=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;
+function drvCard(o,kind){const st=o.status,nIt=(o.items||[]).length,kg=(o.items||[]).reduce((a,[id,q])=>a+((byId(id)?.u||"kg")==="kg"?+q||0:0),0);
+  const act=kind==="free"?`<button class="dv-go bl" data-take="${esc(o.id)}">🙋 خذ هاد الطلب</button>`
+    :kind==="mine"?(st==="road"?`<button class="dv-go or" data-dst="done" data-oid="${esc(o.id)}">✅ تسلّم وتخلّص</button>`:`<button class="dv-go" data-dst="road" data-oid="${esc(o.id)}">🛵 خرجت بالطلب</button>`):"";
+  return `<article class="dv-c ${esc(st)}"><div class="dv-ch"><span class="dv-id num">#${esc(o.id)}</span><span class="dv-st ${esc(st)}">${STATUS[st]||esc(st)}</span><span class="dv-slot">🕒 ${esc(o.slot||"")}</span></div>
+   <div class="dv-cu"><span class="dv-av">${esc(initial(o.name))}</span><div><b>${esc(o.name)}</b><small class="num" dir="ltr">${esc(o.phone)}</small></div></div>
+   <div class="dv-ad">📍 <b>${esc(o.hood||"")}</b> · ${esc(o.addr||"")}${o.note?`<br><span class="hint">📝 ${esc(o.note)}</span>`:""}</div>
+   ${kind==="done"?"":`<div class="dv-qa"><a class="call" href="tel:${esc(o.phone)}">📞 عيّط</a><a class="wa" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener">💬 واتساب</a><a href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🗺️ الخريطة</a></div>`}
+   <details class="dv-it" ${kind==="mine"&&st!=="road"?"open":""}><summary>🧺 ${nIt} منتوج${kg?` · ${fmt(kg)} كغ`:""}</summary>${itemsHtml(o)}</details>
+   ${o.sub_id?`<div class="dv-cash paid"><span>💳 مخلص فالاشتراك</span><b>ما تجمع والو</b></div>`:`<div class="dv-cash"><span>💵 خاصك تجمع</span><b class="num">${fmt(o.total)} درهم</b></div>`}
+   ${act}</article>`}
 function renderDriver(){
-  $("#driverGate").hidden=isTeam();$("#driverBody").hidden=!isTeam();if(!isTeam())return;
+  document.body.classList.toggle("drv-on",view==="driver");
+  $("#driverGate").hidden=isTeam();$("#driverBody").hidden=!isTeam();$(".dv-k").hidden=!isTeam();if(!isTeam())return;
   $("#drvPick").hidden=role==="driver";$("#drvOut").hidden=!cloud;
   const L=drivers.list||{};$("#drvSel").innerHTML=`<option value="">— اختار سميتك —</option>`+Object.entries(L).map(([k,d])=>`<option value="${esc(k)}" ${me===k?"selected":""}>${esc(d.n)}</option>`).join("");
-  $("#drvWho").textContent=L[me]?`مرحبا ${L[me].n}`:"";
-  const O=staffOrders(),mine=O.filter(o=>me&&o.driver===me&&["new","prep","road"].includes(o.status)),free=O.filter(o=>!o.driver&&["new","prep"].includes(o.status));
-  const doneToday=O.filter(o=>me&&o.driver===me&&o.status==="done"&&new Date(o.at).toDateString()===new Date().toDateString());
-  $("#drvKpis").innerHTML=`<div class="kpi o"><small>عندي دابا</small><b class="num">${mine.length}</b></div><div class="kpi g"><small>وصلت اليوم</small><b class="num">${doneToday.length}</b></div><div class="kpi"><small>الفلوس اللي جمعت (د.م)</small><b class="num">${fmt(doneToday.reduce((a,o)=>a+(+o.total||0),0))}</b></div><div class="kpi"><small>طلبات بلا موزع</small><b class="num">${free.length}</b></div>`;
-  $("#drvMine").innerHTML=!me?`<p class="hint">اختار سميتك باش يبانو ليك الطلبات ديالك.</p>`:mine.length?mine.map(o=>drvCard(o,true)).join(""):`<div class="empty">ماعندك حتى طلب دابا 👌</div>`;
-  $("#drvFree").innerHTML=free.length?free.map(o=>drvCard(o,false)).join(""):`<p class="hint">كاع الطلبات عندهم موزع.</p>`;
+  $("#drvWho").textContent=L[me]?`مرحبا ${L[me].n} 👋`:"مرحبا 👋";
+  $("#drvDate").textContent=new Date().toLocaleDateString("ar-MA",{weekday:"long",day:"numeric",month:"long"});
+  const O=staffOrders(),today=new Date().toDateString();
+  const mine=O.filter(o=>me&&o.driver===me&&["new","prep","road"].includes(o.status)).sort((a,b)=>(b.status==="road")-(a.status==="road")||a.at-b.at);
+  const free=O.filter(o=>!o.driver&&["new","prep"].includes(o.status)).sort((a,b)=>a.at-b.at);
+  const done=O.filter(o=>me&&o.driver===me&&o.status==="done"&&new Date(o.at).toDateString()===today);
+  const cash=done.filter(o=>!o.sub_id).reduce((a,o)=>a+(+o.total||0),0);
+  $("#drvKpis").innerHTML=`<div class="o"><b class="num">${mine.length}</b><small>عندي دابا</small></div><div class="g"><b class="num">${done.length}</b><small>وصلت اليوم</small></div><div><b class="num">${fmt(cash)}</b><small>جمعت (درهم)</small></div><div><b class="num">${free.length}</b><small>بلا موزع</small></div>`;
+  const T=[["mine","طلباتي",mine.length],["free","جداد",free.length],["done","سالاو",done.length]];
+  $("#drvTabs").innerHTML=T.map(([k,l,n])=>`<button role="tab" data-dtab="${k}" aria-selected="${drvTab===k}">${l}<em class="num">${n}</em></button>`).join("");
+  const E=(e,t)=>`<div class="dv-empty"><div>${e}</div><p>${t}</p></div>`;
+  $("#drvList").innerHTML=drvTab==="mine"?(!me?E("👤","اختار سميتك باش يبانو ليك الطلبات ديالك."):mine.length?mine.map(o=>drvCard(o,"mine")).join(""):E("👌","ماعندك حتى طلب دابا. شوف «جداد» باش تاخذ طلب."))
+    :drvTab==="free"?(free.length?free.map(o=>drvCard(o,"free")).join(""):E("✅","كاع الطلبات عندهم موزع."))
+    :(done.length?done.map(o=>drvCard(o,"done")).join(""):E("🛵","مازال ما وصلتي حتى طلب اليوم."));
 }
 
 /* ---------------- views ---------------- */
@@ -2854,7 +2908,7 @@ function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
   if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(sheetOpen()&&mode==="cart")renderCart()}
 function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
-  document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");sideOpen(false);if(sheetOpen())closeSheet();
+  document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
@@ -2897,6 +2951,7 @@ document.addEventListener("click",async e=>{
     // one tap for the driver: open WhatsApp with the new-status message right away (before any await, so the browser allows it), then save the status
     window.open(notifyUrl({...o,status:D.dst},D.dst),"_blank","noopener");
     await setStatus(o,D.dst);toast(D.dst==="done"?"مبروك، الطلب توصّل ✓":"بالتوفيق فالطريق")}return}
+  if(D.dtab){drvTab=D.dtab;renderDriver();return}
   if(D.take){if(!me){toast("اختار سميتك اللول");$("#drvSel").focus();return}const o=staffOrders().find(x=>x.id===D.take);if(o){await patchOrder(o,{driver:me,status:"prep"});toast("الطلب ولى عندك")}return}
   if(D.catall){products.filter(p=>p.c===D.catall).forEach(p=>{p.on=D.v==="1";if(!p.on)delete cart[p.id]});saveCatalog("products");renderAll();toast(D.v==="1"?"Rayon activé":"Rayon désactivé");return}
   if(D.delp){products=products.filter(p=>p.id!==D.delp);saveCatalog("products");renderAll();toast("Produit supprimé");return}
@@ -2923,6 +2978,7 @@ document.addEventListener("click",async e=>{
     case "aBell":aTab="orders";oFilter="new";renderAdmin();window.scrollTo({top:0});break;
     case "clearQ":aQ="";$("#aQ").value="";renderAdmin();break;
     case "logout":case "drvOut":logout();break;
+    case "drvRefresh":if(cloud)soonOrders();renderDriver();toast("تحدّثات الطلبات");break;
     case "installBtn":if(installEvt){installEvt.prompt();installEvt=null;renderShop()}break;
     case "copySubs":await loadSubs();try{await navigator.clipboard.writeText((subs||[]).join("\n"));toast(`${subs.length} emails copiés`)}catch(err){toast("Copie impossible ici")}renderAdmin();break;
     case "askNotif":try{const r=await Notification.requestPermission();toast(r==="granted"?"Notifications activées ✓":"Notifications refusées")}catch(err){toast("Notifications non disponibles")}break;
@@ -3018,7 +3074,7 @@ $("#setForm").addEventListener("submit",e=>{e.preventDefault();
   if(px.gaId&&!PIXRE.ga.test(px.gaId)){toast("ID Google invalide (format G-XXXXXXX)");$("#setGa").focus();return}
   settings={...settings,...px,fee:Math.max(0,+$("#setFee").value||0),freeFrom:Math.max(0,+$("#setFree").value||0),margin:Math.min(90,Math.max(0,+$("#setMargin").value||0)),ig:link("#setIg"),fb:link("#setFb"),tt:link("#setTt")};
   document.activeElement?.blur?.();saveCatalog("settings");renderAll();toast("Paramètres enregistrés")});
-const ADMIN_URL=/^\/admin\/?$/.test(location.pathname);
+const ADMIN_URL=/^\/admin\/?$/.test(location.pathname),LIV_URL=/^\/livreur\/?$/.test(location.pathname);
 const route=h=>{if(h==="prix"){aTab="products";pFilter="zero";h="admin"}return h};
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(/^t=/.test(h)&&(cloud||SBC===null))trackFromHash(h);else show(route(h))});
 $("#hTrk").addEventListener("submit",async e=>{e.preventDefault();const E=$("#hTrkErr");E.textContent="";
@@ -3033,7 +3089,7 @@ $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
   catch(err){console.warn(err);E.textContent=tr("eSave").split(".")[0]}finally{b.disabled=false}});
 
 loadLocal();
-show(ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
+show(LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
 initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
