@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Khedar48">
-<script>(function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":"";if(!m)return;document.querySelector("link[rel=manifest]").href="manifest-"+m+".webmanifest";document.querySelector("meta[name=apple-mobile-web-app-title]").content=m==="admin"?"K48 Admin":"K48 Livreur";document.querySelector("meta[name=theme-color]").content="#0b5a2b"})()</script>
+<script>(function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":p==="/callcenter"?"callcenter":"";if(!m)return;document.querySelector("link[rel=manifest]").href="manifest-"+m+".webmanifest";document.querySelector("meta[name=apple-mobile-web-app-title]").content=m==="admin"?"K48 Admin":m==="livreur"?"K48 Livreur":"K48 Call";document.querySelector("meta[name=theme-color]").content="#0b5a2b"})()</script>
 <meta property="og:title" content="خضار 48 · Khedar48">
 <meta property="og:description" content="الخضرة والفواكه الطرية حتى لباب دارك فوجدة">
 <meta property="og:image" content="img/hero.jpg">
@@ -185,6 +185,80 @@ body:not(.drv-on) .dv-nav{display:none}
   .dv-hero{padding:20px;min-height:120px}.dv-hero-art{width:110px;height:90px}.dv-hero-art .road,.dv-hero-art .pin{display:none}.dv-hero-art .moto{font-size:64px}
   .dv-k{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dv-k>div{padding:12px}.dv-k .ic{width:42px;height:42px}.dv-k .ic svg{width:22px;height:22px}.dv-k b{font-size:24px}.dv-k small{font-size:13px}
   .dv-2{grid-template-columns:minmax(0,1fr)}.dv-row{flex-wrap:wrap}.dv-row .b{flex-basis:100%;order:3}.dv-more{margin-inline-start:auto}}
+/* call center */
+body.cc-on .hd,body.cc-on footer.ft,body.cc-on nav.tabs,body.cc-on .wa-fab,body.cc-on .cbar{display:none}
+body.cc-on{padding-bottom:0;background:#f4f7f5}
+.ccx{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.cc-side{background:linear-gradient(180deg,#0e5c2c,#0a4a23);color:#fff;padding:18px 14px;display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;overflow:auto}
+.cc-brand{text-align:center}.cc-brand img{width:100%;max-width:200px;height:auto}.cc-brand small{display:block;color:#e3f3e7;font-weight:600;margin-top:4px;font-size:13px}
+.cc-nav{display:flex;flex-direction:column;gap:4px}
+.cc-nav button{display:flex;align-items:center;gap:12px;border:0;background:none;color:#fff;font:inherit;font-weight:700;font-size:15.5px;padding:12px 14px;border-radius:14px;cursor:pointer;text-align:start}
+.cc-nav button:hover{background:rgba(255,255,255,.08)}.cc-nav button[aria-current=page]{background:#22a447;box-shadow:0 10px 20px -12px rgba(0,0,0,.6)}
+.cc-nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cc-nav em{margin-inline-start:auto;background:#e5372b;color:#fff;font-style:normal;font-size:12px;font-weight:800;border-radius:99px;padding:2px 8px}
+.cc-me{margin-top:auto;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:12px;position:relative}
+.cc-me b{display:block}.cc-me small{color:#cfe6d5}.cc-dot{position:absolute;bottom:12px;right:44px;width:12px;height:12px;border-radius:50%;background:#7ed957;border:2px solid #0b4f26}
+.cc-av{width:44px;height:44px;border-radius:50%;background:#fff;color:#0e7a35;display:grid;place-items:center;font-weight:900;font-size:19px;flex:none}
+.cc-main{min-width:0;padding:14px 20px 120px}
+.cc-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.cc-burger{display:none;width:44px;height:44px;border-radius:12px;border:0;background:#fff;box-shadow:0 6px 16px -12px rgba(0,0,0,.5)}.cc-burger svg{width:22px;height:22px;stroke:#132018;stroke-width:2;fill:none}
+.cc-tt{display:flex;align-items:center;gap:10px}.cc-tt svg{width:34px;height:34px;fill:none;stroke:#1a9e44;stroke-width:1.8}.cc-tt b{display:block;font-size:19px}.cc-tt small{color:#2b8a46;font-weight:700}
+.cc-search{flex:1;max-width:520px;margin-inline:auto;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e5;border-radius:16px;padding:0 14px;box-shadow:0 8px 20px -18px rgba(0,0,0,.5)}
+.cc-search svg{width:20px;height:20px;fill:none;stroke:#4b5b51;stroke-width:2}.cc-search input{flex:1;border:0!important;outline:0;background:transparent;font:inherit;padding:12px 0;box-shadow:none!important}
+.cc-bell{position:relative;width:46px;height:46px;border-radius:50%;border:0;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 20px -16px rgba(0,0,0,.6)}.cc-bell svg{width:22px;height:22px;fill:none;stroke:#132018;stroke-width:1.8}
+.cc-bell i{position:absolute;top:9px;right:11px;width:10px;height:10px;border-radius:50%;background:#e5372b;border:2px solid #fff}.cc-bell i.on{background:#22b04b}
+.cc-user{display:flex;align-items:center;gap:10px}.cc-user .cc-av{background:linear-gradient(135deg,#25a645,#0e7a35);color:#fff}.cc-user b{display:block}.cc-user small{color:#5b6b61}
+.cc-hero{border-radius:24px;min-height:170px;background:linear-gradient(270deg,rgba(9,74,35,.96) 0%,rgba(14,110,52,.88) 45%,rgba(14,110,52,.25) 100%),url("img/hero.jpg") left center/cover;color:#fff;display:flex;align-items:center;padding:24px 30px;margin-bottom:16px}
+.cc-hero h1{margin:0;font-size:clamp(26px,3.6vw,44px)}.cc-hero h1 span{font-size:.8em}.cc-hero p{margin:8px 0 0;font-size:clamp(15px,1.8vw,21px);opacity:.95;border-top:3px solid #ff8519;display:inline-block;padding-top:8px}
+.cc-k{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.cc-k>div{border-radius:20px;padding:16px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 26px -22px rgba(0,0,0,.6);border:1px solid transparent}
+.cc-k .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.8);font-size:24px}
+.cc-k small{display:block;font-weight:800;color:#2b3a31;font-size:14.5px}.cc-k b{font-size:30px;line-height:1.1}.cc-k i{display:block;font-style:normal;font-size:12.5px;font-weight:800;color:#1a8a3c}.cc-k i.dn{color:#c0392b}
+.cc-k .a{background:#fdeeee;border-color:#f8d6d6}.cc-k .b{background:#eaf6ee;border-color:#d4ecdb}.cc-k .c{background:#fff7e8;border-color:#fde7bf}.cc-k .d{background:#fdf0f0;border-color:#f6d3d3}.cc-k .e{background:#eef7f0;border-color:#dcefe1}
+.cc-k.sm{grid-template-columns:repeat(4,minmax(0,1fr))}.cc-k.sm b{font-size:24px}
+.cc-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}.cc-3.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cc-card{background:#fff;border-radius:22px;padding:16px 18px;box-shadow:0 14px 30px -26px rgba(0,0,0,.6);border:1px solid #edf1ee;min-width:0;margin-bottom:14px}.cc-3 .cc-card{margin-bottom:0}
+.cc-ch{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.cc-ch h3{margin:0;font-size:17px}
+.cc-more{border:0;background:none;color:#16833a;font:inherit;font-weight:800;cursor:pointer}
+.cc-live{background:#eaf6ee;color:#1a8a3c;font-weight:800;font-size:13px;border-radius:99px;padding:4px 12px}
+.cc-pf{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;padding:8px 0}.cc-pf b{display:block}.cc-pf small{color:#5b6b61}
+.cc-bar{height:9px;border-radius:9px;background:#e6ece8;overflow:hidden;margin-top:4px}.cc-bar em{display:block;height:100%;background:linear-gradient(90deg,#1a9e44,#34b85a);border-radius:9px}
+.cc-pf .r{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;color:#2b3a31}
+.cc-dn{display:flex;align-items:center;gap:16px}.cc-dn svg{width:150px;height:150px;flex:none}.cc-dn ul{list-style:none;margin:0;padding:0;flex:1}.cc-dn li{display:flex;align-items:center;gap:8px;padding:6px 0;font-weight:700}.cc-dn li i{width:12px;height:12px;border-radius:50%}.cc-dn li b{margin-inline-start:auto}
+.cc-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cc-tools button{border:1px solid #e3ece6;background:#fff;border-radius:16px;padding:14px 6px;font:inherit;font-weight:800;font-size:13px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px}.cc-tools button:hover{background:#f3faf5}
+.cc-tools span{width:44px;height:44px;border-radius:50%;background:#eaf6ee;display:grid;place-items:center;font-size:20px}
+.cc-tbl{overflow:auto}.cc-tbl table{width:100%;border-collapse:collapse;font-size:14px}.cc-tbl th{text-align:start;color:#5b6b61;font-weight:700;padding:8px;border-bottom:1px solid #edf1ee;white-space:nowrap}.cc-tbl td{padding:9px 8px;border-bottom:1px solid #f1f4f2;white-space:nowrap}
+.cc-pill{display:inline-block;border-radius:99px;padding:4px 12px;font-weight:800;font-size:12.5px}.cc-pill.ok{background:#e3f5e8;color:#1a8a3c}.cc-pill.wait{background:#fff3db;color:#a86b00}.cc-pill.no{background:#fde8e8;color:#c0392b}.cc-pill.road{background:#fff0e3;color:#d2600f}.cc-pill.done{background:#e6f0ff;color:#2f6fd6}
+.cc-lc{display:flex;align-items:center;gap:10px;background:#f7faf8;border:1px solid #edf1ee;border-radius:16px;padding:10px 12px;margin-bottom:8px}.cc-lc .ph{width:40px;height:40px;border-radius:50%;background:#eaf6ee;display:grid;place-items:center}.cc-lc b{display:block;direction:ltr;text-align:right}.cc-lc small{color:#e8701a;font-weight:800}.cc-lc .k{margin-inline-start:auto;font-weight:700;color:#2b3a31}
+.cc-pg{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 14px}.cc-pg h2{margin:0}
+.cc-btn{border:0;border-radius:14px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(180deg,#25a645,#0e7a35)}.cc-btn.or{background:linear-gradient(180deg,#ff9a3c,#e8701a)}.cc-btn.gh{background:#eef1ef;color:#132018}.cc-btn.sm{padding:7px 11px;font-size:13px;border-radius:11px}.cc-btn.r{background:#fde8e8;color:#c0392b}.cc-btn.wa{background:#25d366}
+.cc-f{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.cc-f button{border:1px solid #e3e9e5;background:#fff;border-radius:99px;padding:8px 14px;font:inherit;font-weight:800;cursor:pointer}.cc-f button[aria-pressed=true]{background:#1a9e44;border-color:#1a9e44;color:#fff}
+.cc-o{background:#fff;border:1px solid #edf1ee;border-radius:18px;padding:12px 14px;margin-bottom:10px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:10px;align-items:center;box-shadow:0 10px 22px -22px rgba(0,0,0,.6)}
+.cc-o b{display:block}.cc-o small{color:#5b6b61}.cc-o .act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.cc-kb{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow:auto;padding-bottom:6px}
+.cc-col{background:#eef3f0;border-radius:18px;padding:10px;min-height:200px}.cc-col h4{margin:2px 4px 10px;display:flex;justify-content:space-between}
+.cc-ld{background:#fff;border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:0 8px 16px -14px rgba(0,0,0,.6)}.cc-ld b{display:block}.cc-ld small{color:#5b6b61;display:block}.cc-ld .act{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.cc-ld select{font:inherit;font-size:12.5px;border-radius:10px;padding:5px}
+.cc-team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.cc-form{display:flex;gap:8px;flex-wrap:wrap}.cc-form input,.cc-form select,.cc-form textarea{flex:1;min-width:150px;border:1px solid #dfe5e1;border-radius:12px;padding:11px 12px;font:inherit}
+.cc-set{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cc-wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:180px}.cc-wk div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-size:12px;color:#5b6b61}.cc-wk i{width:100%;max-width:40px;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#34b85a,#1a9e44);min-height:4px}.cc-wk b{color:#132018}
+.cc-hb{display:grid;grid-template-columns:120px 1fr 40px;gap:8px;align-items:center;padding:5px 0;font-weight:700;font-size:14px}.cc-hb i{height:10px;border-radius:9px;background:#e6ece8;overflow:hidden}.cc-hb em{display:block;height:100%;background:#1a9e44}
+.cc-call{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(720px,calc(100% - 24px));background:#0f2d1b;color:#fff;border-radius:22px;padding:14px;z-index:70;box-shadow:0 24px 50px -16px rgba(0,0,0,.6)}
+.cc-call-h{display:flex;align-items:center;gap:10px}.cc-call-h b{display:block;font-size:16px}.cc-call-h small{opacity:.8}.cc-timer{margin-inline-start:auto;font-size:26px;font-weight:900;color:#7ed957}
+.cc-pulse{width:14px;height:14px;border-radius:50%;background:#7ed957;box-shadow:0 0 0 0 rgba(126,217,87,.7);animation:lvp 1.6s infinite}
+.cc-call-r{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0 8px}.cc-call-r button{border:0;border-radius:12px;padding:11px 6px;font:inherit;font-weight:800;font-size:13.5px;cursor:pointer;background:rgba(255,255,255,.12);color:#fff}.cc-call-r .g{background:#22a447}.cc-call-r .r{background:#c0392b}
+.cc-call input{width:100%;border:0;border-radius:12px;padding:10px 12px;font:inherit}
+.cc-empty{text-align:center;color:#5b6b61;padding:24px 10px}
+.cc-line svg{width:100%;height:auto}
+.cc-scrim{display:none}
+@media (max-width:1200px){.cc-k{grid-template-columns:repeat(3,minmax(0,1fr))}.cc-3{grid-template-columns:minmax(0,1fr)}.cc-team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.ccx{grid-template-columns:minmax(0,1fr)}.cc-side{position:fixed;inset:0 0 0 auto;width:270px;z-index:80;transform:translateX(105%);transition:transform .3s}.ccx.open .cc-side{transform:none}
+  .ccx.open .cc-scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:79}.cc-burger{display:grid;place-items:center}.cc-main{padding:10px 12px 120px}
+  .cc-tt small,.cc-user div{display:none}.cc-search{order:5;flex-basis:100%;max-width:none}.cc-top{flex-wrap:wrap}
+  .cc-k{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cc-k>div{padding:12px}.cc-k .ic{width:42px;height:42px;font-size:19px}.cc-k b{font-size:24px}.cc-k.sm{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cc-hero{min-height:120px;padding:18px}.cc-tools{grid-template-columns:repeat(2,minmax(0,1fr))}.cc-team{grid-template-columns:minmax(0,1fr)}.cc-3.two{grid-template-columns:minmax(0,1fr)}
+  .cc-o{grid-template-columns:minmax(0,1fr)}.cc-o .act{justify-content:flex-start}.cc-dn svg{width:120px;height:120px}}
 /* team login */
 body.lg-on .hd,body.lg-on footer.ft,body.lg-on nav.tabs,body.lg-on .wa-fab,body.lg-on .cbar{display:none}
 body.lg-on{padding-bottom:0}
@@ -1593,6 +1667,75 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
   </div>
 </div>
 
+<div class="view" id="v-cc" hidden>
+  <div class="ccx" dir="rtl" lang="ar">
+    <aside class="cc-side" id="ccSide">
+      <div class="cc-brand"><img src="img/logo-dark.png" alt="Khedar48" width="600" height="166"><small>Fruits &amp; Légumes à Oujda</small></div>
+      <nav class="cc-nav" id="ccNav"></nav>
+      <div class="cc-me"><span class="cc-av">🎧</span><div><b>Call Center</b><small id="ccMeN">Khedar48</small></div><i class="cc-dot"></i></div>
+    </aside>
+    <div class="cc-scrim" id="ccScrim"></div>
+    <div class="cc-main">
+      <header class="cc-top">
+        <button class="cc-burger" id="ccBurger" aria-label="القائمة"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <div class="cc-tt"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM17 16v1a3 3 0 01-3 3h-2"/></svg><div><b>Call Center Team</b><small>إدارة فريق خدمة العملاء</small></div></div>
+        <label class="cc-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="ccQ" type="search" placeholder="البحث عن طلب، عميل، أو رقم هاتف..." autocomplete="off"></label>
+        <button class="cc-bell" data-push aria-label="الإشعارات"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg><i data-pushdot></i></button>
+        <div class="cc-user"><span class="cc-av" id="ccAv">A</span><div><b id="ccUserN">Admin</b><small id="ccUserR">مدير الفريق</small></div></div>
+      </header>
+      <div id="ccGate" class="dv-gate" hidden><img src="icons/icon-192.png" alt="" width="96" height="96"><h2>Call Center</h2><p>هاد الصفحة غير لفريق خدمة العملاء ديال خضار 48.</p><button class="lg-go" data-go="login">دخول الفريق</button></div>
+      <div id="ccBody">
+        <!-- dashboard -->
+        <section data-cp="dash">
+          <div class="cc-hero"><div class="cc-hero-tx"><h1>فريق خدمة العملاء <span>🎧</span></h1><p>معاً لتقديم أفضل تجربة لزبناء Khedar48</p></div></div>
+          <div class="cc-k" id="ccK"></div>
+          <div class="cc-3">
+            <div class="cc-card"><div class="cc-ch"><h3>📈 تطور الطلبات (7 أيام)</h3></div><div id="ccLine"></div></div>
+            <div class="cc-card"><div class="cc-ch"><h3>📦 حالة الطلبات اليوم</h3></div><div id="ccDonut"></div></div>
+            <div class="cc-card"><div class="cc-ch"><h3>👥 أداء الفريق اليوم</h3></div><div id="ccPerf"></div></div>
+          </div>
+          <div class="cc-3">
+            <div class="cc-card"><div class="cc-ch"><h3>⚡ أدوات سريعة</h3></div><div class="cc-tools">
+              <button data-cctool="call"><span>📞</span>مكالمة سريعة</button><button data-cctool="order"><span>📦</span>إنشاء طلب</button>
+              <button data-cctool="assign"><span>🛵</span>إسناد لموزع</button><button data-cctool="lead"><span>🎯</span>إضافة ليد جديد</button></div></div>
+            <div class="cc-card"><div class="cc-ch"><h3>🕒 آخر الطلبات</h3><button class="cc-more" data-cp-go="orders">عرض الكل ←</button></div><div id="ccLast"></div></div>
+            <div class="cc-card"><div class="cc-ch"><h3>👤 المكالمات الحالية</h3><span class="cc-live">● مباشر</span></div><div id="ccLiveCalls"></div></div>
+          </div>
+        </section>
+        <!-- orders -->
+        <section data-cp="orders" hidden>
+          <div class="cc-pg"><h2>الطلبات</h2><button class="cc-btn" data-cctool="order">➕ إنشاء طلب</button></div>
+          <div class="cc-f" id="ccOF"></div>
+          <div id="ccOrders"></div>
+        </section>
+        <!-- clients -->
+        <section data-cp="clients" hidden><div class="cc-pg"><h2>العملاء</h2></div><div class="cc-card"><div class="cc-tbl"><table><thead><tr><th>العميل</th><th>الهاتف</th><th>الحي</th><th>الطلبات</th><th>المجموع</th><th>آخر طلب</th><th></th></tr></thead><tbody id="ccCli"></tbody></table></div></div></section>
+        <!-- calls -->
+        <section data-cp="calls" hidden><div class="cc-pg"><h2>المكالمات</h2><button class="cc-btn" data-cctool="call">📞 مكالمة جديدة</button></div><div class="cc-k sm" id="ccCallK"></div><div class="cc-card"><div class="cc-tbl"><table><thead><tr><th>الوقت</th><th>الموظف</th><th>العميل</th><th>النوع</th><th>النتيجة</th><th>المدة</th><th>الطلب</th></tr></thead><tbody id="ccCalls"></tbody></table></div></div></section>
+        <!-- leads -->
+        <section data-cp="leads" hidden><div class="cc-pg"><h2>إدارة الليدز (CRM)</h2><button class="cc-btn" data-cctool="lead">🎯 إضافة ليد</button></div><div class="cc-kb" id="ccKb"></div></section>
+        <!-- team -->
+        <section data-cp="team" hidden><div class="cc-pg"><h2>فريق الكول سنتر</h2></div><div class="cc-team" id="ccTeam"></div>
+          <div class="cc-card" id="ccAddAg"><div class="cc-ch"><h3>➕ إضافة موظف (كول سنتر)</h3></div>
+            <form class="cc-form" id="ccAgForm"><input id="agN" placeholder="الاسم" required><input id="agP" type="tel" dir="ltr" placeholder="الهاتف"><input id="agE" type="email" dir="ltr" placeholder="Email" required><input id="agW" type="password" dir="ltr" placeholder="Mot de passe (6+)" required><button class="cc-btn" id="agBtn">إضافة</button></form>
+            <p class="hint">الموظف كيدخل من <b dir="ltr">khedar48.com/callcenter</b> بهاد الإيميل والمودباس.</p></div></section>
+        <!-- stats -->
+        <section data-cp="stats" hidden><div class="cc-pg"><h2>الإحصائيات (7 أيام)</h2></div><div class="cc-k sm" id="ccStK"></div><div class="cc-3 two"><div class="cc-card"><div class="cc-ch"><h3>📞 المكالمات فالنهار</h3></div><div id="ccStBars"></div></div><div class="cc-card"><div class="cc-ch"><h3>🎯 نتائج المكالمات</h3></div><div id="ccStRes"></div></div></div></section>
+        <!-- settings -->
+        <section data-cp="settings" hidden><div class="cc-pg"><h2>الإعدادات</h2></div><div class="cc-card cc-set">
+          <button class="cc-btn" data-install>📲 تثبيت التطبيق</button><button class="cc-btn or" data-push>🔔 تفعيل الإشعارات</button><span class="hint" data-pushst></span>
+          <button class="cc-btn gh" data-go="admin" id="ccToAdmin">👑 لوحة الأدمين</button><button class="cc-btn gh" id="ccOut">🚪 خروج</button></div></section>
+      </div>
+    </div>
+    <!-- live call bar -->
+    <div class="cc-call" id="ccCall" hidden>
+      <div class="cc-call-h"><span class="cc-pulse"></span><div><b id="ccCallN"></b><small id="ccCallP" dir="ltr"></small></div><span class="cc-timer num" id="ccTimer">00:00</span></div>
+      <div class="cc-call-r"><button data-ccres="confirmed" class="g">✅ مؤكد</button><button data-ccres="no_answer">📵 ما جاوبش</button><button data-ccres="callback">🔁 عاود الاتصال</button><button data-ccres="cancelled" class="r">❌ ملغي</button><button data-ccres="ordered" class="g">📦 طلب جديد</button><button data-ccres="info">ℹ️ معلومة</button></div>
+      <input id="ccCallNote" placeholder="ملاحظة (اختياري)" maxlength="300">
+    </div>
+  </div>
+</div>
+
 <!-- ============ TEAM LOGIN ============ -->
 <div class="view" id="v-login" hidden>
   <div class="lg-page" dir="ltr" lang="fr">
@@ -1744,7 +1887,7 @@ let SB=null,SBC=null,uid=null,cloud=false,staff=false,role=null,userEmail="",syn
 let view="shop",cat="all",query="",aTab="dash",oFilter="active",me=store.get("driver",""),pendingGo=null;
 const byId=id=>products.find(p=>p.id===id);
 const qtyLabel=(it,q)=>it.u==="kg"?(q===.5?"نص كيلو":`${fmt(q)} كغ`):it.u==="bunch"?`${q} حزمة`:it.u==="basket"?`${q} قفة`:`${q} حبة`;
-const isTeam=()=>role==="admin"||role==="driver";
+const isTeam=()=>role==="admin"||role==="driver"||role==="agent";
 const canUpload=()=>cloud&&role==="admin";
 
 /* ---------------- cloud (Supabase) ---------------- */
@@ -1757,7 +1900,7 @@ const ok=({error})=>{if(error)throw error};
 function setSync(s){sync=s;const n=$("#syncNote");n.className="note "+(s==="live"?"live":s==="error"||s==="slow"?"bad":"");
   n.querySelector("span").textContent={live:"Connecté à Supabase · commandes et prix partagés en direct",slow:"La base de données ne répond pas, les infos peuvent être anciennes",error:"Problème de connexion à Supabase (vérifiez la config et le script SQL)",local:"Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur"}[s]}
 function saveCatalog(name){
-  const body={products:{items:products},promos,drivers,settings,plans:{items:plans}}[name];
+  const body={products:{items:products},promos,drivers,settings,plans:{items:plans},agents}[name];
   if(!cloud){store.set("c:"+name,name==="products"?products:body);return Promise.resolve()}
   return SB.from("catalog").upsert({id:name,data:clean(body),updated_at:new Date().toISOString()}).then(ok).catch(e=>{console.warn(e);toast(failMsg())});
 }
@@ -1787,13 +1930,14 @@ async function onUser(u){
   if(!u){const {error}=await SB.auth.signInAnonymously();if(error){console.warn(error);setSync("error");toast("Activez « Anonymous sign-ins » dans Supabase")}return}
   uid=u.id;
   if(!u.is_anonymous){userEmail=u.email||"";
-    try{const {data,error}=await SB.from("staff").select("role").eq("user_id",u.id).maybeSingle();if(error)throw error;const r=data?.role;role=r==="admin"||r==="driver"?r:null}catch(e){console.warn(e)}
+    try{const {data,error}=await SB.from("staff").select("role").eq("user_id",u.id).maybeSingle();if(error)throw error;const r=data?.role;role=r==="admin"||r==="driver"||r==="agent"?r:null}catch(e){console.warn(e)}
     staff=role==="admin";if(role==="driver")me=u.id;
     if(!role)toast("Ce compte n'a pas d'accès équipe")}
   await subscribe();renderAll();if(!isTeam())track("visit");if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
   if(!pendingGo&&ADMIN_URL&&view==="login"&&role==="admin")pendingGo="admin";
   if(!pendingGo&&LIV_URL&&view==="login"&&(role==="driver"||role==="admin"))pendingGo="driver";
-  if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?"admin":role==="driver"?"driver":"login");
+  if(!pendingGo&&CC_URL&&view==="login"&&(role==="agent"||role==="admin"))pendingGo="cc";
+  if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?(CC_URL?"cc":"admin"):role==="driver"?"driver":role==="agent"?"cc":"login");
     if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut()}}
 }
 async function loadCatalog(){
@@ -1803,6 +1947,7 @@ async function loadCatalog(){
   if(Array.isArray(m.products?.items)&&m.products.items.length)products=withCut(m.products.items.map(x=>({...x})));else if(role==="admin")saveCatalog("products");
   if(m.promos)promos={codes:{...(m.promos.codes||{})},banners:[...(m.promos.banners||[])]};else if(role==="admin")saveCatalog("promos");
   if(m.drivers)drivers={list:{...(m.drivers.list||{})}};else if(role==="admin")saveCatalog("drivers");
+  if(m.agents)agents={list:{...(m.agents.list||{})}};
   if(Array.isArray(m.plans?.items))plans=m.plans.items.map(x=>({...x}));else if(role==="admin")saveCatalog("plans");
   // first admin visit after the ready-to-cook range was added: store it in the shared catalog once
   if(role==="admin"&&(+settings.seedV||0)<2&&m.products){settings={...settings,seedV:2};saveCatalog("products");saveCatalog("settings")}
@@ -1861,6 +2006,7 @@ function loadLocal(){
   const p=store.get("c:products",null);if(Array.isArray(p)&&p.length)products=p;
   const pr=store.get("c:promos",null);if(pr?.codes)promos=pr;
   const dv=store.get("c:drivers",null);if(dv?.list)drivers=dv;
+  const ag=store.get("c:agents",null);if(ag?.list)agents=ag;
   const st=store.get("c:settings",null);if(st)settings={...DEF_SET,...st};
   const pl=store.get("c:plans",null);if(Array.isArray(pl?.items))plans=pl.items;
   products=withCut(products);
@@ -2486,7 +2632,7 @@ const ICON={
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
-const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["settings","Paramètres","gear"]];
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["settings","Paramètres","gear"]];
 let aPer="1",chartPer="7",aQ="";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -3012,19 +3158,188 @@ function renderDriver(){
   if(sheetOpen()&&mode.startsWith("drv:"))openDrvOrder(mode.slice(4));
 }
 
+/* ---------------- call center (agents + admin) ----------------
+   Confirms new orders by phone, logs every call, creates orders for phone customers and follows leads (CRM).
+   Data: orders (existing), calls + leads tables (Supabase), agent names in catalog row "agents". */
+const isCC=()=>role==="admin"||role==="agent";
+let agents={list:{}},ccPage="dash",ccOF="wait",ccCalls=null,ccLeads=null,ccErr="",ccCur=null,ccTick=0,ccPoll=0,ccLines=[],ccPre={};
+const CC_NAV=[["dash","لوحة التحكم","M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"],["team","فريق الكول سنتر","M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2z"],
+  ["orders","الطلبات","M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"],["clients","العملاء","M16 19v-1a4 4 0 00-4-4H6a4 4 0 00-4 4v1M9 10a4 4 0 100-8 4 4 0 000 8zM22 19v-1a4 4 0 00-3-3.9M16 2.1a4 4 0 010 7.8"],
+  ["calls","المكالمات","M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"],
+  ["leads","إدارة الليدز (CRM)","M12 22a10 10 0 100-20 10 10 0 000 20zM12 16a4 4 0 100-8 4 4 0 000 8zM12 12h.01"],["stats","الإحصائيات","M5 20v-6M10 20V10M15 20V6M20 20v-9"],
+  ["settings","الإعدادات","M12 15a3 3 0 100-6 3 3 0 000 6zM19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"]];
+const CC_KIND={confirm:"تأكيد طلب",new:"عميل جديد",follow:"متابعة طلب",complaint:"شكاية",lead:"ليد"};
+const CC_RES={confirmed:["مؤكد","ok"],ordered:["طلب جديد","ok"],no_answer:["ما جاوبش","wait"],callback:["عاود الاتصال","wait"],cancelled:["ملغي","no"],info:["معلومة","done"]};
+const CC_LS={new:"جديد",contacted:"تواصلنا",interested:"مهتم",won:"ولى زبون",lost:"ضاع"};
+const CC_SRC=["Facebook","Instagram","TikTok","WhatsApp","الموقع","معرفة","آخر"];
+const ccName=id=>id===uid&&role==="admin"?"Admin":agents.list?.[id]?.n||(id?"Admin":"—");
+const ccPill=st=>st==="new"?`<span class="cc-pill wait">قيد التأكيد</span>`:st==="cancel"?`<span class="cc-pill no">ملغاة</span>`:st==="road"?`<span class="cc-pill road">فالطريق</span>`:st==="done"?`<span class="cc-pill done">توصّلات</span>`:`<span class="cc-pill ok">مؤكدة</span>`;
+const ccDur=s=>`${String(Math.floor((+s||0)/60)).padStart(2,"0")}:${String((+s||0)%60).padStart(2,"0")}`;
+const ccQ=()=>($("#ccQ")?.value||"").trim().toLowerCase();
+const ccHit=(...v)=>{const q=ccQ();return !q||v.some(x=>String(x??"").toLowerCase().includes(q))};
+const ccDelta=(c,p)=>p?`<i class="${c<p?"dn":""}">${c>=p?"↑ +":"↓ "}${Math.round((c-p)/p*100)}%</i>`:"";
+async function ccLoad(){
+  if(!cloud){ccCalls=store.get("cc:calls",[]);ccLeads=store.get("cc:leads",[]);ccErr="";return}
+  const since=new Date(per(8)[0]).toISOString();
+  const [c,l]=await Promise.all([SB.from("calls").select("*").gte("at",since).order("at",{ascending:false}).limit(4000),SB.from("leads").select("*").order("at",{ascending:false}).limit(2000)]);
+  ccErr=c.error||l.error?"خاص SQL ديال الكول سنتر يتدار فـ Supabase باش يخدمو المكالمات والليدز.":"";
+  ccCalls=(c.data||[]).map(r=>({...r,at:new Date(r.at).getTime()}));ccLeads=(l.data||[]).map(r=>({...r,at:new Date(r.at).getTime(),next_at:r.next_at?new Date(r.next_at).getTime():0}));
+}
+async function ccAddCall(x){const row={phone:x.phone,name:(x.name||"").slice(0,80),kind:x.kind||"new",result:x.result,oid:x.oid||null,lead:x.lead||null,dur:Math.min(36000,Math.max(0,x.dur|0)),note:(x.note||"").slice(0,300)};
+  if(!cloud){const L=store.get("cc:calls",[]);L.unshift({...row,id:Date.now(),at:Date.now(),agent:uid||"local"});store.set("cc:calls",L);ccCalls=L;return true}
+  const {data,error}=await SB.from("calls").insert(row).select().single();if(error){console.warn(error);toast("ما تسجلاتش المكالمة");return false}
+  ccCalls=[{...data,at:new Date(data.at).getTime()},...(ccCalls||[])];return true}
+async function ccLeadSave(ld,patch){
+  if(!cloud){const L=store.get("cc:leads",[]);if(ld){Object.assign(L.find(x=>x.id===ld.id)||{},patch)}else L.unshift({id:Date.now(),at:Date.now(),status:"new",...patch});store.set("cc:leads",L);ccLeads=L;return true}
+  const q=ld?SB.from("leads").update({...patch,updated_at:new Date().toISOString()}).eq("id",ld.id):SB.from("leads").insert({...patch,agent:uid});
+  const {error}=await q;if(error){console.warn(error);toast("ما تسجلش");return false}await ccLoad();return true}
+/* live calls: presence on channel k48-cc (each member tracks itself, which is also what lets it receive the list) */
+let ccCh=null,ccLive={};
+function ccJoin(){if(ccCh||!cloud||!SB||!isCC())return;ccCh=SB.channel("k48-cc",{config:{presence:{key:uid||rid()}}});
+  ccCh.on("presence",{event:"sync"},()=>{ccLive=ccCh.presenceState();if(view==="cc")ccRenderLive()}).subscribe(st=>{if(st==="SUBSCRIBED")ccTrack()})}
+function ccTrack(){if(!ccCh)return;Promise.resolve(ccCh.track({n:ccName(uid),calling:!!ccCur,phone:ccCur?.phone||"",name:ccCur?.name||"",kind:ccCur?.kind||"",t0:ccCur?.t0||0})).catch(()=>{})}
+function ccRenderLive(){const B=$("#ccLiveCalls");if(!B)return;
+  let V=Object.values(ccLive).map(a=>a[a.length-1]).filter(v=>v&&v.calling);
+  if(!cloud&&ccCur)V=[{n:ccName(uid),phone:ccCur.phone,name:ccCur.name,kind:ccCur.kind,t0:ccCur.t0}];
+  B.innerHTML=V.length?V.map(v=>`<div class="cc-lc"><span class="ph">📞</span><div><b class="num">${esc(v.phone)}</b><small class="num">${ccDur(Math.round((Date.now()-v.t0)/1000))}</small></div><span class="k">${esc(CC_KIND[v.kind]||"")} · ${esc(v.n||"")}</span></div>`).join("")
+    :`<div class="cc-empty">ما كاين حتى مكالمة دابا.<br><small>${(ccCalls||[]).length?`آخر مكالمة: ${esc((ccCalls[0].name||ccCalls[0].phone))} · ${esc(CC_RES[ccCalls[0].result]?.[0]||"")}`:""}</small></div>`}
+/* call flow */
+function ccStartCall(x){if(ccCur){toast("سالي المكالمة الحالية اللول");return}
+  ccCur={...x,phone:String(x.phone||"").replace(/[^\d+]/g,""),t0:Date.now()};if(!ccCur.phone){toast("رقم الهاتف ناقص");ccCur=null;return}
+  const a=document.createElement("a");a.href=`tel:${ccCur.phone}`;a.click();
+  $("#ccCallN").textContent=`${ccCur.name||"عميل"} · ${CC_KIND[ccCur.kind]||""}${ccCur.oid?` · #${ccCur.oid}`:""}`;$("#ccCallP").textContent=ccCur.phone;$("#ccCallNote").value="";$("#ccCall").hidden=false;
+  clearInterval(ccTick);ccTick=setInterval(()=>{$("#ccTimer").textContent=ccDur(Math.round((Date.now()-ccCur.t0)/1000));},1000);ccTrack();ccRenderLive()}
+async function ccEndCall(result){const c=ccCur;if(!c)return;clearInterval(ccTick);
+  const ok1=await ccAddCall({...c,result,dur:Math.round((Date.now()-c.t0)/1000),note:$("#ccCallNote").value.trim()});if(!ok1)return;
+  ccCur=null;$("#ccCall").hidden=true;ccTrack();
+  const o=c.oid?staffOrders().find(x=>x.id===c.oid):null;
+  if(o&&result==="confirmed"&&o.status==="new")await patchOrder(o,{status:"prep"});
+  if(o&&result==="cancelled"&&!["done","cancel"].includes(o.status))await patchOrder(o,{status:"cancel"});
+  if(c.lead){const ld=(ccLeads||[]).find(x=>x.id===c.lead);if(ld)await ccLeadSave(ld,{status:result==="ordered"?"won":result==="cancelled"?"lost":ld.status==="new"?"contacted":ld.status})}
+  toast(`تسجلات المكالمة: ${CC_RES[result]?.[0]||""}`);ccRender();
+  if(result==="ordered")ccOrderForm({name:c.name,phone:c.phone})}
+/* sheets: quick call, new lead, new order */
+function ccSheet(title,body,foot,m){mode=m;$("#shTitle").textContent=title;$("#shBody").innerHTML=`<div dir="rtl" class="cc-sh">${body}</div>`;$("#shFoot").innerHTML=foot;$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function ccCallForm(pre={}){ccSheet("📞 مكالمة سريعة",`<form class="form" onsubmit="return false"><div class="fld"><label>رقم الهاتف</label><input id="cqP" type="tel" dir="ltr" value="${esc(pre.phone||"")}" placeholder="06 12 34 56 78"></div>
+  <div class="fld"><label>الاسم</label><input id="cqN" value="${esc(pre.name||"")}"></div><div class="fld"><label>نوع المكالمة</label><select id="cqK">${Object.entries(CC_KIND).filter(([k])=>k!=="lead").map(([k,v])=>`<option value="${k}" ${pre.kind===k?"selected":""}>${v}</option>`).join("")}</select></div></form>`,
+  `<button class="btn b-gr block" id="ccCallGo">📞 اتصل دابا</button>`,"cc:call")}
+function ccLeadForm(){ccSheet("🎯 ليد جديد",`<form class="form" onsubmit="return false"><div class="fld"><label>الاسم</label><input id="lfN"></div><div class="fld"><label>رقم الهاتف</label><input id="lfP" type="tel" dir="ltr" placeholder="06 12 34 56 78"></div>
+  <div class="fld"><label>المصدر</label><select id="lfS">${CC_SRC.map(s=>`<option>${s}</option>`).join("")}</select></div><div class="fld"><label>ملاحظة</label><textarea id="lfT" rows="2" maxlength="300" placeholder="شنو بغا؟ إمتى نعيطو ليه؟"></textarea></div>
+  <div class="fld"><label>موعد الاتصال (اختياري)</label><input id="lfD" type="datetime-local"></div><p class="err" id="lfE"></p></form>`,`<button class="btn b-gr block" id="ccLeadGo">إضافة الليد</button>`,"cc:lead")}
+function ccOrderForm(pre={}){ccLines=[];ccPre=pre;const P=products.filter(p=>p.on!==false&&+p.p>0);
+  const opts=CATS.filter(c=>c.id!=="deals").map(c=>{const L=P.filter(p=>p.c===c.id);return L.length?`<optgroup label="${esc(c.n)}">${L.map(p=>`<option value="${esc(p.id)}">${esc(p.n)} · ${fmt(p.p)} د</option>`).join("")}</optgroup>`:""}).join("");
+  ccSheet("📦 إنشاء طلب جديد",`<form class="form" onsubmit="return false"><div class="fld"><label>اسم العميل</label><input id="ofN" value="${esc(pre.name||"")}"></div><div class="fld"><label>الهاتف</label><input id="ofP" type="tel" dir="ltr" value="${esc(pre.phone||"")}"></div>
+   <div class="fld"><label>الحي</label><select id="ofH">${HOODS.map(h=>`<option ${pre.hood===h?"selected":""}>${esc(h)}</option>`).join("")}</select></div><div class="fld"><label>العنوان</label><input id="ofA" value="${esc(pre.addr||"")}"></div>
+   <div class="fld"><label>الوقت</label><select id="ofS">${SLOTS.map((s,i)=>`<option value="${i}">${esc(s)}</option>`).join("")}</select></div>
+   <div class="fld"><label>المنتوجات</label><div style="display:flex;gap:6px"><select id="ofI" style="flex:1">${opts}</select><input id="ofQ" type="number" min="0.5" step="0.5" value="1" style="width:80px" class="num"><button type="button" class="btn b-or sm" id="ofAdd">زيد</button></div></div>
+   <div id="ofL"></div><div class="fld"><label>ملاحظة</label><input id="ofT" value="${esc(pre.note||"")}"></div><p class="err" id="ofE"></p></form>`,`<button class="btn b-gr block" id="ccOrderGo">✅ تأكيد الطلب</button>`,"cc:order");ccRenderLines()}
+function ccTotals(){const L=ccLines.map(([id,q])=>{const it=byId(id);return{it,q,sum:(+it?.p||0)*q}}).filter(x=>x.it),sub=L.reduce((a,x)=>a+x.sum,0),fee=!sub||sub>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{L,sub,fee,total:sub+fee}}
+function ccRenderLines(){const T=ccTotals();$("#ofL").innerHTML=T.L.length?`<div class="cc-card" style="padding:10px;margin:0 0 10px">${T.L.map(({it,q,sum},k)=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:4px 0"><span>${esc(it.n)} · ${qtyLabel(it,q)}</span><span class="num">${fmt(sum)} د <button type="button" class="lnk" data-ofdel="${k}" style="color:#c0392b">✕</button></span></div>`).join("")}
+  <div style="display:flex;justify-content:space-between;border-top:1px solid #eee;margin-top:6px;padding-top:6px"><span>التوصيل</span><b class="num">${T.fee?fmt(T.fee)+" د":"فابور"}</b></div><div style="display:flex;justify-content:space-between;font-size:18px"><b>المجموع</b><b class="num">${fmt(T.total)} درهم</b></div></div>`:`<p class="hint">زيد المنتوجات اللي بغا العميل.</p>`}
+async function ccSubmitOrder(){const E=$("#ofE");E.textContent="";const name=$("#ofN").value.trim(),phone=$("#ofP").value.replace(/[\s.-]+/g,""),hood=$("#ofH").value,addr=$("#ofA").value.trim(),note=$("#ofT").value.trim(),slot=SLOTS[+$("#ofS").value]||SLOTS[0];
+  if(!name){E.textContent="الاسم ناقص";return}if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent="رقم الهاتف ماشي صحيح";return}if(!addr){E.textContent="العنوان ناقص";return}
+  const T=ccTotals();if(!T.L.length){E.textContent="زيد على الأقل منتوج واحد";return}
+  const id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken(),b=$("#ccOrderGo");b.disabled=true;
+  const o={at:Date.now(),name,phone,hood,addr,slot,note,lang:"ar",tk,items:T.L.map(({it,q})=>[it.id,q,it.n,+it.p]),sub:T.sub,disc:0,code:"",fee:T.fee,total:T.total,status:"new",driver:"",by:ccName(uid)};
+  try{if(cloud){ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));ok(await SB.from("orders").update({status:"prep"}).eq("id",id));soonOrders()}
+    else{myOrders.unshift({...o,status:"prep",id,owner:"local"});store.set("orders",myOrders)}
+    if(ccPre.lead){const ld=(ccLeads||[]).find(x=>x.id===ccPre.lead);if(ld)await ccLeadSave(ld,{status:"won"})}
+    rememberTrack(id,tk);closeSheet();toast(`الطلب ${id} تسجل ومؤكد ✓`);ccRender();
+    if(confirm("بغيتي تصيفط للعميل رسالة التأكيد فالواتساب؟"))window.open(notifyUrl({...o,id,status:"new"},"new"),"_blank","noopener")}
+  catch(e){console.warn(e);E.textContent="ما تسجلش الطلب، عاود جرب";b.disabled=false}}
+/* render */
+function ccRender(){
+  document.body.classList.toggle("cc-on",view==="cc");
+  const ok2=isCC();$("#ccGate").hidden=ok2;$("#ccBody").hidden=!ok2;if(!ok2)return;
+  if(ccCalls===null){ccCalls=[];ccLeads=[];ccLoad().then(ccRender);}
+  ccJoin();clearInterval(ccPoll);ccPoll=setInterval(()=>{if(view==="cc"&&!document.hidden)ccLoad().then(ccRender)},30000);
+  const O=staffOrders(),T=per(1),Y=per(1,1),newN=O.filter(o=>o.status==="new").length;
+  $("#ccNav").innerHTML=CC_NAV.map(([k,l,d])=>`<button data-cpage="${k}" ${ccPage===k?'aria-current="page"':""}><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span>${l}</span>${k==="orders"&&newN?`<em class="num">${newN}</em>`:""}</button>`).join("");
+  $$("[data-cp]").forEach(x=>x.hidden=x.dataset.cp!==ccPage);
+  const me2=role==="admin"?"Admin":ccName(uid);$("#ccUserN").textContent=me2;$("#ccUserR").textContent=role==="admin"?"مدير الفريق":"خدمة العملاء";$("#ccAv").textContent=initial(me2);$("#ccMeN").textContent=me2;
+  $("#ccToAdmin").hidden=role!=="admin";$("#ccOut").hidden=!cloud;$("#ccAddAg").hidden=role!=="admin";
+  const C=ccCalls||[],CT=C.filter(c=>inR(c,T)),CY=C.filter(c=>inR(c,Y)),conf=st=>["prep","road","done"].includes(st);
+  const OT=O.filter(o=>inR(o,T)),OY=O.filter(o=>inR(o,Y));
+  if(ccPage==="dash"){
+    const K=(c,ic,l,v,d)=>`<div class="${c}"><span class="ic">${ic}</span><div><small>${l}</small><b class="num">${v}</b>${d||""}</div></div>`;
+    const ldNew=(ccLeads||[]).filter(l=>l.status==="new");
+    $("#ccK").innerHTML=K("a","📞","مكالمات اليوم",CT.length,ccDelta(CT.length,CY.length))+K("b","🛒","طلبات مؤكدة",OT.filter(o=>conf(o.status)).length,ccDelta(OT.filter(o=>conf(o.status)).length,OY.filter(o=>conf(o.status)).length))
+      +K("c","⏳","قيد التأكيد",newN)+K("d","❌","ملغاة",OT.filter(o=>o.status==="cancel").length)+K("e","🎯","ليدز جديدة",ldNew.length);
+    const days=[...Array(7)].map((_,i)=>{const r=per(1,6-i);return{d:new Date(r[0]),n:O.filter(o=>inR(o,r)).length}}),mx=Math.max(4,...days.map(d=>d.n));
+    const W=600,H=220,x=i=>40+i*(W-60)/6,y=v=>12+(H-44)*(1-v/mx),pts=days.map((d,i)=>`${x(i).toFixed(1)},${y(d.n).toFixed(1)}`).join(" ");
+    $("#ccLine").innerHTML=`<svg class="cc-line" viewBox="0 0 ${W} ${H}" role="img" aria-label="الطلبات فـ 7 أيام">${[0,.5,1].map(k=>`<line x1="40" x2="${W-20}" y1="${y(mx*k)}" y2="${y(mx*k)}" stroke="#eef1ef"/><text x="30" y="${y(mx*k)+4}" text-anchor="end" font-size="12" fill="#8a978f">${Math.round(mx*k)}</text>`).join("")}
+      <polygon points="${x(0)},${y(0)} ${pts} ${x(6)},${y(0)}" fill="#22b04b" opacity=".15"/><polyline points="${pts}" fill="none" stroke="#1a9e44" stroke-width="3.5" stroke-linejoin="round"/>
+      ${days.map((d,i)=>`<circle cx="${x(i)}" cy="${y(d.n)}" r="5" fill="#1a9e44"><title>${d.n}</title></circle><text x="${x(i)}" y="${H-6}" text-anchor="middle" font-size="12" fill="#5b6b61">${d.d.toLocaleDateString("ar-MA",{weekday:"short"})}</text>`).join("")}</svg>`;
+    const a1=OT.filter(o=>conf(o.status)).length,a2=OT.filter(o=>o.status==="new").length,a3=OT.filter(o=>o.status==="cancel").length,tot=a1+a2+a3,r=56,Cc=2*Math.PI*r;let off=0;
+    const seg=(v,c)=>{if(!v||!tot)return "";const len=v/tot*Cc,s=`<circle r="${r}" cx="75" cy="75" fill="none" stroke="${c}" stroke-width="18" stroke-dasharray="${len} ${Cc}" stroke-dashoffset="${-off}" transform="rotate(-90 75 75)"/>`;off+=len;return s};
+    $("#ccDonut").innerHTML=`<div class="cc-dn"><svg viewBox="0 0 150 150"><circle r="${r}" cx="75" cy="75" fill="none" stroke="#eef1ef" stroke-width="18"/>${seg(a1,"#1a9e44")}${seg(a2,"#f5b400")}${seg(a3,"#e5372b")}<text x="75" y="78" text-anchor="middle" font-size="30" font-weight="900" fill="#132018">${tot}</text><text x="75" y="100" text-anchor="middle" font-size="13" fill="#1a9e44">طلب</text></svg>
+      <ul>${[["مؤكدة",a1,"#1a9e44"],["قيد التأكيد",a2,"#f5b400"],["ملغاة",a3,"#e5372b"]].map(([l,v,c])=>`<li><i style="background:${c}"></i>${l}<b class="num">${v} <small class="hint">(${tot?Math.round(v/tot*100):0}%)</small></b></li>`).join("")}</ul></div>`;
+    const ids=[...new Set([...Object.keys(agents.list||{}),...CT.map(c=>c.agent)])].filter(Boolean);
+    const pf=ids.map(id=>{const m=CT.filter(c=>c.agent===id),ok3=m.filter(c=>c.result==="confirmed"||c.result==="ordered").length;return{id,n:m.length,ok:ok3,rate:m.length?Math.round(ok3/m.length*100):0}}).sort((a,b)=>b.ok-a.ok||b.n-a.n).slice(0,5);
+    $("#ccPerf").innerHTML=pf.length?pf.map((p,i)=>`<div class="cc-pf"><span class="cc-av" style="background:#eaf6ee">${esc(initial(ccName(p.id)))}</span><div><b>${esc(ccName(p.id))}${i===0&&p.ok?" 👑":""}</b><div class="r"><span>${p.ok} طلب مؤكد · ${p.n} مكالمة</span><span class="num">${p.rate}%</span></div><div class="cc-bar"><em style="width:${p.rate}%"></em></div></div></div>`).join(""):`<div class="cc-empty">مازال ما كاين حتى مكالمة اليوم.</div>`;
+    $("#ccLast").innerHTML=O.length?`<div class="cc-tbl"><table><thead><tr><th>#</th><th>العميل</th><th>المبلغ</th><th>الحالة</th></tr></thead><tbody>${O.slice(0,5).map(o=>`<tr><td class="num">${esc(o.id)}</td><td>${esc(o.name)}</td><td class="num">${fmt(o.total)} MAD</td><td>${ccPill(o.status)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="cc-empty">ما كاين حتى طلب.</div>`;
+    ccRenderLive();
+  }
+  if(ccPage==="orders"){
+    const F={wait:["قيد التأكيد",o=>o.status==="new"],ok:["مؤكدة",o=>conf(o.status)],nodrv:["بلا موزع",o=>o.status==="prep"&&!o.driver],cancel:["ملغاة",o=>o.status==="cancel"],all:["الكل",()=>true]};
+    const B=O.filter(o=>ccHit(o.id,o.name,o.phone,o.hood,o.addr));
+    $("#ccOF").innerHTML=Object.entries(F).map(([k,[l,f]])=>`<button data-ccof="${k}" aria-pressed="${ccOF===k}">${l} <span class="num">${B.filter(f).length}</span></button>`).join("");
+    const L=B.filter(F[ccOF][1]).slice(0,200),dOpts=sel=>`<option value="">— الموزع —</option>`+Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${sel===k?"selected":""}>${esc(d.n)}</option>`).join("");
+    $("#ccOrders").innerHTML=L.length?L.map(o=>{const tries=C.filter(c=>c.oid===o.id).length;return `<div class="cc-o"><div><b class="num">#${esc(o.id)} ${ccPill(o.status)}</b><small>${esc(o.name)} · <span class="num" dir="ltr">${esc(o.phone)}</span> · ${esc(o.hood||"")}</small><small>${(o.items||[]).length} منتوجات · <b class="num" style="display:inline">${fmt(o.total)} MAD</b> · ${hhmm(o.at)}${o.by?` · 🎧 ${esc(o.by)}`:""}${tries?` · 📞 ${tries}`:""}</small></div>
+      <div>${["prep","road"].includes(o.status)?`<select data-ccdrv="${esc(o.id)}" aria-label="الموزع">${dOpts(o.driver)}</select>`:""}</div>
+      <div class="act"><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(notifyUrl(o,o.status==="new"?"new":o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
+  }
+  if(ccPage==="clients"){const m={};O.forEach(o=>{const k=digits(o.phone).slice(-9)||o.name;const c=m[k]=m[k]||{name:o.name,phone:o.phone,hood:o.hood,addr:o.addr,n:0,sum:0,last:0};c.n++;if(o.status!=="cancel")c.sum+=+o.total||0;if((o.at||0)>c.last){c.last=o.at;c.name=o.name;c.hood=o.hood;c.addr=o.addr}});
+    const L=Object.values(m).filter(c=>ccHit(c.name,c.phone,c.hood)).sort((a,b)=>b.last-a.last);
+    $("#ccCli").innerHTML=L.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td class="num" dir="ltr">${esc(c.phone)}</td><td>${esc(c.hood||"")}</td><td class="num">${c.n}</td><td class="num">${fmt(c.sum)} MAD</td><td class="num">${hhmm(c.last)}</td>
+      <td><button class="cc-btn sm" data-cccli="${esc(c.phone)}" data-n="${esc(c.name)}">📞</button> <button class="cc-btn sm or" data-ccneword="${esc(c.phone)}" data-n="${esc(c.name)}" data-h="${esc(c.hood||"")}" data-a="${esc(c.addr||"")}">📦</button> <a class="cc-btn sm wa" href="https://wa.me/${waNum(c.phone)}" target="_blank" rel="noopener">💬</a></td></tr>`).join("")||`<tr><td colspan="7" class="cc-empty">ما كاين حتى عميل.</td></tr>`}
+  if(ccPage==="calls"){const L=C.filter(c=>ccHit(c.phone,c.name,c.oid,ccName(c.agent)));const ok4=CT.filter(c=>c.result==="confirmed"||c.result==="ordered").length;
+    $("#ccCallK").innerHTML=`<div class="a"><div><small>مكالمات اليوم</small><b class="num">${CT.length}</b></div></div><div class="b"><div><small>مؤكدة</small><b class="num">${ok4}</b></div></div><div class="c"><div><small>ما جاوبوش</small><b class="num">${CT.filter(c=>c.result==="no_answer").length}</b></div></div><div class="e"><div><small>معدل المدة</small><b class="num">${ccDur(CT.length?Math.round(CT.reduce((a,c)=>a+(+c.dur||0),0)/CT.length):0)}</b></div></div>`;
+    $("#ccCalls").innerHTML=L.slice(0,300).map(c=>`<tr><td class="num">${hhmm(c.at)}</td><td>${esc(ccName(c.agent))}</td><td>${esc(c.name||"")} <small class="num hint" dir="ltr">${esc(c.phone)}</small></td><td>${esc(CC_KIND[c.kind]||c.kind)}</td><td><span class="cc-pill ${CC_RES[c.result]?.[1]||""}">${esc(CC_RES[c.result]?.[0]||c.result)}</span></td><td class="num">${ccDur(c.dur)}</td><td class="num">${c.oid?esc(c.oid):"—"}</td></tr>`).join("")||`<tr><td colspan="7" class="cc-empty">${ccErr||"ما كاين حتى مكالمة."}</td></tr>`}
+  if(ccPage==="leads"){const L=(ccLeads||[]).filter(l=>ccHit(l.name,l.phone,l.src,l.note));
+    $("#ccKb").innerHTML=ccErr&&!L.length?`<div class="cc-empty">${ccErr}</div>`:Object.entries(CC_LS).map(([k,v])=>{const M=L.filter(l=>l.status===k);return `<div class="cc-col"><h4><span>${v}</span><span class="num">${M.length}</span></h4>${M.map(l=>`<div class="cc-ld"><b>${esc(l.name)}</b><small class="num" dir="ltr">${esc(l.phone)}</small><small>${esc(l.src||"")}${l.next_at?` · ⏰ ${hhmm(l.next_at)}`:""}</small>${l.note?`<small>📝 ${esc(l.note)}</small>`:""}
+      <div class="act"><button class="cc-btn sm" data-cclead="${l.id}">📞</button><button class="cc-btn sm or" data-ccleadord="${l.id}">📦</button><a class="cc-btn sm wa" href="https://wa.me/${waNum(l.phone)}" target="_blank" rel="noopener">💬</a>
+      <select data-ccls="${l.id}" aria-label="الحالة">${Object.entries(CC_LS).map(([s,t])=>`<option value="${s}" ${s===l.status?"selected":""}>${t}</option>`).join("")}</select></div></div>`).join("")||`<p class="hint" style="margin:4px">—</p>`}</div>`}).join("")}
+  if(ccPage==="team"){const ids=[...new Set([...Object.keys(agents.list||{}),...C.map(c=>c.agent)])].filter(Boolean);
+    $("#ccTeam").innerHTML=ids.length?ids.map(id=>{const m=CT.filter(c=>c.agent===id),w=C.filter(c=>c.agent===id&&c.at>=per(7)[0]),ok5=m.filter(c=>c.result==="confirmed"||c.result==="ordered").length,rate=m.length?Math.round(ok5/m.length*100):0,live=Object.values(ccLive).some(a=>a.some(v=>v&&v.n===ccName(id)));
+      return `<div class="cc-card" style="margin:0"><div class="cc-pf"><span class="cc-av" style="background:#eaf6ee">${esc(initial(ccName(id)))}</span><div><b>${esc(ccName(id))} ${live?'<span class="cc-live">● متصل</span>':""}</b><small class="num" dir="ltr">${esc(agents.list?.[id]?.phone||"")}</small></div></div>
+        <div class="cc-pf" style="grid-template-columns:1fr"><div class="r"><span>اليوم: ${m.length} مكالمة · ${ok5} مؤكد</span><span class="num">${rate}%</span></div><div class="cc-bar"><em style="width:${rate}%"></em></div><small>7 أيام: ${w.length} مكالمة</small></div>
+        ${role==="admin"&&agents.list?.[id]?`<button class="cc-btn sm r" data-ccdelag="${esc(id)}">حيّد</button>`:""}</div>`}).join(""):`<div class="cc-empty">ما كاين حتى موظف. زيد الموظفين من التحت.</div>`}
+  if(ccPage==="stats"){const W7=[...Array(7)].map((_,i)=>{const r=per(1,6-i),m=C.filter(c=>inR(c,r));return{d:new Date(r[0]),n:m.length,ok:m.filter(c=>c.result==="confirmed"||c.result==="ordered").length}}),mx=Math.max(1,...W7.map(w=>w.n)),A=C.filter(c=>c.at>=per(7)[0]),okA=A.filter(c=>c.result==="confirmed"||c.result==="ordered").length;
+    $("#ccStK").innerHTML=`<div class="a"><div><small>المكالمات</small><b class="num">${A.length}</b></div></div><div class="b"><div><small>مؤكدة</small><b class="num">${okA}</b></div></div><div class="c"><div><small>نسبة التأكيد</small><b class="num">${A.length?Math.round(okA/A.length*100):0}%</b></div></div><div class="e"><div><small>ليدز ولاو زبناء</small><b class="num">${(ccLeads||[]).filter(l=>l.status==="won").length}</b></div></div>`;
+    $("#ccStBars").innerHTML=`<div class="cc-wk">${W7.map(w=>`<div><b class="num">${w.n}</b><i style="height:${Math.max(3,w.n/mx*100)}%"></i><span>${w.d.toLocaleDateString("ar-MA",{weekday:"short"})}</span></div>`).join("")}</div>`;
+    const R={};A.forEach(c=>R[c.result]=(R[c.result]||0)+1);const rm=Math.max(1,...Object.values(R));
+    $("#ccStRes").innerHTML=Object.keys(CC_RES).map(k=>`<div class="cc-hb"><span>${CC_RES[k][0]}</span><i><em style="width:${(R[k]||0)/rm*100}%"></em></i><b class="num">${R[k]||0}</b></div>`).join("")}
+  if(typeof renderAppBtns==="function")renderAppBtns();
+}
+
 /* ---------------- views ---------------- */
 function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b.hidden=b.dataset.staff==="admin"?!staff:!isTeam());setSync(cloud?sync:"local");
   $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
-  if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
-function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
-  document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");sideOpen(false);if(sheetOpen())closeSheet();
+  if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(view==="cc")ccRender();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
+function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login","cc"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
+  document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");document.body.classList.toggle("cc-on",v==="cc");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
 
 document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a");if(!t)return;const D=t.dataset;
+  if(D.cpage){ccPage=D.cpage;$(".ccx")?.classList.remove("open");ccRender();window.scrollTo({top:0});return}
+  if(D.cpGo){ccPage=D.cpGo;ccRender();return}
+  if(D.cctool){const k=D.cctool;if(k==="call")ccCallForm();else if(k==="lead")ccLeadForm();else if(k==="order")ccOrderForm();else{ccPage="orders";ccOF="nodrv";ccRender()}return}
+  if(D.ccof){ccOF=D.ccof;ccRender();return}
+  if(D.cccall){const o=staffOrders().find(x=>x.id===D.cccall);if(o)ccStartCall({phone:o.phone,name:o.name,kind:o.status==="new"?"confirm":"follow",oid:o.id});return}
+  if(D.ccok){const o=staffOrders().find(x=>x.id===D.ccok);if(o){await patchOrder(o,{status:"prep"});await ccAddCall({phone:o.phone,name:o.name,kind:"confirm",result:"confirmed",oid:o.id,dur:0});toast(`#${o.id} مؤكد ✓`);ccRender()}return}
+  if(D.ccno){const o=staffOrders().find(x=>x.id===D.ccno);if(o&&confirm(`إلغاء الطلب ${o.id}؟`)){await patchOrder(o,{status:"cancel"});await ccAddCall({phone:o.phone,name:o.name,kind:"confirm",result:"cancelled",oid:o.id,dur:0});toast("تلغى الطلب");ccRender()}return}
+  if(D.cccli){ccStartCall({phone:D.cccli,name:D.n,kind:"follow"});return}
+  if(D.ccneword){ccOrderForm({phone:D.ccneword,name:D.n,hood:D.h,addr:D.a});return}
+  if(D.cclead){const l=(ccLeads||[]).find(x=>String(x.id)===D.cclead);if(l)ccStartCall({phone:l.phone,name:l.name,kind:"lead",lead:l.id});return}
+  if(D.ccleadord){const l=(ccLeads||[]).find(x=>String(x.id)===D.ccleadord);if(l)ccOrderForm({phone:l.phone,name:l.name,note:l.note,lead:l.id});return}
+  if(D.ccres){ccEndCall(D.ccres);return}
+  if(D.ofdel){ccLines.splice(+D.ofdel,1);ccRenderLines();return}
+  if(D.ccdelag){const n=agents.list?.[D.ccdelag]?.n;if(confirm(`تحيّد ${n} من الفريق؟ ما غاديش يقدر يدخل.`)){delete agents.list[D.ccdelag];saveCatalog("agents");if(cloud)SB.from("staff").delete().eq("user_id",D.ccdelag).then(ok).catch(e=>console.warn(e));ccRender()}return}
   if(D.pack){openPack(D.pack);return}
   if(D.abo){openAbo(D.abo);return}
   if(D.add){addOne(D.add);return}if(D.sub){subOne(D.sub);return}
@@ -3040,6 +3355,7 @@ document.addEventListener("click",async e=>{
   if(D.go==="login"&&isTeam()&&(cloud||t.id==="teamLink")){closeSheet();show(role==="admin"?"admin":"driver");return}
   if(D.go){closeSheet();show(D.go);return}
   if("cart" in D){openSheet("cart");return}
+  if(D.at==="cc"){show("cc");return}
   if(D.at){aTab=D.at;sideOpen(false);renderAdmin();window.scrollTo({top:0});return}
   if(D.of){oFilter=D.of;renderAdmin();return}
   if(D.pf){pFilter=D.pf;renderAdmin();return}
@@ -3078,6 +3394,13 @@ document.addEventListener("click",async e=>{
     case "closeSheet":case "closeSheet2":closeSheet();break;
     case "toCheckout":openSheet("checkout");break;
     case "backCart":openSheet("cart");break;
+    case "ccCallGo":{const p=$("#cqP").value,n=$("#cqN").value.trim(),k=$("#cqK").value;closeSheet();ccStartCall({phone:p,name:n,kind:k});break}
+    case "ccLeadGo":{const n=$("#lfN").value.trim(),p=$("#lfP").value.replace(/[\s.-]+/g,""),E=$("#lfE");if(!n||!/^(\+212|0)[5-7]\d{8}$/.test(p)){E.textContent="الاسم ورقم الهاتف ضروريين";break}
+      const d=$("#lfD").value;if(await ccLeadSave(null,{name:n.slice(0,80),phone:p,src:$("#lfS").value,note:$("#lfT").value.trim().slice(0,300),next_at:d?new Date(d).toISOString():null})){closeSheet();toast("تزاد الليد ✓");ccPage="leads";ccRender()}break}
+    case "ofAdd":{const id=$("#ofI").value,q=Math.round((+$("#ofQ").value||0)*2)/2;if(!id||!(q>0))break;const ex=ccLines.find(x=>x[0]===id);if(ex)ex[1]=q;else ccLines.push([id,q]);ccRenderLines();break}
+    case "ccOrderGo":ccSubmitOrder();break;
+    case "ccBurger":$(".ccx").classList.toggle("open");break;
+    case "ccOut":logout();break;
     case "placeOrder":placeOrder();break;
     case "cbGo":openSheet("checkout");break;
     case "aboSubmit":submitAbo();break;
@@ -3106,6 +3429,15 @@ $("#sScrim").addEventListener("click",()=>sideOpen(false));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSheet();sideOpen(false)}if(e.key==="Enter"&&e.target.id==="q"){e.preventDefault();goSec("shopSec")}if(e.key==="Enter"&&e.target.id==="codeIn")$("#codeBtn").click()
   if(e.key==="Enter"&&e.target.id==="aQ"&&!["orders","clients","products","stock"].includes(aTab)){aTab=products.some(p=>qMatch(p.n,pn(p)))&&!staffOrders().some(o=>qMatch(o.id,o.name,o.phone,o.hood,o.addr))?"products":"orders";oFilter="all";renderAdmin()}});
 $("#q").addEventListener("input",e=>{query=e.target.value;renderShop()});
+$("#ccQ").addEventListener("input",()=>{if(ccPage==="dash")ccPage="orders",ccOF="all";ccRender()});
+$("#ccScrim").addEventListener("click",()=>$(".ccx").classList.remove("open"));
+$("#ccAgForm").addEventListener("submit",async e=>{e.preventDefault();const n=$("#agN").value.trim(),ph=$("#agP").value.trim(),em=$("#agE").value.trim(),pw=$("#agW").value;if(!n)return;
+  if(!cloud){agents.list["a"+Date.now().toString(36)]={n,phone:ph};saveCatalog("agents");e.target.reset();ccRender();toast(`${n} تزاد`);return}
+  if(!em||pw.length<6){toast("Email ومودباس (6 حروف على الأقل) ضروريين");return}
+  const b=$("#agBtn");b.disabled=true;
+  try{const id=await createStaffLogin(em,pw);ok(await SB.from("staff").upsert({user_id:id,role:"agent",name:n,phone:ph,email:em}));agents.list[id]={n,phone:ph};await saveCatalog("agents");e.target.reset();ccRender();toast(`${n} تزاد · يدخل بـ ${em}`)}
+  catch(err){console.warn(err);const m=String(err?.message||err?.code||"");toast(err?.code==="exists"||/already/i.test(m)?"هاد الإيميل مستعمل":/check constraint|staff_role/i.test(m)?"خاص SQL ديال الكول سنتر يتدار اللول":"ما تزادش، عاود جرب")}
+  finally{b.disabled=false}});
 $("#aQ").addEventListener("input",e=>{aQ=e.target.value;if(["orders","clients","products","stock"].includes(aTab))renderAdmin()});
 document.addEventListener("change",async e=>{
   const t=e.target,D=t.dataset;
@@ -3115,6 +3447,8 @@ document.addEventListener("change",async e=>{
   if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):String(t.value).trim().slice(0,60);saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
   if(D.pkm){const P=byId(pkCur);if(!P)return;const k=D.pkm,v=String(t.value).trim();if(k==="p"||k==="old")P[k]=Math.max(0,+v||0);else if(k==="dar"||k==="dfr")P.d={...(P.d||{}),[k==="dar"?"ar":"fr"]:v.slice(0,160)};else P[k]=v.slice(0,60);
     if(k==="old"&&!P.old)delete P.old;saveCatalog("products");t.blur?.();renderAll();toast("Pack enregistré");return}
+  if(D.ccdrv){const o=staffOrders().find(x=>x.id===D.ccdrv);if(o){await patchOrder(o,{driver:t.value});toast(t.value?`تسند لـ ${drivers.list?.[t.value]?.n||""}`:"بلا موزع");ccRender()}return}
+  if(D.ccls){const l=(ccLeads||[]).find(x=>String(x.id)===D.ccls);if(l&&await ccLeadSave(l,{status:t.value})){toast("تبدلات الحالة");ccRender()}return}
   if(t.id==="pkSel"){pkCur=t.value;renderAdmin();return}
   if(D.pkq){const P=byId(pkCur),k=+D.pkq;if(P?.inc?.[k]){const q=Math.round((+t.value||0)*100)/100;if(q>0)P.inc[k][1]=q;else P.inc.splice(k,1);packMeta(P);saveCatalog("products");t.blur();renderAll();toast("Quantité enregistrée")}return}
   if(D.price){const p=byId(D.price);p.p=Math.max(0,+t.value||0);saveCatalog("products");renderShop();toast(`Prix ${pn(p)} : ${mad(p.p)}`)}
@@ -3187,7 +3521,7 @@ $("#setForm").addEventListener("submit",e=>{e.preventDefault();
   if(px.gaId&&!PIXRE.ga.test(px.gaId)){toast("ID Google invalide (format G-XXXXXXX)");$("#setGa").focus();return}
   settings={...settings,...px,fee:Math.max(0,+$("#setFee").value||0),freeFrom:Math.max(0,+$("#setFree").value||0),margin:Math.min(90,Math.max(0,+$("#setMargin").value||0)),ig:link("#setIg"),fb:link("#setFb"),tt:link("#setTt")};
   document.activeElement?.blur?.();saveCatalog("settings");renderAll();toast("Paramètres enregistrés")});
-const ADMIN_URL=/^\/admin\/?$/.test(location.pathname),LIV_URL=/^\/livreur\/?$/.test(location.pathname);
+const ADMIN_URL=/^\/admin\/?$/.test(location.pathname),LIV_URL=/^\/livreur\/?$/.test(location.pathname),CC_URL=/^\/callcenter\/?$/.test(location.pathname);
 const route=h=>{if(h==="prix"){aTab="products";pFilter="zero";h="admin"}return h};
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(/^t=/.test(h)&&(cloud||SBC===null))trackFromHash(h);else show(route(h))});
 $("#hTrk").addEventListener("submit",async e=>{e.preventDefault();const E=$("#hTrkErr");E.textContent="";
@@ -3202,7 +3536,7 @@ $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
   catch(err){console.warn(err);E.textContent=tr("eSave").split(".")[0]}finally{b.disabled=false}});
 
 loadLocal();
-show(LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
+show(CC_URL&&!location.hash.slice(1)?(isTeam()?"cc":"login"):LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
 initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 /* ---------------- app install + push notifications (admin & drivers) ----------------
