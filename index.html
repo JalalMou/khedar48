@@ -99,6 +99,46 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-sum{background:#eef8f0;border-radius:14px;padding:12px 14px;margin-bottom:14px}.abo-sum b{font-size:24px;color:#1a9e44}.abo-sum small{display:block;color:#4b5f52;margin-top:2px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
+/* team login */
+body.lg-on .hd,body.lg-on footer.ft,body.lg-on nav.tabs,body.lg-on .wa-fab,body.lg-on .cbar{display:none}
+body.lg-on{padding-bottom:0}
+.lg-page{position:relative;min-height:100vh;overflow:hidden;background:radial-gradient(1200px 600px at 20% 0%,#f3fbf4,transparent 60%),linear-gradient(180deg,#f6faf6,#eef5ef);display:flex;align-items:center;padding:clamp(18px,4vw,48px) 16px}
+.lg-wv{position:absolute;pointer-events:none;background:linear-gradient(135deg,#1e9e3e,#0b6b32)}
+.lg-wv-t{top:-140px;right:-120px;width:520px;height:260px;border-radius:0 0 0 60% / 0 0 0 100%;transform:rotate(-8deg);opacity:.95}
+.lg-wv-b{bottom:-160px;left:-10%;width:120%;height:240px;border-radius:50% 50% 0 0 / 100% 100% 0 0;opacity:.9}
+.lg-in{position:relative;z-index:1;width:min(1180px,100%);margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,56px);align-items:center}
+.lg-l{text-align:center}
+.lg-logo{width:min(380px,80%);height:auto}
+.lg-l h1{margin:8px 0 6px;font-size:clamp(36px,5vw,62px);line-height:1.05;font-weight:900;color:#0f4d26;letter-spacing:-.02em}
+.lg-sub{margin:0 0 22px;font-size:clamp(16px,1.6vw,21px);font-style:italic;color:#1d2b22}
+.lg-feats{display:inline-grid;grid-template-columns:repeat(3,minmax(0,1fr));background:rgba(255,255,255,.9);border-radius:22px;padding:16px 10px;box-shadow:0 18px 40px -26px rgba(17,60,30,.45);max-width:560px;width:100%}
+.lg-feats div{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 10px;font-weight:700;color:#14532d;font-size:14px;line-height:1.2}
+.lg-feats div+div{border-inline-start:1px solid #d6e7da}
+.lg-feats svg{width:34px;height:34px;fill:none;stroke:#1a9e44;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lg-ph{margin:22px auto 0;width:min(560px,100%);aspect-ratio:16/8;border-radius:24px;background:url("img/hero.jpg") center/cover;box-shadow:0 30px 50px -30px rgba(17,60,30,.6)}
+.lg-card{background:#fff;border-radius:30px;padding:clamp(22px,3vw,40px);box-shadow:0 30px 70px -30px rgba(17,60,30,.45);text-align:center;max-width:520px;width:100%;justify-self:center}
+.lg-ic{width:96px;height:96px;margin:0 auto 10px;border-radius:24px;overflow:hidden;box-shadow:0 14px 26px -14px rgba(11,107,50,.7);background:#fff}.lg-ic img{width:100%;height:100%;object-fit:cover}
+.lg-card h2{margin:6px 0 4px;font-size:clamp(26px,3vw,36px);font-weight:900;color:#132018}
+.lg-c-sub{margin:0 0 22px;color:#33443a;font-size:16px}
+.lg-f{display:flex;flex-direction:column;gap:14px;text-align:start}
+.lg-fld{display:flex;align-items:center;gap:10px;border:1.5px solid #dfe5e1;border-radius:16px;padding:0 14px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.lg-fld:focus-within{border-color:#1a9e44;box-shadow:0 0 0 4px rgba(26,158,68,.12)}
+.lg-fld svg{width:22px;height:22px;flex:none;fill:none;stroke:#2b3a31;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.lg-fld input{flex:1;min-width:0;border:0!important;outline:0;background:transparent;font:inherit;font-size:16px;padding:16px 0;box-shadow:none!important}
+.lg-eye{border:0;background:none;padding:6px;cursor:pointer;display:grid;place-items:center;border-radius:8px}.lg-eye[aria-pressed=true] svg{stroke:#1a9e44}
+.lg-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14.5px}
+.lg-ck{display:flex;align-items:center;gap:8px;cursor:pointer}.lg-ck input{width:18px;height:18px;accent-color:#1a9e44}
+.lg-fg{border:0;background:none;color:#16833a;font:inherit;font-weight:700;cursor:pointer;padding:0}
+.lg-go,.lg-back{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:99px;font:inherit;font-size:17px;font-weight:800;cursor:pointer;padding:16px}
+.lg-go{border:0;color:#fff;background:linear-gradient(180deg,#25a645,#0e7a35);box-shadow:0 14px 26px -14px rgba(14,122,53,.9)}
+.lg-go[disabled]{opacity:.7}
+.lg-back{background:#fff;border:1.5px solid #dfe5e1;color:#132018}
+.lg-go svg,.lg-back svg{width:22px;height:22px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.lg-go svg{stroke:#fff}.lg-back svg{stroke:#1a9e44}
+@media (max-width:900px){.lg-in{grid-template-columns:minmax(0,1fr)}.lg-l{order:2}.lg-card{order:1}.lg-ph{display:none}.lg-l h1{font-size:30px}.lg-wv-t{width:300px;height:160px}}
+@media (max-width:520px){.lg-feats div{font-size:12px;padding:0 4px}.lg-feats svg{width:28px;height:28px}.lg-card{border-radius:24px}}
+/* admin sidebar logo */
+#kpis>:last-child{background:linear-gradient(135deg,#effaf1,#e2f4e6);border-color:#cfe9d4}
+.s-logo{display:block;text-align:center;width:100%}.s-logo img{width:100%;max-width:230px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}.s-logo small{display:block;margin-top:6px;color:#e3f3e7;font-size:13.5px;font-weight:600}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .cbar.on{transform:none}
@@ -1186,7 +1226,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
   <div id="adminGate" class="gate" hidden><svg width="70" height="70"><use href="#logo"/></svg><h3>Espace réservé</h3><p>L'espace admin est réservé à l'équipe Khedar48.</p><p class="hint">Connectez-vous avec le compte admin créé dans Supabase.</p><p style="display:flex;gap:8px;justify-content:center"><button class="btn b-gr" data-go="login">Se connecter</button><button class="btn b-gh" data-go="shop">Boutique</button></p></div>
   <div class="adm" id="adminBody">
     <aside class="side" id="side" aria-label="Menu admin">
-      <div class="s-brand"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#leaf"/></svg><span><b>Khedar48</b><small>Fruits &amp; Légumes à Oujda</small></span></div>
+      <div class="s-brand"><span class="s-logo"><img src="img/logo-dark.png" alt="Khedar48" width="600" height="166"><small>Fruits &amp; Légumes à Oujda</small></span></div>
       <nav class="s-nav" id="sNav"></nav>
       <div class="s-links"><button data-go="shop">← Boutique</button><button data-go="driver">App livreur</button></div>
       <div class="s-me"><span class="av">A</span><span style="min-width:0"><b>Admin</b><small id="meMail" style="display:block;overflow:hidden;text-overflow:ellipsis">Super Admin</small><button class="lnk" id="logout" style="color:#9fe0b0;font-size:12.5px;font-weight:700">Se déconnecter</button></span><button class="s-th" id="admTheme" aria-label="Changer de thème"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div>
@@ -1442,18 +1482,37 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 </div>
 
 <!-- ============ TEAM LOGIN ============ -->
-<div class="view wrap" id="v-login" hidden>
-  <section class="sec"><div class="panel" style="max-width:420px;margin:20px auto" dir="ltr" lang="fr">
-    <div style="text-align:center"><svg width="64" height="64"><use href="#logo"/></svg><h2 style="margin:.3em 0 .1em">Espace équipe</h2><p class="hint" style="margin:0 0 14px">Admin et livreurs · دخول الفريق</p></div>
-    <form class="form" id="loginForm">
-      <div class="fld"><label for="lgE">Email</label><input id="lgE" type="email" autocomplete="username" required></div>
-      <div class="fld"><label for="lgP">Mot de passe</label><input id="lgP" type="password" autocomplete="current-password" required></div>
-      <div class="err" id="lgErr" role="alert"></div>
-      <button class="btn b-gr block" id="lgBtn">Se connecter</button>
-      <button type="button" class="btn b-gh block" data-go="shop">Retour à la boutique</button>
-    </form>
-    <p class="hint" id="lgDemo" hidden style="margin-top:12px">Mode démo : Supabase n'est pas encore configuré, l'admin est ouvert sans mot de passe. <button class="lnk" data-go="admin" style="color:var(--green)">Ouvrir l'admin</button></p>
-  </div></section>
+<div class="view" id="v-login" hidden>
+  <div class="lg-page" dir="ltr" lang="fr">
+    <div class="lg-wv lg-wv-t" aria-hidden="true"></div><div class="lg-wv lg-wv-b" aria-hidden="true"></div>
+    <div class="lg-in">
+      <div class="lg-l">
+        <img class="lg-logo" src="img/logo.png" alt="Khedar48" width="980" height="272">
+        <h1>Espace équipe</h1>
+        <p class="lg-sub">Accès réservé à l'équipe Khedar48</p>
+        <div class="lg-feats">
+          <div><svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9v1a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0V9M5 12v8h14v-8M10 20v-5h4v5"/></svg><span>Gestion des commandes</span></div>
+          <div><svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h6l-2-7H9l-2 4M13 10h3l2 7M15 6h3"/></svg><span>Suivi des livraisons</span></div>
+          <div><svg viewBox="0 0 24 24"><path d="M4 20V14M10 20V9M16 20V12M22 20V4"/></svg><span>Tableaux et performances</span></div>
+        </div>
+        <div class="lg-ph" aria-hidden="true"></div>
+      </div>
+      <div class="lg-card">
+        <div class="lg-ic"><img src="icons/icon-192.png" alt="" width="192" height="192"></div>
+        <h2>Espace équipe</h2>
+        <p class="lg-c-sub">Admin et livreurs – Khedar48</p>
+        <form id="loginForm" class="lg-f" novalidate>
+          <label class="lg-fld"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><input id="lgE" type="email" autocomplete="username" placeholder="Email" aria-label="Email" required></label>
+          <label class="lg-fld"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><input id="lgP" type="password" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe" required><button type="button" class="lg-eye" id="lgEye" aria-label="Afficher le mot de passe" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></label>
+          <div class="lg-row"><label class="lg-ck"><input type="checkbox" id="lgRem" checked> Se souvenir de moi</label><button type="button" class="lg-fg" id="lgForgot">Mot de passe oublié ?</button></div>
+          <div class="err" id="lgErr" role="alert"></div>
+          <button class="lg-go" id="lgBtn"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 012 2v14a2 2 0 01-2 2h-5"/></svg><span>Se connecter</span></button>
+          <button type="button" class="lg-back" data-go="shop"><svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18v1a3 3 0 01-6 0 3 3 0 01-6 0 3 3 0 01-6 0zM5 12v8h14v-8M10 20v-5h4v5"/></svg><span>Retour à la boutique</span></button>
+        </form>
+        <p class="hint" id="lgDemo" hidden style="margin-top:12px">Mode démo : Supabase n'est pas encore configuré, l'admin est ouvert sans mot de passe. <button class="lnk" data-go="admin" style="color:var(--green)">Ouvrir l'admin</button></p>
+      </div>
+    </div>
+  </div>
 </div>
 </main>
 
@@ -1572,7 +1631,7 @@ let myOrders=[],allOrders=[];
 let SB=null,SBC=null,uid=null,cloud=false,staff=false,role=null,userEmail="",sync="local";
 let view="shop",cat="all",query="",aTab="dash",oFilter="active",me=store.get("driver",""),pendingGo=null;
 const byId=id=>products.find(p=>p.id===id);
-const qtyLabel=(it,q)=>it.u==="kg"?`${fmt(q)} كغ`:it.u==="bunch"?`${q} حزمة`:it.u==="basket"?`${q} قفة`:`${q} حبة`;
+const qtyLabel=(it,q)=>it.u==="kg"?(q===.5?"نص كيلو":`${fmt(q)} كغ`):it.u==="bunch"?`${q} حزمة`:it.u==="basket"?`${q} قفة`:`${q} حبة`;
 const isTeam=()=>role==="admin"||role==="driver";
 const canUpload=()=>cloud&&role==="admin";
 
@@ -1604,7 +1663,11 @@ async function initCloud(){
   SB=createClient(SBC.SUPABASE_URL,SBC.SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"k48-auth"}});
   cloud=true;myOrders=[];setSync("slow");renderAll();
   // never call Supabase inside the auth callback itself (it can deadlock): hop to the next tick
-  SB.auth.onAuthStateChange((ev,session)=>setTimeout(()=>onUser(session?.user||null),0));
+  SB.auth.onAuthStateChange((ev,session)=>{
+    // "Se souvenir de moi" unticked: a team session does not survive closing the browser
+    if(ev==="INITIAL_SESSION"&&session?.user&&!session.user.is_anonymous&&store.get("remember",true)===false&&!(()=>{try{return sessionStorage.getItem("k48:live")}catch(e){return null}})()){SB.auth.signOut();return}
+    if(ev==="PASSWORD_RECOVERY")setTimeout(askNewPass,400);
+    setTimeout(()=>onUser(session?.user||null),0)});
 }
 async function onUser(u){
   if((u?.id||null)===curUser)return;curUser=u?.id||null;
@@ -1895,7 +1958,7 @@ function promoFor(sub){const k=(promoCode||"").toUpperCase();const c=promos.code
 function totals(){const sub=lines().reduce((a,l)=>a+l.sum,0);const pr=promoFor(sub);const after=sub-pr.d;const fee=sub===0||after>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{sub,disc:pr.d,pr,fee,total:after+fee}}
 function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart();else if(sheetOpen()&&mode.startsWith("pack:"))openPack(mode.slice(5))}
 function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");const cb=$("#cartBar");if(cb){cb.classList.toggle("bump",false);void cb.offsetWidth;cb.classList.add("bump")}pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
-function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=1?0:cur-(STEP[it.u]||1))}
+function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=.5?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n});renderCartBar()}
 function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&view==="shop"&&!sheetOpen();
   bar.classList.toggle("on",on);bar.setAttribute("aria-hidden",String(!on));bar.inert=!on;document.body.classList.toggle("cbar-on",on);if(!L.length)return;
@@ -2214,12 +2277,13 @@ async function placeOrder(){
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#coPhone").focus();return}
   if(!addr){E.textContent=t("eAddr");$("#coAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
+  let waWin=null;try{waWin=window.open("","_blank")}catch(e){}
   const L=lines(),tt=totals(),id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
   const o={at:Date.now(),name,phone,hood,addr,slot,note,lang,tk,items:L.map(l=>[l.it.id,l.q,l.it.n,l.it.p]),sub:tt.sub,disc:tt.disc,code:tt.disc?promoCode.toUpperCase():"",fee:tt.fee,total:tt.total,status:"new",driver:""};
   if(cloud){const b=$("#placeOrder");b.disabled=true;b.textContent=t("saving");
     try{if(!uid)throw new Error("no-auth");
       ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
-    catch(e){console.warn(e);b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
+    catch(e){console.warn(e);try{waWin?.close()}catch(x){}b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
   }else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
   track("order",id);pix("purchase",pixItems(L),o.total,id);
   cart={};promoCode="";store.set("cart",cart);store.set("promo","");renderShop();renderBadges();
@@ -2228,6 +2292,7 @@ async function placeOrder(){
   const msg=["السلام عليكم، طلب جديد من خضار 48 🌿",`رقم الطلب: ${id}`,"",...L.map(l=>`• ${l.it.n} — ${qtyLabel(l.it,l.q)} = ${fmt(l.sum)} د.م`),"",
     `المجموع: ${fmt(tt.sub)} د.م`,tt.disc?`التخفيض (${o.code}): −${fmt(tt.disc)} د.م`:"",`التوصيل: ${tt.fee?fmt(tt.fee)+" د.م":"فابور"}`,`الإجمالي: ${fmt(tt.total)} د.م (كاش)`,"",
     `الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,`الوقت: ${slot}`,note?`ملاحظة: ${note}`:"","",`${T.ar.trackWa} ${link}`].filter(Boolean).join("\n");
+  const waUrl=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;if(waWin&&!waWin.closed){try{waWin.location.href=waUrl}catch(e){}}
   mode="done";$("#shTitle").textContent=t("done");
   $("#shBody").innerHTML=`<div class="done-box"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h3 style="font-size:22px;margin:.2em 0">${esc(t("thanks",name))}</h3>
@@ -2789,7 +2854,7 @@ function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
   if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(sheetOpen()&&mode==="cart")renderCart()}
 function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
-  document.body.classList.toggle("adm-on",v==="admin");sideOpen(false);if(sheetOpen())closeSheet();
+  document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
@@ -2912,10 +2977,19 @@ $("#newDrv").addEventListener("submit",async e=>{e.preventDefault();const n=$("#
   finally{b.disabled=false;b.textContent="Ajouter"}});
 $("#loginForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("#lgErr");E.textContent="";
   if(!cloud){role="admin";staff=true;show("admin");return}
-  const b=$("#lgBtn");b.disabled=true;b.textContent="Connexion…";
+  const b=$("#lgBtn"),bl=b.querySelector("span");b.disabled=true;bl.textContent="Connexion…";store.set("remember",$("#lgRem").checked);try{sessionStorage.setItem("k48:live","1")}catch(x){}
   try{pendingGo="__team";const {error}=await SB.auth.signInWithPassword({email:$("#lgE").value.trim(),password:$("#lgP").value});if(error)throw error;$("#lgP").value=""}
   catch(err){pendingGo=null;const m=String(err?.message||"");E.textContent=/disabled/i.test(m)?"La connexion par email est désactivée dans Supabase (Authentication → Sign In / Providers → Email).":/invalid/i.test(m)?"Email ou mot de passe incorrect.":/not confirmed/i.test(m)?"Email pas encore confirmé (voir README, étape « Confirm email »).":/rate|many/i.test(m)?"Trop d'essais, réessayez plus tard.":"Connexion impossible, vérifiez Internet."}
-  finally{b.disabled=false;b.textContent="Se connecter"}});
+  finally{b.disabled=false;bl.textContent="Se connecter"}});
+$("#lgEye").addEventListener("click",e=>{const p=$("#lgP"),on=p.type==="password";p.type=on?"text":"password";e.currentTarget.setAttribute("aria-pressed",String(on));e.currentTarget.setAttribute("aria-label",on?"Masquer le mot de passe":"Afficher le mot de passe")});
+$("#lgForgot").addEventListener("click",async()=>{const E=$("#lgErr"),em=$("#lgE").value.trim();E.textContent="";
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){E.textContent="Écrivez d'abord votre email, puis cliquez sur « Mot de passe oublié ? ».";$("#lgE").focus();return}
+  if(!cloud){E.textContent="Mode démo : pas de mot de passe.";return}
+  try{const {error}=await SB.auth.resetPasswordForEmail(em,{redirectTo:SITE+"admin"});if(error)throw error;toast("Email envoyé");E.textContent="📧 Si ce compte existe, un email pour changer le mot de passe vient d'être envoyé."}
+  catch(err){console.warn(err);E.textContent=/rate|many/i.test(String(err?.message))?"Trop de demandes, réessayez dans une heure.":"Envoi impossible pour le moment, réessayez plus tard."}});
+async function askNewPass(){const p=prompt("Choisissez un nouveau mot de passe (8 caractères minimum) :");if(p===null)return;
+  if(p.length<8){alert("Mot de passe trop court (8 caractères minimum).");return askNewPass()}
+  const {error}=await SB.auth.updateUser({password:p});if(error){console.warn(error);alert("Changement impossible, redemandez un email.");return}toast("Mot de passe changé ✓")}
 async function logout(){if(!cloud){show("shop");return}try{await SB.auth.signOut()}catch(e){}me="";show("shop");toast("Déconnecté · تخرجتي")}
 $("#newsForm")?.addEventListener("submit",async e=>{e.preventDefault();const b=e.target.querySelector("button");b.disabled=true;
   try{if(await subscribeNews($("#newsEmail").value.trim()))e.target.reset()}finally{b.disabled=false}});
