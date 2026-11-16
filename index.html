@@ -13,6 +13,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Khedar48">
+<script>(function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":"";if(!m)return;document.querySelector("link[rel=manifest]").href="manifest-"+m+".webmanifest";document.querySelector("meta[name=apple-mobile-web-app-title]").content=m==="admin"?"K48 Admin":"K48 Livreur";document.querySelector("meta[name=theme-color]").content="#0b5a2b"})()</script>
 <meta property="og:title" content="خضار 48 · Khedar48">
 <meta property="og:description" content="الخضرة والفواكه الطرية حتى لباب دارك فوجدة">
 <meta property="og:image" content="img/hero.jpg">
@@ -100,6 +101,10 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
 /* driver app */
+.dv-bell{position:relative}.dv-bell i{position:absolute;top:7px;right:8px;width:9px;height:9px;border-radius:50%;background:#ffb02e;box-shadow:0 0 0 2px #0e6a31}.dv-bell i.on{background:#7ed957}
+.dv-note{display:flex;align-items:center;gap:10px;background:#fff8ec;border:1px solid #ffd9a8;border-radius:16px;padding:10px 12px;margin-bottom:12px;font-size:14px;font-weight:700}.dv-note span{flex:1}.dv-note button{border:0;background:#e8701a;color:#fff;font:inherit;font-weight:800;border-radius:12px;padding:8px 14px;cursor:pointer}
+[data-install][hidden],[data-push][hidden],.dv-note[hidden]{display:none!important}
+.app-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 body.drv-on .hd,body.drv-on footer.ft,body.drv-on nav.tabs,body.drv-on .wa-fab,body.drv-on .cbar{display:none}
 body.drv-on{padding-bottom:0;background:#f2f6f3}
 .dv{min-height:100vh;max-width:760px;margin:0 auto;background:#f2f6f3}
@@ -1443,6 +1448,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
             <p class="hint" style="margin:10px 0 0">Encaissé = total des commandes livrées (payées à la livraison). Résultat = encaissé − dépenses. Notez vos achats de marchandise comme dépenses pour avoir le vrai bénéfice.</p></div>
         </div>
 
+        <!-- app & notifications card is injected in Paramètres -->
         <!-- packs -->
         <div data-ap="packs" hidden>
           <div class="pg-h"><h2>Packs (qoffa)</h2><p class="hint">Créez vos packs (Pack Famille, Pack Premium…), leur prix et les produits qu'ils contiennent. Ils s'affichent sur le site et servent aux abonnements.</p></div>
@@ -1473,7 +1479,12 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
         <div data-ap="settings" hidden>
           <div class="pg-h"><h2>Paramètres</h2></div>
           <div class="note" id="syncNote"><i></i><span></span></div>
-          <div class="r2">
+          <div class="card app-card"><div class="c-h"><h3>📲 Application & notifications</h3></div>
+            <p class="hint" style="margin:0 0 12px">Installez l'espace admin comme une application sur ce téléphone, et recevez une notification à chaque nouvelle commande, même téléphone verrouillé.</p>
+            <div class="app-row"><button class="btn b-gr" data-install>📲 Installer l'application</button><button class="btn b-or" data-push>🔔 Activer les notifications</button><span class="hint" data-pushst></span></div>
+            <p class="hint" style="margin:10px 0 0">Livreurs : leur application est sur <b>khedar48.com/livreur</b> (même bouton dans leur écran).</p></div>
+
+<div class="r2">
             <div class="card"><h3>Livraison et marge</h3>
               <form class="form" id="setForm" style="margin-top:12px">
                 <div class="fld"><label for="setFee">Frais de livraison (MAD)</label><input id="setFee" type="number" min="0" step="1"></div>
@@ -1493,7 +1504,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
                 <li><b>Clients :</b> commandent sans compte. Chaque client ne voit que ses propres commandes.</li>
                 <li><b>Livreurs :</b> créez leur accès dans la page « Livreurs » (email + mot de passe).</li>
                 <li><b>Admins :</b> à ajouter dans Supabase (voir le guide README).</li>
-                <li>Autorisez les notifications pour être alerté des nouvelles commandes. <button class="lnk" id="askNotif" style="color:var(--acc-d)">Activer</button></li>
+                <li>Notifications et application : voir la carte « 📲 Application & notifications ».</li>
               </ul></div>
           </div>
         </div>
@@ -1507,6 +1518,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
   <div class="dv" dir="rtl" lang="ar">
     <header class="dv-hd">
       <div class="dv-top"><img class="dv-logo" src="img/logo-dark.png" alt="Khedar48" width="600" height="166"><span class="dv-tag">🛵 تطبيق الموزع</span>
+        <button class="dv-ib" data-install aria-label="تثبيت التطبيق" title="تثبيت التطبيق"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>
+        <button class="dv-ib dv-bell" data-push aria-label="تفعيل الإشعارات" title="الإشعارات"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg><i data-pushdot></i></button>
         <button class="dv-ib" id="drvRefresh" aria-label="تحديث"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg></button>
         <button class="dv-ib" id="drvOut" aria-label="خروج"><svg viewBox="0 0 24 24"><path d="M15 17l5-5-5-5M20 12H9M11 3H5a2 2 0 00-2 2v14a2 2 0 002 2h6"/></svg></button></div>
       <div class="dv-hi"><div><h1 id="drvWho">مرحبا 👋</h1><p id="drvDate"></p></div><div class="fld dv-pick" id="drvPick"><label for="drvSel">شكون نتا؟</label><select id="drvSel"></select></div></div>
@@ -1514,6 +1527,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
     </header>
     <div id="driverGate" class="dv-gate" hidden><img src="icons/icon-192.png" alt="" width="96" height="96"><h2>تطبيق الموزع</h2><p>هاد الصفحة غير للموزعين ديال خضار 48.</p><button class="lg-go" data-go="login">دخول الموزع</button></div>
     <main id="driverBody" class="dv-b">
+      <div class="dv-note" id="drvPushNote" hidden>🔔 <span>فعّل الإشعارات باش يوصلك كل طلب جديد فالتيليفون.</span><button data-push>فعّل</button></div>
       <div class="dv-tabs" role="tablist" id="drvTabs"></div>
       <div id="drvList"></div>
     </main>
@@ -2906,7 +2920,7 @@ function renderDriver(){
 function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b.hidden=b.dataset.staff==="admin"?!staff:!isTeam());setSync(cloud?sync:"local");
   $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
-  if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(sheetOpen()&&mode==="cart")renderCart()}
+  if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
 function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
   document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
@@ -3092,6 +3106,36 @@ loadLocal();
 show(LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
 initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+/* ---------------- app install + push notifications (admin & drivers) ----------------
+   The phone subscribes to Web Push; the Supabase function "notify" sends a push for each new order / assignment. */
+var VAPID_PUB="BHvtgblccA6rkLERgJMJo586JONNHkiYl6N0X-sflp4IEEEH5zrG-Fh04sh9Q02dLxGGP8Il5P68HM4Vip0gBAM";
+var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+var b64u=s=>{const p="=".repeat((4-s.length%4)%4),b=atob((s+p).replace(/-/g,"+").replace(/_/g,"/"));return Uint8Array.from(b,c=>c.charCodeAt(0))};
+var pushOn=false;
+async function pushCheck(){try{if(!("serviceWorker" in navigator)||!("PushManager" in window)||Notification.permission!=="granted"){pushOn=false;return}
+  const reg=await navigator.serviceWorker.getRegistration();pushOn=!!(reg&&await reg.pushManager.getSubscription())}catch(e){pushOn=false}}
+function renderAppBtns(){const fr=view!=="driver";
+  $$("[data-install]").forEach(b=>b.hidden=standalone||!(installEvt||isIOS));
+  $$("[data-pushdot]").forEach(d=>d.classList.toggle("on",pushOn));
+  $$(".app-card [data-push]").forEach(b=>b.textContent=pushOn?"🔔 Notifications activées ✓":"🔔 Activer les notifications");
+  const st=!("Notification" in window)?(isIOS&&!standalone?"Sur iPhone : installez d'abord l'application (Partager → Sur l'écran d'accueil).":"Ce navigateur ne gère pas les notifications."):Notification.permission==="denied"?"Notifications bloquées : autorisez-les dans les réglages du navigateur.":"";
+  $$("[data-pushst]").forEach(x=>x.textContent=st);
+  const n=$("#drvPushNote");if(n)n.hidden=pushOn||!isTeam()||!("Notification" in window)||Notification.permission==="denied"}
+async function enablePush(){const fr=view!=="driver";
+  if(!cloud||!uid||!isTeam()){toast(fr?"Connectez-vous d'abord":"دخل اللول");return}
+  if(!("serviceWorker" in navigator)||!("PushManager" in window)){toast(isIOS?(fr?"iPhone : installez d'abord l'application (Partager → Sur l'écran d'accueil)":"آيفون: زيد التطبيق للشاشة اللول (Partager → Sur l'écran d'accueil)"):(fr?"Notifications non disponibles sur ce navigateur":"الإشعارات ما خدامينش فهاد المتصفح"));return}
+  try{const perm=await Notification.requestPermission();if(perm!=="granted"){toast(fr?"Notifications refusées":"رفضتي الإشعارات");renderAppBtns();return}
+    const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
+    if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(VAPID_PUB)});
+    const j=sub.toJSON();const {error}=await SB.from("push_subs").upsert({endpoint:j.endpoint,user_id:uid,role,p256dh:j.keys.p256dh,auth:j.keys.auth},{onConflict:"endpoint"});
+    if(error)throw error;pushOn=true;renderAppBtns();toast(fr?"Notifications activées ✓":"تفعّلو الإشعارات ✓")}
+  catch(e){console.warn(e);toast(/push_subs/i.test(String(e?.message))?(fr?"Exécutez d'abord le SQL des notifications dans Supabase":"خاص SQL ديال الإشعارات"):(fr?"Activation impossible, réessayez":"ما تفعّلوش، عاود جرب"))}}
+async function installApp(){if(installEvt){installEvt.prompt();try{await installEvt.userChoice}catch(e){}installEvt=null;renderAppBtns();return}
+  if(isIOS)alert(view==="driver"?"باش تزيد التطبيق: كليكي على زر المشاركة (Partager) ⬆️ من تحت، ومن بعد «Sur l'écran d'accueil».":"Pour installer : touchez le bouton Partager ⬆️ en bas de Safari, puis « Sur l'écran d'accueil ».")}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-push],[data-install]");if(!b)return;e.preventDefault();e.stopPropagation();"push" in b.dataset?enablePush():installApp()},true);
+window.addEventListener("beforeinstallprompt",()=>setTimeout(renderAppBtns,0));
+pushCheck().then(renderAppBtns);
+
 </script>
 </body>
 </html>
