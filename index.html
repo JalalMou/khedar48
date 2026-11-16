@@ -99,6 +99,20 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-sum{background:#eef8f0;border-radius:14px;padding:12px 14px;margin-bottom:14px}.abo-sum b{font-size:24px;color:#1a9e44}.abo-sum small{display:block;color:#4b5f52;margin-top:2px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
+/* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
+.cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.cbar.on{transform:none}
+.cbar-in{pointer-events:auto;width:min(720px,100%);display:flex;align-items:center;gap:10px;background:#0f2d1b;color:#fff;border-radius:22px;padding:10px;box-shadow:0 22px 44px -14px rgba(0,0,0,.6)}
+.cbar-l{display:flex;align-items:center;gap:10px;background:none;border:0;color:inherit;font:inherit;cursor:pointer;min-width:0;flex:1;text-align:start;padding:0 4px}
+.cbar-th{display:flex;flex:none}.cbar-th i{width:38px;height:38px;border-radius:50%;border:2px solid #0f2d1b;background:#fff center/cover no-repeat;margin-inline-start:-12px;display:grid;place-items:center;font-style:normal;font-size:18px}.cbar-th i:first-child{margin-inline-start:0}
+.cbar-t{display:flex;flex-direction:column;min-width:0;flex:1}.cbar-t b{font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cbar-t small{opacity:.85;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbar-prog{display:block;height:4px;border-radius:9px;background:rgba(255,255,255,.18);margin-top:5px;overflow:hidden;max-width:220px}.cbar-prog em{display:block;height:100%;background:#7ed957;transition:width .4s}
+.cbar-go{flex:none;border:0;background:#ff8519;color:#fff;font:inherit;font-weight:800;font-size:16px;border-radius:16px;padding:15px 22px;cursor:pointer;box-shadow:0 10px 20px -8px rgba(255,133,25,.9);white-space:nowrap}
+.cbar.bump .cbar-in{animation:cbb .5s}@keyframes cbb{35%{transform:scale(1.05)}}
+body.cbar-on .wa-fab{bottom:110px}
+@media (max-width:900px){.cbar{bottom:calc(74px + env(safe-area-inset-bottom,0px));padding:0 10px}.cbar-go{padding:14px 16px;font-size:15px}body.cbar-on .wa-fab{bottom:calc(166px + env(safe-area-inset-bottom,0px))}.cbar-th i{width:32px;height:32px}.cbar-th i:nth-child(3){display:none}}
+@media (max-width:360px){.cbar-th{display:none}}
+@media (prefers-reduced-motion:reduce){.cbar{transition:none}.cbar.bump .cbar-in{animation:none}}
 /* packs admin */
 .pk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .pk-card{display:flex;flex-direction:column;gap:6px}.pk-card.sel{outline:2px solid #1a9e44;outline-offset:-2px}
@@ -1464,6 +1478,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 </footer>
 <a class="wa-fab" href="https://wa.me/212713694399" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 00-11.2 19.6L3 29l6.6-1.7A13 13 0 1016 3zm0 23.6a10.6 10.6 0 01-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1116 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 01-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 000-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7 6.3 6.3 0 001.3 3.3 14.3 14.3 0 005.5 4.9c2 .9 2.8.9 3.8.8a3.2 3.2 0 002.1-1.5 2.6 2.6 0 00.2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg></a>
 
+<div class="cbar" id="cartBar" aria-hidden="true"><div class="cbar-in"><button class="cbar-l" data-cart type="button"><span class="cbar-th" id="cbTh"></span><span class="cbar-t"><b id="cbN"></b><small id="cbSub"></small><span class="cbar-prog" id="cbProg"><em></em></span></span></button><button class="cbar-go" id="cbGo" type="button"></button></div></div>
 <nav class="tabs" aria-label="التنقل"><div class="in">
   <button data-go="shop" aria-current="page"><svg viewBox="0 0 24 24"><path d="M4 10l8-6 8 6v9a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/></svg><span data-t="navHome"></span></button>
   <button data-cart><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span data-t="cart"></span><span class="badge num" data-count hidden>0</span></button>
@@ -1879,9 +1894,17 @@ function promoFor(sub){const k=(promoCode||"").toUpperCase();const c=promos.code
   const d=c.k==="pct"?Math.round(sub*(+c.v||0))/100:+c.v||0;return{d:Math.min(d,sub),ok:c.k==="pct"?t("codePct",c.v):t("codeAmt",money(c.v))}}
 function totals(){const sub=lines().reduce((a,l)=>a+l.sum,0);const pr=promoFor(sub);const after=sub-pr.d;const fee=sub===0||after>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{sub,disc:pr.d,pr,fee,total:after+fee}}
 function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];else cart[id]=q;store.set("cart",cart);renderShop();renderBadges();if(sheetOpen()&&mode==="cart")renderCart();else if(sheetOpen()&&mode.startsWith("pack:"))openPack(mode.slice(5))}
-function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
+function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");const cb=$("#cartBar");if(cb){cb.classList.toggle("bump",false);void cb.offsetWidth;cb.classList.add("bump")}pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=1?0:cur-(STEP[it.u]||1))}
-function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n})}
+function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n});renderCartBar()}
+function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&view==="shop"&&!sheetOpen();
+  bar.classList.toggle("on",on);bar.setAttribute("aria-hidden",String(!on));bar.inert=!on;document.body.classList.toggle("cbar-on",on);if(!L.length)return;
+  const tt=totals(),free=+settings.freeFrom||0,left=Math.max(0,free-(tt.sub-tt.disc));
+  $("#cbTh").innerHTML=L.slice(-3).reverse().map(({it})=>{const im=photoOf(it);return `<i style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(it.e||"🥬")}</i>`}).join("");
+  $("#cbN").textContent=`${L.length} ${fr?(L.length>1?"produits":"produit"):"منتوج"} · ${money(tt.total)}`;
+  $("#cbSub").textContent=free&&left>0?(fr?`Plus que ${money(left)} pour la livraison offerte`:`زيد ${money(left)} والتوصيل فابور`):(fr?"🎉 Livraison offerte":"🎉 التوصيل فابور");
+  const pg=$("#cbProg");pg.hidden=!free;pg.firstElementChild.style.width=`${free?Math.min(100,(tt.sub-tt.disc)/free*100):100}%`;
+  $("#cbGo").textContent=`${fr?"Commander":"كمّل الطلب"} ${fr?"→":"←"}`}
 const CART_SVG=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>`;
 function stepper(id){const it=byId(id);const q=cart[id]||0;
   return q?`<div class="step"><button data-sub="${esc(id)}" aria-label="−">−</button><span class="num">${qtyL(it,q)}</span><button data-add="${esc(id)}" aria-label="+">+</button></div>`
@@ -2145,7 +2168,8 @@ function openPack(id){const p=byId(id);if(!p)return;mode="pack:"+id;const fr=lan
       :`<button class="btn b-or block" data-add="${esc(id)}">${fr?"Ajouter au panier":"زيد للسلة"} · ${dh(p.p)}</button>`)
     :`<a class="btn b-wa block" href="https://wa.me/${WA}" target="_blank" rel="noopener">WhatsApp · <span dir="ltr">${WA_PRETTY}</span></a>`;
   $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
-function closeSheet(){$("#sheet").classList.remove("open");$("#scrim").classList.remove("open")}
+function closeSheet(){$("#sheet").classList.toggle("open",false);$("#scrim").classList.toggle("open",false);renderCartBar()}
+new MutationObserver(()=>renderCartBar()).observe($("#sheet"),{attributes:true,attributeFilter:["class"]});
 function openCredits(){mode="info:credits";$("#shTitle").textContent=lang==="fr"?"Crédits photos":"مصادر الصور";
   $("#shBody").innerHTML=`<div class="info"><p>${lang==="fr"?"Photos des produits : Wikimedia Commons, sous licences libres. Merci aux photographes :":"صور المنتوجات من Wikimedia Commons، بتراخيص حرة. شكراً للمصورين:"}</p><ul class="cred">${PHOTO_CREDITS.map(([id,f,l,a])=>`<li><b>${esc(nm(byId(id)||{n:id})||id)}</b> · <a href="https://commons.wikimedia.org/wiki/File:${esc(f)}" target="_blank" rel="noopener">${esc(a)}</a> · ${esc(l)}</li>`).join("")}</ul><p class="hint">CC BY / CC BY-SA : creativecommons.org/licenses</p></div>`;
   $("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">${t("close")}</button>`;$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
@@ -2764,7 +2788,7 @@ function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b
   $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
   if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(sheetOpen()&&mode==="cart")renderCart()}
-function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
+function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
   document.body.classList.toggle("adm-on",v==="admin");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
@@ -2822,6 +2846,7 @@ document.addEventListener("click",async e=>{
     case "toCheckout":openSheet("checkout");break;
     case "backCart":openSheet("cart");break;
     case "placeOrder":placeOrder();break;
+    case "cbGo":openSheet("checkout");break;
     case "aboSubmit":submitAbo();break;
     case "aboReload":abos=null;renderAdmin();break;
     case "seeOrders":closeSheet();show("orders");break;
