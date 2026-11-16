@@ -101,45 +101,90 @@ header.bar .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
 .abo-pay{background:#fff8ef;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:4px 0 0}
 @media (max-width:900px){.abo-plans{grid-template-columns:minmax(0,1fr)}}
 /* driver app */
-.dv-bell{position:relative}.dv-bell i{position:absolute;top:7px;right:8px;width:9px;height:9px;border-radius:50%;background:#ffb02e;box-shadow:0 0 0 2px #0e6a31}.dv-bell i.on{background:#7ed957}
-.dv-note{display:flex;align-items:center;gap:10px;background:#fff8ec;border:1px solid #ffd9a8;border-radius:16px;padding:10px 12px;margin-bottom:12px;font-size:14px;font-weight:700}.dv-note span{flex:1}.dv-note button{border:0;background:#e8701a;color:#fff;font:inherit;font-weight:800;border-radius:12px;padding:8px 14px;cursor:pointer}
-[data-install][hidden],[data-push][hidden],.dv-note[hidden]{display:none!important}
-.app-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 body.drv-on .hd,body.drv-on footer.ft,body.drv-on nav.tabs,body.drv-on .wa-fab,body.drv-on .cbar{display:none}
-body.drv-on{padding-bottom:0;background:#f2f6f3}
-.dv{min-height:100vh;max-width:760px;margin:0 auto;background:#f2f6f3}
-.dv-hd{background:linear-gradient(160deg,#16843a,#0b5a2b);color:#fff;padding:14px 16px 64px;border-radius:0 0 28px 28px;position:relative}
-.dv-top{display:flex;align-items:center;gap:8px}.dv-logo{height:34px;width:auto}.dv-tag{font-size:12.5px;font-weight:700;background:rgba(255,255,255,.15);border-radius:99px;padding:4px 10px;margin-inline-start:auto}
-.dv-ib{width:40px;height:40px;border-radius:12px;border:0;background:rgba(255,255,255,.14);display:grid;place-items:center;cursor:pointer}.dv-ib svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.dv-hi{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:16px;flex-wrap:wrap}.dv-hi h1{margin:0;font-size:26px}.dv-hi p{margin:2px 0 0;opacity:.85;font-size:14px}
-.dv-pick{min-width:180px;margin:0}.dv-pick label{color:#e3f3e7}.dv-pick select{border:0;color:#132018;background:#fff}
-.dv-k{position:absolute;left:12px;right:12px;bottom:-46px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.dv-k div{background:#fff;color:#132018;border-radius:16px;padding:10px 8px;text-align:center;box-shadow:0 14px 26px -18px rgba(0,0,0,.5)}
-.dv-k b{display:block;font-size:22px;line-height:1.2}.dv-k small{font-size:11.5px;color:#5b6b61;font-weight:700}.dv-k .o b{color:#e8701a}.dv-k .g b{color:#1a9e44}
-.dv-b{padding:62px 12px 30px}
+body.drv-on{padding-bottom:0;background:#f5f8f6}
+.dv{min-height:100vh;max-width:1120px;margin:0 auto;padding:0 16px 110px}
+.dv-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 0}
+.dv-logo{height:52px;width:auto;justify-self:center}
+.dv-bar-a{display:flex;gap:10px;align-items:center}
+.dv-help{display:flex;align-items:center;gap:6px;background:#eef1ef;border-radius:16px;padding:10px 14px;color:#132018;text-decoration:none;font-weight:800;font-size:14.5px}
+.dv-help svg,.dv-bell svg{width:22px;height:22px;fill:none;stroke:#132018;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dv-bell{position:relative;width:48px;height:48px;border-radius:50%;border:0;background:#eef1ef;display:grid;place-items:center;cursor:pointer}
+.dv-bell i{position:absolute;top:9px;right:11px;width:10px;height:10px;border-radius:50%;background:#e5372b;border:2px solid #eef1ef}.dv-bell i.on{background:#22b04b}
+.dv-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#25a645,#0e7a35);color:#fff;display:grid;place-items:center;font-weight:900;font-size:19px;flex:none}
+.dv-av.big{width:58px;height:58px;font-size:24px;border:3px solid #fff;box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
+.dv-pick{max-width:340px;margin:0 0 12px}
+.dv-hero{position:relative;overflow:hidden;border-radius:26px;background:linear-gradient(110deg,#0b5a2b 0%,#14883b 60%,#22a347 100%);color:#fff;padding:26px 28px;min-height:150px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.dv-hero h1{margin:0;font-size:clamp(24px,3.2vw,36px)}.dv-hero p{margin:8px 0 0;font-size:clamp(15px,1.8vw,20px);opacity:.92}
+.dv-hero::after{content:"";position:absolute;inset:auto auto -60px -60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.07)}
+.dv-hero-art{position:relative;width:min(280px,40%);height:110px;flex:none}
+.dv-hero-art .pin{position:absolute;top:0;right:30%;width:44px;height:44px;fill:#7ed957;filter:drop-shadow(0 6px 8px rgba(0,0,0,.25))}
+.dv-hero-art .road{position:absolute;top:44px;right:12%;width:55%;height:40px;border:3px dashed rgba(255,255,255,.55);border-color:rgba(255,255,255,.55) transparent transparent transparent;border-radius:50%}
+.dv-hero-art .moto{position:absolute;bottom:0;left:0;font-size:72px;transform:scaleX(-1);filter:drop-shadow(0 10px 10px rgba(0,0,0,.3))}
+.dv-k{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:16px 0}
+.dv-k>div{border-radius:20px;padding:16px;display:flex;align-items:center;gap:12px;border:1px solid transparent;box-shadow:0 10px 22px -20px rgba(0,0,0,.6)}
+.dv-k .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.75)}.dv-k .ic svg{width:28px;height:28px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dv-k small{display:block;font-size:15px;font-weight:800;color:#2b3a31}.dv-k b{font-size:30px;line-height:1.1}
+.dv-k .t{background:#eef7f0;border-color:#dcefe1}.dv-k .t svg{stroke:#1a9e44}
+.dv-k .d{background:#eaf6ee;border-color:#d4ecdb}.dv-k .d svg{stroke:#1a9e44}
+.dv-k .r{background:#fff7e8;border-color:#fde7bf}.dv-k .r svg{stroke:#e8901a}
+.dv-k .c{background:#fdeeee;border-color:#f8d6d6}.dv-k .c svg{stroke:#e5372b}
+.dv-k.sm b{font-size:24px}.dv-k.sm .ic{display:none}
+.dv-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dv-card{background:#fff;border-radius:22px;padding:16px 18px;box-shadow:0 14px 30px -26px rgba(0,0,0,.6);border:1px solid #edf1ee;margin-bottom:14px}
+.dv-ct{display:flex;align-items:center;gap:10px;margin-bottom:10px}.dv-ct b{font-size:17px}.dv-ct svg{width:26px;height:26px;fill:none;stroke:#1a9e44;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dv-earn-r{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.dv-money{display:block;font-size:clamp(30px,4vw,40px);font-weight:900;color:#1a9e44}.dv-money small{font-size:.5em;color:#2b3a31;margin-inline-start:4px}
+.dv-delta{display:inline-block;background:#eaf6ee;color:#1a8a3c;font-weight:800;font-size:13px;border-radius:10px;padding:4px 10px;margin-top:6px}.dv-delta.dn{background:#fdeeee;color:#c0392b}
+.dv-moto{font-size:26px}
+.dv-work-r{display:flex;align-items:center;justify-content:space-between;gap:10px}.dv-on{background:#eaf6ee;color:#1a8a3c;font-weight:800;border-radius:14px;padding:10px 16px;font-size:16px}.dv-on.off{background:#eef1ef;color:#5b6b61}
+.dv-sw{width:70px;height:40px;border-radius:99px;border:0;background:#cfd8d2;position:relative;cursor:pointer;transition:background .25s;flex:none}
+.dv-sw i{position:absolute;top:4px;right:4px;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:right .25s}
+.dv-sw[aria-checked=true]{background:#22b04b}.dv-sw[aria-checked=true] i{right:34px}
+.dv-row{display:flex;align-items:center;gap:12px;background:#f0f9f2;border:1px solid #dcefe1;border-radius:18px;padding:12px 14px;margin-top:10px}
+.dv-row .ic{width:46px;height:46px;border-radius:14px;background:#fff;display:grid;place-items:center;flex:none}.dv-row .ic svg{width:24px;height:24px;fill:none;stroke:#1a9e44;stroke-width:1.8}
+.dv-row .a{flex:1;min-width:0}.dv-row .a b{display:block;font-size:16px}.dv-row .a small{color:#5b6b61}
+.dv-row .b{flex:1;min-width:0;font-size:14.5px}.dv-row .b div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dv-more{border:0;background:#0e7a35;color:#fff;font:inherit;font-weight:800;border-radius:14px;padding:11px 16px;cursor:pointer;white-space:nowrap}
 .dv-tabs{display:flex;gap:6px;background:#fff;border-radius:16px;padding:5px;margin-bottom:14px;box-shadow:0 10px 20px -18px rgba(0,0,0,.5)}
 .dv-tabs button{flex:1;white-space:nowrap;border:0;background:none;border-radius:12px;padding:11px 6px;font:inherit;font-weight:800;font-size:14px;color:#4b5b51;cursor:pointer}
 .dv-tabs button[aria-selected=true]{background:#1a9e44;color:#fff}.dv-tabs em{font-style:normal;background:rgba(0,0,0,.08);border-radius:99px;padding:1px 7px;margin-inline-start:4px;font-size:12px}.dv-tabs [aria-selected=true] em{background:rgba(255,255,255,.25)}
 .dv-c{background:#fff;border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 14px 28px -24px rgba(0,0,0,.6);border:1px solid #e6eee8}
-.dv-c.road{border-color:#ffb877}
+.dv-c.road{border-color:#ffb877}.dv-sh .dv-c{box-shadow:none;border:0;padding:0}
 .dv-ch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.dv-id{font-weight:800}.dv-st{border-radius:99px;padding:3px 10px;font-size:12.5px;font-weight:800;background:#eef1ef}
-.dv-st.new{background:#e6f0ff;color:#2f6fd6}.dv-st.prep{background:#fff6dd;color:#a86b00}.dv-st.road{background:#fff0e3;color:#d2600f}.dv-st.done{background:#e6f6ea;color:#1a8a3c}
+.dv-st.new{background:#e6f0ff;color:#2f6fd6}.dv-st.prep{background:#fff6dd;color:#a86b00}.dv-st.road{background:#fff0e3;color:#d2600f}.dv-st.done{background:#e6f6ea;color:#1a8a3c}.dv-st.cancel{background:#fdeeee;color:#c0392b}
 .dv-slot{margin-inline-start:auto;font-size:12.5px;font-weight:700;color:#4b5b51;background:#f2f6f3;border-radius:99px;padding:3px 10px}
-.dv-cu{display:flex;align-items:center;gap:10px;margin:12px 0 8px}.dv-av{width:42px;height:42px;border-radius:50%;background:#e6f6ea;color:#1a8a3c;display:grid;place-items:center;font-weight:900;font-size:18px;flex:none}
-.dv-cu b{display:block;font-size:16px}.dv-cu small{color:#5b6b61}
+.dv-cu{display:flex;align-items:center;gap:10px;margin:12px 0 8px}.dv-cu b{display:block;font-size:16px}.dv-cu small{color:#5b6b61}
 .dv-ad{background:#f7faf8;border-radius:14px;padding:10px 12px;font-size:14.5px;line-height:1.5}.dv-ad .hint{font-size:13px}
-.dv-qa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.dv-qa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}
 .dv-qa a{display:flex;align-items:center;justify-content:center;gap:6px;border-radius:14px;padding:11px 6px;font-weight:800;font-size:13.5px;text-decoration:none;border:1.5px solid #e1e8e3;color:#132018;background:#fff}
-.dv-qa a.wa{border-color:#bfe9cc;color:#128c4a}.dv-qa a.call{border-color:#cfe0ff;color:#2f6fd6}
+.dv-qa a.call{border-color:#cfe0ff;color:#2f6fd6}
+.dv-wa{background:#effaf3;border:1px solid #c9ecd5;border-radius:16px;padding:10px;margin:10px 0}.dv-wa p{margin:0 0 8px;font-weight:800;font-size:14px;color:#128c4a}
+.dv-wa div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.dv-wa a{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:#25d366;color:#fff;text-decoration:none;font-weight:800;font-size:12.5px;border-radius:12px;padding:9px 4px}.dv-wa a span{font-size:18px}
+.dv-wa a.cur{outline:3px solid #0e7a35;outline-offset:1px}
 .dv-it{margin:4px 0 10px}.dv-it summary{cursor:pointer;font-weight:800;font-size:14px;padding:6px 0;list-style:none}.dv-it summary::-webkit-details-marker{display:none}.dv-it summary::after{content:" ▾";color:#8a978f}.dv-it[open] summary::after{content:" ▴"}
 .dv-it ul{margin:4px 0 0;padding:0 18px;font-size:14px;line-height:1.8}
 .dv-cash{display:flex;justify-content:space-between;align-items:center;background:#fff4ea;border:1.5px dashed #ffb877;border-radius:14px;padding:10px 14px;margin-bottom:10px}
 .dv-cash span{font-weight:700;color:#7a4a1c}.dv-cash b{font-size:24px;color:#e8701a}.dv-cash.paid{background:#eef8f0;border-color:#9fd8ad}.dv-cash.paid b{font-size:15px;color:#1a8a3c}
 .dv-go{width:100%;border:0;border-radius:16px;padding:16px;font:inherit;font-size:17px;font-weight:900;color:#fff;cursor:pointer;background:linear-gradient(180deg,#25a645,#0e7a35);box-shadow:0 14px 24px -14px rgba(14,122,53,.9)}
-.dv-go.or{background:linear-gradient(180deg,#ff9a3c,#e8701a);box-shadow:0 14px 24px -14px rgba(232,112,26,.9)}.dv-go.bl{background:linear-gradient(180deg,#3d86f0,#2563c9)}
-.dv-empty{text-align:center;padding:40px 16px;color:#5b6b61}.dv-empty div{font-size:54px}
-.dv-gate{max-width:420px;margin:70px auto 0;background:#fff;border-radius:24px;padding:28px;text-align:center;box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}.dv-gate img{border-radius:22px}
-@media (max-width:420px){.dv-k b{font-size:19px}.dv-k small{font-size:10.5px}.dv-qa a{font-size:12.5px}}
+.dv-go.or{background:linear-gradient(180deg,#ff9a3c,#e8701a)}.dv-go.bl{background:linear-gradient(180deg,#3d86f0,#2563c9)}
+.dv-empty{text-align:center;padding:30px 16px;color:#5b6b61}.dv-empty div{font-size:46px}
+.dv-gate{max-width:420px;margin:50px auto 0;background:#fff;border-radius:24px;padding:28px;text-align:center;box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}.dv-gate img{border-radius:22px}
+.dv-note{display:flex;align-items:center;gap:10px;background:#fff8ec;border:1px solid #ffd9a8;border-radius:16px;padding:10px 12px;margin-bottom:12px;font-size:14px;font-weight:700}.dv-note span{flex:1}.dv-note button{border:0;background:#e8701a;color:#fff;font:inherit;font-weight:800;border-radius:12px;padding:8px 14px;cursor:pointer}
+.dv-wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:170px;margin-top:10px}
+.dv-wk div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-size:12px;color:#5b6b61}
+.dv-wk i{width:100%;max-width:38px;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#34b85a,#1a9e44);min-height:4px}.dv-wk b{color:#132018;font-size:12.5px}
+.dv-me{text-align:center}.dv-me .dv-av{margin:0 auto 10px}.dv-me h2{margin:0}.dv-me p{margin:4px 0 16px;color:#5b6b61}
+.dv-me .btn,.dv-me button.dv-go{margin-top:10px}
+.dv-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(1120px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;background:#fff;border-radius:26px 26px 0 0;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));box-shadow:0 -12px 30px -22px rgba(0,0,0,.5);z-index:40}
+.dv-nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;font-weight:800;font-size:13.5px;color:#3b4a41;border-radius:18px;padding:9px 4px;cursor:pointer}
+.dv-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dv-nav button[aria-current=page]{background:linear-gradient(180deg,#25a645,#0e7a35);color:#fff}
+body:not(.drv-on) .dv-nav{display:none}
+@media (max-width:760px){.dv{padding:0 12px 100px}.dv-logo{height:40px}.dv-help span{display:none}.dv-help{padding:12px}.dv-av.big{width:46px;height:46px;font-size:19px}
+  .dv-hero{padding:20px;min-height:120px}.dv-hero-art{width:110px;height:90px}.dv-hero-art .road,.dv-hero-art .pin{display:none}.dv-hero-art .moto{font-size:64px}
+  .dv-k{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dv-k>div{padding:12px}.dv-k .ic{width:42px;height:42px}.dv-k .ic svg{width:22px;height:22px}.dv-k b{font-size:24px}.dv-k small{font-size:13px}
+  .dv-2{grid-template-columns:minmax(0,1fr)}.dv-row{flex-wrap:wrap}.dv-row .b{flex-basis:100%;order:3}.dv-more{margin-inline-start:auto}}
 /* team login */
 body.lg-on .hd,body.lg-on footer.ft,body.lg-on nav.tabs,body.lg-on .wa-fab,body.lg-on .cbar{display:none}
 body.lg-on{padding-bottom:0}
@@ -1516,21 +1561,35 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 <!-- ============ DRIVER ============ -->
 <div class="view" id="v-driver" hidden>
   <div class="dv" dir="rtl" lang="ar">
-    <header class="dv-hd">
-      <div class="dv-top"><img class="dv-logo" src="img/logo-dark.png" alt="Khedar48" width="600" height="166"><span class="dv-tag">🛵 تطبيق الموزع</span>
-        <button class="dv-ib" data-install aria-label="تثبيت التطبيق" title="تثبيت التطبيق"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>
-        <button class="dv-ib dv-bell" data-push aria-label="تفعيل الإشعارات" title="الإشعارات"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg><i data-pushdot></i></button>
-        <button class="dv-ib" id="drvRefresh" aria-label="تحديث"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg></button>
-        <button class="dv-ib" id="drvOut" aria-label="خروج"><svg viewBox="0 0 24 24"><path d="M15 17l5-5-5-5M20 12H9M11 3H5a2 2 0 00-2 2v14a2 2 0 002 2h6"/></svg></button></div>
-      <div class="dv-hi"><div><h1 id="drvWho">مرحبا 👋</h1><p id="drvDate"></p></div><div class="fld dv-pick" id="drvPick"><label for="drvSel">شكون نتا؟</label><select id="drvSel"></select></div></div>
-      <div class="dv-k" id="drvKpis"></div>
+    <header class="dv-bar">
+      <span class="dv-av big" id="drvAv">👤</span>
+      <img class="dv-logo" src="img/logo.png" alt="Khedar48" width="980" height="272">
+      <div class="dv-bar-a"><a class="dv-help" href="https://wa.me/212713694399" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM17 16v1a3 3 0 01-3 3h-2"/></svg><span>مساعدة</span></a>
+        <button class="dv-bell" data-push aria-label="الإشعارات"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg><i data-pushdot></i></button></div>
     </header>
     <div id="driverGate" class="dv-gate" hidden><img src="icons/icon-192.png" alt="" width="96" height="96"><h2>تطبيق الموزع</h2><p>هاد الصفحة غير للموزعين ديال خضار 48.</p><button class="lg-go" data-go="login">دخول الموزع</button></div>
     <main id="driverBody" class="dv-b">
+      <div class="fld dv-pick" id="drvPick"><label for="drvSel">شكون نتا؟ (معاينة الأدمين)</label><select id="drvSel"></select></div>
       <div class="dv-note" id="drvPushNote" hidden>🔔 <span>فعّل الإشعارات باش يوصلك كل طلب جديد فالتيليفون.</span><button data-push>فعّل</button></div>
-      <div class="dv-tabs" role="tablist" id="drvTabs"></div>
-      <div id="drvList"></div>
+      <section data-dp="home">
+        <div class="dv-hero"><div><h1 id="drvWho">مرحبا بك 👋</h1><p>جاهز لتوصيل الطلبات اليوم؟</p></div><div class="dv-hero-art" aria-hidden="true"><svg class="pin" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.6" fill="#0e7a35"/></svg><span class="road"></span><span class="moto">🛵</span></div></div>
+        <div class="dv-k" id="drvKpis"></div>
+        <div class="dv-2">
+          <div class="dv-card dv-earn"><div class="dv-ct"><svg viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h12v4M16 13.5h.01"/></svg><b>أرباح اليوم</b></div><div class="dv-earn-r"><div><span class="dv-money" id="drvCash"></span><span class="dv-delta" id="drvDelta"></span></div><span id="drvSpark"></span></div></div>
+          <div class="dv-card dv-work"><div class="dv-ct"><span class="dv-moto">🛵</span><b>حالة العمل</b></div><div class="dv-work-r"><span class="dv-on" id="drvOnLbl"></span><button class="dv-sw" id="drvOnline" role="switch" aria-checked="true" aria-label="حالة العمل"><i></i></button></div></div>
+        </div>
+        <div class="dv-card"><div class="dv-ct"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg><b>الطلبات الحالية (<span id="drvCurN" class="num">0</span>)</b></div><div id="drvCur"></div></div>
+      </section>
+      <section data-dp="orders" hidden><div class="dv-tabs" role="tablist" id="drvTabs"></div><div id="drvList"></div></section>
+      <section data-dp="stats" hidden><div class="dv-card"><div class="dv-ct"><b>📊 آخر 7 أيام</b></div><div class="dv-k sm" id="drvStatK"></div><div id="drvWeek"></div></div></section>
+      <section data-dp="me" hidden><div class="dv-card dv-me" id="drvMe"></div></section>
     </main>
+    <nav class="dv-nav" id="drvNav">
+      <button data-dpage="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span>الرئيسية</span></button>
+      <button data-dpage="orders"><svg viewBox="0 0 24 24"><path d="M9 4h6v3H9zM7 5H5v16h14V5h-2M8 11h8M8 15h6"/></svg><span>طلباتي</span></button>
+      <button data-dpage="stats"><svg viewBox="0 0 24 24"><path d="M5 20v-6M10 20V10M15 20V6M20 20v-9"/></svg><span>الإحصائيات</span></button>
+      <button data-dpage="me"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg><span>حسابي</span></button>
+    </nav>
   </div>
 </div>
 
@@ -2443,21 +2502,25 @@ const SITE="https://www.khedar48.com/";
 function notifyText(o,st=o.status){
   const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"",id=o.id,dv=drivers.list?.[o.driver];
   const link=o.tk?`${SITE}#t=${encodeURIComponent(id)}.${o.tk}`:"";
-  const tot=o.sub_id?(fr?"déjà payé (abonnement)":"مخلص فالاشتراك"):fr?`${(+o.total||0).toLocaleString("fr-MA",{minimumFractionDigits:2,maximumFractionDigits:2})} MAD`:`${fmt(o.total)} درهم`;
+  const nIt=(o.items||[]).length;
+  const tot=o.sub_id?(fr?"déjà payé dans votre abonnement ✅":"مخلّص فالاشتراك ديالك ✅"):fr?`${(+o.total||0).toLocaleString("fr-MA",{minimumFractionDigits:2,maximumFractionDigits:2})} MAD`:`${fmt(o.total)} درهم`;
+  const pay=o.sub_id?"":fr?" (paiement à la livraison)":" (الخلاص عند الاستلام)";
+  const hi=fr?`Bonjour ${n} 👋`:`السلام عليكم ${n} 👋`;
   const M=fr?{
-    new:`Bonjour ${n}, nous avons bien reçu votre commande ${id} ✅ Total : ${tot} (paiement à la livraison). Nous la préparons très vite.`,
-    prep:`Bonjour ${n}, votre commande ${id} est en préparation 🧺 Nous choisissons vos produits les plus frais.`,
-    road:`Bonjour ${n}, votre commande ${id} est en route 🛵${dv?` avec ${dv.n} (${dv.phone})`:""}. Gardez votre téléphone près de vous. Total à payer : ${tot}.`,
-    done:`Merci ${n} ! Votre commande ${id} a été livrée 🌿 Bonne dégustation. Pour recommander : ${SITE}`,
-    cancel:`Bonjour ${n}, votre commande ${id} a été annulée. Pour toute question, répondez simplement à ce message.`}
+    new:`${hi}\nMerci pour votre confiance 🌿\n\nNous avons bien reçu votre commande *${id}* ✅\n🧺 ${nIt} produit${nIt>1?"s":""}\n💵 Total : *${tot}*${pay}\n🕒 Créneau : ${o.slot||"—"}\n\nNous la préparons tout de suite et vous prévenons dès qu'elle part en livraison.`,
+    prep:`${hi}\nVotre commande *${id}* est en cours de préparation 🧺\nNous choisissons pour vous les fruits et légumes les plus frais, un par un.\n\nNous vous prévenons dès qu'elle part avec le livreur 🛵`,
+    road:`${hi}\nBonne nouvelle : votre commande *${id}* est en route 🛵\n${dv?`👤 Livreur : ${dv.n}${dv.phone?` (${dv.phone})`:""}\n`:""}💵 À payer : *${tot}*\n\nMerci de garder votre téléphone à portée de main, le livreur vous appelle à son arrivée.`,
+    done:`Merci beaucoup ${n} 🙏\nVotre commande *${id}* a bien été livrée ✅\nBonne dégustation 🌿\n\nUne remarque ? Répondez simplement à ce message.\nPour recommander : ${SITE}`,
+    cancel:`${hi}\nVotre commande *${id}* a été annulée ❌\nS'il s'agit d'une erreur ou si vous souhaitez recommander, répondez à ce message : nous nous en occupons.\nDésolés pour le désagrément 🙏`}
    :{
-    new:`مرحبا ${n}، توصلنا بالطلب ديالك ${id} ✅ المجموع: ${tot} (الخلاص عند الاستلام). غادي نوجدوه دغيا.`,
-    prep:`مرحبا ${n}، الطلب ديالك ${id} كيتوجد دابا 🧺 كنختارو ليك أطرى المنتوجات.`,
-    road:`مرحبا ${n}، الطلب ديالك ${id} خرج فالطريق 🛵${dv?` مع الموزع ${dv.n} (${dv.phone})`:""}. خلّي التيليفون قريب منك. المبلغ اللي غادي تخلص: ${tot}.`,
-    done:`شكراً ${n}! الطلب ${id} توصّل 🌿 بالصحة والراحة. باش تطلب مرة أخرى: ${SITE}`,
-    cancel:`مرحبا ${n}، الطلب ديالك ${id} تلغى. إلا عندك شي سؤال، جاوبنا هنا.`};
-  const track=link&&!["done","cancel"].includes(st)?`\n\n${fr?"Suivre la commande :":"تتبع الطلب:"} ${link}`:"";
-  return (M[st]||M.new)+track;
+    new:`${hi}\nشكراً على الثقة ديالك 🌿\n\nتوصلنا بالطلب ديالك رقم *${id}* ✅\n🧺 ${nIt} منتوج\n💵 المبلغ: *${tot}*${pay}\n🕒 الوقت: ${o.slot||"—"}\n\nغادي نبداو نوجدوه دابا، وغادي نخبروك ملّي يخرج للتوصيل.`,
+    prep:`${hi}\nالطلب ديالك *${id}* كيتوجد دابا 🧺\nكنختارو ليك أطرى الخضرة والفواكه، وحدة بوحدة.\n\nغادي نخبروك ملّي يخرج مع الموزع 🛵`,
+    road:`${hi}\nخبر زوين: الطلب ديالك *${id}* خرج فالطريق دابا 🛵\n${dv?`👤 الموزع: ${dv.n}${dv.phone?` (${dv.phone})`:""}\n`:""}💵 المبلغ اللي غادي تخلص: *${tot}*\n\nعافاك خلّي التيليفون قريب منك، الموزع غادي يعيّط ليك ملّي يوصل.`,
+    done:`شكراً بزاف ${n} 🙏\nالطلب ديالك *${id}* توصّل بالسلامة ✅\nبالصحة والراحة 🌿\n\nإلا كانت عندك شي ملاحظة، جاوبنا هنا نيشان.\nباش تطلب مرة أخرى: ${SITE}`,
+    cancel:`${hi}\nالطلب ديالك *${id}* تلغى ❌\nإلا كان شي غلط ولا بغيتي تعاود الطلب، جاوبنا هنا وغادي نتكلفو بيك.\nسمح لينا على الإزعاج 🙏`};
+  const track=link&&!["done","cancel"].includes(st)?`\n\n📍 ${fr?"Suivre votre commande :":"تبّع الطلب ديالك:"}\n${link}`:"";
+  const sign=fr?"\n\n— L'équipe Khedar48 🥬 · Oujda":"\n\n— فريق خضار 48 🥬 · وجدة";
+  return (M[st]||M.new)+track+sign;
 }
 const notifyUrl=(o,st)=>`https://wa.me/${waNum(o.phone)}?text=${encodeURIComponent(notifyText(o,st))}`;
 const thumb=p=>{const im=photoOf(p);return `<span class="th" style="${im?"":`background:color-mix(in srgb,${safeColor(p?.t)} 16%,var(--card))`}">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p?.e||"🥬")}</span>`};
@@ -2883,37 +2946,70 @@ const sideOpen=on=>{$("#side").classList.toggle("open",on);$("#sScrim").classLis
 function toggleTheme(){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark"}
 
 /* ---------------- driver ---------------- */
-let drvTab="mine";
+let drvTab="mine",drvPage="home",drvOn=store.get("drvOn",true);
 const mapUrl=o=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;
+const DIC={bag:"M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 016 0v2",ok:"M20 6L9 17l-5-5",clock:"M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z",x:"M12 21a9 9 0 100-18 9 9 0 000 18zM9 9l6 6M15 9l-6 6"};
+const dic=k=>`<span class="ic"><svg viewBox="0 0 24 24"><path d="${DIC[k]}"/></svg></span>`;
 function drvCard(o,kind){const st=o.status,nIt=(o.items||[]).length,kg=(o.items||[]).reduce((a,[id,q])=>a+((byId(id)?.u||"kg")==="kg"?+q||0:0),0);
   const act=kind==="free"?`<button class="dv-go bl" data-take="${esc(o.id)}">🙋 خذ هاد الطلب</button>`
     :kind==="mine"?(st==="road"?`<button class="dv-go or" data-dst="done" data-oid="${esc(o.id)}">✅ تسلّم وتخلّص</button>`:`<button class="dv-go" data-dst="road" data-oid="${esc(o.id)}">🛵 خرجت بالطلب</button>`):"";
+  const wa=kind==="mine"?`<div class="dv-wa"><p>💬 خبّر الزبون فالواتساب</p><div>
+      <a href="${esc(notifyUrl(o,"prep"))}" target="_blank" rel="noopener" class="${st==="prep"||st==="new"?"cur":""}"><span>🧺</span>الطلبية واجدة</a>
+      <a href="${esc(notifyUrl(o,"road"))}" target="_blank" rel="noopener" class="${st==="road"?"cur":""}"><span>🛵</span>فالطريق</a>
+      <a href="${esc(notifyUrl(o,"done"))}" target="_blank" rel="noopener"><span>✅</span>توصّلات</a></div></div>`:"";
   return `<article class="dv-c ${esc(st)}"><div class="dv-ch"><span class="dv-id num">#${esc(o.id)}</span><span class="dv-st ${esc(st)}">${STATUS[st]||esc(st)}</span><span class="dv-slot">🕒 ${esc(o.slot||"")}</span></div>
    <div class="dv-cu"><span class="dv-av">${esc(initial(o.name))}</span><div><b>${esc(o.name)}</b><small class="num" dir="ltr">${esc(o.phone)}</small></div></div>
    <div class="dv-ad">📍 <b>${esc(o.hood||"")}</b> · ${esc(o.addr||"")}${o.note?`<br><span class="hint">📝 ${esc(o.note)}</span>`:""}</div>
-   ${kind==="done"?"":`<div class="dv-qa"><a class="call" href="tel:${esc(o.phone)}">📞 عيّط</a><a class="wa" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener">💬 واتساب</a><a href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🗺️ الخريطة</a></div>`}
-   <details class="dv-it" ${kind==="mine"&&st!=="road"?"open":""}><summary>🧺 ${nIt} منتوج${kg?` · ${fmt(kg)} كغ`:""}</summary>${itemsHtml(o)}</details>
+   ${kind==="done"?"":`<div class="dv-qa"><a class="call" href="tel:${esc(o.phone)}">📞 عيّط للزبون</a><a href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🗺️ الخريطة</a></div>`}
+   ${wa}
+   <details class="dv-it" ${kind!=="done"?"open":""}><summary>🧺 ${nIt} منتوج${kg?` · ${fmt(kg)} كغ`:""}</summary>${itemsHtml(o)}</details>
    ${o.sub_id?`<div class="dv-cash paid"><span>💳 مخلص فالاشتراك</span><b>ما تجمع والو</b></div>`:`<div class="dv-cash"><span>💵 خاصك تجمع</span><b class="num">${fmt(o.total)} درهم</b></div>`}
    ${act}</article>`}
+function openDrvOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="drv:"+id;
+  const kind=o.driver&&o.driver===me&&["new","prep","road"].includes(o.status)?"mine":!o.driver&&["new","prep"].includes(o.status)?"free":"done";
+  $("#shTitle").textContent=`الطلب #${o.id}`;$("#shBody").innerHTML=`<div class="dv-sh" dir="rtl">${drvCard(o,kind)}</div>`;$("#shFoot").innerHTML="";
+  $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function drvDays(O,n){return [...Array(n)].map((_,i)=>{const r=per(1,n-1-i),D=O.filter(o=>me&&o.driver===me&&o.status==="done"&&inR(o,r));
+  return{d:new Date(r[0]),n:D.length,cash:D.filter(o=>!o.sub_id).reduce((a,o)=>a+(+o.total||0),0)}})}
 function renderDriver(){
   document.body.classList.toggle("drv-on",view==="driver");
-  $("#driverGate").hidden=isTeam();$("#driverBody").hidden=!isTeam();$(".dv-k").hidden=!isTeam();if(!isTeam())return;
-  $("#drvPick").hidden=role==="driver";$("#drvOut").hidden=!cloud;
-  const L=drivers.list||{};$("#drvSel").innerHTML=`<option value="">— اختار سميتك —</option>`+Object.entries(L).map(([k,d])=>`<option value="${esc(k)}" ${me===k?"selected":""}>${esc(d.n)}</option>`).join("");
-  $("#drvWho").textContent=L[me]?`مرحبا ${L[me].n} 👋`:"مرحبا 👋";
-  $("#drvDate").textContent=new Date().toLocaleDateString("ar-MA",{weekday:"long",day:"numeric",month:"long"});
-  const O=staffOrders(),today=new Date().toDateString();
+  $("#driverGate").hidden=isTeam();$("#driverBody").hidden=!isTeam();$("#drvNav").hidden=!isTeam();if(!isTeam())return;
+  $("#drvPick").hidden=role==="driver";
+  const L=drivers.list||{},dv=L[me];$("#drvSel").innerHTML=`<option value="">— اختار سميتك —</option>`+Object.entries(L).map(([k,d])=>`<option value="${esc(k)}" ${me===k?"selected":""}>${esc(d.n)}</option>`).join("");
+  $("#drvWho").textContent=dv?`مرحبا بك، ${dv.n} 👋`:"مرحبا بك 👋";$("#drvAv").textContent=dv?initial(dv.n):"👤";
+  $$("[data-dp]").forEach(x=>x.hidden=x.dataset.dp!==drvPage);$$("[data-dpage]").forEach(b=>b.dataset.dpage===drvPage?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
+  const O=staffOrders(),T=per(1),Y=per(1,1);
   const mine=O.filter(o=>me&&o.driver===me&&["new","prep","road"].includes(o.status)).sort((a,b)=>(b.status==="road")-(a.status==="road")||a.at-b.at);
-  const free=O.filter(o=>!o.driver&&["new","prep"].includes(o.status)).sort((a,b)=>a.at-b.at);
-  const done=O.filter(o=>me&&o.driver===me&&o.status==="done"&&new Date(o.at).toDateString()===today);
-  const cash=done.filter(o=>!o.sub_id).reduce((a,o)=>a+(+o.total||0),0);
-  $("#drvKpis").innerHTML=`<div class="o"><b class="num">${mine.length}</b><small>عندي دابا</small></div><div class="g"><b class="num">${done.length}</b><small>وصلت اليوم</small></div><div><b class="num">${fmt(cash)}</b><small>جمعت (درهم)</small></div><div><b class="num">${free.length}</b><small>بلا موزع</small></div>`;
-  const T=[["mine","طلباتي",mine.length],["free","جداد",free.length],["done","سالاو",done.length]];
-  $("#drvTabs").innerHTML=T.map(([k,l,n])=>`<button role="tab" data-dtab="${k}" aria-selected="${drvTab===k}">${l}<em class="num">${n}</em></button>`).join("");
+  const free=drvOn?O.filter(o=>!o.driver&&["new","prep"].includes(o.status)).sort((a,b)=>a.at-b.at):[];
+  const myT=O.filter(o=>me&&o.driver===me&&inR(o,T)),done=O.filter(o=>me&&o.driver===me&&o.status==="done"&&inR(o,T)),canc=myT.filter(o=>o.status==="cancel");
+  const cashOf=A=>A.filter(o=>!o.sub_id).reduce((a,o)=>a+(+o.total||0),0),cash=cashOf(done),cashY=cashOf(O.filter(o=>me&&o.driver===me&&o.status==="done"&&inR(o,Y)));
+  const K=(c,ic,l,v)=>`<div class="${c}">${dic(ic)}<div><small>${l}</small><b class="num">${v}</b></div></div>`;
+  $("#drvKpis").innerHTML=K("t","bag","إجمالي الطلبات",new Set([...myT,...mine].map(o=>o.id)).size)+K("d","ok","موصلة",done.length)+K("r","clock","قيد التوصيل",mine.filter(o=>o.status==="road").length)+K("c","x","ملغاة",canc.length);
+  $("#drvCash").innerHTML=`${fmt(cash)}<small>MAD</small>`;
+  const dl=cashY?Math.round((cash-cashY)/cashY*100):null;$("#drvDelta").className="dv-delta"+(dl!==null&&dl<0?" dn":"");$("#drvDelta").textContent=dl===null?"أول نهار 💪":`${dl>=0?"↑ +":"↓ "}${dl}% مقارنة بالأمس`;
+  const W=drvDays(O,7),mx=Math.max(1,...W.map(w=>w.cash)),pts=W.map((w,i)=>`${(i*20).toFixed(0)},${(44-w.cash/mx*40).toFixed(1)}`).join(" ");
+  $("#drvSpark").innerHTML=`<svg viewBox="0 0 120 48" width="130" height="52" aria-hidden="true"><polygon points="0,48 ${pts} 120,48" fill="#22b04b" opacity=".12"/><polyline points="${pts}" fill="none" stroke="#1a9e44" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+  $("#drvOnline").setAttribute("aria-checked",String(drvOn));const ol=$("#drvOnLbl");ol.textContent=drvOn?"● متصل الآن":"○ غير متصل";ol.className="dv-on"+(drvOn?"":" off");
+  const cur=[...mine,...free.slice(0,3)];$("#drvCurN").textContent=mine.length;
+  $("#drvCur").innerHTML=cur.length?cur.map(o=>`<div class="dv-row"><span class="ic"><svg viewBox="0 0 24 24"><path d="${DIC.bag}"/></svg></span>
+      <div class="a"><b class="num">#${esc(o.id)}</b><small>${(o.items||[]).length} منتوجات • ${o.sub_id?"مخلص":`${fmt(o.total)} MAD`}${o.driver?"":" · <b style='color:#2f6fd6'>بلا موزع</b>"}</small></div>
+      <div class="b"><div>👤 <b>${esc(o.name)}</b></div><div class="hint">📍 ${esc(o.hood||"")}، وجدة</div></div>
+      <button class="dv-more" data-dord="${esc(o.id)}">عرض التفاصيل ‹</button></div>`).join("")
+    :`<div class="dv-empty"><div>${drvOn?"👌":"😴"}</div><p>${drvOn?"ماعندك حتى طلب دابا.":"نتا غير متصل. شعّل «حالة العمل» باش تشوف الطلبات الجداد."}</p></div>`;
+  const Tb=[["mine","طلباتي",mine.length],["free","جداد",free.length],["done","سالاو",done.length]];
+  $("#drvTabs").innerHTML=Tb.map(([k,l,n])=>`<button role="tab" data-dtab="${k}" aria-selected="${drvTab===k}">${l}<em class="num">${n}</em></button>`).join("");
   const E=(e,t)=>`<div class="dv-empty"><div>${e}</div><p>${t}</p></div>`;
-  $("#drvList").innerHTML=drvTab==="mine"?(!me?E("👤","اختار سميتك باش يبانو ليك الطلبات ديالك."):mine.length?mine.map(o=>drvCard(o,"mine")).join(""):E("👌","ماعندك حتى طلب دابا. شوف «جداد» باش تاخذ طلب."))
-    :drvTab==="free"?(free.length?free.map(o=>drvCard(o,"free")).join(""):E("✅","كاع الطلبات عندهم موزع."))
+  $("#drvList").innerHTML=drvTab==="mine"?(!me?E("👤","اختار سميتك باش يبانو ليك الطلبات ديالك."):mine.length?mine.map(o=>drvCard(o,"mine")).join(""):E("👌","ماعندك حتى طلب دابا."))
+    :drvTab==="free"?(free.length?free.map(o=>drvCard(o,"free")).join(""):E(drvOn?"✅":"😴",drvOn?"كاع الطلبات عندهم موزع.":"شعّل «حالة العمل» باش تشوف الطلبات الجداد."))
     :(done.length?done.map(o=>drvCard(o,"done")).join(""):E("🛵","مازال ما وصلتي حتى طلب اليوم."));
+  const W7=drvDays(O,7),m7=Math.max(1,...W7.map(w=>w.n));
+  $("#drvStatK").innerHTML=`<div class="d"><div><small>توصيلات</small><b class="num">${W7.reduce((a,w)=>a+w.n,0)}</b></div></div><div class="t"><div><small>الفلوس اللي جمعت</small><b class="num">${fmt(W7.reduce((a,w)=>a+w.cash,0))}</b></div></div><div class="r"><div><small>معدل فالنهار</small><b class="num">${fmt(Math.round(W7.reduce((a,w)=>a+w.n,0)/7*10)/10)}</b></div></div><div class="c"><div><small>ملغاة</small><b class="num">${O.filter(o=>me&&o.driver===me&&o.status==="cancel"&&o.at>=per(7)[0]).length}</b></div></div>`;
+  $("#drvWeek").innerHTML=`<div class="dv-wk">${W7.map(w=>`<div><b class="num">${w.n}</b><i style="height:${Math.max(3,w.n/m7*100)}%"></i><span>${w.d.toLocaleDateString("ar-MA",{weekday:"short"})}</span></div>`).join("")}</div>`;
+  $("#drvMe").innerHTML=`<span class="dv-av big">${dv?esc(initial(dv.n)):"👤"}</span><h2>${esc(dv?.n||"الموزع")}</h2><p class="num" dir="ltr">${esc(dv?.phone||userEmail||"")}</p>
+    <button class="btn b-gr block" data-install>📲 زيد التطبيق للتيليفون</button><button class="btn b-or block" data-push style="margin-top:10px">🔔 فعّل الإشعارات</button>
+    <a class="btn b-wa block" style="margin-top:10px" href="https://wa.me/212713694399" target="_blank" rel="noopener">💬 تواصل مع الإدارة</a>
+    ${cloud?`<button class="btn b-gh block" id="drvOut" style="margin-top:10px">🚪 خروج</button>`:""}`;
+  if(sheetOpen()&&mode.startsWith("drv:"))openDrvOrder(mode.slice(4));
 }
 
 /* ---------------- views ---------------- */
@@ -2966,6 +3062,9 @@ document.addEventListener("click",async e=>{
     window.open(notifyUrl({...o,status:D.dst},D.dst),"_blank","noopener");
     await setStatus(o,D.dst);toast(D.dst==="done"?"مبروك، الطلب توصّل ✓":"بالتوفيق فالطريق")}return}
   if(D.dtab){drvTab=D.dtab;renderDriver();return}
+  if(D.dpage){drvPage=D.dpage;renderDriver();if(typeof renderAppBtns==="function")renderAppBtns();window.scrollTo({top:0});return}
+  if(D.dord){openDrvOrder(D.dord);return}
+  if(t.id==="drvOnline"){drvOn=!drvOn;store.set("drvOn",drvOn);renderDriver();toast(drvOn?"متصل ✓":"غير متصل");return}
   if(D.take){if(!me){toast("اختار سميتك اللول");$("#drvSel").focus();return}const o=staffOrders().find(x=>x.id===D.take);if(o){await patchOrder(o,{driver:me,status:"prep"});toast("الطلب ولى عندك")}return}
   if(D.catall){products.filter(p=>p.c===D.catall).forEach(p=>{p.on=D.v==="1";if(!p.on)delete cart[p.id]});saveCatalog("products");renderAll();toast(D.v==="1"?"Rayon activé":"Rayon désactivé");return}
   if(D.delp){products=products.filter(p=>p.id!==D.delp);saveCatalog("products");renderAll();toast("Produit supprimé");return}
