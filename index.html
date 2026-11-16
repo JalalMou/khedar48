@@ -5,15 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>خضار 48 · Khedar48 — الخضرة والفواكه حتى لباب دارك فوجدة</title>
 <meta name="description" content="خضار 48: توصيل الخضرة والفواكه الطرية فوجدة فنفس النهار. اطلب من التطبيق وخلّص عند الاستلام.">
-<meta name="theme-color" content="#0b6b32">
-<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>/* one installable app per space: shop (/), admin (/admin), driver (/livreur), call center (/callcenter) */
+(function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":p==="/callcenter"?"callcenter":"";
+document.write("<link rel=\"manifest\" href=\""+(m?"manifest-"+m+".webmanifest":"manifest.webmanifest")+"\">");window.K48_APP=m||"shop"})()</script>
+<noscript><link rel="manifest" href="manifest.webmanifest"></noscript>
 <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="icons/favicon-48.png" sizes="48x48" type="image/png">
 <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Khedar48">
-<script>(function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":p==="/callcenter"?"callcenter":"";if(!m)return;document.querySelector("link[rel=manifest]").href="manifest-"+m+".webmanifest";document.querySelector("meta[name=apple-mobile-web-app-title]").content=m==="admin"?"K48 Admin":m==="livreur"?"K48 Livreur":"K48 Call";document.querySelector("meta[name=theme-color]").content="#0b5a2b"})()</script>
+<script>(function(){var m=window.K48_APP;if(!m||m==="shop")return;document.querySelector("meta[name=apple-mobile-web-app-title]").content=m==="admin"?"K48 Admin":m==="livreur"?"K48 Livreur":"K48 Call"})()</script>
 <meta property="og:title" content="خضار 48 · Khedar48">
 <meta property="og:description" content="الخضرة والفواكه الطرية حتى لباب دارك فوجدة">
 <meta property="og:image" content="img/hero.jpg">
