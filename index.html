@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>خضار 48 · Khedar48 — الخضرة والفواكه حتى لباب دارك فوجدة</title>
 <meta name="description" content="خضار 48: توصيل الخضرة والفواكه الطرية فوجدة فنفس النهار. اطلب من التطبيق وخلّص عند الاستلام.">
-<meta name="theme-color" content="#ffffff">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#0b5a2b">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>/* one installable app per space: shop (/), admin (/admin), driver (/livreur), call center (/callcenter) */
 (function(){var p=location.pathname.replace(/\/$/,""),m=p==="/admin"?"admin":p==="/livreur"?"livreur":p==="/callcenter"?"callcenter":"";
 document.write("<link rel=\"manifest\" href=\""+(m?"manifest-"+m+".webmanifest":"manifest.webmanifest")+"\">");window.K48_APP=m||"shop"})()</script>
@@ -303,6 +303,12 @@ body.lg-on{padding-bottom:0}
 /* admin sidebar logo */
 #kpis>:last-child{background:linear-gradient(135deg,#effaf1,#e2f4e6);border-color:#cfe9d4}
 .s-logo{display:block;text-align:center;width:100%}.s-logo img{width:100%;max-width:230px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}.s-logo small{display:block;margin-top:6px;color:#e3f3e7;font-size:13.5px;font-weight:600}
+/* installed app (iPhone notch / Android): a green strip behind the status bar, content starts below it */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#0b5a2b;z-index:10000;pointer-events:none}
+body{padding-top:env(safe-area-inset-top,0px)}
+.a-top{top:env(safe-area-inset-top,0px)!important}
+.side,.cc-side{padding-top:calc(18px + env(safe-area-inset-top,0px))!important}
+.cc-side{top:0}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .cbar.on{transform:none}
