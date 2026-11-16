@@ -572,7 +572,7 @@ html[lang=fr] h1,html[lang=fr] h2,html[lang=fr] h3{font-family:"Plus Jakarta San
 .city svg{color:var(--g1)}
 .cartbtn{display:flex;align-items:center;gap:8px;background:var(--g2);color:#fff;border:0;border-radius:12px;padding:11px 18px;font-weight:700;font-size:15px;white-space:nowrap}
 .cartbtn svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.9;flex:none}
-body.adm-on .hd,body.adm-on .wa-fab,body.adm-on footer.ft{display:none}
+body.adm-on .hd,body.adm-on .wa-fab,body.adm-on footer.ft,body.adm-on .cbar,body.cc-on .cbar,body.drv-on .cbar,body.lg-on .cbar{display:none!important}
 
 .hero2{position:relative;overflow:hidden;background:linear-gradient(90deg,#0b5a28,#137a36 45%,#1f9d45)}
 .h2-bg{position:absolute;inset:0;background:url("img/hero.jpg") center/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 28%,#000 62%);mask-image:linear-gradient(90deg,transparent 28%,#000 62%)}
@@ -2219,7 +2219,7 @@ function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];e
 function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");const cb=$("#cartBar");if(cb){cb.classList.toggle("bump",false);void cb.offsetWidth;cb.classList.add("bump")}pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=.5?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n});renderCartBar()}
-function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&view==="shop"&&!sheetOpen();
+function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&view==="shop"&&!sheetOpen()&&!/adm-on|cc-on|drv-on|lg-on/.test(document.body.className);
   bar.classList.toggle("on",on);bar.setAttribute("aria-hidden",String(!on));bar.inert=!on;document.body.classList.toggle("cbar-on",on);if(!L.length)return;
   const tt=totals(),free=+settings.freeFrom||0,left=Math.max(0,free-(tt.sub-tt.disc));
   $("#cbTh").innerHTML=L.slice(-3).reverse().map(({it})=>{const im=photoOf(it);return `<i style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(it.e||"🥬")}</i>`}).join("");
