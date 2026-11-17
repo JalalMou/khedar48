@@ -6,7 +6,7 @@
   "lang": "ar",
   "dir": "rtl",
   "start_url": "/callcenter",
-  "scope": "/",
+  "scope": "/callcenter",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",

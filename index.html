@@ -1948,12 +1948,13 @@ async function onUser(u){
     try{const {data,error}=await SB.from("staff").select("role").eq("user_id",u.id).maybeSingle();if(error)throw error;const r=data?.role;role=r==="admin"||r==="driver"||r==="agent"?r:null}catch(e){console.warn(e)}
     staff=role==="admin";if(role==="driver")me=u.id;
     if(!role)toast("Ce compte n'a pas d'accès équipe")}
-  await subscribe();renderAll();if(!isTeam())track("visit");if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
   if(!pendingGo&&ADMIN_URL&&view==="login"&&role==="admin")pendingGo="admin";
   if(!pendingGo&&LIV_URL&&view==="login"&&(role==="driver"||role==="admin"))pendingGo="driver";
   if(!pendingGo&&CC_URL&&view==="login"&&(role==="agent"||role==="admin"))pendingGo="cc";
   if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?(CC_URL?"cc":"admin"):role==="driver"?"driver":role==="agent"?"cc":"login");
-    if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut()}}
+    if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut();return}}
+  try{await subscribe()}catch(e){console.warn(e);setSync("error")}
+  renderAll();if(!isTeam())track("visit");if(pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}else if(view==="orders")refreshTracks();
 }
 async function loadCatalog(){
   const {data,error}=await SB.from("catalog").select("id,data");if(error)throw error;
