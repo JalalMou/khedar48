@@ -1,6 +1,6 @@
 // Khedar48 service worker: makes the app installable and opens fast.
 // Pages and config are network-first (always fresh when online); photos and icons are cache-first.
-const CACHE = "k48-v30";
+const CACHE = "k48-v31";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "img/hero.jpg"];
 
 self.addEventListener("install", e => {
@@ -28,10 +28,15 @@ self.addEventListener("fetch", e => {
 self.addEventListener("push", e => {
   let d = {};
   try { d = e.data ? e.data.json() : {}; } catch (x) { d = { body: e.data ? e.data.text() : "" }; }
-  e.waitUntil(self.registration.showNotification(d.title || "Khedar48", {
-    body: d.body || "", icon: "icons/icon-192.png", badge: "icons/favicon-48.png",
-    tag: d.tag || "k48", renotify: true, vibrate: [200, 100, 200, 100, 300], data: { url: d.url || "/" }
-  }));
+  e.waitUntil(Promise.all([
+    self.registration.showNotification(d.title || "Khedar48", {
+      body: d.body || "", icon: "icons/icon-192.png", badge: "icons/badge-96.png", lang: d.lang || "fr", dir: d.dir || "auto",
+      tag: d.tag || "k48", renotify: true, requireInteraction: !!d.sticky, timestamp: Date.now(),
+      vibrate: [180, 80, 180, 80, 320], data: { url: d.url || "/" }
+    }),
+    // an open app plays its "ka-ching" sound
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then(ws => ws.forEach(w => w.postMessage({ type: "k48-push" })))
+  ]));
 });
 self.addEventListener("notificationclick", e => {
   e.notification.close();
