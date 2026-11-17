@@ -189,6 +189,14 @@ body:not(.drv-on) .dv-nav{display:none}
   .dv-hero{padding:20px;min-height:120px}.dv-hero-art{width:110px;height:90px}.dv-hero-art .road,.dv-hero-art .pin{display:none}.dv-hero-art .moto{font-size:64px}
   .dv-k{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dv-k>div{padding:12px}.dv-k .ic{width:42px;height:42px}.dv-k .ic svg{width:22px;height:22px}.dv-k b{font-size:24px}.dv-k small{font-size:13px}
   .dv-2{grid-template-columns:minmax(0,1fr)}.dv-row{flex-wrap:wrap}.dv-row .b{flex-basis:100%;order:3}.dv-more{margin-inline-start:auto}}
+/* driver app: small phones */
+.dv-bar>*{min-width:0}.dv-logo{max-width:100%;object-fit:contain}
+@media (max-width:430px){.dv-help{display:none}.dv-logo{height:32px}.dv-av.big{width:40px;height:40px;font-size:17px;border-width:2px}.dv-bell{width:42px;height:42px}.dv-bar{gap:8px}.dv-bar-a{gap:6px}
+  .dv-k{gap:8px}.dv-k>div{padding:10px;gap:8px}.dv-k .ic{width:36px;height:36px}.dv-k small{font-size:12px}.dv-k b{font-size:22px}
+  .dv-hero{padding:16px}.dv-hero h1{font-size:21px}.dv-hero p{font-size:14px}.dv-hero-art{width:80px;height:70px}.dv-hero-art .moto{font-size:52px}
+  .dv-nav{gap:2px;padding-inline:6px}.dv-nav button{font-size:11.5px;padding:8px 2px}.dv-card{padding:14px}.dv-money{font-size:30px}
+  .dv-qa a,.dv-wa a{font-size:12px}.dv-tabs button{font-size:13px;padding:10px 4px}}
+@media (min-width:761px) and (max-width:1100px){.dv-k{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* call center */
 .cc-lang,.dv-lang{flex:none}.dv-lang{margin-inline-end:2px}
 @media (max-width:760px){.dv-lang button{padding:6px 9px;min-width:34px}}
@@ -3199,9 +3207,13 @@ const UI_FR=[
  ...SLOTS.map((x,i)=>[x,SLOTS_FR[i]||x]),...HOODS.map((x,i)=>[x,HOODS_FR[i]||x])
 ].sort((a,b)=>b[0].length-a[0].length);
 const trS=s=>{if(lang!=="fr"||!s)return s;let o=String(s);for(const [a,f] of UI_FR)if(o.includes(a))o=o.split(a).join(f);return o};
-function trUI(root){if(lang!=="fr"||!root)return;
-  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(/[؀-ۿ]/.test(n.nodeValue))n.nodeValue=trS(n.nodeValue)}
-  root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(e=>["placeholder","aria-label","title"].forEach(k=>{const v=e.getAttribute(k);if(v&&/[؀-ۿ]/.test(v))e.setAttribute(k,trS(v))}))}
+const UI_ORIG=new WeakMap();
+function trUI(root){if(!root)return;const fr=lang==="fr";
+  // keep the Darija original of every text so switching back to ع restores it
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+  while((n=w.nextNode())){const o=UI_ORIG.get(n);if(fr){const src=o??n.nodeValue;if(/[؀-ۿ]/.test(src)){if(o===undefined)UI_ORIG.set(n,src);n.nodeValue=trS(src)}}else if(o!==undefined){n.nodeValue=o;UI_ORIG.delete(n)}}
+  root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(e=>["placeholder","aria-label","title"].forEach(k=>{const v=e.getAttribute(k),ok="data-ar-"+k,o=e.getAttribute(ok);
+    if(fr){const src=o??v;if(src&&/[؀-ۿ]/.test(src)){if(o===null)e.setAttribute(ok,src);e.setAttribute(k,trS(src))}}else if(o!==null){e.setAttribute(k,o);e.removeAttribute(ok)}}))}
 const uiLoc=()=>lang==="fr"?"fr-FR":uiLoc();
 let drvTab="mine",drvPage="home",drvOn=store.get("drvOn",true);
 const mapUrl=o=>o.loc&&isFinite(+o.loc.lat)&&isFinite(+o.loc.lng)?`https://www.google.com/maps/dir/?api=1&destination=${+o.loc.lat},${+o.loc.lng}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;

@@ -1,6 +1,43 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/callcentre",
+      "destination": "/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/call-center",
+      "destination": "/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/call-centre",
+      "destination": "/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/cc",
+      "destination": "/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/livreurs",
+      "destination": "/livreur",
+      "permanent": false
+    },
+    {
+      "source": "/driver",
+      "destination": "/livreur",
+      "permanent": false
+    },
+    {
+      "source": "/admine",
+      "destination": "/admin",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/admin",
