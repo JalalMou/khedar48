@@ -3463,7 +3463,7 @@ $("#ccAgForm").addEventListener("submit",async e=>{e.preventDefault();const n=$(
   if(!em||pw.length<6){toast("Email ومودباس (6 حروف على الأقل) ضروريين");return}
   const b=$("#agBtn");b.disabled=true;
   try{const id=await createStaffLogin(em,pw);ok(await SB.from("staff").upsert({user_id:id,role:"agent",name:n,phone:ph,email:em}));agents.list[id]={n,phone:ph};await saveCatalog("agents");e.target.reset();ccRender();toast(`${n} تزاد · يدخل بـ ${em}`)}
-  catch(err){console.warn(err);const m=String(err?.message||err?.code||"");toast(err?.code==="exists"||/already/i.test(m)?"هاد الإيميل مستعمل":/check constraint|staff_role/i.test(m)?"خاص SQL ديال الكول سنتر يتدار اللول":"ما تزادش، عاود جرب")}
+  catch(err){console.warn(err);const m=String(err?.message||err?.code||"");toast(err?.code==="exists"||/already/i.test(m)?"هاد الإيميل مستعمل":/check constraint|staff_role/i.test(m)?"خاص SQL ديال الكول سنتر يتدار اللول":/rate limit|security purposes/i.test(m)?"Supabase: بزاف ديال المحاولات. طفي «Confirm email» فـ Supabase ولا تسنا ساعة":/signups? (are )?(not allowed|disabled)/i.test(m)?"Supabase: التسجيل مسدود (Allow new users to sign up)":/password/i.test(m)?"المودباس ضعيف (6 حروف على الأقل)":/invalid/i.test(m)?"الإيميل ماشي صحيح":"ما تزادش: "+m.slice(0,80))}
   finally{b.disabled=false}});
 $("#aQ").addEventListener("input",e=>{aQ=e.target.value;if(["orders","clients","products","stock"].includes(aTab))renderAdmin()});
 document.addEventListener("change",async e=>{
