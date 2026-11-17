@@ -2400,7 +2400,9 @@ const PHOTO_CREDITS=[
  ["sp-pepper","Ground_black_pepper.jpg","CC BY-SA 4.0","Eliška Jindříšková"],
  ["sp-ras","Ras.el.hanout.jpg","CC BY-SA 4.0","Sarefo"],
  ["oil-1l","Bottle_of_Extra_Virgin_Olive_Oil.jpg","CC BY-SA 4.0","Mervat Salman"],
- ["abo-famille","Fruits_and_Vegetables_in_Boquete,_Panama.jpg","CC BY-SA 4.0","FranHogan"]];
+ ["abo-famille","Fruits_and_Vegetables_in_Boquete,_Panama.jpg","CC BY-SA 4.0","FranHogan"],
+ ["pepper-red","Red_bell_pepper.jpg","CC BY-SA 4.0","AntanO"],
+ ["pepper-yellow","Yellow_Bell_Pepper_(5572058294).jpg","CC BY 2.0","Sharunas Jurevic"]];
 const PHOTO_IDS=new Set(PHOTO_CREDITS.map(c=>c[0]));
 const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.id==="oil-5l"?"img/pr-oil-1l.jpg":"");
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
