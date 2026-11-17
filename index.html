@@ -328,6 +328,11 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .pf-box{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
 .pf-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pf-row>b{min-width:78px;font-size:13px;color:var(--muted)}.pf-row .filters{margin:0}
 .pf-z{font-style:normal;background:#e5372b;color:#fff;border-radius:99px;font-size:11px;font-weight:800;padding:1px 6px;margin-inline-start:4px}
+.np-form{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:start}
+.np-photo{aspect-ratio:1;border:2px dashed #b9dcc3;border-radius:16px;background:#f3faf5;display:grid;place-items:center;cursor:pointer;overflow:hidden;position:relative}.np-photo input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.np-photo span{display:flex;flex-direction:column;align-items:center;font-size:34px;color:#1a9e44}.np-photo small{font-size:13px;font-weight:700}.np-photo img{width:100%;height:100%;object-fit:cover}
+.np-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end}.np-fields .fld{margin:0}.np-wide{grid-column:span 2}
+@media (max-width:760px){.np-form{grid-template-columns:minmax(0,1fr)}.np-photo{max-width:160px}.np-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.np-wide{grid-column:1/-1}}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1506,18 +1511,22 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
         <!-- products -->
         <div data-ap="products" hidden>
           <div class="pg-h"><h2>Produits</h2><p class="hint">Prix, promotions, disponibilité et photos. Le nom arabe est celui que voient les clients. Un produit à 0 MAD n'est pas visible à la commande.</p></div>
+          <div class="card np-card" id="npCard"><div class="c-h"><h3>➕ Ajouter un produit</h3><span class="hint" id="npHint">Légumes, fruits, khodra m9att3a, épices…</span></div>
+            <form class="np-form" id="newProd">
+              <label class="np-photo" id="npPhotoL"><input type="file" accept="image/*" id="npImg"><span id="npPrev">📷<small>Photo</small></span></label>
+              <div class="np-fields">
+                <div class="fld"><label for="npC">Catégorie</label><select id="npC"></select></div>
+                <div class="fld"><label for="npN">Nom (arabe)</label><input id="npN" required placeholder="خضرة مقطعة للطاجين" dir="rtl"></div>
+                <div class="fld"><label for="npF">Nom (FR)</label><input id="npF" placeholder="Légumes coupés pour tajine"></div>
+                <div class="fld"><label for="npP">Prix (MAD)</label><input id="npP" type="number" min="0" step="0.5" required></div>
+                <div class="fld"><label for="npU">Unité</label><select id="npU"><option value="kg">kg</option><option value="pc">pièce</option><option value="bunch">botte</option><option value="basket">panier</option></select></div>
+                <div class="fld"><label for="npE">Emoji</label><input id="npE" maxlength="4" value="🥬"></div>
+                <div class="fld np-wide"><label for="npD">Description (arabe, facultatif)</label><input id="npD" dir="rtl" maxlength="160" placeholder="مقشرة ومقطعة، غير طيب"></div>
+                <button class="btn b-gr" id="npBtn">Ajouter le produit</button>
+              </div>
+            </form></div>
           <div class="pf-box"><div class="pf-row"><b>Catégorie</b><div class="filters" id="pCats"></div></div><div class="pf-row"><b>Prix</b><div class="filters" id="pFilters"></div></div></div>
           <div class="card"><div class="tbl"><table><thead><tr><th>Produit</th><th>Nom (FR)</th><th>Catégorie</th><th>Prix (MAD)</th><th>Ancien prix</th><th>Unité</th><th>Ventes</th><th>Dispo</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div></div>
-          <div class="card"><h3>Ajouter un produit</h3>
-            <form class="row-form" id="newProd">
-              <div class="fld"><label for="npN">Nom (arabe)</label><input id="npN" required placeholder="لفت" dir="rtl"></div>
-              <div class="fld"><label for="npF">Nom (FR)</label><input id="npF" placeholder="Navet"></div>
-              <div class="fld"><label for="npE">Emoji</label><input id="npE" maxlength="4" value="🥬"></div>
-              <div class="fld"><label for="npC">Catégorie</label><select id="npC"></select></div>
-              <div class="fld"><label for="npP">Prix (MAD)</label><input id="npP" type="number" min="0" step="0.5" required></div>
-              <div class="fld"><label for="npU">Unité</label><select id="npU"><option value="kg">kg</option><option value="pc">pièce</option><option value="bunch">botte</option><option value="basket">panier</option></select></div>
-              <button class="btn b-gr">Ajouter</button>
-            </form></div>
         </div>
 
         <!-- stock -->
@@ -2925,6 +2934,7 @@ A.products=({OR})=>{
      <td><input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="${esc(pn(p))} disponible"></td>
      <td>${p.c==="panier"?`<button class="btn b-gh sm" data-pkedit="${esc(p.id)}">🧺 Contenu (${(p.inc||[]).length})</button>`:`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
   if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
+  if(!document.activeElement?.closest?.("#newProd")&&pCat!=="all"&&$("#npC").dataset.cat!==pCat){$("#npC").value=pCat;$("#npC").dataset.cat=pCat;const E={veg:"🥬",fruit:"🍎",cut:"🔪",spice:"🌶️",oil:"🫒",panier:"🧺"}[pCat];if(E)$("#npE").value=E;if(pCat==="spice"||pCat==="oil"||pCat==="panier")$("#npU").value=pCat==="panier"?"basket":"pc";}
 };
 A.stock=()=>{
   const tracked=products.filter(p=>typeof p.stock==="number"),low=lowStock(),out=tracked.filter(p=>p.stock<=0);
@@ -3622,8 +3632,12 @@ document.addEventListener("change",async e=>{
     const p=byId(D.photo);toast("Envoi de la photo…");
     try{p.img=await uploadPhoto(p.id,t.files[0]);await saveCatalog("products");renderAll();toast("Photo ajoutée ✓")}catch(err){toast("Échec de l'envoi. Essayez une image plus légère (JPG/PNG).")}}
 });
-$("#newProd").addEventListener("submit",e=>{e.preventDefault();const n=$("#npN").value.trim(),p=+$("#npP").value,fr=$("#npF").value.trim();if(!n||!(p>=0))return;
-  products.push({id:"x"+Date.now().toString(36),n,...(fr?{fr}:{}),e:$("#npE").value.trim()||"🥬",c:$("#npC").value,p,u:$("#npU").value,t:"#8bc34a",on:true});saveCatalog("products");e.target.reset();$("#npE").value="🥬";renderAll();toast(`${fr||n} ajouté`)});
+$("#npImg").addEventListener("change",e=>{const f=e.target.files?.[0];const P=$("#npPrev");if(!f){P.innerHTML="📷<small>Photo</small>";return}const u=URL.createObjectURL(f);P.innerHTML=`<img src="${u}" alt="">`;});
+$("#newProd").addEventListener("submit",async e=>{e.preventDefault();const n=$("#npN").value.trim(),p=+$("#npP").value,fr=$("#npF").value.trim(),dar=$("#npD").value.trim(),file=$("#npImg").files?.[0];if(!n||!(p>=0))return;
+  const b=$("#npBtn");b.disabled=true;const P={id:"x"+Date.now().toString(36),n,...(fr?{fr}:{}),...(dar?{d:{ar:dar}}:{}),e:$("#npE").value.trim()||"🥬",c:$("#npC").value,p,u:$("#npU").value,t:"#8bc34a",on:true};
+  try{if(file){if(canUpload()){toast("Envoi de la photo…");P.img=await uploadPhoto(P.id,file)}else toast("Photo non envoyée : connectez Supabase")}
+    products.push(P);await saveCatalog("products");e.target.reset();$("#npE").value="🥬";$("#npPrev").innerHTML="📷<small>Photo</small>";$("#npC").dataset.cat="";renderAll();toast(`${fr||n} ajouté ✓`)}
+  catch(err){console.warn(err);toast("Échec de l'envoi de la photo. Essayez une image plus légère (JPG/PNG).")}finally{b.disabled=false}});
 $("#newCode").addEventListener("submit",e=>{e.preventDefault();const k=$("#ncC").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(!k)return;
   promos.codes[k]={k:$("#ncK").value,v:+$("#ncV").value||0,min:+$("#ncM").value||0,on:true};saveCatalog("promos");e.target.reset();renderAll();toast(`Code ${k} ajouté`)});
 $("#newBanner").addEventListener("submit",e=>{e.preventDefault();const t=$("#nbT").value.trim();if(!t)return;
