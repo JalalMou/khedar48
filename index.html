@@ -309,6 +309,8 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .a-top{top:env(safe-area-inset-top,0px)!important}
 .side,.cc-side{padding-top:calc(18px + env(safe-area-inset-top,0px))!important}
 .cc-side{top:0}
+.gps-btn{width:100%;border:1.5px dashed #1a9e44;background:#f1faf3;color:#0e7a35;font:inherit;font-weight:800;border-radius:14px;padding:12px;cursor:pointer}.gps-btn[disabled]{opacity:.7}
+.gps-st{margin:6px 2px 0;font-size:13px;color:#4b5b51}.gps-st a,.gps-l{color:#16833a;font-weight:800}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .cbar.on{transform:none}
@@ -2532,6 +2534,7 @@ function renderCheckout(){
     <div class="fld"><label for="coPhone">${t("phone")}</label><input id="coPhone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" value="${esc(d.phone)}" placeholder="06 12 34 56 78"></div>
     <div class="fld"><label for="coHood">${t("hood")}</label><select id="coHood">${HOODS.map((h,i)=>`<option value="${esc(h)}" ${d.hood===h?"selected":""}>${lang==="fr"?HOODS_FR[i]||h:h}</option>`).join("")}</select></div>
     <div class="fld"><label for="coAddr">${t("addr")}</label><input id="coAddr" value="${esc(d.addr)}" placeholder="${esc(t("addrPh"))}"></div>
+    <div class="fld"><button type="button" class="gps-btn" id="coLoc">📍 ${lang==="fr"?"Partager ma position (GPS)":"حدد الموقع ديالي (GPS)"}</button><p class="gps-st" id="coLocS">${locTxt()}</p></div>
     <div class="fld"><label>${t("slot")}</label><div class="slots">${SLOTS.map((s,i)=>`<label><input type="radio" name="slot" value="${i}" ${i===0?"checked":""}>${lang==="fr"?SLOTS_FR[i]:s}</label>`).join("")}</div></div>
     <div class="fld"><label for="coNote">${t("note")}</label><textarea id="coNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
     <div class="err" id="coErr" role="alert"></div></form>`;
@@ -2539,6 +2542,19 @@ function renderCheckout(){
   $("#shFoot").innerHTML=`<div class="tot num"><div class="g" style="border:0;margin:0;padding:0"><span>${t("cash")}</span><span>${money(tt.total)}</span></div></div>
     <div style="display:flex;gap:8px"><button class="btn b-gh" id="backCart">${t("back")}</button><button class="btn b-or" style="flex:1" id="placeOrder">${t("confirm")}</button></div>`;
 }
+/* customer GPS position for the delivery (asked only when the customer taps the button) */
+let coLoc=store.get("loc",null);
+const locUrl=l=>`https://www.google.com/maps?q=${l.lat},${l.lng}`;
+function locTxt(){const fr=lang==="fr";return coLoc?`✅ ${fr?"Position enregistrée":"الموقع تسجل"}${coLoc.acc?` (± ${coLoc.acc} ${fr?"m":"متر"})`:""} · <a href="${esc(locUrl(coLoc))}" target="_blank" rel="noopener">${fr?"voir":"شوف فالخريطة"}</a>`
+  :(fr?"Facultatif, mais aide le livreur à vous trouver vite.":"اختياري، ولكن كيعاون الموزع يلقاك دغيا.")}
+function askLoc(){const S=$("#coLocS"),B=$("#coLoc"),fr=lang==="fr";
+  if(!("geolocation" in navigator)){S.textContent=fr?"Votre téléphone ne permet pas la localisation.":"التيليفون ديالك ما كيعطيش الموقع.";return}
+  B.disabled=true;B.textContent=fr?"⏳ Recherche de la position…":"⏳ كنقلبو على الموقع…";
+  navigator.geolocation.getCurrentPosition(p=>{coLoc={lat:+p.coords.latitude.toFixed(6),lng:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy||0)};store.set("loc",coLoc);
+      B.disabled=false;B.textContent=`📍 ${fr?"Mettre à jour ma position":"عاود حدد الموقع"}`;S.innerHTML=locTxt();toast(fr?"Position enregistrée ✓":"تسجل الموقع ✓")},
+    e=>{B.disabled=false;B.textContent=`📍 ${fr?"Partager ma position (GPS)":"حدد الموقع ديالي (GPS)"}`;
+      S.textContent=e.code===1?(fr?"Localisation refusée : autorisez-la dans les réglages, ou écrivez bien l'adresse.":"رفضتي الموقع: سمح بيه فالإعدادات، ولا كتب العنوان مزيان."):(fr?"Position introuvable, réessayez dehors ou écrivez l'adresse.":"ما لقيناش الموقع، عاود جرب ولا كتب العنوان.")},
+    {enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
 async function placeOrder(){
   const name=$("#coName").value.trim(),phone=$("#coPhone").value.replace(/[\s.-]+/g,""),hood=$("#coHood").value,addr=$("#coAddr").value.trim(),note=$("#coNote").value.trim();
   const slot=SLOTS[+document.querySelector("input[name=slot]:checked").value];const E=$("#coErr");
@@ -2548,7 +2564,7 @@ async function placeOrder(){
   store.set("profile",{name,phone,hood,addr});
   let waWin=null;try{waWin=window.open("","_blank")}catch(e){}
   const L=lines(),tt=totals(),id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
-  const o={at:Date.now(),name,phone,hood,addr,slot,note,lang,tk,items:L.map(l=>[l.it.id,l.q,l.it.n,l.it.p]),sub:tt.sub,disc:tt.disc,code:tt.disc?promoCode.toUpperCase():"",fee:tt.fee,total:tt.total,status:"new",driver:""};
+  const o={at:Date.now(),name,phone,hood,addr,slot,note,lang,tk,items:L.map(l=>[l.it.id,l.q,l.it.n,l.it.p]),sub:tt.sub,disc:tt.disc,code:tt.disc?promoCode.toUpperCase():"",fee:tt.fee,total:tt.total,status:"new",driver:"",...(coLoc?{loc:coLoc}:{})};
   if(cloud){const b=$("#placeOrder");b.disabled=true;b.textContent=t("saving");
     try{if(!uid)throw new Error("no-auth");
       ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
@@ -2560,7 +2576,7 @@ async function placeOrder(){
   // the WhatsApp message goes to the shop, so it stays in Arabic
   const msg=["السلام عليكم، طلب جديد من خضار 48 🌿",`رقم الطلب: ${id}`,"",...L.map(l=>`• ${l.it.n} — ${qtyLabel(l.it,l.q)} = ${fmt(l.sum)} د.م`),"",
     `المجموع: ${fmt(tt.sub)} د.م`,tt.disc?`التخفيض (${o.code}): −${fmt(tt.disc)} د.م`:"",`التوصيل: ${tt.fee?fmt(tt.fee)+" د.م":"فابور"}`,`الإجمالي: ${fmt(tt.total)} د.م (كاش)`,"",
-    `الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,`الوقت: ${slot}`,note?`ملاحظة: ${note}`:"","",`${T.ar.trackWa} ${link}`].filter(Boolean).join("\n");
+    `الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,coLoc?`📍 الموقع: ${locUrl(coLoc)}`:"",`الوقت: ${slot}`,note?`ملاحظة: ${note}`:"","",`${T.ar.trackWa} ${link}`].filter(Boolean).join("\n");
   const waUrl=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;if(waWin&&!waWin.closed){try{waWin.location.href=waUrl}catch(e){}}
   mode="done";$("#shTitle").textContent=t("done");
   $("#shBody").innerHTML=`<div class="done-box"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
@@ -2722,7 +2738,7 @@ function donut(parts){
 function adminOrderCard(o){
   const dOpts=Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${o.driver===k?"selected":""}>${esc(d.n)}</option>`).join("");
   return `<article class="oc"><div class="oc-h"><span><b class="num">#${esc(o.id)}</b>${o.ex?' <span class="tagx">Exemple</span>':""} <small class="hint num">${hhmm(o.at)}</small></span>${stPill(o.status)}</div>
-   <div class="oc-c"><b>${esc(o.name)}</b> · <a href="tel:${esc(o.phone)}" class="num">${esc(o.phone)}</a><br><span class="hint">📍 ${esc(o.hood)} · ${esc(o.addr)}</span><br><span class="hint">🕒 ${esc(o.slot)}${o.note?` · 📝 ${esc(o.note)}`:""}${o.code?` · 🏷️ ${esc(o.code)}`:""}</span></div>
+   <div class="oc-c"><b>${esc(o.name)}</b> · <a href="tel:${esc(o.phone)}" class="num">${esc(o.phone)}</a><br><span class="hint">📍 ${esc(o.hood)} · ${esc(o.addr)}</span>${o.loc?` · <a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}<br><span class="hint">🕒 ${esc(o.slot)}${o.note?` · 📝 ${esc(o.note)}`:""}${o.code?` · 🏷️ ${esc(o.code)}`:""}</span></div>
    <ul class="oc-i">${(o.items||[]).map(([id,q,n])=>{const p=byId(id);return `<li><span>${esc(p?pn(p):n)}</span><span class="num">${fmt(q)} ${UFR[p?.u||"kg"]}</span></li>`}).join("")}</ul>
    <div class="oc-t"><span>Total${o.disc?` <small class="hint num">(remise −${fmt(o.disc)})</small>`:""}${o.fee?` <small class="hint num">(livraison ${fmt(o.fee)})</small>`:""}</span><b class="num">${mad(o.total)}</b></div>
    <div class="seg" role="group" aria-label="Statut">${Object.keys(AST).map(k=>`<button class="ps-${k}" data-st="${k}" data-oid="${esc(o.id)}" aria-pressed="${o.status===k}">${AST[k]}</button>`).join("")}</div>
@@ -3103,7 +3119,7 @@ function toggleTheme(){const r=document.documentElement;const dark=r.dataset.the
 
 /* ---------------- driver ---------------- */
 let drvTab="mine",drvPage="home",drvOn=store.get("drvOn",true);
-const mapUrl=o=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;
+const mapUrl=o=>o.loc&&isFinite(+o.loc.lat)&&isFinite(+o.loc.lng)?`https://www.google.com/maps/dir/?api=1&destination=${+o.loc.lat},${+o.loc.lng}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;
 const DIC={bag:"M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 016 0v2",ok:"M20 6L9 17l-5-5",clock:"M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z",x:"M12 21a9 9 0 100-18 9 9 0 000 18zM9 9l6 6M15 9l-6 6"};
 const dic=k=>`<span class="ic"><svg viewBox="0 0 24 24"><path d="${DIC[k]}"/></svg></span>`;
 function drvCard(o,kind){const st=o.status,nIt=(o.items||[]).length,kg=(o.items||[]).reduce((a,[id,q])=>a+((byId(id)?.u||"kg")==="kg"?+q||0:0),0);
@@ -3116,7 +3132,7 @@ function drvCard(o,kind){const st=o.status,nIt=(o.items||[]).length,kg=(o.items|
   return `<article class="dv-c ${esc(st)}"><div class="dv-ch"><span class="dv-id num">#${esc(o.id)}</span><span class="dv-st ${esc(st)}">${STATUS[st]||esc(st)}</span><span class="dv-slot">🕒 ${esc(o.slot||"")}</span></div>
    <div class="dv-cu"><span class="dv-av">${esc(initial(o.name))}</span><div><b>${esc(o.name)}</b><small class="num" dir="ltr">${esc(o.phone)}</small></div></div>
    <div class="dv-ad">📍 <b>${esc(o.hood||"")}</b> · ${esc(o.addr||"")}${o.note?`<br><span class="hint">📝 ${esc(o.note)}</span>`:""}</div>
-   ${kind==="done"?"":`<div class="dv-qa"><a class="call" href="tel:${esc(o.phone)}">📞 عيّط للزبون</a><a href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🗺️ الخريطة</a></div>`}
+   ${kind==="done"?"":`<div class="dv-qa"><a class="call" href="tel:${esc(o.phone)}">📞 عيّط للزبون</a><a href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🗺️ ${o.loc?"الموقع GPS":"الخريطة"}</a></div>`}
    ${wa}
    <details class="dv-it" ${kind!=="done"?"open":""}><summary>🧺 ${nIt} منتوج${kg?` · ${fmt(kg)} كغ`:""}</summary>${itemsHtml(o)}</details>
    ${o.sub_id?`<div class="dv-cash paid"><span>💳 مخلص فالاشتراك</span><b>ما تجمع والو</b></div>`:`<div class="dv-cash"><span>💵 خاصك تجمع</span><b class="num">${fmt(o.total)} درهم</b></div>`}
@@ -3295,7 +3311,7 @@ function ccRender(){
     const B=O.filter(o=>ccHit(o.id,o.name,o.phone,o.hood,o.addr));
     $("#ccOF").innerHTML=Object.entries(F).map(([k,[l,f]])=>`<button data-ccof="${k}" aria-pressed="${ccOF===k}">${l} <span class="num">${B.filter(f).length}</span></button>`).join("");
     const L=B.filter(F[ccOF][1]).slice(0,200),dOpts=sel=>`<option value="">— الموزع —</option>`+Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${sel===k?"selected":""}>${esc(d.n)}</option>`).join("");
-    $("#ccOrders").innerHTML=L.length?L.map(o=>{const tries=C.filter(c=>c.oid===o.id).length;return `<div class="cc-o"><div><b class="num">#${esc(o.id)} ${ccPill(o.status)}</b><small>${esc(o.name)} · <span class="num" dir="ltr">${esc(o.phone)}</span> · ${esc(o.hood||"")}</small><small>${(o.items||[]).length} منتوجات · <b class="num" style="display:inline">${fmt(o.total)} MAD</b> · ${hhmm(o.at)}${o.by?` · 🎧 ${esc(o.by)}`:""}${tries?` · 📞 ${tries}`:""}</small></div>
+    $("#ccOrders").innerHTML=L.length?L.map(o=>{const tries=C.filter(c=>c.oid===o.id).length;return `<div class="cc-o"><div><b class="num">#${esc(o.id)} ${ccPill(o.status)}</b><small>${esc(o.name)} · <span class="num" dir="ltr">${esc(o.phone)}</span> · ${esc(o.hood||"")}${o.loc?` · <a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}</small><small>${(o.items||[]).length} منتوجات · <b class="num" style="display:inline">${fmt(o.total)} MAD</b> · ${hhmm(o.at)}${o.by?` · 🎧 ${esc(o.by)}`:""}${tries?` · 📞 ${tries}`:""}</small></div>
       <div>${["prep","road"].includes(o.status)?`<select data-ccdrv="${esc(o.id)}" aria-label="الموزع">${dOpts(o.driver)}</select>`:""}</div>
       <div class="act"><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(notifyUrl(o,o.status==="new"?"new":o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
   }
@@ -3412,6 +3428,7 @@ document.addEventListener("click",async e=>{
     case "ccBurger":$(".ccx").classList.toggle("open");break;
     case "ccOut":logout();break;
     case "placeOrder":placeOrder();break;
+    case "coLoc":askLoc();break;
     case "cbGo":openSheet("checkout");break;
     case "aboSubmit":submitAbo();break;
     case "aboReload":abos=null;renderAdmin();break;
