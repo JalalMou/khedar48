@@ -1875,12 +1875,6 @@ const DEF_PRODUCTS=[
  ["p-premp","قفة البريميوم +","panier",300,"basket","🧺","#c99a5b",{img:"img/p-premp.jpg",kg:23,cnt:25}],
  ["p-veg","قفة الخضرة","panier",180,"basket","🧺","#c99a5b",{img:"img/p-veg.jpg",kg:15,cnt:17}],
  ["p-fruit","قفة الفواكه","panier",170,"basket","🧺","#c99a5b",{img:"img/p-fruit.jpg",kg:8,cnt:7}],
- ["tomato","طماطم","veg",6,"kg","🍅","#e0533d",{old:7}],["potato","بطاطا","veg",5,"kg","🥔","#c7a06a"],["onion","بصلة","veg",5,"kg","🧅","#c98a5a"],
- ["carrot","خيزو","veg",4,"kg","🥕","#ef8a2f"],["courgette","كرعة (كوسة)","veg",6,"kg","🥒","#6aa84f"],["eggplant","دنجال","veg",7,"kg","🍆","#7b4fa0"],
- ["pepper","فلفلة خضرا","veg",8,"kg","🫑","#5aa34a"],["chili","فلفلة حارة","veg",10,"kg","🌶️","#d33b2c"],["cucumber","خيار","veg",5,"kg","🥒","#4f9a5a"],
- ["lettuce","خس","veg",4,"pc","🥬","#7cc36a"],["garlic","ثوم","veg",30,"kg","🧄","#d8cbb0"],["peas","جلبانة","veg",10,"kg","🫛","#7cbf4a"],
- ["beans","فول","veg",8,"kg","🫘","#9a6b3f"],["corn","ذرة","veg",4,"pc","🌽","#e8c23a"],
- ["parsley","معدنوس","herb",2,"bunch","🌿","#4caf50"],["coriander","قزبر","herb",2,"bunch","🌿","#62b35a"],["mint","نعناع","herb",3,"bunch","🍃","#3fae6b"],["ginger","سكنجبير","herb",40,"kg","🫚","#c9a15a"],
  ["apple","تفاح","fruit",14,"kg","🍎","#d64545"],["orange","ليمون (برتقال)","fruit",7,"kg","🍊","#f39a2b"],["mandarin","مندرين","fruit",9,"kg","🍊","#f5a623"],
  ["banana","بنان","fruit",13,"kg","🍌","#f2d04a",{old:15}],["grapes","عنب","fruit",15,"kg","🍇","#7e4b9e"],["pear","بوعويد (إجاص)","fruit",16,"kg","🍐","#b6c94a"],
  ["strawberry","فريز","fruit",20,"kg","🍓","#e2364a"],["watermelon","دلاح","fruit",5,"kg","🍉","#e04b5a"],["melon","بطيخ","fruit",8,"kg","🍈","#a8c96a"],
@@ -2368,24 +2362,7 @@ function liveJoin(){if(liveCh||!cloud||!SB||isTeam())return;
   liveCh.subscribe(st=>{if(st==="SUBSCRIBED"){liveLast="";liveTick()}});liveTimer=setInterval(liveTick,6000)}
 // product photos: Wikimedia Commons, free licences (credits shown in the footer "Crédits photos")
 const PHOTO_CREDITS=[
- ["tomato","Tomato_je.jpg","CC BY-SA 3.0","Softeis"],
- ["potato","Agriculture-72254.jpg","CC0","Petr Kratochvil"],
- ["onion","Mixed_onions.jpg","CC BY-SA 3.0","Colin"],
- ["carrot","Carrots_001.jpg","CC BY-SA 4.0","Aastha12gogo"],
- ["courgette","Starr-070730-7874-Cucurbita_pepo-green_zucchini-Foodland_Pukalani-Maui_%2824797124241%29.jpg","CC BY 3.0 US","Forest and Kim Starr"],
- ["eggplant","Aubergine_violette.jpg","CC BY-SA 4.0","Cca Raheem"],
- ["pepper","Green_Bell_Pepper.jpg","CC BY-SA 4.0","Gaurav Dhwaj Khadka"],
- ["chili","Fresh_Red_Curly_Chili_Peppers_%28Capsicum_annuum%29_Pile.jpg","CC BY-SA 4.0","Undeka 11"],
- ["cucumber","Ryerson_Market_cucumbers_on_sale.jpg","CC BY-SA 3.0","Jason Zhang"],
- ["lettuce","ARS_romaine_lettuce.jpg","Public domain","USDA"],
- ["garlic","Opened_garlic_bulb_with_garlic_clove.jpg","CC BY 2.0","Dubravko Sorić"],
- ["peas","Green_pea_pods.jpg","CC0","Fumikas Sagisavas"],
- ["beans","-2021-06-30_Broad_beans_in_the_pod%2C_Trimingham.JPG","CC BY-SA 4.0","Kolforn"],
  ["corn","Liat_Portal_for_Foodie_Disorder_-_Cooked_Corn_on_the_Cob.jpg","CC BY-SA 4.0","HaJunkiyada"],
- ["parsley","Petroselinum_crispum_003.JPG","CC BY-SA 3.0","H. Zell"],
- ["coriander","Coriander_Leaves.jpg","CC BY-SA 4.0","Rupeshm364"],
- ["mint","Fresh_Mint_leaves.jpg","CC BY-SA 4.0","Mangosapiens"],
- ["ginger","Fresh_ginger_rhizome_01.jpg","CC BY-SA 4.0","Friday musa"],
  ["apple","Red_Apple.jpg","CC BY 2.0","Abhijit Tembhekar"],
  ["orange","Orange_Fruit_Close-up.jpg","CC BY-SA 3.0","freestock.ca"],
  ["mandarin","2023_Mandarynki.jpg","CC BY-SA 4.0","Jacek Halicki"],
@@ -2417,10 +2394,11 @@ const PHOTO_CREDITS=[
  ["sp-pepper","Ground_black_pepper.jpg","CC BY-SA 4.0","Eliška Jindříšková"],
  ["sp-ras","Ras.el.hanout.jpg","CC BY-SA 4.0","Sarefo"],
  ["oil-1l","Bottle_of_Extra_Virgin_Olive_Oil.jpg","CC BY-SA 4.0","Mervat Salman"],
- ["abo-famille","Fruits_and_Vegetables_in_Boquete,_Panama.jpg","CC BY-SA 4.0","FranHogan"],
- ["pepper-red","Red_bell_pepper.jpg","CC BY-SA 4.0","AntanO"],
- ["pepper-yellow","Yellow_Bell_Pepper_(5572058294).jpg","CC BY 2.0","Sharunas Jurevic"]];
-const PHOTO_IDS=new Set(PHOTO_CREDITS.map(c=>c[0]));
+ ["abo-famille","Fruits_and_Vegetables_in_Boquete,_Panama.jpg","CC BY-SA 4.0","FranHogan"]
+];
+// our own vegetable photos (same as sokhra48), no external credit needed
+const OWN_PHOTOS=["tomato","onion","carrot","potato","cherry-tomato","pumpkin","cauliflower","chili","chili-pc","beans-green","beans-fine","beans","garlic","peas","beet","coriander","parsley","lettuce","mint","eggplant","pepper","pepper-red","pepper-yellow","sweet-potato","courgette","cucumber","navet","ginger"];
+const PHOTO_IDS=new Set([...PHOTO_CREDITS.map(c=>c[0]),...OWN_PHOTOS]);
 const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.id==="oil-5l"?"img/pr-oil-1l.jpg":"");
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
 // a product without a price yet (0 DH) is shown but cannot be ordered
