@@ -333,6 +333,11 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .np-photo span{display:flex;flex-direction:column;align-items:center;font-size:34px;color:#1a9e44}.np-photo small{font-size:13px;font-weight:700}.np-photo img{width:100%;height:100%;object-fit:cover}
 .np-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end}.np-fields .fld{margin:0}.np-wide{grid-column:span 2}
 @media (max-width:760px){.np-form{grid-template-columns:minmax(0,1fr)}.np-photo{max-width:160px}.np-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.np-wide{grid-column:1/-1}}
+.ot-card{padding:6px 8px}.ot{width:100%}.ot td,.ot th{vertical-align:middle}.ot td small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.ot-r{cursor:pointer;transition:background .15s}.ot-r:hover,.ot-r:focus{background:#f2f9f4;outline:none}.ot-r.is-new td:first-child{box-shadow:inset 3px 0 0 #2f80ed}
+.ot-go{color:#9aa79f;font-size:22px;text-align:end}
+.aord .oc{box-shadow:none;border:0;padding:0;background:transparent}.aord-x{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media (min-width:900px){body.adm-on .sheet{left:auto;right:16px;bottom:16px;top:16px;width:480px;max-height:none;border-radius:22px}}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1482,7 +1487,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="pg-h"><h2>Commandes</h2><p class="hint">Changez le statut, assignez un livreur, contactez le client.</p></div>
           <div class="filters" id="oFilters"></div>
           <p class="hint" id="oQinfo" hidden></p>
-          <div class="o-grid" id="aOrders"></div>
+          <div id="aOrders"></div>
         </div>
 
         <!-- clients -->
@@ -2892,7 +2897,12 @@ A.orders=({O})=>{
   $("#oFilters").innerHTML=Object.entries(F).map(([k,v])=>`<button class="fchip" data-of="${k}" aria-pressed="${oFilter===k}">${v} <span class="num">${B.filter(o=>fit(o,k)).length}</span></button>`).join("");
   const qi=$("#oQinfo");qi.hidden=!aQ.trim();qi.innerHTML=aQ.trim()?`Recherche : « ${esc(aQ)} » · <button class="lnk" id="clearQ">effacer</button>`:"";
   const OL=B.filter(o=>fit(o,oFilter));
-  $("#aOrders").innerHTML=OL.length?OL.map(adminOrderCard).join(""):aEmpty("Aucune commande ici.");
+  const dn=k=>drivers.list?.[k]?.n||"";
+  $("#aOrders").innerHTML=OL.length?`<div class="card ot-card"><div class="tbl"><table class="ot"><thead><tr><th>Commande</th><th>Client</th><th>Quartier</th><th>Articles</th><th>Total</th><th>Statut</th><th>Livreur</th><th></th></tr></thead><tbody>${OL.map(o=>{const n=(o.items||[]).length;
+    return `<tr class="ot-r ${o.status==="new"?"is-new":""}" data-oview="${esc(o.id)}" tabindex="0" title="Voir la commande"><td><b class="num">#${esc(o.id)}</b><small class="num">${hhmm(o.at)}</small></td>
+      <td><b>${esc(o.name)}</b><small class="num">${esc(o.phone)}</small></td><td>${esc(hoodFrA(o.hood))}${o.loc?' <span title="Position GPS">📍</span>':""}</td>
+      <td class="num">${n} produit${n>1?"s":""}</td><td class="num"><b>${mad(o.total)}</b>${o.sub_id?'<small>abonnement</small>':""}</td><td>${stPill(o.status)}</td><td>${dn(o.driver)?esc(dn(o.driver)):'<span class="hint">—</span>'}</td><td class="ot-go">›</td></tr>`}).join("")}</tbody></table></div></div>`:aEmpty("Aucune commande ici.");
+  if(sheetOpen()&&mode.startsWith("aord:"))openAdminOrder(mode.slice(5));
 };
 let subs=null;
 async function loadSubs(){if(!cloud){subs=store.get("subs",[]);return}
@@ -3145,6 +3155,17 @@ async function aboPack(a){const x=a.data||{};let P=byId(x.pack);
     P={id,n:`قفة ${x.name||""}`.slice(0,60),fr:`Panier ${x.name||""}`.slice(0,60),c:"panier",u:"basket",p:Math.round((+x.price||0)/Math.max(1,(+x.per||1)*4)),e:"🧺",t:"#c99a5b",on:false,priv:true,inc:base&&Array.isArray(base.inc)?base.inc.map(r=>[...r]):[]};
     products.push(P);packMeta(P);saveCatalog("products");await patchAbo(a,{data:{...x,pack:id}})}
   pkCur=P.id;aTab="packs";renderAdmin();setTimeout(()=>$("#pkCard")?.scrollIntoView({behavior:"smooth",block:"start"}),50);toast("Pack personnalisé : ajoutez ses produits")}
+/* admin: order detail panel (opened from the orders table) */
+const hoodFrA=h=>{const i=HOODS.indexOf(h);return i>=0?HOODS_FR[i]||h:h||""};
+function openAdminOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="aord:"+id;
+  $("#shTitle").textContent=`Commande #${o.id}`;
+  $("#shBody").innerHTML=`<div dir="ltr" lang="fr" class="aord">${adminOrderCard(o)}
+    <div class="aord-x">${o.loc?`<a class="btn b-gh sm" href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🧭 Itinéraire GPS</a>`:""}<a class="btn b-gh sm" href="tel:${esc(o.phone)}">📞 Appeler</a><a class="btn b-gh sm" href="https://wa.me/${waNum(o.phone)}" target="_blank" rel="noopener">💬 WhatsApp</a></div></div>`;
+  $("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">Fermer</button>`;
+  $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+document.addEventListener("click",e=>{const r=e.target.closest("[data-oview]");if(!r||e.target.closest("button,a,select,input"))return;openAdminOrder(r.dataset.oview)});
+document.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const r=e.target.closest?.("[data-oview]");if(r)openAdminOrder(r.dataset.oview)});
+
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
