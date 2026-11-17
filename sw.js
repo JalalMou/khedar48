@@ -1,6 +1,6 @@
 // Khedar48 service worker: makes the app installable and opens fast.
 // Pages and config are network-first (always fresh when online); photos and icons are cache-first.
-const CACHE = "k48-v34";
+const CACHE = "k48-v35";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "img/hero.jpg"];
 
 self.addEventListener("install", e => {

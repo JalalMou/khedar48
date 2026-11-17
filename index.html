@@ -1963,6 +1963,7 @@ async function onUser(u){
   if(!pendingGo&&ADMIN_URL&&view==="login"&&role==="admin")pendingGo="admin";
   if(!pendingGo&&LIV_URL&&view==="login"&&(role==="driver"||role==="admin"))pendingGo="driver";
   if(!pendingGo&&CC_URL&&view==="login"&&(role==="agent"||role==="admin"))pendingGo="cc";
+  if(!pendingGo&&TEAM_HOST&&view==="login"&&role)pendingGo="__team";
   if(pendingGo){const g=pendingGo;pendingGo=null;show(g!=="__team"?g:role==="admin"?(CC_URL?"cc":"admin"):role==="driver"?"driver":role==="agent"?"cc":"login");
     if(g==="__team"&&!role){$("#lgErr").textContent="Ce compte n'a pas d'accès équipe.";SB.auth.signOut();return}}
   try{await subscribe()}catch(e){console.warn(e);setSync("error")}
@@ -2293,6 +2294,7 @@ let VID=store.get("vid",""),VNEW=false;if(!VID){VID=rid();store.set("vid",VID);V
 const SID=(()=>{try{let s=sessionStorage.getItem("k48:sid");if(!s){s=rid();sessionStorage.setItem("k48:sid",s)}return s}catch(e){return rid()}})();
 const sentEv=(()=>{try{return new Set(JSON.parse(sessionStorage.getItem("k48:ev")||"[]"))}catch(e){return new Set()}})();
 function track(kind,oid){
+  if(TEAM_HOST)return;
   if(kind==="visit"&&!isTeam()){pixReady=true;initPixels();liveJoin()}
   if(cloud&&isTeam())return;
   if(kind!=="order"){if(sentEv.has(kind))return;sentEv.add(kind);try{sessionStorage.setItem("k48:ev",JSON.stringify([...sentEv]))}catch(e){}}
@@ -3457,10 +3459,10 @@ function ccRender0(){
 
 /* ---------------- views ---------------- */
 function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b.hidden=b.dataset.staff==="admin"?!staff:!isTeam());setSync(cloud?sync:"local");
-  $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");
+  $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");if(MAIN_HOST)$("#teamLink").closest("li").hidden=!isTeam();
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
   if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(view==="cc")ccRender();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
-function show(v){if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login","cc"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
+function show(v){if(TEAM_HOST&&v==="shop"&&!isTeam()&&view==="login"){location.href="https://www.khedar48.com/";return}if(TEAM_HOST&&v==="shop"&&isTeam()&&view!=="login"){window.open("https://www.khedar48.com/","_blank","noopener");return}if(TEAM_HOST&&(v==="shop"||v==="orders"))v=route("");if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login","cc"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
   document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");document.body.classList.toggle("cc-on",v==="cc");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
@@ -3631,7 +3633,7 @@ $("#lgEye").addEventListener("click",e=>{const p=$("#lgP"),on=p.type==="password
 $("#lgForgot").addEventListener("click",async()=>{const E=$("#lgErr"),em=$("#lgE").value.trim();E.textContent="";
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){E.textContent="Écrivez d'abord votre email, puis cliquez sur « Mot de passe oublié ? ».";$("#lgE").focus();return}
   if(!cloud){E.textContent="Mode démo : pas de mot de passe.";return}
-  try{const {error}=await SB.auth.resetPasswordForEmail(em,{redirectTo:SITE+"admin"});if(error)throw error;toast("Email envoyé");E.textContent="📧 Si ce compte existe, un email pour changer le mot de passe vient d'être envoyé."}
+  try{const {error}=await SB.auth.resetPasswordForEmail(em,{redirectTo:(TEAM_HOST?TEAM_SITE:SITE)+"admin"});if(error)throw error;toast("Email envoyé");E.textContent="📧 Si ce compte existe, un email pour changer le mot de passe vient d'être envoyé."}
   catch(err){console.warn(err);E.textContent=/rate|many/i.test(String(err?.message))?"Trop de demandes, réessayez dans une heure.":"Envoi impossible pour le moment, réessayez plus tard."}});
 async function askNewPass(){const p=prompt("Choisissez un nouveau mot de passe (8 caractères minimum) :");if(p===null)return;
   if(p.length<8){alert("Mot de passe trop court (8 caractères minimum).");return askNewPass()}
@@ -3664,8 +3666,14 @@ $("#setForm").addEventListener("submit",e=>{e.preventDefault();
   if(px.gaId&&!PIXRE.ga.test(px.gaId)){toast("ID Google invalide (format G-XXXXXXX)");$("#setGa").focus();return}
   settings={...settings,...px,fee:Math.max(0,+$("#setFee").value||0),freeFrom:Math.max(0,+$("#setFree").value||0),margin:Math.min(90,Math.max(0,+$("#setMargin").value||0)),ig:link("#setIg"),fb:link("#setFb"),tt:link("#setTt")};
   document.activeElement?.blur?.();saveCatalog("settings");renderAll();toast("Paramètres enregistrés")});
+const TEAM_HOST=/^team\./.test(location.hostname),MAIN_HOST=/^(www\.)?khedar48\.com$/.test(location.hostname),TEAM_SITE="https://team.khedar48.com/";
 const ADMIN_URL=/^\/admin\/?$/.test(location.pathname),LIV_URL=/^\/livreur\/?$/.test(location.pathname),CC_URL=/^\/callcenter\/?$/.test(location.pathname);
-const route=h=>{if(h==="prix"){aTab="products";pFilter="zero";h="admin"}return h};
+const route=h=>{if(h==="prix"){aTab="products";pFilter="zero";h="admin"}
+  // old team links on the customer site (#admin, #login, #driver, #cc) move to team.khedar48.com
+  if(MAIN_HOST&&["admin","login","driver","cc","prix"].includes(h0(h))){location.replace(TEAM_SITE+(h==="driver"?"livreur":h==="cc"?"callcenter":h==="login"?"":"admin")+(location.hash==="#prix"?"#prix":""));return "shop"}
+  if(TEAM_HOST&&(!h||h==="shop"))return isTeam()?(role==="driver"?"driver":role==="agent"?"cc":"admin"):"login";
+  return h};
+function h0(h){return String(h||"").split(/[?&]/)[0]}
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(/^t=/.test(h)&&(cloud||SBC===null))trackFromHash(h);else show(route(h))});
 $("#hTrk").addEventListener("submit",async e=>{e.preventDefault();const E=$("#hTrkErr");E.textContent="";
   const id=$("#hTrkId").value.trim().toUpperCase(),ph=$("#hTrkPh").value.trim();if(!id||digits(ph).length<9){E.textContent=tr("trackNo");return}
@@ -3679,7 +3687,7 @@ $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
   catch(err){console.warn(err);E.textContent=tr("eSave").split(".")[0]}finally{b.disabled=false}});
 
 loadLocal();
-show(CC_URL&&!location.hash.slice(1)?(isTeam()?"cc":"login"):LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
+show(TEAM_HOST&&location.pathname==="/"&&!location.hash.slice(1)?"login":CC_URL&&!location.hash.slice(1)?(isTeam()?"cc":"login"):LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
 initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 /* ---------------- app install + push notifications (admin & drivers) ----------------

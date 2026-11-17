@@ -3,6 +3,138 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/admin",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/admin",
+      "permanent": false
+    },
+    {
+      "source": "/livreur",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/livreur",
+      "permanent": false
+    },
+    {
+      "source": "/callcenter",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/callcentre",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/cc",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/driver",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/livreur",
+      "permanent": false
+    },
+    {
+      "source": "/admin",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/admin",
+      "permanent": false
+    },
+    {
+      "source": "/livreur",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/livreur",
+      "permanent": false
+    },
+    {
+      "source": "/callcenter",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/callcentre",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/cc",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/callcenter",
+      "permanent": false
+    },
+    {
+      "source": "/driver",
+      "has": [
+        {
+          "type": "host",
+          "value": "khedar48.com"
+        }
+      ],
+      "destination": "https://team.khedar48.com/livreur",
+      "permanent": false
+    },
+    {
       "source": "/callcentre",
       "destination": "/callcenter",
       "permanent": false
