@@ -1615,7 +1615,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="card"><div class="c-h"><h3>📦 Livraisons d'abonnement aujourd'hui</h3><button class="btn b-gh sm" id="aboReload" type="button">↻ Actualiser</button></div><div id="aboToday"></div></div>
           <div class="card"><h3>Abonnés</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Client</th><th>Formule</th><th>Jour</th><th>Statut</th><th>Paiement du mois</th><th>Prochaine livraison</th><th></th></tr></thead><tbody id="aboRows"></tbody></table></div>
             <p class="hint" style="margin:10px 0 0">« Commande » crée la livraison de la semaine (total 0 MAD, déjà payé dans l'abonnement) avec le contenu de la qoffa. « Marquer payé » enregistre le paiement du mois dans la comptabilité des abonnements.</p></div>
-          <div class="card"><h3>Formules d'abonnement</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Nom (arabe)</th><th>Nom (FR)</th><th>Prix / mois (MAD)</th><th>Livraisons</th><th>Qoffa livrée</th><th>Visible</th><th></th></tr></thead><tbody id="planRows"></tbody></table></div>
+          <div class="card"><h3>Formules d'abonnement</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Nom (arabe)</th><th>Nom (FR)</th><th>Prix / mois (MAD)</th><th>Livraisons</th><th>Qoffa livrée</th><th>Photo</th><th>Visible</th><th></th></tr></thead><tbody id="planRows"></tbody></table></div>
             <form class="row-form" id="planAdd" style="margin-top:14px"><div class="fld"><label for="plN">Nom (arabe)</label><input id="plN" dir="rtl" placeholder="اشتراك الخضرة" required></div><div class="fld"><label for="plF">Nom (FR)</label><input id="plF" placeholder="Abonnement Légumes"></div><div class="fld"><label for="plP">Prix / mois</label><input id="plP" type="number" min="0" step="1" class="num" required></div><button class="btn b-gr">Ajouter la formule</button></form>
             <p class="hint" style="margin:10px 0 0">Une formule à 0 MAD s'affiche « Prix bientôt » et on ne peut pas encore s'y abonner.</p></div>
         </div>
@@ -2399,7 +2399,8 @@ const PHOTO_CREDITS=[
  ["sp-ginger","Ginger_powder_2.jpg","CC BY 2.0 KR","경빈마마"],
  ["sp-pepper","Ground_black_pepper.jpg","CC BY-SA 4.0","Eliška Jindříšková"],
  ["sp-ras","Ras.el.hanout.jpg","CC BY-SA 4.0","Sarefo"],
- ["oil-1l","Bottle_of_Extra_Virgin_Olive_Oil.jpg","CC BY-SA 4.0","Mervat Salman"]];
+ ["oil-1l","Bottle_of_Extra_Virgin_Olive_Oil.jpg","CC BY-SA 4.0","Mervat Salman"],
+ ["abo-famille","Fruits_and_Vegetables_in_Boquete,_Panama.jpg","CC BY-SA 4.0","FranHogan"]];
 const PHOTO_IDS=new Set(PHOTO_CREDITS.map(c=>c[0]));
 const photoOf=p=>safeImg(p?.img)||(PHOTO_IDS.has(p?.id)?`img/pr-${p.id}.jpg`:p?.id==="oil-5l"?"img/pr-oil-1l.jpg":"");
 const HEART=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg>`;
@@ -2467,7 +2468,7 @@ const planN=pl=>lang==="fr"?pl.fr||pl.n:pl.n;
 const planDel=pl=>Math.max(1,+pl.per||1)*4;
 function renderPlans(){const box=$("#aboPlans");if(!box)return;const fr=lang==="fr",L=plans.filter(pl=>pl.on!==false);
   $("#abo").hidden=!L.length;
-  box.innerHTML=L.map(pl=>{const pk=byId(pl.pack),im=pk?photoOf(pk):"",inc=packInc(pk),pr=+pl.price>0,n=planDel(pl);
+  box.innerHTML=L.map(pl=>{const pk=byId(pl.pack),im=safeImg(pl.img)||(pk?photoOf(pk):""),inc=packInc(pk),pr=+pl.price>0,n=planDel(pl);
     return `<article class="abo-c ${pl.hot?"hot":""}">${pl.hot?`<span class="abo-hot">${fr?"Le plus choisi":"الأكثر طلباً"}</span>`:""}
       <div class="abo-im">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:"🧺"}</div>
       <h3>${esc(planN(pl))}</h3>
@@ -3054,6 +3055,7 @@ function renderPackEd(){const packs=products.filter(p=>p.c==="panier"),card=$("#
   $("#pkSum").innerHTML=I.length?`Poids ≈ <b class="num">${fmt(kg)} kg</b> · Valeur au détail : <b class="num">${mad(val)}</b> · Prix du panier : <b class="num">${mad(P.p)}</b>${+P.p>0&&val>0?` · ${val>P.p?`le client économise <b class="num">${mad(val-P.p)}</b>`:`<span style="color:#c0392b">le panier coûte plus cher que les produits séparés</span>`}`:""}`:"";
 }
 /* ---------------- admin: subscriptions ---------------- */
+const PLAN_IMGS=[["","Photo de la qoffa"],["img/abo-famille.jpg","🧺 Marché coloré"],["img/hero.jpg","🍅 Panier tomates"],["img/sl-fruit.jpg","🍊 Agrumes"],["img/sl-cut.jpg","🥕 Légumes coupés"],["img/p-big.jpg","🧺 Grande qoffa"],["img/p-premp.jpg","👑 Qoffa premium"]];
 const AST2={new:"Nouveau",active:"Actif",paused:"En pause",cancel:"Arrêté"};
 let abos=null,aboErr="";
 async function loadAbos(){if(!cloud){abos=store.get("abos",[]);aboErr="";return}
@@ -3103,6 +3105,7 @@ A.abo=()=>{
     <td><input type="number" min="0" step="1" value="${+pl.price||0}" data-plf="price" data-pli="${i}" class="num" aria-label="Prix par mois"></td>
     <td><select data-plf="per" data-pli="${i}" aria-label="Livraisons par semaine"><option value="1" ${+pl.per!==2?"selected":""}>1 / semaine</option><option value="2" ${+pl.per===2?"selected":""}>2 / semaine</option></select></td>
     <td><select data-plf="pack" data-pli="${i}" aria-label="Panier livré">${po(pl.pack)}</select>${byId(pl.pack)?` <button class="lnk" style="color:var(--acc-d)" data-pkedit="${esc(pl.pack)}">✏️</button>`:""}</td>
+    <td><div style="display:flex;align-items:center;gap:6px">${safeImg(pl.img)?`<img src="${esc(pl.img)}" alt="" style="width:46px;height:32px;object-fit:cover;border-radius:6px">`:""}<select data-plf="img" data-pli="${i}" aria-label="Photo" style="max-width:150px">${PLAN_IMGS.map(([v,l])=>`<option value="${v}" ${(pl.img||"")===v?"selected":""}>${l}</option>`).join("")}${pl.img&&!PLAN_IMGS.some(x=>x[0]===pl.img)?`<option value="${esc(pl.img)}" selected>Photo envoyée</option>`:""}</select>${canUpload()?`<label class="upl">📷<input type="file" accept="image/*" data-planphoto="${i}"></label>`:""}</div></td>
     <td><input type="checkbox" class="sw" ${pl.on!==false?"checked":""} data-plf="on" data-pli="${i}" aria-label="Visible"></td><td><button class="btn b-gh sm" data-pldel="${i}">Supprimer</button></td></tr>`).join("")||`<tr><td colspan="7" class="hint">Aucune formule.</td></tr>`;
 };
 A.packs=()=>{
@@ -3589,7 +3592,7 @@ document.addEventListener("change",async e=>{
   if(t.id==="aPer"){aPer=t.value;renderAdmin();return}
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
   if(D.abost){const a=abos?.find(x=>x.id===D.abost);if(a&&await patchAbo(a,{status:t.value})){renderAdmin();toast(`Abonnement : ${AST2[t.value]}`)}return}
-  if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):String(t.value).trim().slice(0,60);saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
+  if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):f==="img"?safeImg(t.value):String(t.value).trim().slice(0,60);if(f==="img"&&!pl.img)delete pl.img;saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
   if(D.pkm){const P=byId(pkCur);if(!P)return;const k=D.pkm,v=String(t.value).trim();if(k==="p"||k==="old")P[k]=Math.max(0,+v||0);else if(k==="dar"||k==="dfr")P.d={...(P.d||{}),[k==="dar"?"ar":"fr"]:v.slice(0,160)};else P[k]=v.slice(0,60);
     if(k==="old"&&!P.old)delete P.old;saveCatalog("products");t.blur?.();renderAll();toast("Pack enregistré");return}
   if(D.ccdrv){const o=staffOrders().find(x=>x.id===D.ccdrv);if(o){await patchOrder(o,{driver:t.value});toast(t.value?`تسند لـ ${drivers.list?.[t.value]?.n||""}`:"بلا موزع");ccRender()}return}
@@ -3604,6 +3607,8 @@ document.addEventListener("change",async e=>{
   if(D.code){promos.codes[D.code].on=t.checked;saveCatalog("promos")}
   if(D.assign){const o=staffOrders().find(x=>x.id===D.assign);if(o){await patchOrder(o,{driver:t.value,...(t.value&&o.status==="new"?{status:"prep"}:{})});toast(t.value?`Assignée à ${drivers.list[t.value]?.n}`:"Livreur retiré")}}
   if(t.id==="drvSel"){me=t.value;store.set("driver",me);renderDriver()}
+  if(D.planphoto!=null&&t.files?.[0]){if(!canUpload()){toast("Connectez Supabase pour envoyer des photos");return}const pl=plans[+D.planphoto];if(!pl)return;toast("Envoi de la photo…");
+    try{pl.img=await uploadPhoto(pl.id,t.files[0]);await saveCatalog("plans");renderAll();toast("Photo ajoutée ✓")}catch(err){toast("Échec de l'envoi. Essayez une image plus légère (JPG/PNG).")}return}
   if(D.photo&&t.files?.[0]){if(!canUpload()){toast("Connectez Supabase pour envoyer des photos");return}
     const p=byId(D.photo);toast("Envoi de la photo…");
     try{p.img=await uploadPhoto(p.id,t.files[0]);await saveCatalog("products");renderAll();toast("Photo ajoutée ✓")}catch(err){toast("Échec de l'envoi. Essayez une image plus légère (JPG/PNG).")}}
