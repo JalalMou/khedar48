@@ -321,6 +321,10 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .cc-side{top:0}
 .gps-btn{width:100%;border:1.5px dashed #1a9e44;background:#f1faf3;color:#0e7a35;font:inherit;font-weight:800;border-radius:14px;padding:12px;cursor:pointer}.gps-btn[disabled]{opacity:.7}
 .gps-st{margin:6px 2px 0;font-size:13px;color:#4b5b51}.gps-st a,.gps-l{color:#16833a;font-weight:800}
+.wa-cta{background:#effaf3;border:1.5px solid #bfe9cc;border-radius:18px;padding:14px;margin:6px 0 4px;text-align:center}.wa-cta b{display:block;font-size:16px;color:#0e6a31}.wa-cta p{margin:6px 0 12px;font-size:14px;color:#2b4a36}
+.wa-big{display:flex!important;align-items:center;justify-content:center;gap:10px;font-size:17px!important;padding:15px!important;animation:waPulse 2s infinite}.wa-big svg{width:24px;height:24px;fill:#fff}
+@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}60%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}@media (prefers-reduced-motion:reduce){.wa-big{animation:none}}
+.free-tag{color:#1a8a3c;font-weight:800}.fee-note{font-size:12.5px;color:#a86b00}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(170%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .cbar.on{transform:none}
@@ -1835,7 +1839,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 <script type="module">
 document.documentElement.lang="ar";document.documentElement.dir="rtl";
 /* ---------------- constants ---------------- */
-const WA="212713694399",WA_PRETTY="+212 713-694399",DEF_SET={fee:15,freeFrom:200,margin:30};
+const WA="212713694399",WA_PRETTY="+212 713-694399",DEF_SET={fee:20,freeFrom:200,margin:30};
 const CATS=[
  {id:"veg",n:"الخضرة",e:"🥬",bg:"#e3f5df"},{id:"fruit",n:"الفواكه",e:"🍎",bg:"#ffe7e1"},
  {id:"herb",n:"الربيع",e:"🌿",bg:"#e0f3e8"},{id:"exotic",n:"المستوردة",e:"🥭",bg:"#fff1d6"},
@@ -2546,7 +2550,8 @@ function renderCart(){
   $("#codeMsg").innerHTML=tt.pr.err?`<span class="err">${esc(tt.pr.err)}</span>`:tt.pr.ok?`<span class="ok">✓ ${esc(tt.pr.ok)}</span>`:"";
   $("#shFoot").innerHTML=`<div class="tot num"><div><span>${t("sub")}</span><span>${money(tt.sub)}</span></div>
     ${tt.disc?`<div class="dsc"><span>${t("disc")} (${esc(promoCode.toUpperCase())})</span><span>−${money(tt.disc)}</span></div>`:""}
-    <div><span>${t("delivery")}</span><span>${tt.fee?money(tt.fee):t("free")}</span></div>
+    <div><span>${t("delivery")}</span><span>${tt.fee?money(tt.fee):`${money(0)} <small class="free-tag">🎉 ${t("free")}</small>`}</span></div>
+    ${tt.fee&&+settings.freeFrom?`<div class="fee-note"><span>${lang==="fr"?`Livraison offerte dès ${money(settings.freeFrom)} · encore ${money(Math.max(0,settings.freeFrom-(tt.sub-tt.disc)))}`:`التوصيل فابور من ${money(settings.freeFrom)} · زيد ${money(Math.max(0,settings.freeFrom-(tt.sub-tt.disc)))}`}</span></div>`:""}
     <div class="g"><span>${t("total")}</span><span>${money(tt.total)}</span></div></div>
     <div class="bar"><i style="width:${Math.min(100,(tt.sub-tt.disc)/Math.max(1,+settings.freeFrom||0)*100)}%"></i></div>
     <p class="hint num" style="margin:0 0 10px">${left?t("addMore",money(left)):t("freeOk")}</p>
@@ -2564,7 +2569,7 @@ function renderCheckout(){
     <div class="fld"><label for="coNote">${t("note")}</label><textarea id="coNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
     <div class="err" id="coErr" role="alert"></div></form>`;
   const tt=totals();
-  $("#shFoot").innerHTML=`<div class="tot num"><div class="g" style="border:0;margin:0;padding:0"><span>${t("cash")}</span><span>${money(tt.total)}</span></div></div>
+  $("#shFoot").innerHTML=`<div class="tot num"><div style="font-size:13.5px"><span>${t("delivery")}</span><span>${tt.fee?money(tt.fee):`${money(0)} <small class="free-tag">🎉 ${t("free")}</small>`}</span></div><div class="g" style="border:0;margin:0;padding:0"><span>${t("cash")}</span><span>${money(tt.total)}</span></div></div>
     <div style="display:flex;gap:8px"><button class="btn b-gh" id="backCart">${t("back")}</button><button class="btn b-or" style="flex:1" id="placeOrder">${t("confirm")}</button></div>`;
 }
 /* customer GPS position for the delivery (asked only when the customer taps the button) */
@@ -2587,13 +2592,12 @@ async function placeOrder(){
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#coPhone").focus();return}
   if(!addr){E.textContent=t("eAddr");$("#coAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
-  let waWin=null;try{waWin=window.open("","_blank")}catch(e){}
   const L=lines(),tt=totals(),id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
   const o={at:Date.now(),name,phone,hood,addr,slot,note,lang,tk,items:L.map(l=>[l.it.id,l.q,l.it.n,l.it.p]),sub:tt.sub,disc:tt.disc,code:tt.disc?promoCode.toUpperCase():"",fee:tt.fee,total:tt.total,status:"new",driver:"",...(coLoc?{loc:coLoc}:{})};
   if(cloud){const b=$("#placeOrder");b.disabled=true;b.textContent=t("saving");
     try{if(!uid)throw new Error("no-auth");
       ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
-    catch(e){console.warn(e);try{waWin?.close()}catch(x){}b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
+    catch(e){console.warn(e);b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
   }else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
   track("order",id);pix("purchase",pixItems(L),o.total,id);
   cart={};promoCode="";store.set("cart",cart);store.set("promo","");renderShop();renderBadges();
@@ -2602,7 +2606,6 @@ async function placeOrder(){
   const msg=["السلام عليكم، طلب جديد من خضار 48 🌿",`رقم الطلب: ${id}`,"",...L.map(l=>`• ${l.it.n} — ${qtyLabel(l.it,l.q)} = ${fmt(l.sum)} د.م`),"",
     `المجموع: ${fmt(tt.sub)} د.م`,tt.disc?`التخفيض (${o.code}): −${fmt(tt.disc)} د.م`:"",`التوصيل: ${tt.fee?fmt(tt.fee)+" د.م":"فابور"}`,`الإجمالي: ${fmt(tt.total)} د.م (كاش)`,"",
     `الاسم: ${name}`,`الهاتف: ${phone}`,`الحومة: ${hood}`,`العنوان: ${addr}`,coLoc?`📍 الموقع: ${locUrl(coLoc)}`:"",`الوقت: ${slot}`,note?`ملاحظة: ${note}`:"","",`${T.ar.trackWa} ${link}`].filter(Boolean).join("\n");
-  const waUrl=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;if(waWin&&!waWin.closed){try{waWin.location.href=waUrl}catch(e){}}
   mode="done";$("#shTitle").textContent=t("done");
   $("#shBody").innerHTML=`<div class="done-box"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h3 style="font-size:22px;margin:.2em 0">${esc(t("thanks",name))}</h3>
@@ -2610,7 +2613,7 @@ async function placeOrder(){
     <p style="margin:10px 0 0;font-weight:700">${t("trackLink")}</p>
     <div class="tlink"><code>${esc(link)}</code><button class="btn b-gr sm" data-copylink="${esc(link)}">${t("copyLink")}</button></div>
     <p class="hint" style="margin:0 0 12px">${t("saveLink")}</p>
-    <a class="btn b-wa block" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${t("sendWa")}</a>
+    <div class="wa-cta"><b>${lang==="fr"?"📲 Dernière étape : envoyez-nous votre commande sur WhatsApp":"📲 باقي غير خطوة وحدة: صيفط لينا الطلب فالواتساب"}</b><p>${lang==="fr"?"Elle arrive directement chez notre équipe : nous la confirmons et la préparons tout de suite ⚡":"كتوصل نيشان للفريق ديالنا، كنأكدوها ونبداو نوجدوها دغيا ⚡"}</p><a class="btn b-wa block wa-big" href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 00-11.2 19.6L3 29l6.6-1.7A13 13 0 1016 3z"/></svg>${t("sendWa")}</a></div>
     <p class="hint" style="margin-top:12px">${t("noWa")}</p>
     <div class="copy"><code>${WA_PRETTY}</code><button class="btn b-gh sm" id="copyNum">${t("copy")}</button></div></div>`;
   $("#shFoot").innerHTML=`<button class="btn b-gr block" id="seeOrders">${t("track")}</button>`;
