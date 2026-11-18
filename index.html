@@ -344,6 +344,8 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .ccv-t tfoot td{border:0;padding:4px}.ccv-t .tt td{font-weight:900;font-size:16px;color:#0b5a2b;border-top:2px solid #e3ece4;padding-top:8px}.ccv-f{display:flex;gap:8px;flex-wrap:wrap}.ccv-f>*{flex:1;justify-content:center;text-align:center}
 .a-lang{font-weight:900;font-size:15px;font-family:inherit}
 @media (max-width:1000px){#v-admin[dir=rtl] .side{left:auto;right:0;transform:translateX(105%)}#v-admin[dir=rtl] .side.open{transform:none}}
+.oc-p{display:inline-flex;align-items:center;gap:10px;min-width:0}.oc-ph{width:38px;height:38px;flex:none;border-radius:10px;object-fit:cover;background:#f3faf5;display:inline-grid;place-items:center;font-size:20px;border:1px solid #e3ece4}
+.oc-i li{align-items:center}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -2785,11 +2787,12 @@ function donut(parts){
     <text x="80" y="82" text-anchor="middle" class="dn-n">${total}</text><text x="80" y="102" text-anchor="middle" class="dn-l">commande${total>1?"s":""}</text></svg>
     <ul class="dn-k">${parts.map(p=>`<li><i style="background:${p.c}"></i><span>${p.n} <small class="hint num">(${total?(p.v/total*100).toLocaleString("fr-FR",{maximumFractionDigits:1}):0}%)</small></span><b class="num">${p.v}</b></li>`).join("")}</ul></div>`}
 
+const itemThumb=(p,it)=>{const src=photoOf(p);return src?`<img class="oc-ph" src="${esc(src)}" alt="" loading="lazy">`:`<span class="oc-ph">${esc(it?.e||"🥬")}</span>`};
 function adminOrderCard(o){
   const dOpts=Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${o.driver===k?"selected":""}>${esc(d.n)}</option>`).join("");
   return `<article class="oc"><div class="oc-h"><span><b class="num">#${esc(o.id)}</b>${o.ex?' <span class="tagx">Exemple</span>':""} <small class="hint num">${hhmm(o.at)}</small></span>${stPill(o.status)}</div>
    <div class="oc-c"><b>${esc(o.name)}</b> · <a href="tel:${esc(o.phone)}" class="num">${esc(o.phone)}</a><br><span class="hint">📍 ${esc(o.hood)} · ${esc(o.addr)}</span>${o.loc?` · <a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}<br><span class="hint">🕒 ${esc(o.slot)}${o.note?` · 📝 ${esc(o.note)}`:""}${o.code?` · 🏷️ ${esc(o.code)}`:""}</span></div>
-   <ul class="oc-i">${(o.items||[]).map(([id,q,n])=>{const p=byId(id);return `<li><span>${esc(p?pn(p):n)}</span><span class="num">${fmt(q)} ${UFR[p?.u||"kg"]}</span></li>`}).join("")}</ul>
+   <ul class="oc-i">${(o.items||[]).map(([id,q,n,p0])=>{const p=byId(id),ar=admLang==="ar",it=p||{n,u:"kg",e:"🥬"},pr=(+p0||+it.p||0)*(+q||0);return `<li data-notr><span class="oc-p">${itemThumb(p,it)}<span>${esc(ar?(it.n||n):p?pn(p):n)}</span></span><span class="num">${ar?esc(qtyLabel(it,+q)):`${fmt(q)} ${UFR[it.u||"kg"]}`}${pr?` <small class="hint">· ${fmt(pr)} ${ar?"درهم":"MAD"}</small>`:""}</span></li>`}).join("")}</ul>
    <div class="oc-t"><span>Total${o.disc?` <small class="hint num">(remise −${fmt(o.disc)})</small>`:""}${o.fee?` <small class="hint num">(livraison ${fmt(o.fee)})</small>`:""}</span><b class="num">${mad(o.total)}</b></div>
    <div class="seg" role="group" aria-label="Statut">${Object.keys(AST).map(k=>`<button class="ps-${k}" data-st="${k}" data-oid="${esc(o.id)}" aria-pressed="${o.status===k}">${AST[k]}</button>`).join("")}</div>
    <div class="oc-a"><select data-assign="${esc(o.id)}" aria-label="Livreur"><option value="">— Livreur —</option>${dOpts}</select>
@@ -3598,7 +3601,7 @@ const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ما�
 /* call center: full order sheet (what the customer ordered) */
 function openCcOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="ccv:"+id;
   const rows=(o.items||[]).map(([pid,q,nm,p0])=>{const it=byId(pid)||{n:nm,u:"kg",e:"🥬"},p=+p0||+it.p||0;
-    return `<tr><td>${esc(it.e||"")} ${esc(it.n||nm||pid)}</td><td class="num">${esc(qtyLabel(it,+q))}</td><td class="num">${fmt(p*(+q||0))} درهم</td></tr>`}).join("");
+    return `<tr><td><span class="oc-p">${itemThumb(byId(pid),it)}<span>${esc(it.n||nm||pid)}</span></span></td><td class="num">${esc(qtyLabel(it,+q))}</td><td class="num">${fmt(p*(+q||0))} درهم</td></tr>`}).join("");
   const fee=+o.fee||0,line=(l,v,b)=>`<tr${b?' class="tt"':""}><td colspan="2">${l}</td><td class="num">${v}</td></tr>`;
   $("#shTitle").textContent=`الطلب #${o.id}`;
   $("#shBody").innerHTML=`<div class="ccv" dir="${lang==="fr"?"ltr":"rtl"}">
