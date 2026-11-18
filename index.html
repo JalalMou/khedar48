@@ -338,6 +338,7 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .ot-go{color:#9aa79f;font-size:22px;text-align:end}
 .aord .oc{box-shadow:none;border:0;padding:0;background:transparent}.aord-x{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 @media (min-width:900px){body.adm-on .sheet{left:auto;right:16px;bottom:16px;top:16px;width:480px;max-height:none;border-radius:22px}}
+.ot-wa{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#25d366;color:#fff;text-decoration:none;font-size:17px;margin-inline-end:8px;vertical-align:middle}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1654,6 +1655,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
                 <div class="fld"><label for="setMargin">Marge estimée quand il n'y a pas de prix d'achat (%)</label><input id="setMargin" type="number" min="0" max="90" step="1"></div>
                 <div class="fld"><label for="setIg">Lien Instagram</label><input id="setIg" type="url" placeholder="https://instagram.com/…"></div>
                 <div class="fld"><label for="setFb">Lien Facebook</label><input id="setFb" type="url" placeholder="https://facebook.com/…"></div>
+                <div class="fld"><label for="setConfAr">Message de confirmation WhatsApp (arabe)</label><textarea id="setConfAr" rows="8" dir="rtl" placeholder="Laissez vide pour le message par défaut"></textarea><small class="hint">Variables : {nom} {commande} {produits} {total} {adresse} {heure}</small></div>
+                <div class="fld"><label for="setConfFr">Message de confirmation WhatsApp (français)</label><textarea id="setConfFr" rows="6" placeholder="Laissez vide pour le message par défaut"></textarea></div>
                 <div class="fld"><label for="setTt">Lien TikTok</label><input id="setTt" type="url" placeholder="https://tiktok.com/@…"></div>
                 <div class="fld"><label for="setFbPx">Meta Pixel ID (Facebook / Instagram)</label><input id="setFbPx" inputmode="numeric" placeholder="Ex. : 123456789012345" dir="ltr"></div>
                 <div class="fld"><label for="setTtPx">TikTok Pixel ID</label><input id="setTtPx" placeholder="Ex. : C1A2B3C4D5E6F7G8H9" dir="ltr"></div>
@@ -2699,6 +2702,16 @@ const aEmpty=t=>`<p class="a-empty">${t}</p>`;
 const waNum=ph=>esc(String(ph||"").replace(/^0/,"212").replace(/\D/g,""));
 /* ready-made WhatsApp message to the customer, in the language they ordered in, for the order's current (or given) status */
 const SITE="https://www.khedar48.com/";
+/* WhatsApp message to ask the customer to confirm a new order (template editable in Paramètres) */
+const CONF_AR="السلام عليكم {nom} 👋\nمعاك فريق خضار 48 🥬\n\nتوصلنا بالطلب ديالك رقم *{commande}*:\n{produits}\n\n💵 المجموع: *{total}* (الخلاص عند الاستلام)\n📍 العنوان: {adresse}\n🕒 الوقت: {heure}\n\nواش نأكدو ليك الطلب؟ جاوبنا بـ *نعم* باش نبداو نوجدوه دابا ✅\n\n— فريق خضار 48 🥬 · وجدة";
+const CONF_FR="Bonjour {nom} 👋\nIci l'équipe Khedar48 🥬\n\nNous avons bien reçu votre commande *{commande}* :\n{produits}\n\n💵 Total : *{total}* (paiement à la livraison)\n📍 Adresse : {adresse}\n🕒 Créneau : {heure}\n\nPouvez-vous confirmer la commande ? Répondez *Oui* et nous la préparons tout de suite ✅\n\n— L'équipe Khedar48 🥬 · Oujda";
+function confirmText(o){const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"";
+  const items=(o.items||[]).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `• ${fr?(byId(id)?pn(it)||it.n:nm0):(it.n||nm0)} — ${fr?`${fmt(q)} ${UFR[it.u]||""}`:qtyLabel(it,q)}`}).join("\n");
+  const tot=o.sub_id?(fr?"déjà payé (abonnement)":"مخلص فالاشتراك"):fr?`${fmt(o.total)} MAD`:`${fmt(o.total)} درهم`;
+  const tpl=(fr?settings.confFr:settings.confAr)||(fr?CONF_FR:CONF_AR);
+  return tpl.replace(/\{nom\}/g,n).replace(/\{commande\}/g,o.id).replace(/\{produits\}/g,items).replace(/\{total\}/g,tot)
+    .replace(/\{adresse\}/g,`${fr?hoodFrA(o.hood):o.hood||""} · ${o.addr||""}`).replace(/\{heure\}/g,fr?(SLOTS_FR[SLOTS.indexOf(o.slot)]||o.slot||""):(o.slot||""))}
+const confirmUrl=o=>`https://wa.me/${waNum(o.phone)}?text=${encodeURIComponent(confirmText(o))}`;
 function notifyText(o,st=o.status){
   const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"",id=o.id,dv=drivers.list?.[o.driver];
   const link=o.tk?`${SITE}#t=${encodeURIComponent(id)}.${o.tk}`:"";
@@ -2771,7 +2784,7 @@ function adminOrderCard(o){
    <div class="oc-t"><span>Total${o.disc?` <small class="hint num">(remise −${fmt(o.disc)})</small>`:""}${o.fee?` <small class="hint num">(livraison ${fmt(o.fee)})</small>`:""}</span><b class="num">${mad(o.total)}</b></div>
    <div class="seg" role="group" aria-label="Statut">${Object.keys(AST).map(k=>`<button class="ps-${k}" data-st="${k}" data-oid="${esc(o.id)}" aria-pressed="${o.status===k}">${AST[k]}</button>`).join("")}</div>
    <div class="oc-a"><select data-assign="${esc(o.id)}" aria-label="Livreur"><option value="">— Livreur —</option>${dOpts}</select>
-     <a class="btn b-wa sm" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener" title="Message prêt : « ${esc(AST[o.status]||"")} »">📲 Informer le client</a></div></article>`}
+     ${o.status==="new"?`<a class="btn b-wa sm" href="${esc(confirmUrl(o))}" target="_blank" rel="noopener" title="Demander au client de confirmer la commande">✅ Confirmer sur WhatsApp</a>`:""}<a class="btn b-wa sm" href="${esc(notifyUrl(o))}" target="_blank" rel="noopener" title="Message prêt : « ${esc(AST[o.status]||"")} »">📲 Informer le client</a></div></article>`}
 
 const A={};
 A.dash=({O,OR,OP,len,act})=>{
@@ -2879,7 +2892,7 @@ A.orders=({O})=>{
   $("#aOrders").innerHTML=OL.length?`<div class="card ot-card"><div class="tbl"><table class="ot"><thead><tr><th>Commande</th><th>Client</th><th>Quartier</th><th>Articles</th><th>Total</th><th>Statut</th><th>Livreur</th><th></th></tr></thead><tbody>${OL.map(o=>{const n=(o.items||[]).length;
     return `<tr class="ot-r ${o.status==="new"?"is-new":""}" data-oview="${esc(o.id)}" tabindex="0" title="Voir la commande"><td><b class="num">#${esc(o.id)}</b><small class="num">${hhmm(o.at)}</small></td>
       <td><b>${esc(o.name)}</b><small class="num">${esc(o.phone)}</small></td><td>${esc(hoodFrA(o.hood))}${o.loc?' <span title="Position GPS">📍</span>':""}</td>
-      <td class="num">${n} produit${n>1?"s":""}</td><td class="num"><b>${mad(o.total)}</b>${o.sub_id?'<small>abonnement</small>':""}</td><td>${stPill(o.status)}</td><td>${dn(o.driver)?esc(dn(o.driver)):'<span class="hint">—</span>'}</td><td class="ot-go">›</td></tr>`}).join("")}</tbody></table></div></div>`:aEmpty("Aucune commande ici.");
+      <td class="num">${n} produit${n>1?"s":""}</td><td class="num"><b>${mad(o.total)}</b>${o.sub_id?'<small>abonnement</small>':""}</td><td>${stPill(o.status)}</td><td>${dn(o.driver)?esc(dn(o.driver)):'<span class="hint">—</span>'}</td><td class="ot-go">${o.status==="new"?`<a class="ot-wa" href="${esc(confirmUrl(o))}" target="_blank" rel="noopener" title="Confirmer sur WhatsApp">💬</a>`:""}›</td></tr>`}).join("")}</tbody></table></div></div>`:aEmpty("Aucune commande ici.");
   if(sheetOpen()&&mode.startsWith("aord:"))openAdminOrder(mode.slice(5));
 };
 let subs=null;
@@ -2973,7 +2986,7 @@ A.finance=({OR,len})=>{
   $("#finNote").textContent=`Le coût utilise le prix d'achat saisi dans « Stock » ; sinon une marge estimée de ${fmt(settings.margin)} % (modifiable dans Paramètres).`;
 };
 A.settings=()=>{if(document.activeElement?.closest?.("#setForm"))return;$("#setFee").value=settings.fee;$("#setFree").value=settings.freeFrom;$("#setMargin").value=settings.margin;
-  $("#setIg").value=settings.ig||"";$("#setFb").value=settings.fb||"";$("#setTt").value=settings.tt||"";$("#setFbPx").value=settings.fbPixel||"";$("#setTtPx").value=settings.ttPixel||"";$("#setGa").value=settings.gaId||""};
+  $("#setIg").value=settings.ig||"";$("#setFb").value=settings.fb||"";$("#setTt").value=settings.tt||"";$("#setFbPx").value=settings.fbPixel||"";$("#setTtPx").value=settings.ttPixel||"";$("#setGa").value=settings.gaId||"";$("#setConfAr").value=settings.confAr||CONF_AR;$("#setConfFr").value=settings.confFr||CONF_FR};
 
 /* ---------------- live view (admin side) ---------------- */
 const SRCN={direct:"Direct / WhatsApp","l.instagram.com":"Instagram","instagram.com":"Instagram","m.facebook.com":"Facebook","l.facebook.com":"Facebook","lm.facebook.com":"Facebook","facebook.com":"Facebook","google.com":"Google","google.co.ma":"Google","tiktok.com":"TikTok","instagram":"Instagram","facebook":"Facebook","tiktok":"TikTok","google":"Google"};
@@ -3451,7 +3464,7 @@ function ccRender0(){
     const L=B.filter(F[ccOF][1]).slice(0,200),dOpts=sel=>`<option value="">— الموزع —</option>`+Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${sel===k?"selected":""}>${esc(d.n)}</option>`).join("");
     $("#ccOrders").innerHTML=L.length?L.map(o=>{const tries=C.filter(c=>c.oid===o.id).length;return `<div class="cc-o"><div><b class="num">#${esc(o.id)} ${ccPill(o.status)}</b><small>${esc(o.name)} · <span class="num" dir="ltr">${esc(o.phone)}</span> · ${esc(o.hood||"")}${o.loc?` · <a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}</small><small>${(o.items||[]).length} منتوجات · <b class="num" style="display:inline">${fmt(o.total)} MAD</b> · ${hhmm(o.at)}${o.by?` · 🎧 ${esc(o.by)}`:""}${tries?` · 📞 ${tries}`:""}</small></div>
       <div>${["prep","road"].includes(o.status)?`<select data-ccdrv="${esc(o.id)}" aria-label="الموزع">${dOpts(o.driver)}</select>`:""}</div>
-      <div class="act"><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(notifyUrl(o,o.status==="new"?"new":o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
+      <div class="act"><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(o.status==="new"?confirmUrl(o):notifyUrl(o,o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
   }
   if(ccPage==="clients"){const m={};O.forEach(o=>{const k=digits(o.phone).slice(-9)||o.name;const c=m[k]=m[k]||{name:o.name,phone:o.phone,hood:o.hood,addr:o.addr,n:0,sum:0,last:0};c.n++;if(o.status!=="cancel")c.sum+=+o.total||0;if((o.at||0)>c.last){c.last=o.at;c.name=o.name;c.hood=o.hood;c.addr=o.addr}});
     const L=Object.values(m).filter(c=>ccHit(c.name,c.phone,c.hood)).sort((a,b)=>b.last-a.last);
@@ -3691,6 +3704,7 @@ $("#setForm").addEventListener("submit",e=>{e.preventDefault();
   if(px.fbPixel&&!PIXRE.fb.test(px.fbPixel)){toast("Meta Pixel ID invalide (que des chiffres)");$("#setFbPx").focus();return}
   if(px.ttPixel&&!PIXRE.tt.test(px.ttPixel)){toast("TikTok Pixel ID invalide");$("#setTtPx").focus();return}
   if(px.gaId&&!PIXRE.ga.test(px.gaId)){toast("ID Google invalide (format G-XXXXXXX)");$("#setGa").focus();return}
+  const cA=$("#setConfAr").value.trim().slice(0,1500),cF=$("#setConfFr").value.trim().slice(0,1500);px.confAr=cA&&cA!==CONF_AR?cA:"";px.confFr=cF&&cF!==CONF_FR?cF:"";
   settings={...settings,...px,fee:Math.max(0,+$("#setFee").value||0),freeFrom:Math.max(0,+$("#setFree").value||0),margin:Math.min(90,Math.max(0,+$("#setMargin").value||0)),ig:link("#setIg"),fb:link("#setFb"),tt:link("#setTt")};
   document.activeElement?.blur?.();saveCatalog("settings");renderAll();toast("Paramètres enregistrés")});
 const TEAM_HOST=/^team\./.test(location.hostname),MAIN_HOST=/^(www\.)?khedar48\.com$/.test(location.hostname),TEAM_SITE="https://team.khedar48.com/";
