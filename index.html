@@ -339,6 +339,11 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .aord .oc{box-shadow:none;border:0;padding:0;background:transparent}.aord-x{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 @media (min-width:900px){body.adm-on .sheet{left:auto;right:16px;bottom:16px;top:16px;width:480px;max-height:none;border-radius:22px}}
 .ot-wa{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#25d366;color:#fff;text-decoration:none;font-size:17px;margin-inline-end:8px;vertical-align:middle}
+.ccv{display:grid;gap:12px}.ccv-h{display:flex;justify-content:space-between;align-items:center;gap:8px}.ccv-c{display:grid;gap:4px;background:#f3faf5;border-radius:14px;padding:12px;font-size:14px}
+.ccv-t{width:100%;border-collapse:collapse;font-size:14px}.ccv-t th{text-align:start;color:#6b7a70;font-weight:700;font-size:12px;padding:6px 4px;border-bottom:1px solid #e3ece4}.ccv-t td{padding:8px 4px;border-bottom:1px dashed #e3ece4}.ccv-t td:nth-child(n+2),.ccv-t th:nth-child(n+2){text-align:end;white-space:nowrap}
+.ccv-t tfoot td{border:0;padding:4px}.ccv-t .tt td{font-weight:900;font-size:16px;color:#0b5a2b;border-top:2px solid #e3ece4;padding-top:8px}.ccv-f{display:flex;gap:8px;flex-wrap:wrap}.ccv-f>*{flex:1;justify-content:center;text-align:center}
+.a-lang{font-weight:900;font-size:15px;font-family:inherit}
+@media (max-width:1000px){#v-admin[dir=rtl] .side{left:auto;right:0;transform:translateX(105%)}#v-admin[dir=rtl] .side.open{transform:none}}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1437,6 +1442,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
         <button class="a-ib a-burger" id="sBurger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
         <h1 class="a-ttl" id="aTitle">👑 Espace Admin</h1>
         <label class="a-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="aQ" type="search" placeholder="Rechercher une commande, un client, un produit…" autocomplete="off"></label>
+        <button class="a-ib a-lang" id="aLang" title="بدل للعربية">ع</button>
         <button class="a-ib" id="aBell" aria-label="Nouvelles commandes"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1112 0v5l2 2H4zM10 21h4"/></svg><span class="a-dot num" id="aBellN" hidden></span></button>
         <label class="a-date"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><b id="aPerLbl">Aujourd'hui</b><small id="aDate"></small></span><svg viewBox="0 0 24 24" class="chev"><path d="M6 9l6 6 6-6"/></svg>
           <select id="aPer" aria-label="Période"><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
@@ -1655,7 +1661,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
                 <div class="fld"><label for="setMargin">Marge estimée quand il n'y a pas de prix d'achat (%)</label><input id="setMargin" type="number" min="0" max="90" step="1"></div>
                 <div class="fld"><label for="setIg">Lien Instagram</label><input id="setIg" type="url" placeholder="https://instagram.com/…"></div>
                 <div class="fld"><label for="setFb">Lien Facebook</label><input id="setFb" type="url" placeholder="https://facebook.com/…"></div>
-                <div class="fld"><label for="setConfAr">Message de confirmation WhatsApp (arabe)</label><textarea id="setConfAr" rows="8" dir="rtl" placeholder="Laissez vide pour le message par défaut"></textarea><small class="hint">Variables : {nom} {commande} {produits} {total} {adresse} {heure}</small></div>
+                <div class="fld"><label for="setConfAr">Message de confirmation WhatsApp (arabe)</label><textarea id="setConfAr" rows="8" dir="rtl" placeholder="Laissez vide pour le message par défaut"></textarea><small class="hint">Variables : {nom} {commande} {produits} {livraison} {total} {adresse} {heure}</small></div>
                 <div class="fld"><label for="setConfFr">Message de confirmation WhatsApp (français)</label><textarea id="setConfFr" rows="6" placeholder="Laissez vide pour le message par défaut"></textarea></div>
                 <div class="fld"><label for="setTt">Lien TikTok</label><input id="setTt" type="url" placeholder="https://tiktok.com/@…"></div>
                 <div class="fld"><label for="setFbPx">Meta Pixel ID (Facebook / Instagram)</label><input id="setFbPx" inputmode="numeric" placeholder="Ex. : 123456789012345" dir="ltr"></div>
@@ -2705,13 +2711,14 @@ const waNum=ph=>esc(String(ph||"").replace(/^0/,"212").replace(/\D/g,""));
 /* ready-made WhatsApp message to the customer, in the language they ordered in, for the order's current (or given) status */
 const SITE="https://www.khedar48.com/";
 /* WhatsApp message to ask the customer to confirm a new order (template editable in Paramètres) */
-const CONF_AR="السلام عليكم {nom} 👋\nمعاك فريق خضار 48 🥬\n\nتوصلنا بالطلب ديالك رقم *{commande}*:\n{produits}\n\n💵 المجموع: *{total}* (الخلاص عند الاستلام)\n📍 العنوان: {adresse}\n🕒 الوقت: {heure}\n\nواش نأكدو ليك الطلب؟ جاوبنا بـ *نعم* باش نبداو نوجدوه دابا ✅\n\n— فريق خضار 48 🥬 · وجدة";
-const CONF_FR="Bonjour {nom} 👋\nIci l'équipe Khedar48 🥬\n\nNous avons bien reçu votre commande *{commande}* :\n{produits}\n\n💵 Total : *{total}* (paiement à la livraison)\n📍 Adresse : {adresse}\n🕒 Créneau : {heure}\n\nPouvez-vous confirmer la commande ? Répondez *Oui* et nous la préparons tout de suite ✅\n\n— L'équipe Khedar48 🥬 · Oujda";
+const CONF_AR="السلام عليكم {nom} 👋\nمعاك فريق خضار 48 🥬\n\nتوصلنا بالطلب ديالك رقم *{commande}*:\n{produits}\n\n🚚 التوصيل: {livraison}\n💵 المجموع: *{total}* (الخلاص عند الاستلام)\n📍 العنوان: {adresse}\n🕒 الوقت: {heure}\n\nواش نأكدو ليك الطلب؟ جاوبنا بـ *نعم* باش نبداو نوجدوه دابا ✅\n\n— فريق خضار 48 🥬 · وجدة";
+const CONF_FR="Bonjour {nom} 👋\nIci l'équipe Khedar48 🥬\n\nNous avons bien reçu votre commande *{commande}* :\n{produits}\n\n🚚 Livraison : {livraison}\n💵 Total : *{total}* (paiement à la livraison)\n📍 Adresse : {adresse}\n🕒 Créneau : {heure}\n\nPouvez-vous confirmer la commande ? Répondez *Oui* et nous la préparons tout de suite ✅\n\n— L'équipe Khedar48 🥬 · Oujda";
 function confirmText(o){const fr=o.lang==="fr",n=String(o.name||"").trim().split(/\s+/)[0]||"";
   const items=(o.items||[]).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `• ${fr?(byId(id)?pn(it)||it.n:nm0):(it.n||nm0)} — ${fr?`${fmt(q)} ${UFR[it.u]||""}`:qtyLabel(it,q)}`}).join("\n");
   const tot=o.sub_id?(fr?"déjà payé (abonnement)":"مخلص فالاشتراك"):fr?`${fmt(o.total)} MAD`:`${fmt(o.total)} درهم`;
-  const tpl=(fr?settings.confFr:settings.confAr)||(fr?CONF_FR:CONF_AR);
-  return tpl.replace(/\{nom\}/g,n).replace(/\{commande\}/g,o.id).replace(/\{produits\}/g,items).replace(/\{total\}/g,tot)
+  const fee=+o.fee||0,liv=o.sub_id?(fr?"incluse":"داخلة فالاشتراك"):fee>0?(fr?`${fmt(fee)} MAD`:`${fmt(fee)} درهم`):(fr?"gratuite 🎉":"فابور 🎉");
+  let tpl=(fr?settings.confFr:settings.confAr)||(fr?CONF_FR:CONF_AR);if(!tpl.includes("{livraison}"))tpl=tpl.replace("💵",(fr?"🚚 Livraison : {livraison}\n":"🚚 التوصيل: {livraison}\n")+"💵");
+  return tpl.replace(/\{nom\}/g,n).replace(/\{commande\}/g,o.id).replace(/\{produits\}/g,items).replace(/\{total\}/g,tot).replace(/\{livraison\}/g,liv)
     .replace(/\{adresse\}/g,`${fr?hoodFrA(o.hood):o.hood||""} · ${o.addr||""}`).replace(/\{heure\}/g,fr?(SLOTS_FR[SLOTS.indexOf(o.slot)]||o.slot||""):(o.slot||""))}
 const confirmUrl=o=>`https://wa.me/${waNum(o.phone)}?text=${encodeURIComponent(confirmText(o))}`;
 function notifyText(o,st=o.status){
@@ -3152,12 +3159,96 @@ async function aboPack(a){const x=a.data||{};let P=byId(x.pack);
 const hoodFrA=h=>{const i=HOODS.indexOf(h);return i>=0?HOODS_FR[i]||h:h||""};
 function openAdminOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="aord:"+id;
   $("#shTitle").textContent=`Commande #${o.id}`;
-  $("#shBody").innerHTML=`<div dir="ltr" lang="fr" class="aord">${adminOrderCard(o)}
+  $("#shBody").innerHTML=`<div dir="${admLang==="ar"?"rtl":"ltr"}" class="aord">${adminOrderCard(o)}
     <div class="aord-x">${o.loc?`<a class="btn b-gh sm" href="${esc(mapUrl(o))}" target="_blank" rel="noopener">🧭 Itinéraire GPS</a>`:""}<a class="btn b-gh sm" href="tel:${esc(o.phone)}">📞 Appeler</a><a class="btn b-gh sm" href="https://wa.me/${waNum(o.phone)}" target="_blank" rel="noopener">💬 WhatsApp</a></div></div>`;
   $("#shFoot").innerHTML=`<button class="btn b-gh block" id="closeSheet2">Fermer</button>`;
   $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 document.addEventListener("click",e=>{const r=e.target.closest("[data-oview]");if(!r||e.target.closest("button,a,select,input"))return;openAdminOrder(r.dataset.oview)});
 document.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const r=e.target.closest?.("[data-oview]");if(r)openAdminOrder(r.dataset.oview)});
+
+/* admin: Darija translation layer (FR → AR), toggled from the ع/FR button in the admin header */
+const ADM_AR_RAW={
+"Espace réservé":"فضاء خاص","Se connecter":"دخول","Boutique":"المتجر","Fruits & Légumes à Oujda":"خضرة وفواكه فوجدة",
+"Tableau de bord":"لوحة القيادة","Trafic":"الزوار","Commandes":"الطلبات","Clients":"الكليان","Livreurs":"الموزعين","Produits":"المنتوجات","Stock":"الستوك",
+"Promotions":"البروموسيون","Catégories":"الأصناف","Rapports":"التقارير","Finances":"المالية","Comptabilité":"الحسابات","Packs":"القفف","Abonnements":"الاشتراكات",
+"Call center":"الكول سنتر","Paramètres":"الإعدادات","← Boutique":"→ المتجر","App livreur":"تطبيق الموزع","Super Admin":"سوبر أدمين","Se déconnecter":"خروج",
+"👑 Espace Admin":"👑 فضاء الأدمين","Aujourd'hui":"اليوم","aujourd'hui":"اليوم","7 derniers jours":"آخر 7 أيام","30 derniers jours":"آخر 30 يوم","Bonjour Admin 👋":"مرحبا أدمين 👋",
+"Voici la performance de Khedar48":"هادي هي نتائج خضار 48","vs hier":"مقارنة بالبارح","Livrées":"توصلات","Annulées":"ملغية","Chiffre d'affaires":"رقم المعاملات",
+"Gain net (estimé)":"الربح الصافي (تقريبي)","Évolution des commandes":"تطور الطلبات","Statut des commandes":"حالة الطلبات","En cours":"فالطريق للخدمة","Livreurs en ligne":"الموزعين المتصلين",
+"Voir tout →":"شوف الكل ←","En livraison":"فالطريق","Dernières commandes":"آخر الطلبات","N° Commande":"رقم الطلب","Client":"الكليان","Montant":"المبلغ","Statut":"الحالة","Heure":"الساعة",
+"Nouvelle":"جديدة","Nouvelles":"جداد","En préparation":"كتوجد","Livrée":"توصلات","Annulée":"ملغية","Top produits":"أكثر المنتوجات مبيعا","du jour":"ديال اليوم","Nouveau":"جديد",
+"Stock faible":"ستوك ناقص","Le stock n'est pas encore suivi.":"الستوك مازال ما متبعش.","Saisir le stock":"دخل الستوك","Trafic & conversion":"الزوار والتحويل",
+"Visiteurs":"الزوار","Taux de conversion":"نسبة التحويل","Nouveaux visiteurs":"زوار جداد","Visiteurs récurrents":"زوار رجعو","Ajout au panier":"زادو للسلة","Commande commencée":"بداو الطلب",
+"Commandes passées":"طلبات مسجلة","Taux de conversion global :":"نسبة التحويل الإجمالية:","Clients fidèles":"كليان أوفياء","clients ont commandé 2 fois ou plus":"كليان طلبو جوج مرات ولا كثر",
+"taux de fidélité":"نسبة الوفاء","clients revenus sur la période":"كليان رجعو فهاد المدة","Fidèle":"وفي","En direct sur le site":"مباشر فالموقع","Heures de pointe":"ساعات الذروة",
+"visites par heure":"زيارات فكل ساعة","Langue des visiteurs":"لغة الزوار","Pixels publicitaires":"بيكسلات الإشهار","Visiteurs et commandes par jour":"الزوار والطلبات فكل نهار",
+"Entonnoir de conversion":"مراحل التحويل","Chaque étape compte les visites qui sont allées au moins jusque-là.":"كل مرحلة كتحسب الزيارات اللي وصلات ليها على الأقل.","Appareils":"الأجهزة",
+"D'où viennent les visiteurs":"منين جاو الزوار","Changez le statut, assignez un livreur, contactez le client.":"بدل الحالة، عطي موزع، وتواصل مع الكليان.",
+"Regroupés par numéro de téléphone, du meilleur client au plus petit.":"مجموعين برقم التيليفون، من أحسن كليان للأصغر.","Copier les emails":"نسخ الإيميلات",
+"Téléphone":"التيليفون","Quartier":"الحومة","Total dépensé":"مجموع المصروف","Dernière commande":"آخر طلب","Ajouter un livreur":"زيد موزع","Nom":"السمية","Email de connexion":"إيميل الدخول",
+"Mot de passe (6+)":"كلمة السر (6+)","Ajouter":"زيد","➕ Ajouter un produit":"➕ زيد منتوج","Photo":"تصويرة","Catégorie":"الصنف","Nom (arabe)":"السمية (عربية)","Nom (FR)":"السمية (فرنسية)",
+"Prix (MAD)":"الثمن (درهم)","Unité":"الوحدة","pièce":"حبة","botte":"حزمة","panier":"قفة","Description (arabe, facultatif)":"الوصف (عربية، اختياري)","Ajouter le produit":"زيد المنتوج",
+"Prix":"الثمن","Produit":"المنتوج","Ancien prix":"الثمن القديم","Ventes":"المبيعات","Dispo":"متوفر","Seuil d'alerte":"حد التنبيه","Prix d'achat":"ثمن الشرا","Prix de vente":"ثمن البيع",
+"Marge":"الهامش","État":"الحالة","Codes promo":"كودات البروموسيون","Code":"الكود","Remise":"التخفيض","Commande min.":"أقل طلب","Utilisations":"الاستعمالات","Actif":"مفعل","Type":"النوع",
+"Pourcentage %":"نسبة %","Montant (MAD)":"المبلغ (درهم)","Valeur":"القيمة","Commande min. (MAD)":"أقل طلب (درهم)","Ajouter le code":"زيد الكود","Bannières de la boutique":"لافتات المتجر",
+"Grand chiffre":"رقم كبير","Titre":"العنوان","Sous-titre":"عنوان فرعي","Couleur":"اللون","Orange":"ليموني","Vert":"خضر","Vert clair":"خضر فاتح","Bleu":"زرق","Ajouter la bannière":"زيد اللافتة",
+"Copier les commandes (CSV)":"نسخ الطلبات (CSV)","CA par catégorie":"المعاملات حسب الصنف","CA par quartier":"المعاملات حسب الحومة","Créneaux demandés":"أوقات التوصيل المطلوبة",
+"Codes promo utilisés":"كودات مستعملة","Classement des produits":"ترتيب المنتوجات","Quantité":"الكمية","CA":"المعاملات","Détail par jour":"التفاصيل حسب النهار","Jour":"النهار","Coût":"التكلفة",
+"Gain net":"الربح الصافي","Cash encaissé par livreur":"الفلوس اللي جمع كل موزع","Commandes livrées sur la période, payées à la livraison.":"الطلبات اللي توصلات فهاد المدة، مخلصة عند التسليم.",
+"Ajouter une dépense":"زيد مصروف","Date":"التاريخ","Libellé":"البيان","Ajouter la dépense":"زيد المصروف","Dépenses par catégorie":"المصاريف حسب الصنف","Entrées et sorties":"المداخيل والمصاريف",
+"Journal des dépenses":"دفتر المصاريف","⬇️ Exporter (CSV)":"⬇️ تصدير (CSV)","Résultat par mois":"النتيجة فكل شهر","Mois":"الشهر","Commandes livrées":"طلبات توصلات","Encaissé":"المحصّل",
+"Dépenses":"المصاريف","Résultat":"النتيجة","Packs (qoffa)":"القفف","➕ Créer un pack":"➕ دير قفة جديدة","Créer le pack":"دير القفة","✏️ Modifier le pack":"✏️ بدل القفة","Ajouter au panier":"زيد للسلة",
+"🎯 Packs personnalisés (abonnés)":"🎯 قفف خاصة (المشتركين)","Packs faits sur mesure pour un abonné. Ils ne s'affichent pas sur le site.":"قفف مدايرة على قياس مشترك. ما كيبانوش فالموقع.",
+"📦 Livraisons d'abonnement aujourd'hui":"📦 توصيلات الاشتراك اليوم","↻ Actualiser":"↻ تحديث","Abonnés":"المشتركين","Formule":"العرض","Paiement du mois":"خلاص الشهر","Prochaine livraison":"التوصيل الجاي",
+"Formules d'abonnement":"عروض الاشتراك","Prix / mois (MAD)":"الثمن / شهر (درهم)","Livraisons":"التوصيلات","Qoffa livrée":"القفة اللي كتوصل","Visible":"باين","Prix / mois":"الثمن / شهر","Ajouter la formule":"زيد العرض",
+"📲 Application & notifications":"📲 التطبيق والإشعارات","📲 Installer l'application":"📲 ثبت التطبيق","🔔 Activer les notifications":"🔔 فعل الإشعارات","Livraison et marge":"التوصيل والهامش",
+"Frais de livraison (MAD)":"ثمن التوصيل (درهم)","Livraison gratuite dès (MAD)":"التوصيل فابور من (درهم)","Marge estimée quand il n'y a pas de prix d'achat (%)":"الهامش التقريبي إلا ما كانش ثمن الشرا (%)",
+"Lien Instagram":"رابط إنستغرام","Lien Facebook":"رابط فيسبوك","Lien TikTok":"رابط تيكتوك","Message de confirmation WhatsApp (arabe)":"ميساج التأكيد فواتساب (عربية)","Message de confirmation WhatsApp (français)":"ميساج التأكيد فواتساب (فرنسية)",
+"Enregistrer":"سجل","Accès de l'équipe":"دخول الفريق","Clients :":"الكليان:","Livreurs :":"الموزعين:","Admins :":"الأدمين:","Menu admin":"قائمة الأدمين","Changer de thème":"بدل الشكل","Menu":"القائمة",
+"Rechercher une commande, un client, un produit…":"قلب على طلب، كليان، منتوج…","Nouvelles commandes":"طلبات جداد","Période":"المدة","Commandes par jour":"الطلبات فكل نهار","Répartition des statuts":"توزيع الحالات",
+"Laissez vide pour le message par défaut":"خليه خاوي باش يبقى الميساج العادي","Visites":"الزيارات","Paniers abandonnés":"سلات متروكة","Panier → commande":"سلة ← طلب","Revenu par visiteur":"المدخول لكل زائر",
+"Panier moyen":"متوسط السلة","Visiteurs / jour":"زوار / نهار","Commandes / jour":"طلبات / نهار","Heure la plus active :":"الساعة اللي فيها أكثر حركة:","Non configuré":"ما مفعلش","Mobile":"تيليفون","Ordinateur":"بيسي","Tablette":"طابليت",
+"Toutes":"الكل","Tous":"الكل","Commande":"الطلب","Articles":"المنتوجات","Total":"المجموع","Livreur":"الموزع","abonnement":"اشتراك","Voir la commande":"شوف الطلب","Confirmer sur WhatsApp":"أكد فواتساب","✅ Confirmer sur WhatsApp":"✅ أكد فواتساب",
+"Position GPS":"الموقع GPS","Nouveaux (période)":"جداد (المدة)","Fidèles (3+ commandes)":"أوفياء (3+ طلبات)","Retirer":"حيد","Livrées aujourd'hui":"توصلات اليوم","Cash du jour":"فلوس اليوم","Livrées (période)":"توصلات (المدة)",
+"Avec prix":"عندهم ثمن","Sans prix (invisibles)":"بلا ثمن (ما باينينش)","Désactivés":"مطفيين","Supprimer":"مسح","Produits suivis":"منتوجات متبعة","En rupture":"سالين","Valeur du stock":"قيمة الستوك","Non suivi":"ما متبعش",
+"produits":"منتوجات","disponibles":"متوفرين","Tout activer":"شعل الكل","Tout désactiver":"طفي الكل","Taux d'annulation":"نسبة الإلغاء","Pas de données sur cette période.":"ما كاين حتى معطيات فهاد المدة.",
+"CA produits":"معاملات المنتوجات","Remises":"التخفيضات","Frais de livraison":"مصاريف التوصيل","Coût marchandises":"تكلفة السلعة","Marge nette":"الهامش الصافي","Aucune livraison sur la période.":"ما كاين حتى توصيل فهاد المدة.",
+"Encaissé (livré)":"المحصّل (توصل)","Résultat net":"النتيجة الصافية","Achats marchandise":"شرا السلعة","Dépense / jour":"مصروف / نهار","Achat marchandise":"شرا السلعة","Carburant / transport":"المازوط / النقل",
+"Salaires / livreurs":"الخلصة / الموزعين","Publicité":"الإشهار","Emballage / sacs":"التغليف / الميكا","Loyer / local":"الكرا / المحل","Téléphone & Internet":"التيليفون والأنترنيت","Autre":"آخر",
+"Aucune dépense sur cette période.":"ما كاين حتى مصروف فهاد المدة.","Entrées":"المداخيل","Sorties":"المصاريف","Résultat :":"النتيجة:","au détail":"بالتقسيط","✏️ Modifier":"✏️ بدل","Vide : ajoutez ses produits":"خاوية: زيد المنتوجات ديالها",
+"Description (arabe)":"الوصف (عربية)","Description (FR)":"الوصف (فرنسية)","Visible sur le site":"باينة فالموقع","Abonnés actifs":"مشتركين نشيطين","Nouvelles demandes":"طلبات جديدة","Revenu mensuel (actifs)":"المدخول الشهري (النشيطين)",
+"Encaissé ce mois":"المحصّل هاد الشهر","Pas encore payé (ce mois)":"مازال ما خلصش (هاد الشهر)","Livraisons aujourd'hui":"توصيلات اليوم","Aucune livraison d'abonnement prévue aujourd'hui.":"ما كاين حتى توصيل اشتراك اليوم.",
+"🧺 Modifier son pack":"🧺 بدل القفة ديالو","En pause":"موقف مؤقتا","Arrêté":"موقف","Marquer payé":"خلص","🧺 Pack perso":"🧺 قفة خاصة","— Aucun —":"— والو —","✍️ Sur mesure (le client écrit sa liste)":"✍️ على القياس (الكليان كيكتب اللائحة)",
+"Photo de la qoffa":"تصويرة القفة","Annuler le paiement":"لغي الخلاص","Nom arabe":"السمية بالعربية","Nom FR":"السمية بالفرنسية","Prix par mois":"الثمن فالشهر","Livraisons par semaine":"توصيلات فالسيمانة","Panier livré":"القفة اللي كتوصل",
+"Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
+"📲 Informer le client":"📲 علم الكليان","Assigner un livreur":"عطي موزع","Confirmer":"أكد","Annuler":"لغي","Valider":"صادق","Modifier":"بدل","Copier":"نسخ","Actualiser":"تحديث","Exporter":"تصدير","Rechercher":"قلب",
+"Agents":"الوكلاء","Agent":"الوكيل","Appels":"المكالمات","Leads":"الليدز","Ajouter un agent":"زيد وكيل","Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur":"وضع تجريبي: Supabase ما مربوطش، كلشي كيبقى فهاد المتصفح",
+"Le direct fonctionne quand le site est connecté à Supabase.":"المباشر كيخدم ملي يكون الموقع مربوط بـ Supabase.","Direct / WhatsApp":"مباشر / واتساب","Français (FR)":"فرنسية (FR)","Arabe (AR)":"عربية (AR)",
+"Légumes coupés, épices…":"خضرة مقطعة، عطرية…","Légumes, fruits, khodra m9att3a, épices…":"خضرة، فواكه، خضرة مقطعة، عطرية…","Newsletter":"النشرة","WhatsApp":"واتساب","Admin":"أدمين"
+};
+const ADM_WORDS=[["commandes","طلبات"],["commande","طلب"],["produits","منتوجات"],["produit","منتوج"],["livraisons","توصيلات"],["livraison","توصيل"],["visites","زيارات"],["visite","زيارة"],["abonnés","مشتركين"],["abonné","مشترك"],
+ ["actifs","نشيطين"],["actif","نشيط"],["sans prix","بلا ثمن"],["clients","كليان"],["vente","بيعة"],["ventes","بيعات"],["paniers","قفف"],["panier","قفة"],["Période :","المدة:"],["comparé à la période précédente","مقارنة بالمدة اللي قبل"],
+ ["Abonnement :","الاشتراك:"],["Poids ≈","الوزن ≈"],["· Valeur au détail :","· القيمة بالتقسيط:"],["· Prix du panier :","· ثمن القفة:"],["· le client économise","· الكليان كيربح"],["/ mois","/ شهر"],["/ semaine","/ سيمانة"],["Contenu","المحتوى"],
+ ["Payé","مخلص"],["aujourd'hui","اليوم"],["Aujourd'hui","اليوم"],["MAD","درهم"]];
+let admLang=store.get("admLang","fr"),ADM_DICT=null,ADM_RE=null;const ADM_ORIG=new WeakMap();
+function admDict(){const m=new Map(Object.entries(ADM_AR_RAW));
+  (products||[]).forEach(p=>{if(p.fr&&p.n)m.set(p.fr,p.n)});Object.entries(CATFR).forEach(([k,v])=>{const c=CATS.find(x=>x.id===k);if(c)m.set(v,c.n)});
+  HOODS_FR.forEach((v,i)=>v&&m.set(v,HOODS[i]));SLOTS_FR.forEach((v,i)=>v&&m.set(v,SLOTS[i]));
+  const W=[...m.entries(),...ADM_WORDS].sort((a,b)=>b[0].length-a[0].length);const esc2=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  ADM_RE=new RegExp(`(?<![A-Za-zÀ-ÿ])(${W.map(w=>esc2(w[0])).join("|")})(?![A-Za-zÀ-ÿ])`,"g");ADM_DICT=new Map(W);return m}
+const admT=s=>{if(!s||!/[A-Za-zÀ-ÿ]/.test(s))return s;const k=s.trim();if(ADM_DICT.has(k))return s.replace(k,ADM_DICT.get(k));return s.replace(ADM_RE,w=>ADM_DICT.get(w)??w)};
+function trADM(root){if(!root)return;const ar=admLang==="ar";if(ar)admDict();
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement?.closest("textarea,script,style,[data-notr]")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});let n;
+  while((n=w.nextNode())){const o=ADM_ORIG.get(n);if(ar){if(o!==undefined&&n.nodeValue!==o.t)ADM_ORIG.delete(n);const src=ADM_ORIG.get(n)?.s??n.nodeValue;const t2=admT(src);if(t2!==src){ADM_ORIG.set(n,{s:src,t:t2});if(n.nodeValue!==t2)n.nodeValue=t2}}
+    else if(o!==undefined){if(n.nodeValue===o.t)n.nodeValue=o.s;ADM_ORIG.delete(n)}}
+  root.querySelectorAll("[placeholder],[title],[aria-label]").forEach(e=>["placeholder","title","aria-label"].forEach(k=>{const v=e.getAttribute(k),ok="data-fr-"+k,o=e.getAttribute(ok);
+    if(ar){const src=o??v;if(src){const t2=admT(src);if(t2!==src){if(o===null)e.setAttribute(ok,src);if(v!==t2)e.setAttribute(k,t2)}}}else if(o!==null){e.setAttribute(k,o);e.removeAttribute(ok)}}))}
+function admApplyLang(){const ar=admLang==="ar",V=$("#v-admin");if(!V)return;V.dir=ar?"rtl":"ltr";V.lang=ar?"ar":"fr";
+  const B=$("#aLang");if(B){const x=ar?"FR":"ع";if(B.textContent!==x)B.textContent=x;B.title=ar?"Passer en français":"بدل للعربية"}
+  trADM(V);if(document.body.classList.contains("adm-on")){const S=$("#sheet");if(S){S.dir=ar?"rtl":"";trADM(S)}}}
+const admObs=new MutationObserver(()=>{if(admLang==="ar"&&document.body.classList.contains("adm-on"))admApplyLang()});
+(()=>{const V=$("#v-admin");if(V)admObs.observe(V,{childList:true,subtree:true});const S=$("#sheet");if(S)admObs.observe(S,{childList:true,subtree:true})})();
+document.addEventListener("click",e=>{if(!e.target.closest("#aLang"))return;admLang=admLang==="ar"?"fr":"ar";store.set("admLang",admLang);admApplyLang();renderAdmin();admApplyLang()});
 
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
@@ -3253,6 +3344,7 @@ const UI_FR=[
  ["ملغي","Annulé"],["معلومة","Info"],["طلب جديد","Nouvelle commande"],["فالطريق","En route"],["توصّلات","Livrée"],["الخريطة","Carte"],
  ["موصلة","Livrées"],["مخلص","payé"],["جداد","Nouvelles"],["سالاو","Terminées"],["الموزع","Livreur"],["شكاية","Réclamation"],["ليد","Lead"],
  ["تواصلنا","Contacté"],["مهتم","Intéressé"],["ضاع","Perdu"],["معرفة","Bouche-à-oreille"],["المصدر","Source"],["ملاحظة","Note"],["العنوان","Adresse"],
+ ["المجموع الفرعي","Sous-total"],["التفاصيل","Détails"],["المنتوج","Produit"],["الكمية","Quantité"],["الثمن","Prix"],["تخفيض","Remise"],["واتساب","WhatsApp"],["المجموع","Total"],["نص كيلو","0,5 kg"],["حزمة","botte(s)"],["حبة","pièce(s)"],["قفة","panier(s)"],
  ["التوصيل","Livraison"],["فابور","Gratuite"],["تأكيد","Confirmer"],["إلغاء","Annuler"],["اتصل","Appeler"],["الكل","Tout"],["متصل","En ligne"],
  ["حيّد","Retirer"],["الحالة","Statut"],["المبلغ","Montant"],["كيتوجد","En préparation"],["توصّل","Livrée"],["ملغى","Annulée"],
  ["مكالمة","appel(s)"],["عميل","Client"],["جديد","Nouveau"],["منتوج","produit(s)"],["كغ","kg"],["درهم","MAD"],["طلب","commande(s)"],
@@ -3267,7 +3359,7 @@ function trUI(root){if(!root)return;const fr=lang==="fr";
   while((n=w.nextNode())){const o=UI_ORIG.get(n);if(fr){const src=o??n.nodeValue;if(/[؀-ۿ]/.test(src)){if(o===undefined)UI_ORIG.set(n,src);n.nodeValue=trS(src)}}else if(o!==undefined){n.nodeValue=o;UI_ORIG.delete(n)}}
   root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(e=>["placeholder","aria-label","title"].forEach(k=>{const v=e.getAttribute(k),ok="data-ar-"+k,o=e.getAttribute(ok);
     if(fr){const src=o??v;if(src&&/[؀-ۿ]/.test(src)){if(o===null)e.setAttribute(ok,src);e.setAttribute(k,trS(src))}}else if(o!==null){e.setAttribute(k,o);e.removeAttribute(ok)}}))}
-const uiLoc=()=>lang==="fr"?"fr-FR":uiLoc();
+const uiLoc=()=>lang==="fr"?"fr-FR":"ar-MA";
 let drvTab="mine",drvPage="home",drvOn=store.get("drvOn",true);
 const mapUrl=o=>o.loc&&isFinite(+o.loc.lat)&&isFinite(+o.loc.lng)?`https://www.google.com/maps/dir/?api=1&destination=${+o.loc.lat},${+o.loc.lng}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.addr||""}, ${o.hood||""}, Oujda`)}`;
 const DIC={bag:"M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 016 0v2",ok:"M20 6L9 17l-5-5",clock:"M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z",x:"M12 21a9 9 0 100-18 9 9 0 000 18zM9 9l6 6M15 9l-6 6"};
@@ -3466,7 +3558,7 @@ function ccRender0(){
     const L=B.filter(F[ccOF][1]).slice(0,200),dOpts=sel=>`<option value="">— الموزع —</option>`+Object.entries(drivers.list||{}).map(([k,d])=>`<option value="${esc(k)}" ${sel===k?"selected":""}>${esc(d.n)}</option>`).join("");
     $("#ccOrders").innerHTML=L.length?L.map(o=>{const tries=C.filter(c=>c.oid===o.id).length;return `<div class="cc-o"><div><b class="num">#${esc(o.id)} ${ccPill(o.status)}</b><small>${esc(o.name)} · <span class="num" dir="ltr">${esc(o.phone)}</span> · ${esc(o.hood||"")}${o.loc?` · <a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}</small><small>${(o.items||[]).length} منتوجات · <b class="num" style="display:inline">${fmt(o.total)} MAD</b> · ${hhmm(o.at)}${o.by?` · 🎧 ${esc(o.by)}`:""}${tries?` · 📞 ${tries}`:""}</small></div>
       <div>${["prep","road"].includes(o.status)?`<select data-ccdrv="${esc(o.id)}" aria-label="الموزع">${dOpts(o.driver)}</select>`:""}</div>
-      <div class="act"><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(o.status==="new"?confirmUrl(o):notifyUrl(o,o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
+      <div class="act"><button class="cc-btn sm" data-ccview="${esc(o.id)}">📄 التفاصيل</button><button class="cc-btn sm" data-cccall="${esc(o.id)}">📞 اتصل</button>${o.status==="new"?`<button class="cc-btn sm" data-ccok="${esc(o.id)}">✅ تأكيد</button><button class="cc-btn sm r" data-ccno="${esc(o.id)}">❌ إلغاء</button>`:""}<a class="cc-btn sm wa" href="${esc(o.status==="new"?confirmUrl(o):notifyUrl(o,o.status))}" target="_blank" rel="noopener">💬</a></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى طلب هنا 👌</div>`;
   }
   if(ccPage==="clients"){const m={};O.forEach(o=>{const k=digits(o.phone).slice(-9)||o.name;const c=m[k]=m[k]||{name:o.name,phone:o.phone,hood:o.hood,addr:o.addr,n:0,sum:0,last:0};c.n++;if(o.status!=="cancel")c.sum+=+o.total||0;if((o.at||0)>c.last){c.last=o.at;c.name=o.name;c.hood=o.hood;c.addr=o.addr}});
     const L=Object.values(m).filter(c=>ccHit(c.name,c.phone,c.hood)).sort((a,b)=>b.last-a.last);
@@ -3503,14 +3595,28 @@ function show(v){if(TEAM_HOST&&v==="shop"&&!isTeam()&&view==="login"){location.h
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
 
+/* call center: full order sheet (what the customer ordered) */
+function openCcOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="ccv:"+id;
+  const rows=(o.items||[]).map(([pid,q,nm,p0])=>{const it=byId(pid)||{n:nm,u:"kg",e:"🥬"},p=+p0||+it.p||0;
+    return `<tr><td>${esc(it.e||"")} ${esc(it.n||nm||pid)}</td><td class="num">${esc(qtyLabel(it,+q))}</td><td class="num">${fmt(p*(+q||0))} درهم</td></tr>`}).join("");
+  const fee=+o.fee||0,line=(l,v,b)=>`<tr${b?' class="tt"':""}><td colspan="2">${l}</td><td class="num">${v}</td></tr>`;
+  $("#shTitle").textContent=`الطلب #${o.id}`;
+  $("#shBody").innerHTML=`<div class="ccv" dir="${lang==="fr"?"ltr":"rtl"}">
+    <div class="ccv-h">${ccPill(o.status)} <span class="hint num">${new Date(o.at).toLocaleString(lang==="fr"?"fr-FR":"ar-MA")}</span></div>
+    <div class="ccv-c"><b>👤 ${esc(o.name)}</b><span class="num" dir="ltr">${esc(o.phone)}</span><span>📍 ${esc(o.hood||"")} · ${esc(o.addr||"")}</span><span>🕒 ${esc(o.slot||"")}</span>${o.note?`<span>📝 ${esc(o.note)}</span>`:""}${o.loc?`<a href="${esc(mapUrl(o))}" target="_blank" rel="noopener" class="gps-l">🧭 GPS</a>`:""}</div>
+    <table class="ccv-t"><thead><tr><th>المنتوج</th><th>الكمية</th><th>الثمن</th></tr></thead><tbody>${rows||`<tr><td colspan="3">—</td></tr>`}</tbody>
+    <tfoot>${line("المجموع الفرعي",`${fmt(o.sub??0)} درهم`)}${+o.disc?line(`تخفيض ${esc(o.code||"")}`,`-${fmt(o.disc)} درهم`):""}${line("التوصيل",o.sub_id?"—":fee>0?`${fmt(fee)} درهم`:"فابور 🎉")}${line("المجموع",`${fmt(o.total)} درهم`,1)}</tfoot></table></div>`;
+  $("#shFoot").innerHTML=`<div class="ccv-f"><button class="cc-btn" data-cccall="${esc(o.id)}">📞 اتصل</button><a class="cc-btn wa" href="${esc(o.status==="new"?confirmUrl(o):notifyUrl(o,o.status))}" target="_blank" rel="noopener">💬 واتساب</a>${o.status==="new"?`<button class="cc-btn" data-ccok="${esc(o.id)}">✅ تأكيد</button>`:""}</div>`;
+  trUI($("#sheet"));$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 document.addEventListener("click",async e=>{
   const t=e.target.closest("button,a");if(!t)return;const D=t.dataset;
   if(D.cpage){ccPage=D.cpage;$(".ccx")?.classList.remove("open");ccRender();window.scrollTo({top:0});return}
   if(D.cpGo){ccPage=D.cpGo;ccRender();return}
   if(D.cctool){const k=D.cctool;if(k==="call")ccCallForm();else if(k==="lead")ccLeadForm();else if(k==="order")ccOrderForm();else{ccPage="orders";ccOF="nodrv";ccRender()}return}
   if(D.ccof){ccOF=D.ccof;ccRender();return}
-  if(D.cccall){const o=staffOrders().find(x=>x.id===D.cccall);if(o)ccStartCall({phone:o.phone,name:o.name,kind:o.status==="new"?"confirm":"follow",oid:o.id});return}
-  if(D.ccok){const o=staffOrders().find(x=>x.id===D.ccok);if(o){await patchOrder(o,{status:"prep"});await ccAddCall({phone:o.phone,name:o.name,kind:"confirm",result:"confirmed",oid:o.id,dur:0});toast(`#${o.id} مؤكد ✓`);ccRender()}return}
+  if(D.ccview){openCcOrder(D.ccview);return}
+  if(D.cccall){const o=staffOrders().find(x=>x.id===D.cccall);if(o&&String(mode).startsWith("ccv:"))closeSheet();if(o)ccStartCall({phone:o.phone,name:o.name,kind:o.status==="new"?"confirm":"follow",oid:o.id});return}
+  if(D.ccok){const o=staffOrders().find(x=>x.id===D.ccok);if(o){await patchOrder(o,{status:"prep"});await ccAddCall({phone:o.phone,name:o.name,kind:"confirm",result:"confirmed",oid:o.id,dur:0});toast(`#${o.id} مؤكد ✓`);ccRender();if(mode==="ccv:"+o.id)openCcOrder(o.id)}return}
   if(D.ccno){const o=staffOrders().find(x=>x.id===D.ccno);if(o&&confirm(trS(`إلغاء الطلب ${o.id}؟`))){await patchOrder(o,{status:"cancel"});await ccAddCall({phone:o.phone,name:o.name,kind:"confirm",result:"cancelled",oid:o.id,dur:0});toast("تلغى الطلب");ccRender()}return}
   if(D.cccli){ccStartCall({phone:D.cccli,name:D.n,kind:"follow"});return}
   if(D.ccneword){ccOrderForm({phone:D.ccneword,name:D.n,hood:D.h,addr:D.a});return}
