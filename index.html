@@ -2091,7 +2091,7 @@ const T={
   added:n=>`تزاد ${n} للسلة`,yourCart:"السلة ديالك",emptyCart:"السلة خاوية.<br>زيد شي خضرة ولا فاكهة.",backShop:"رجع للسوق",code:"كود التخفيض",apply:"طبّق",
   sub:"المجموع",disc:"التخفيض",delivery:"التوصيل",free:"فابور",total:"الإجمالي",addMore:v=>`زيد ${v} ويولي التوصيل فابور`,freeOk:"🎉 التوصيل فابور على هاد الطلب",checkout:v=>`كمّل الطلب · ${v}`,
   codeBad:"هاد الكود ماخدامش",codeMin:v=>`هاد الكود خدام غير فوق ${v}`,codePct:v=>`تخفيض ${v}%`,codeAmt:v=>`تخفيض ${v}`,
-  deliveryInfo:"معلومات التوصيل",name:"السمية",namePh:"مثلاً: فاطمة الزهراء",phone:"رقم الهاتف",hood:"الحومة",addr:"العنوان بالتفصيل",addrPh:"الزنقة، رقم الدار، علامة قريبة",
+  deliveryInfo:"معلومات التوصيل",name:"السمية",namePh:"مثلاً: فاطمة الزهراء",phone:"رقم الهاتف",hood:"الحومة",hoodPh:"كتب الحومة ديالك، مثلاً: لازاري",eHood:"كتب الحومة باش نعرفو فين نوصلو.",addr:"العنوان بالتفصيل",addrPh:"الزنقة، رقم الدار، علامة قريبة",
   slot:"وقت التوصيل",note:"ملاحظة (اختياري)",notePh:"مثلاً: البنان ماشي طايب بزاف",cash:"الإجمالي · كاش عند الاستلام",back:"رجوع",confirm:"أكّد الطلب",saving:"كنسجلو الطلب…",
   eName:"كتب السمية باش نعرفو لمن نوصلو.",ePhone:"رقم الهاتف خاصو يكون بحال 0612345678.",eAddr:"زيد العنوان بالتفصيل باش الموزع يلقاك بسهولة.",eSave:"ماتسجلش الطلب. تأكد من الأنترنيت وعاود جرب، ولا صيفطو فواتساب.",
   done:"الطلب تسجّل",thanks:n=>`شكراً ${n}!`,doneMsg:id=>`الطلب <b class="num">${id}</b> وصلنا. تقدر تتبعو من "طلباتي". باش نوجدوه دغيا، صيفطو حتى فواتساب:`,
@@ -2163,7 +2163,7 @@ const T={
   added:n=>`${n} ajouté au panier`,yourCart:"Votre panier",emptyCart:"Votre panier est vide.<br>Ajoutez des fruits ou des légumes.",backShop:"Retour à la boutique",code:"Code promo",apply:"Appliquer",
   sub:"Sous-total",disc:"Remise",delivery:"Livraison",free:"Gratuite",total:"Total",addMore:v=>`Encore ${v} pour la livraison gratuite`,freeOk:"🎉 Livraison gratuite pour cette commande",checkout:v=>`Commander · ${v}`,
   codeBad:"Ce code n'est pas valide",codeMin:v=>`Code valable dès ${v}`,codePct:v=>`Remise de ${v}%`,codeAmt:v=>`Remise de ${v}`,
-  deliveryInfo:"Informations de livraison",name:"Nom",namePh:"Ex : Fatima Zahra",phone:"Téléphone",hood:"Quartier",addr:"Adresse détaillée",addrPh:"Rue, n° de maison, repère proche",
+  deliveryInfo:"Informations de livraison",name:"Nom",namePh:"Ex : Fatima Zahra",phone:"Téléphone",hood:"Quartier",hoodPh:"Votre quartier, ex : Lazaret",eHood:"Indiquez votre quartier.",addr:"Adresse détaillée",addrPh:"Rue, n° de maison, repère proche",
   slot:"Heure de livraison",note:"Note (facultatif)",notePh:"Ex : bananes pas trop mûres",cash:"Total · paiement à la livraison",back:"Retour",confirm:"Confirmer la commande",saving:"Enregistrement…",
   eName:"Indiquez votre nom pour la livraison.",ePhone:"Le téléphone doit ressembler à 0612345678.",eAddr:"Ajoutez une adresse détaillée pour que le livreur vous trouve.",eSave:"Commande non enregistrée. Vérifiez Internet et réessayez, ou envoyez-la sur WhatsApp.",
   done:"Commande enregistrée",thanks:n=>`Merci ${n} !`,doneMsg:id=>`Nous avons bien reçu la commande <b class="num">${id}</b>. Suivez-la dans « Mes commandes ». Pour aller plus vite, envoyez-la aussi sur WhatsApp :`,
@@ -2484,7 +2484,7 @@ function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))re
    <form class="form" id="aboForm" novalidate>
     <div class="fld"><label for="abName">${t("name")}</label><input id="abName" autocomplete="name" value="${esc(d.name||"")}" placeholder="${esc(t("namePh"))}"></div>
     <div class="fld"><label for="abPhone">${t("phone")}</label><input id="abPhone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" value="${esc(d.phone||"")}" placeholder="06 12 34 56 78"></div>
-    <div class="fld"><label for="abHood">${t("hood")}</label><select id="abHood">${HOODS.map((h,i)=>`<option value="${esc(h)}" ${d.hood===h?"selected":""}>${fr?HOODS_FR[i]||h:h}</option>`).join("")}</select></div>
+    <div class="fld"><label for="abHood">${t("hood")}</label><input id="abHood" maxlength="60" autocomplete="address-level3" value="${esc(d.hood||"")}" placeholder="${t("hoodPh")}"></div>
     <div class="fld"><label for="abAddr">${t("addr")}</label><input id="abAddr" value="${esc(d.addr||"")}" placeholder="${esc(t("addrPh"))}"></div>
     <div class="fld"><label for="abDay">${fr?"Jour de livraison chaque semaine":"نهار التوصيل كل سيمانة"}</label><select id="abDay">${WDAY[fr?"fr":"ar"].map((w,i)=>`<option value="${i}" ${i===(today+1)%7?"selected":""}>${w}</option>`).join("")}</select></div>
     <div class="fld"><label for="abSlot">${t("slot")}</label><select id="abSlot">${SLOTS.slice(1).map((s,i)=>`<option value="${i+1}">${fr?SLOTS_FR[i+1]:s}</option>`).join("")}</select></div>
@@ -2495,11 +2495,12 @@ function openAbo(id){const pl=plans.find(x=>x.id===id);if(!pl||!(+pl.price>0))re
   $("#shFoot").innerHTML=`<button class="btn b-or block" id="aboSubmit">${fr?"Confirmer l'abonnement":"أكد الاشتراك"}</button>`;
   $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 async function submitAbo(){const id0=mode.slice(4),pl=plans.find(x=>x.id===id0);if(!pl)return;const fr=lang==="fr",E=$("#abErr");E.textContent="";
-  const name=$("#abName").value.trim(),phone=$("#abPhone").value.replace(/[\s.-]+/g,""),hood=$("#abHood").value,addr=$("#abAddr").value.trim(),note=$("#abNote").value.trim().slice(0,300);
+  const name=$("#abName").value.trim(),phone=$("#abPhone").value.replace(/[\s.-]+/g,""),hood=$("#abHood").value.trim().slice(0,60),addr=$("#abAddr").value.trim(),note=$("#abNote").value.trim().slice(0,300);
   const day=+$("#abDay").value,slot=SLOTS[+$("#abSlot").value]||SLOTS[1],wish=$("#abWish").value.trim().slice(0,500);
   if(pl.pack==="custom"&&wish.length<3){E.textContent=fr?"Écrivez ce que vous voulez dans votre panier.":"كتب شنو بغيتي فالقفة ديالك.";$("#abWish").focus();return}
   if(!name){E.textContent=t("eName");$("#abName").focus();return}
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#abPhone").focus();return}
+  if(!hood){E.textContent=t("eHood");$("#abHood").focus();return}
   if(!addr){E.textContent=t("eAddr");$("#abAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
   const id="S48-"+Date.now().toString(36).slice(-6).toUpperCase();
@@ -2565,7 +2566,7 @@ function renderCheckout(){
   $("#shBody").innerHTML=`<form class="form" id="coForm" novalidate>
     <div class="fld"><label for="coName">${t("name")}</label><input id="coName" autocomplete="name" value="${esc(d.name)}" placeholder="${esc(t("namePh"))}"></div>
     <div class="fld"><label for="coPhone">${t("phone")}</label><input id="coPhone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" value="${esc(d.phone)}" placeholder="06 12 34 56 78"></div>
-    <div class="fld"><label for="coHood">${t("hood")}</label><select id="coHood">${HOODS.map((h,i)=>`<option value="${esc(h)}" ${d.hood===h?"selected":""}>${lang==="fr"?HOODS_FR[i]||h:h}</option>`).join("")}</select></div>
+    <div class="fld"><label for="coHood">${t("hood")}</label><input id="coHood" maxlength="60" autocomplete="address-level3" value="${esc(d.hood||"")}" placeholder="${t("hoodPh")}"></div>
     <div class="fld"><label for="coAddr">${t("addr")}</label><input id="coAddr" value="${esc(d.addr)}" placeholder="${esc(t("addrPh"))}"></div>
     <div class="fld"><button type="button" class="gps-btn" id="coLoc">📍 ${lang==="fr"?"Partager ma position (GPS)":"حدد الموقع ديالي (GPS)"}</button><p class="gps-st" id="coLocS">${locTxt()}</p></div>
     <div class="fld"><label>${t("slot")}</label><div class="slots">${SLOTS.map((s,i)=>`<label><input type="radio" name="slot" value="${i}" ${i===0?"checked":""}>${lang==="fr"?SLOTS_FR[i]:s}</label>`).join("")}</div></div>
@@ -2589,10 +2590,11 @@ function askLoc(){const S=$("#coLocS"),B=$("#coLoc"),fr=lang==="fr";
       S.textContent=e.code===1?(fr?"Localisation refusée : autorisez-la dans les réglages, ou écrivez bien l'adresse.":"رفضتي الموقع: سمح بيه فالإعدادات، ولا كتب العنوان مزيان."):(fr?"Position introuvable, réessayez dehors ou écrivez l'adresse.":"ما لقيناش الموقع، عاود جرب ولا كتب العنوان.")},
     {enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
 async function placeOrder(){
-  const name=$("#coName").value.trim(),phone=$("#coPhone").value.replace(/[\s.-]+/g,""),hood=$("#coHood").value,addr=$("#coAddr").value.trim(),note=$("#coNote").value.trim();
+  const name=$("#coName").value.trim(),phone=$("#coPhone").value.replace(/[\s.-]+/g,""),hood=$("#coHood").value.trim().slice(0,60),addr=$("#coAddr").value.trim(),note=$("#coNote").value.trim();
   const slot=SLOTS[+document.querySelector("input[name=slot]:checked").value];const E=$("#coErr");
   if(!name){E.textContent=t("eName");$("#coName").focus();return}
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#coPhone").focus();return}
+  if(!hood){E.textContent=t("eHood");$("#coHood").focus();return}
   if(!addr){E.textContent=t("eAddr");$("#coAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
   const L=lines(),tt=totals(),id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
