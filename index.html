@@ -350,6 +350,10 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .tp-f{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 10px}.tp-f .a-sel{flex:1;min-width:0}.c-h .tp-f{margin:0}
 .tp .tp-n{width:22px;height:22px;border-radius:50%;background:#eaf6ee;color:#0b5a2b;display:inline-grid;place-items:center;font-size:12px;font-weight:800;flex:none}.tp b small{display:block;font-weight:600;font-size:12px}
 @media (max-width:760px){.a-dates{order:9;width:100%}.a-dates input{flex:1;min-width:0}}
+.rp-f{margin:12px 0}.rp-f #rpQ{flex:2;min-width:160px}.rp-chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);flex:1 1 100%}
+.rp-t td,.rp-t th{white-space:nowrap}.rp-t td:nth-child(2){white-space:normal;min-width:170px}.rp-zero{opacity:.55}.rp-t tfoot td{border-top:2px solid var(--line);padding-top:10px}
+.rp-bar{position:relative;min-width:90px;height:20px;background:#eef5f0;border-radius:6px;overflow:hidden}.rp-bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#7fd49a,#1a9e44);border-radius:6px}[dir=rtl] .rp-bar i{inset:0 0 0 auto}.rp-bar span{position:relative;font-size:12px;font-weight:700;padding:0 6px;line-height:20px}
+#repRank{scroll-margin-top:80px}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1588,7 +1592,9 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="k4" id="repK"></div>
           <div class="r2"><div class="card"><h3>CA par catégorie</h3><div id="repCat" class="hbs"></div></div><div class="card"><h3>CA par quartier</h3><div id="repHood" class="hbs"></div></div></div>
           <div class="r2"><div class="card"><h3>Créneaux demandés</h3><div id="repSlot" class="hbs"></div></div><div class="card"><h3>Codes promo utilisés</h3><div id="repCode" class="hbs"></div></div></div>
-          <div class="card"><div class="c-h"><h3>Classement des produits</h3><div class="tp-f"><select id="repCat" class="a-sel" aria-label="Catégorie"></select><select id="repSort" class="a-sel" aria-label="Trier par"></select></div></div><div class="tbl" style="margin-top:12px"><table><thead><tr><th>#</th><th>Produit</th><th>Commandes</th><th>Quantité</th><th>CA</th></tr></thead><tbody id="repProd"></tbody></table></div></div>
+          <div class="card" id="repRank"><div class="c-h"><h3>📦 Ventes par article <span class="hint" id="rpSum"></span></h3><button class="btn b-gh sm" data-act="rpCsv">⬇️ CSV</button></div>
+            <div class="tp-f rp-f"><input id="rpQ" class="a-sel" type="search" placeholder="Chercher un article…" autocomplete="off"><select id="rpCat" class="a-sel" aria-label="Catégorie"></select><select id="rpSort" class="a-sel" aria-label="Trier par"></select><label class="rp-chk"><input type="checkbox" id="rpAll"> Afficher aussi les articles sans vente</label></div>
+            <div class="tbl"><table class="rp-t"><thead><tr><th>#</th><th>Article</th><th>Catégorie</th><th>Commandes</th><th>Quantité vendue</th><th>Prix actuel</th><th>CA</th><th>% du CA</th><th>Dernière vente</th></tr></thead><tbody id="repProd"></tbody><tfoot id="repProdT"></tfoot></table></div></div>
         </div>
 
         <!-- finance -->
@@ -2781,12 +2787,22 @@ function agg(O){const ok=O.filter(o=>o.status!=="cancel");return{n:O.length,done
   clients:new Set(O.map(o=>String(o.phone||o.name))).size,rev:ok.reduce((a,o)=>a+(+o.total||0),0),net:ok.reduce((a,o)=>a+oNet(o),0)}}
 function delta(c,p,inv){if(!p)return c?`<span class="up">Nouveau</span>`:`<span class="flat">—</span>`;const d=Math.round((c-p)/Math.abs(p)*100);const good=inv?d<=0:d>=0;
   return `<span class="${d===0?"flat":good?"up":"down"}">${d>0?"↑ +":d<0?"↓ ":"→ "}${d}%</span>`}
-const TOP_SORT={c:"Plus commandés",q:"Plus grosse quantité",rev:"Plus gros CA"};
+const TOP_SORT={c:"Plus commandés",q:"Plus grosse quantité",rev:"Plus gros CA",name:"Nom (A → Z)"};let rpAll=false,rpQ="",rpRows=[];
 function topSel(ci,si){const C=$("#"+ci),S=$("#"+si);if(!C||!S)return;
   if(!C.options.length)C.innerHTML=`<option value="all">Toutes catégories</option>`+["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
   if(!S.options.length)S.innerHTML=Object.entries(TOP_SORT).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");C.value=topCat;S.value=topSort}
-const topFilter=L=>L.filter(t=>topCat==="all"||t.p?.c===topCat).sort((a,b)=>topSort==="rev"?b.rev-a.rev:topSort==="q"?b.q-a.q:b.c-a.c||b.rev-a.rev);function prodSales(O){const m={};O.filter(o=>o.status!=="cancel").forEach(o=>(o.items||[]).forEach(([id,q,n,pr])=>{const p=byId(id);
-  const s=m[id]=m[id]||{id,p,n:p?pn(p):n,c:0,q:0,rev:0};s.c++;s.q+=+q||0;s.rev+=(+q||0)*(+pr||+p?.p||0)}));return Object.values(m).sort((a,b)=>b.c-a.c||b.rev-a.rev)}
+const topFilter=L=>L.filter(t=>topCat==="all"||t.p?.c===topCat).sort((a,b)=>topSort==="name"?String(a.n).localeCompare(String(b.n),"fr"):topSort==="rev"?b.rev-a.rev||b.c-a.c:topSort==="q"?b.q-a.q||b.c-a.c:b.c-a.c||b.rev-a.rev);
+/* Rapports: one row per article with what was sold on the period */
+function renderRank(ps){topSel("rpCat","rpSort");$("#rpAll").checked=rpAll;
+  let L=[...ps];if(rpAll){const seen=new Set(L.map(x=>x.id));products.forEach(p=>{if(!seen.has(p.id))L.push({id:p.id,p,n:pn(p),c:0,q:0,rev:0,last:0})})}
+  const q=rpQ.trim().toLowerCase();if(q)L=L.filter(x=>`${x.n} ${x.p?.n||""}`.toLowerCase().includes(q));
+  L=topFilter(L);rpRows=L;const tot=L.reduce((a,x)=>a+x.rev,0),totAll=ps.reduce((a,x)=>a+x.rev,0)||1,sold=L.filter(x=>x.c).length;
+  const ar=admLang==="ar",nm=x=>ar?(x.p?.n||x.n):x.n,u=x=>ar&&x.p?"":` ${UFR[x.p?.u||"kg"]||""}`,qty=x=>ar&&x.p?qtyLabel(x.p,Math.round(x.q*100)/100):`${fmt(x.q)}${u(x)}`;
+  const day=t=>t?hhmm(t):"—";
+  $("#rpSum").textContent=`· ${sold} vendus / ${L.length}`;
+  $("#repProd").innerHTML=L.map((x,i)=>`<tr class="${x.c?"":"rp-zero"}"><td class="num">${i+1}</td><td><div class="pcell">${thumb(x.p)}<b data-notr>${esc(nm(x))}</b></div></td><td>${esc(CATFR[x.p?.c]||"—")}</td><td class="num">${x.c}</td><td class="num" data-notr><b>${x.c?esc(qty(x)):"0"}</b></td><td class="num">${x.p?mad(x.p.p):"—"}</td><td class="num"><b>${mad(x.rev)}</b></td><td><div class="rp-bar"><i style="width:${Math.min(100,x.rev/totAll*100)}%"></i><span class="num">${Math.round(x.rev/totAll*1000)/10}%</span></div></td><td class="num hint">${day(x.last)}</td></tr>`).join("")||`<tr><td colspan="9" class="hint">Pas encore de ventes sur cette période.</td></tr>`;
+  $("#repProdT").innerHTML=L.length?`<tr><td></td><td><b>Total</b></td><td></td><td class="num"><b>${L.reduce((a,x)=>a+x.c,0)}</b></td><td></td><td></td><td class="num"><b>${mad(tot)}</b></td><td></td><td></td></tr>`:""}function prodSales(O){const m={};O.filter(o=>o.status!=="cancel").forEach(o=>(o.items||[]).forEach(([id,q,n,pr])=>{const p=byId(id);
+  const s=m[id]=m[id]||{id,p,n:p?pn(p):n,c:0,q:0,rev:0};s.c++;s.last=Math.max(s.last||0,+o.at||0);s.q+=+q||0;s.rev+=(+q||0)*(+pr||+p?.p||0)}));return Object.values(m).sort((a,b)=>b.c-a.c||b.rev-a.rev)}
 const kmini=arr=>arr.map(([n,v,i,col])=>`<div class="kc">${i?`<span class="kc-i ${col||"g"}">${ic(i)}</span>`:""}<div><small>${n}</small><b class="num">${v}</b></div></div>`).join("");
 const qMatch=(...v)=>{const q=aQ.trim().toLowerCase();return !q||v.some(x=>String(x??"").toLowerCase().includes(q))};
 
@@ -3008,7 +3024,7 @@ A.reports=({OR,len})=>{
   $("#repPer").textContent=`Période : ${aLbl().toLowerCase()} (changez-la en haut à droite).`;
   $("#repK").innerHTML=kmini([["Commandes",OR.length,"cart"],["Chiffre d'affaires",mad(rev),"coins"],["Panier moyen",mad(ok.length?rev/ok.length:0),"basket"],["Taux d'annulation",`${OR.length?Math.round((OR.length-ok.length)/OR.length*100):0} %`,"x","r"]]);
   $("#repCat").innerHTML=bars(byCat,k=>CATFR[k]||k);$("#repHood").innerHTML=bars(byHood);$("#repSlot").innerHTML=bars(bySlot,k=>k,false);$("#repCode").innerHTML=bars(byCode,k=>k,false);
-  topSel("repCat","repSort");$("#repProd").innerHTML=topFilter(ps).slice(0,100).map((s,i)=>`<tr><td class="num">${i+1}</td><td><div class="pcell">${thumb(s.p)}<b>${esc(s.n)}</b></div></td><td class="num">${s.c}</td><td class="num">${fmt(s.q)} ${UFR[s.p?.u||"kg"]}</td><td class="num"><b>${mad(s.rev)}</b></td></tr>`).join("")||`<tr><td colspan="5" class="hint">Pas encore de ventes.</td></tr>`;
+  renderRank(ps);
 };
 A.finance=({OR,len})=>{
   const ok=OR.filter(o=>o.status!=="cancel"),S=k=>ok.reduce((a,o)=>a+(+o[k]||0),0);
@@ -3249,7 +3265,7 @@ const ADM_AR_RAW={
 "Encaissé ce mois":"المحصّل هاد الشهر","Pas encore payé (ce mois)":"مازال ما خلصش (هاد الشهر)","Livraisons aujourd'hui":"توصيلات اليوم","Aucune livraison d'abonnement prévue aujourd'hui.":"ما كاين حتى توصيل اشتراك اليوم.",
 "🧺 Modifier son pack":"🧺 بدل القفة ديالو","En pause":"موقف مؤقتا","Arrêté":"موقف","Marquer payé":"خلص","🧺 Pack perso":"🧺 قفة خاصة","— Aucun —":"— والو —","✍️ Sur mesure (le client écrit sa liste)":"✍️ على القياس (الكليان كيكتب اللائحة)",
 "Photo de la qoffa":"تصويرة القفة","Annuler le paiement":"لغي الخلاص","Nom arabe":"السمية بالعربية","Nom FR":"السمية بالفرنسية","Prix par mois":"الثمن فالشهر","Livraisons par semaine":"توصيلات فالسيمانة","Panier livré":"القفة اللي كتوصل",
-"Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
+"📦 Ventes par article":"📦 المبيعات حسب كل منتوج","Chercher un article…":"قلب على منتوج…","Afficher aussi les articles sans vente":"بين حتى المنتوجات اللي ما تباعوش","Article":"المنتوج","Quantité vendue":"الكمية المبيوعة","Prix actuel":"الثمن دابا","% du CA":"% من المبيعات","Dernière vente":"آخر بيعة","vendus":"تباعو","Nom (A → Z)":"السمية (أ → ي)","Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
 "📲 Informer le client":"📲 علم الكليان","Assigner un livreur":"عطي موزع","Confirmer":"أكد","Annuler":"لغي","Valider":"صادق","Modifier":"بدل","Copier":"نسخ","Actualiser":"تحديث","Exporter":"تصدير","Rechercher":"قلب",
 "Agents":"الوكلاء","Agent":"الوكيل","Appels":"المكالمات","Leads":"الليدز","Ajouter un agent":"زيد وكيل","Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur":"وضع تجريبي: Supabase ما مربوطش، كلشي كيبقى فهاد المتصفح",
 "Le direct fonctionne quand le site est connecté à Supabase.":"المباشر كيخدم ملي يكون الموقع مربوط بـ Supabase.","Direct / WhatsApp":"مباشر / واتساب","Français (FR)":"فرنسية (FR)","Arabe (AR)":"عربية (AR)",
@@ -3670,7 +3686,7 @@ document.addEventListener("click",async e=>{
   if(D.go){closeSheet();show(D.go);return}
   if("cart" in D){openSheet("cart");return}
   if(D.at==="cc"){show("cc");return}
-  if(D.at){aTab=D.at;sideOpen(false);renderAdmin();window.scrollTo({top:0});return}
+  if(D.at){aTab=D.at;sideOpen(false);renderAdmin();if(D.at==="reports"&&t.closest(".card")?.querySelector("#topList")){setTimeout(()=>$("#repRank")?.scrollIntoView({block:"start"}),80)}else window.scrollTo({top:0});return}
   if(D.of){oFilter=D.of;renderAdmin();return}
   if(D.pf){pFilter=D.pf;renderAdmin();return}
   if(D.pcat){pCat=D.pcat;renderAdmin();return}
@@ -3734,6 +3750,8 @@ document.addEventListener("click",async e=>{
     case "installBtn":if(installEvt){installEvt.prompt();installEvt=null;renderShop()}break;
     case "copySubs":await loadSubs();try{await navigator.clipboard.writeText((subs||[]).join("\n"));toast(`${subs.length} emails copiés`)}catch(err){toast("Copie impossible ici")}renderAdmin();break;
     case "askNotif":try{const r=await Notification.requestPermission();toast(r==="granted"?"Notifications activées ✓":"Notifications refusées")}catch(err){toast("Notifications non disponibles")}break;
+    case "rpCsv":{const rows=[["article","categorie","commandes","quantite","unite","prix_actuel","ca_mad","derniere_vente"],...rpRows.map(x=>[x.n,CATFR[x.p?.c]||"",x.c,x.q,x.p?.u||"",x.p?.p??"",Math.round(x.rev*100)/100,x.last?new Date(x.last).toISOString().slice(0,16).replace("T"," "):""])];
+      const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv"}));a.download=`ventes-articles-${ymd(Date.now())}.csv`;a.click();break}
     case "repCsv":{const R=aR();const rows=[["commande","date","client","telephone","quartier","total","statut","livreur","code"],
         ...staffOrders().filter(o=>inR(o,R)).map(o=>[o.id,new Date(o.at||0).toLocaleString("fr-FR"),o.name,o.phone,o.hood,o.total,AST[o.status]||o.status,drivers.list?.[o.driver]?.n||"",o.code||""])];
       const csv=rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(";")).join("\n");
@@ -3754,12 +3772,14 @@ $("#ccAgForm").addEventListener("submit",async e=>{e.preventDefault();const n=$(
   try{const id=await createStaffLogin(em,pw);ok(await SB.from("staff").upsert({user_id:id,role:"agent",name:n,phone:ph,email:em}));agents.list[id]={n,phone:ph};await saveCatalog("agents");e.target.reset();ccRender();toast(`${n} تزاد · يدخل بـ ${em}`)}
   catch(err){console.warn(err);const m=String(err?.message||err?.code||"");toast(err?.code==="exists"||/already/i.test(m)?"هاد الإيميل مستعمل":/check constraint|staff_role/i.test(m)?"خاص SQL ديال الكول سنتر يتدار اللول":/rate limit|security purposes/i.test(m)?"Supabase: بزاف ديال المحاولات. طفي «Confirm email» فـ Supabase ولا تسنا ساعة":/signups? (are )?(not allowed|disabled)/i.test(m)?"Supabase: التسجيل مسدود (Allow new users to sign up)":/password/i.test(m)?"المودباس ضعيف (6 حروف على الأقل)":/invalid/i.test(m)?"الإيميل ماشي صحيح":"ما تزادش: "+m.slice(0,80))}
   finally{b.disabled=false}});
+document.addEventListener("input",e=>{if(e.target.id==="rpQ"){rpQ=e.target.value;renderRank(prodSales(staffOrders().filter(o=>inR(o,aR()))))}});
 $("#aQ").addEventListener("input",e=>{aQ=e.target.value;if(["orders","clients","products","stock"].includes(aTab))renderAdmin()});
 document.addEventListener("change",async e=>{
   const t=e.target,D=t.dataset;
   if(t.id==="aPer"){aPer=t.value;store.set("aPer",aPer);if(aPer==="d"||aPer==="r")setTimeout(()=>{try{$("#aD1").showPicker?.()}catch(_){}$("#aD1").focus()},50);renderAdmin();return}
   if(t.id==="aD1"||t.id==="aD2"){if(t.id==="aD1")aD1=t.value;else aD2=t.value;store.set("aD1",aD1);store.set("aD2",aD2);if(aPer==="d")aD2=aD1;t.blur();renderAdmin();return}
-  if(t.id==="topCat"||t.id==="topSort"||t.id==="repCat"||t.id==="repSort"){const c=t.id.endsWith("Cat");if(c)topCat=t.value;else topSort=t.value;renderAdmin();return}
+  if(t.id==="rpAll"){rpAll=t.checked;renderAdmin();return}
+  if(t.id==="topCat"||t.id==="topSort"||t.id==="rpCat"||t.id==="rpSort"){const c=t.id.endsWith("Cat");if(c)topCat=t.value;else topSort=t.value;renderAdmin();return}
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
   if(D.abost){const a=abos?.find(x=>x.id===D.abost);if(a&&await patchAbo(a,{status:t.value})){renderAdmin();toast(`Abonnement : ${AST2[t.value]}`)}return}
   if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):f==="img"?safeImg(t.value):String(t.value).trim().slice(0,60);if(f==="img"&&!pl.img)delete pl.img;saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
