@@ -346,6 +346,10 @@ body{padding-top:env(safe-area-inset-top,0px)}
 @media (max-width:1000px){#v-admin[dir=rtl] .side{left:auto;right:0;transform:translateX(105%)}#v-admin[dir=rtl] .side.open{transform:none}}
 .oc-p{display:inline-flex;align-items:center;gap:10px;min-width:0}.oc-ph{width:38px;height:38px;flex:none;border-radius:10px;object-fit:cover;background:#f3faf5;display:inline-grid;place-items:center;font-size:20px;border:1px solid #e3ece4}
 .oc-i li{align-items:center}
+.a-top:has(.a-dates:not([hidden])){flex-wrap:wrap}.a-dates{display:flex;align-items:center;gap:6px;order:9;width:100%;justify-content:flex-end}.a-dates[hidden],.a-dates [hidden]{display:none}.a-dates input{height:42px;border:1px solid var(--line);border-radius:12px;padding:0 10px;background:var(--card);color:var(--fg);font:inherit;font-size:14px}
+.tp-f{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 10px}.tp-f .a-sel{flex:1;min-width:0}.c-h .tp-f{margin:0}
+.tp .tp-n{width:22px;height:22px;border-radius:50%;background:#eaf6ee;color:#0b5a2b;display:inline-grid;place-items:center;font-size:12px;font-weight:800;flex:none}.tp b small{display:block;font-weight:600;font-size:12px}
+@media (max-width:760px){.a-dates{order:9;width:100%}.a-dates input{flex:1;min-width:0}}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1447,7 +1451,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
         <button class="a-ib a-lang" id="aLang" title="بدل للعربية">ع</button>
         <button class="a-ib" id="aBell" aria-label="Nouvelles commandes"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1112 0v5l2 2H4zM10 21h4"/></svg><span class="a-dot num" id="aBellN" hidden></span></button>
         <label class="a-date"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><b id="aPerLbl">Aujourd'hui</b><small id="aDate"></small></span><svg viewBox="0 0 24 24" class="chev"><path d="M6 9l6 6 6-6"/></svg>
-          <select id="aPer" aria-label="Période"><option value="1">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
+          <select id="aPer" aria-label="Période"><option value="1">Aujourd'hui</option><option value="y">Hier</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option><option value="m">Ce mois</option><option value="pm">Mois dernier</option><option value="all">Toutes les dates</option><option value="d">📅 Choisir un jour…</option><option value="r">📅 Période personnalisée…</option></select></label>
+        <div class="a-dates" id="aDates" hidden><input type="date" id="aD1" aria-label="Du"><span id="aDsep">→</span><input type="date" id="aD2" aria-label="Au"></div>
       </header>
       <div class="a-body">
         <!-- dashboard -->
@@ -1461,7 +1466,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           </div>
           <div class="r3b">
             <div class="card"><div class="c-h"><h3>Dernières commandes</h3><button class="more" data-at="orders">Voir tout →</button></div><div id="lastOrders"></div></div>
-            <div class="card"><div class="c-h"><h3>Top produits <span id="topPer">du jour</span></h3><button class="more" data-at="reports">Voir tout →</button></div><div id="topList"></div></div>
+            <div class="card"><div class="c-h"><h3>Top produits <span id="topPer">du jour</span></h3><button class="more" data-at="reports">Voir tout →</button></div><div class="tp-f"><select id="topCat" class="a-sel" aria-label="Catégorie"></select><select id="topSort" class="a-sel" aria-label="Trier par"></select></div><div id="topList"></div></div>
             <div class="card"><div class="c-h"><h3>Stock faible <span id="lowN"></span></h3><button class="more" data-at="stock">Voir tout →</button></div><div id="lowList"></div></div>
           </div>
           <div class="r2b">
@@ -1583,7 +1588,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="k4" id="repK"></div>
           <div class="r2"><div class="card"><h3>CA par catégorie</h3><div id="repCat" class="hbs"></div></div><div class="card"><h3>CA par quartier</h3><div id="repHood" class="hbs"></div></div></div>
           <div class="r2"><div class="card"><h3>Créneaux demandés</h3><div id="repSlot" class="hbs"></div></div><div class="card"><h3>Codes promo utilisés</h3><div id="repCode" class="hbs"></div></div></div>
-          <div class="card"><h3>Classement des produits</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>#</th><th>Produit</th><th>Commandes</th><th>Quantité</th><th>CA</th></tr></thead><tbody id="repProd"></tbody></table></div></div>
+          <div class="card"><div class="c-h"><h3>Classement des produits</h3><div class="tp-f"><select id="repCat" class="a-sel" aria-label="Catégorie"></select><select id="repSort" class="a-sel" aria-label="Trier par"></select></div></div><div class="tbl" style="margin-top:12px"><table><thead><tr><th>#</th><th>Produit</th><th>Commandes</th><th>Quantité</th><th>CA</th></tr></thead><tbody id="repProd"></tbody></table></div></div>
         </div>
 
         <!-- finance -->
@@ -2700,7 +2705,7 @@ const ICON={
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
 const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["settings","Paramètres","gear"]];
-let aPer="1",chartPer="7",aQ="";
+let aPer=store.get("aPer","1"),chartPer="7",aQ="",topCat="all",topSort="c";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
 const pn=p=>p?.fr||FRN[p?.id]||p?.n||"";
@@ -2754,13 +2759,33 @@ const unitCost=(id,price)=>{const p=byId(id);return p&&+p.cost>0?+p.cost:(+price
 const oCost=o=>(o.items||[]).reduce((a,[id,q,,pr])=>a+unitCost(id,pr)*(+q||0),0);
 const oNet=o=>(+o.sub||0)-(+o.disc||0)-oCost(o);
 const perLbl=len=>len===1?"Aujourd'hui":`${len} derniers jours`;
+/* admin period: aPer = 1|y|7|30|m|pm|all|d|r (+ aD1/aD2 for d and r) */
+let aD1=store.get("aD1",""),aD2=store.get("aD2","");
+const d0=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x};
+const pDay=v=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||"");return m?new Date(+m[1],+m[2]-1,+m[3]):null};
+function aRange(){const t=d0(Date.now()),add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};let s,e;
+  switch(aPer){case "y":s=add(t,-1);e=t;break;case "7":s=add(t,-6);e=add(t,1);break;case "30":s=add(t,-29);e=add(t,1);break;
+    case "m":s=new Date(t.getFullYear(),t.getMonth(),1);e=add(t,1);break;case "pm":s=new Date(t.getFullYear(),t.getMonth()-1,1);e=new Date(t.getFullYear(),t.getMonth(),1);break;
+    case "all":{const f=Math.min(Date.now(),...staffOrders().map(o=>+o.at||Infinity));s=d0(f);e=add(t,1);break}
+    case "d":s=pDay(aD1)||t;e=add(s,1);break;
+    case "r":{let a=pDay(aD1)||add(t,-6),b=pDay(aD2)||t;if(b<a)[a,b]=[b,a];s=a;e=add(b,1);break}
+    default:s=t;e=add(t,1)}
+  return [s.getTime(),e.getTime()]}
+const aR=(shift=0)=>{const [s,e]=aRange(),L=e-s;return [s-shift*L,e-shift*L]};
+const aDays=()=>{const [s,e]=aRange();return Math.max(1,Math.round((e-s)/864e5))};
+function aLbl(){const f=d=>new Date(d).toLocaleDateString("fr-FR",{day:"numeric",month:"short"});const [s,e]=aRange();
+  return {"1":"Aujourd'hui","y":"Hier","7":"7 derniers jours","30":"30 derniers jours","m":"Ce mois","pm":"Mois dernier","all":"Toutes les dates"}[aPer]||(aPer==="d"?f(s):`${f(s)} → ${f(e-1)}`)}
 function per(len,shift=0){const s=new Date();s.setHours(0,0,0,0);s.setDate(s.getDate()-(len-1)-shift*len);const e=new Date(s);e.setDate(e.getDate()+len);return [s.getTime(),e.getTime()]}
 const inR=(o,r)=>(o.at||0)>=r[0]&&(o.at||0)<r[1];
 function agg(O){const ok=O.filter(o=>o.status!=="cancel");return{n:O.length,done:O.filter(o=>o.status==="done").length,cancel:O.length-ok.length,
   clients:new Set(O.map(o=>String(o.phone||o.name))).size,rev:ok.reduce((a,o)=>a+(+o.total||0),0),net:ok.reduce((a,o)=>a+oNet(o),0)}}
 function delta(c,p,inv){if(!p)return c?`<span class="up">Nouveau</span>`:`<span class="flat">—</span>`;const d=Math.round((c-p)/Math.abs(p)*100);const good=inv?d<=0:d>=0;
   return `<span class="${d===0?"flat":good?"up":"down"}">${d>0?"↑ +":d<0?"↓ ":"→ "}${d}%</span>`}
-function prodSales(O){const m={};O.filter(o=>o.status!=="cancel").forEach(o=>(o.items||[]).forEach(([id,q,n,pr])=>{const p=byId(id);
+const TOP_SORT={c:"Plus commandés",q:"Plus grosse quantité",rev:"Plus gros CA"};
+function topSel(ci,si){const C=$("#"+ci),S=$("#"+si);if(!C||!S)return;
+  if(!C.options.length)C.innerHTML=`<option value="all">Toutes catégories</option>`+["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
+  if(!S.options.length)S.innerHTML=Object.entries(TOP_SORT).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");C.value=topCat;S.value=topSort}
+const topFilter=L=>L.filter(t=>topCat==="all"||t.p?.c===topCat).sort((a,b)=>topSort==="rev"?b.rev-a.rev:topSort==="q"?b.q-a.q:b.c-a.c||b.rev-a.rev);function prodSales(O){const m={};O.filter(o=>o.status!=="cancel").forEach(o=>(o.items||[]).forEach(([id,q,n,pr])=>{const p=byId(id);
   const s=m[id]=m[id]||{id,p,n:p?pn(p):n,c:0,q:0,rev:0};s.c++;s.q+=+q||0;s.rev+=(+q||0)*(+pr||+p?.p||0)}));return Object.values(m).sort((a,b)=>b.c-a.c||b.rev-a.rev)}
 const kmini=arr=>arr.map(([n,v,i,col])=>`<div class="kc">${i?`<span class="kc-i ${col||"g"}">${ic(i)}</span>`:""}<div><small>${n}</small><b class="num">${v}</b></div></div>`).join("");
 const qMatch=(...v)=>{const q=aQ.trim().toLowerCase();return !q||v.some(x=>String(x??"").toLowerCase().includes(q))};
@@ -2801,7 +2826,7 @@ function adminOrderCard(o){
 const A={};
 A.dash=({O,OR,OP,len,act})=>{
   const c=agg(OR),p=agg(OP);
-  $("#helloPer").textContent=len===1?"aujourd'hui":`sur les ${len} derniers jours`;
+  $("#helloPer").textContent=aPer==="1"?"aujourd'hui":`· ${aLbl().toLowerCase()}`;
   const K=[["Commandes","cart",c.n,p.n,"g"],["Livrées","truck",c.done,p.done,"g"],["Annulées","x",c.cancel,p.cancel,"r",1],["Clients","users",c.clients,p.clients,"g"],
     ["Chiffre d'affaires","coins",c.rev,p.rev,"g",0,1],["Gain net (estimé)","bars",c.net,p.net,"g",0,1]];
   $("#kpis").innerHTML=K.map(([n,i,v,pv,col,inv,money],k)=>`<div class="kc"><span class="kc-i ${col}">${ic(i)}</span><div><small>${n}</small><b class="num">${money?`${fmt(v)}<span class="cur"> MAD</span>`:v}</b>${delta(v,pv,inv)}${k===0?` <span class="vs">${len===1?"vs hier":`vs ${len} j. préc.`}</span>`:""}</div></div>`).join("");
@@ -2814,13 +2839,14 @@ A.dash=({O,OR,OP,len,act})=>{
     return `<div class="dl"><span class="av">${esc(initial(d.n))}</span><span class="dl-n"><b>${esc(d.n)} <small>(L${String(i+1).padStart(2,"0")})</small></b><i class="${road?"":mine.length?"prep":"idle"}">${road?"En livraison":mine.length?"En préparation":"Disponible"}</i></span><span class="dl-c">${ic("bike")}${mine.length} commande${mine.length>1?"s":""}</span></div>`}).join("")
     :`${aEmpty("Aucun livreur pour l'instant.")}<button class="btn b-gr sm" data-at="drivers">Ajouter un livreur</button>`;
   $("#lastOrders").innerHTML=O.length?`<div class="tbl0"><table class="at"><thead><tr><th>N° Commande</th><th>Client</th><th>Montant</th><th>Statut</th><th>Heure</th></tr></thead><tbody>${O.slice(0,5).map(o=>`<tr><td><button class="lnk num" data-open="${esc(o.id)}">#${esc(o.id)}</button></td><td>${esc(shortName(o.name))}</td><td class="num">${mad(o.total)}</td><td>${stPill(o.status)}</td><td class="num">${hhmm(o.at)}</td></tr>`).join("")}</tbody></table></div>`:aEmpty("Aucune commande pour l'instant.");
-  const top=prodSales(OR),topP=prodSales(OP);$("#topPer").textContent=len===1?"du jour":`(${len} j.)`;
-  $("#topList").innerHTML=top.length?top.slice(0,4).map(t=>`<div class="tp">${thumb(t.p)}<b>${esc(t.n)}</b><span class="hint num">${t.c} vente${t.c>1?"s":""}</span>${delta(t.c,topP.find(x=>x.id===t.id)?.c||0)}</div>`).join(""):aEmpty("Pas encore de ventes sur cette période.");
+  const top=prodSales(OR),topP=prodSales(OP);$("#topPer").textContent=aPer==="1"?"du jour":`· ${aLbl().toLowerCase()}`;
+  topSel("topCat","topSort");const topF=topFilter(top);
+  $("#topList").innerHTML=topF.length?topF.slice(0,6).map((t,i)=>`<div class="tp"><span class="tp-n num">${i+1}</span>${thumb(t.p)}<b>${esc(t.n)}<small class="hint num">${fmt(t.q)} ${UFR[t.p?.u||"kg"]||""} · ${mad(t.rev)}</small></b><span class="hint num">${t.c} vente${t.c>1?"s":""}</span>${delta(topSort==="rev"?t.rev:topSort==="q"?t.q:t.c,(x=>x?(topSort==="rev"?x.rev:topSort==="q"?x.q:x.c):0)(topP.find(x=>x.id===t.id)))}</div>`).join(""):aEmpty("Pas encore de ventes sur cette période.");
   const low=lowStock();$("#lowN").textContent=`(${low.length})`;
   $("#lowList").innerHTML=low.length?low.slice(0,4).map(p=>`<div class="ls">${thumb(p)}<b>${esc(pn(p))}</b><span class="ls-q num">${fmt(p.stock)} ${UFR[p.u]}</span></div>`).join("")
     :products.some(p=>typeof p.stock==="number")?aEmpty("Tout est en stock ✓"):`${aEmpty("Le stock n'est pas encore suivi.")}<button class="btn b-gh sm" data-at="stock">Saisir le stock</button>`;
   const an=getAnalytics(len);
-  $("#trSub").textContent=`· ${perLbl(len).toLowerCase()}`;
+  $("#trSub").textContent=`· ${aLbl().toLowerCase()}`;
   $("#trK").innerHTML=an.err?"":trafficKpis(an,OR,4);
   $("#funnel").innerHTML=an.err?aEmpty(an.err):an.cur?funnelHtml(an.cur):aEmpty("Chargement…");
   $("#loyal").innerHTML=loyalHtml(O,OR);
@@ -2842,9 +2868,9 @@ function aggEvents(L,t0,t1){
     hours:e.filter(x=>x.kind==="visit").reduce((h,x)=>{const k=new Date(x.at).getHours();h[k]=(h[k]||0)+1;return h},{}),
     langs:Object.fromEntries(Object.entries(e.filter(x=>x.kind==="visit").reduce((m,x)=>{(m[x.lang||"ar"]=m[x.lang||"ar"]||new Set()).add(x.vid);return m},{})).map(([k,v])=>[k,v.size]))}}
 function getAnalytics(len){
-  const key=`${len}:${new Date().toDateString()}`,c=anaCache[key];
+  const R0=aR(),key=`${R0[0]}:${R0[1]}:${new Date().toDateString()}`,c=anaCache[key];
   if(c&&Date.now()-c.t<60000)return c;
-  const R=per(len),P=per(len,1),slot=anaCache[key]=c?{...c}:{t:0};slot.t=Date.now();
+  const R=aR(),P=aR(1),slot=anaCache[key]=c?{...c}:{t:0};slot.t=Date.now();
   if(!cloud){const L=store.get("ev",[]);Object.assign(slot,{cur:aggEvents(L,...R),prev:aggEvents(L,...P),err:""});return slot}
   const call=r=>SB.rpc("analytics",{t0:new Date(r[0]).toISOString(),t1:new Date(r[1]).toISOString()}).then(({data,error})=>{if(error)throw error;return data});
   Promise.all([call(R),call(P)]).then(([cur,prev])=>{Object.assign(slot,{cur,prev,err:""});if(["dash","traffic"].includes(aTab)&&view==="admin")renderAdmin()})
@@ -2864,7 +2890,7 @@ function funnelHtml(c){
 function loyalHtml(O,OR){
   const by={};O.filter(o=>o.status!=="cancel").forEach(o=>{const k=digits(o.phone).slice(-9)||o.name;const c=by[k]=by[k]||{name:o.name,n:0,sum:0,first:Infinity,last:0};c.n++;c.sum+=+o.total||0;c.first=Math.min(c.first,o.at||0);c.last=Math.max(c.last,o.at||0)});
   const all=Object.values(by),rep=all.filter(c=>c.n>=2),buyers=new Set(OR.filter(o=>o.status!=="cancel").map(o=>digits(o.phone).slice(-9)||o.name));
-  const back=[...buyers].filter(k=>by[k]&&by[k].first<per(+aPer)[0]).length;
+  const back=[...buyers].filter(k=>by[k]&&by[k].first<aR()[0]).length;
   return `<div class="ly"><div><b class="num">${rep.length}</b><small>clients ont commandé 2 fois ou plus</small></div><div><b class="num">${pctf(rep.length,all.length)}%</b><small>taux de fidélité</small></div><div><b class="num">${back}</b><small>clients revenus sur la période</small></div></div>
     ${rep.length?`<div class="ly-l">${rep.sort((a,b)=>b.n-a.n||b.sum-a.sum).slice(0,4).map(c=>`<div class="dl"><span class="av">${esc(initial(c.name))}</span><span class="dl-n"><b>${esc(c.name)}</b><small class="hint num">${c.n} commandes · ${mad(c.sum)}</small></span><span class="tagx g">Fidèle</span></div>`).join("")}</div>`:aEmpty("Pas encore de client revenu. Ils apparaîtront ici dès leur 2ᵉ commande.")}`}
 function chart2(rows){
@@ -2878,7 +2904,7 @@ function chart2(rows){
    ${rows.map((r,i)=>`<circle cx="${x(i)}" cy="${y(r.v)}" r="4" fill="#1a9e44"><title>${lbl(r.d)} : ${r.v} visiteurs, ${r.o} commandes</title></circle><circle cx="${x(i)}" cy="${y(r.o)}" r="4" fill="#ff8519"><title>${lbl(r.d)} : ${r.o} commandes</title></circle>`).join("")}
    ${rows.map((r,i)=>i%step===0||i===n-1?`<text x="${x(i)}" y="${H-8}" text-anchor="middle" class="lc-t">${lbl(r.d)}</text>`:"").join("")}</svg>`}
 A.traffic=({OR,len})=>{
-  renderLive();const an=getAnalytics(len);$("#trPix").innerHTML=pixStatus();$("#trPer").textContent=`Période : ${perLbl(len).toLowerCase()} · comparé à la période précédente.`;
+  renderLive();const an=getAnalytics(len);$("#trPix").innerHTML=pixStatus();$("#trPer").textContent=`Période : ${aLbl().toLowerCase()} · comparé à la période précédente.`;
   if(an.err){$("#trK6").innerHTML="";$("#trK6b").innerHTML="";["#trChart","#funnel2","#trDev","#trSrc","#trHours","#trLang"].forEach(s=>$(s).innerHTML=aEmpty(an.err));return}
   $("#trK6").innerHTML=trafficKpis(an,OR,6);
   const c=an.cur;if(!c){["#trChart","#funnel2","#trDev","#trSrc","#trHours","#trLang"].forEach(s=>$(s).innerHTML=aEmpty("Chargement…"));return}
@@ -2969,7 +2995,7 @@ A.cats=({OR})=>{
   const ps=prodSales(OR);
   $("#catGrid").innerHTML=CATS.filter(c=>c.id!=="deals").map(c=>{const P=products.filter(p=>p.c===c.id),on=P.filter(p=>p.on!==false).length,rev=ps.filter(s=>s.p?.c===c.id).reduce((a,s)=>a+s.rev,0);
     return `<div class="card cc"><div class="cc-t"><span class="cc-e" style="background:color-mix(in srgb,${c.bg} 80%,var(--card))">${c.e}</span><span><b>${CATFR[c.id]}</b><small class="hint" dir="rtl">${c.n}</small></span></div>
-     <div class="cc-s"><span><b class="num">${P.length}</b> produits</span><span><b class="num">${on}</b> disponibles</span><span><b class="num">${mad(rev)}</b> de CA (${perLbl(+aPer).toLowerCase()})</span></div>
+     <div class="cc-s"><span><b class="num">${P.length}</b> produits</span><span><b class="num">${on}</b> disponibles</span><span><b class="num">${mad(rev)}</b> de CA (${aLbl().toLowerCase()})</span></div>
      <div class="cc-a"><button class="btn b-gh sm" data-catall="${c.id}" data-v="1">Tout activer</button><button class="btn b-gh sm" data-catall="${c.id}" data-v="0">Tout désactiver</button></div></div>`}).join("");
 };
 A.reports=({OR,len})=>{
@@ -2979,15 +3005,15 @@ A.reports=({OR,len})=>{
   ok.forEach(o=>{const h=o.hood||"—";byHood[h]=(byHood[h]||0)+(+o.total||0);const s=o.slot||"—";bySlot[s]=(bySlot[s]||0)+1;if(o.code)byCode[o.code]=(byCode[o.code]||0)+1});
   const bars=(obj,lbl=k=>k,money=true)=>{const E=Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,8),mx=Math.max(1,...E.map(e=>e[1]));
     return E.length?E.map(([k,v])=>`<div class="hb"><span dir="auto">${esc(lbl(k))}</span><i><em style="width:${v/mx*100}%"></em></i><b class="num">${money?mad(v):v}</b></div>`).join(""):aEmpty("Pas de données sur cette période.")};
-  $("#repPer").textContent=`Période : ${perLbl(len).toLowerCase()} (changez-la en haut à droite).`;
+  $("#repPer").textContent=`Période : ${aLbl().toLowerCase()} (changez-la en haut à droite).`;
   $("#repK").innerHTML=kmini([["Commandes",OR.length,"cart"],["Chiffre d'affaires",mad(rev),"coins"],["Panier moyen",mad(ok.length?rev/ok.length:0),"basket"],["Taux d'annulation",`${OR.length?Math.round((OR.length-ok.length)/OR.length*100):0} %`,"x","r"]]);
   $("#repCat").innerHTML=bars(byCat,k=>CATFR[k]||k);$("#repHood").innerHTML=bars(byHood);$("#repSlot").innerHTML=bars(bySlot,k=>k,false);$("#repCode").innerHTML=bars(byCode,k=>k,false);
-  $("#repProd").innerHTML=ps.slice(0,15).map((s,i)=>`<tr><td class="num">${i+1}</td><td><div class="pcell">${thumb(s.p)}<b>${esc(s.n)}</b></div></td><td class="num">${s.c}</td><td class="num">${fmt(s.q)} ${UFR[s.p?.u||"kg"]}</td><td class="num"><b>${mad(s.rev)}</b></td></tr>`).join("")||`<tr><td colspan="5" class="hint">Pas encore de ventes.</td></tr>`;
+  topSel("repCat","repSort");$("#repProd").innerHTML=topFilter(ps).slice(0,100).map((s,i)=>`<tr><td class="num">${i+1}</td><td><div class="pcell">${thumb(s.p)}<b>${esc(s.n)}</b></div></td><td class="num">${s.c}</td><td class="num">${fmt(s.q)} ${UFR[s.p?.u||"kg"]}</td><td class="num"><b>${mad(s.rev)}</b></td></tr>`).join("")||`<tr><td colspan="5" class="hint">Pas encore de ventes.</td></tr>`;
 };
 A.finance=({OR,len})=>{
   const ok=OR.filter(o=>o.status!=="cancel"),S=k=>ok.reduce((a,o)=>a+(+o[k]||0),0);
   const gross=S("sub"),disc=S("disc"),fee=S("fee"),cogs=ok.reduce((a,o)=>a+oCost(o),0),net=gross-disc-cogs,base=gross-disc;
-  $("#finPer").textContent=`Période : ${perLbl(len).toLowerCase()}.`;
+  $("#finPer").textContent=`Période : ${aLbl().toLowerCase()}.`;
   $("#finK").innerHTML=kmini([["CA produits",mad(gross),"coins"],["Remises",(disc?"−":"")+mad(disc),"tag","r"],["Frais de livraison",mad(fee),"truck"],["Coût marchandises",(cogs?"−":"")+mad(cogs),"box","r"],["Gain net (estimé)",mad(net),"bars"],["Marge nette",base?`${Math.round(net/base*100)} %`:"—","chart"]]);
   const all=staffOrders().filter(o=>o.status!=="cancel");
   $("#finRows").innerHTML=[...Array(Math.max(len,7))].map((_,i)=>{const r=per(1,i),D=all.filter(o=>inR(o,r));
@@ -3052,7 +3078,7 @@ A.compta=({O,R,len})=>{
   const aboIn=(t0,t1)=>abos.reduce((s,a)=>s+Object.values(a.data?.pay||{}).filter(p=>p.at>=t0&&p.at<t1).reduce((x,p)=>x+(+p.a||0),0),0);
   const sel=$("#exCat");if(!sel.options.length)sel.innerHTML=Object.entries(EXCAT).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
   if(!$("#exDay").value)$("#exDay").value=ymd(Date.now());
-  $("#cpPer").textContent=`Période : ${perLbl(len).toLowerCase()} (changez-la en haut à droite).`;
+  $("#cpPer").textContent=`Période : ${aLbl().toLowerCase()} (changez-la en haut à droite).`;
   $("#exErr").textContent=expErr;
   const E=expenses.filter(e=>{const t=dayT(e.day);return t>=R[0]&&t<R[1]}),dep=E.reduce((a,e)=>a+e.amount,0);
   const done=O.filter(o=>o.status==="done"&&inR(o,R)),aCash=aboIn(R[0],R[1]),cash=done.reduce((a,o)=>a+(+o.total||0),0)+aCash,res=cash-dep,buy=E.filter(e=>e.cat==="stock").reduce((a,e)=>a+e.amount,0);
@@ -3223,7 +3249,7 @@ const ADM_AR_RAW={
 "Encaissé ce mois":"المحصّل هاد الشهر","Pas encore payé (ce mois)":"مازال ما خلصش (هاد الشهر)","Livraisons aujourd'hui":"توصيلات اليوم","Aucune livraison d'abonnement prévue aujourd'hui.":"ما كاين حتى توصيل اشتراك اليوم.",
 "🧺 Modifier son pack":"🧺 بدل القفة ديالو","En pause":"موقف مؤقتا","Arrêté":"موقف","Marquer payé":"خلص","🧺 Pack perso":"🧺 قفة خاصة","— Aucun —":"— والو —","✍️ Sur mesure (le client écrit sa liste)":"✍️ على القياس (الكليان كيكتب اللائحة)",
 "Photo de la qoffa":"تصويرة القفة","Annuler le paiement":"لغي الخلاص","Nom arabe":"السمية بالعربية","Nom FR":"السمية بالفرنسية","Prix par mois":"الثمن فالشهر","Livraisons par semaine":"توصيلات فالسيمانة","Panier livré":"القفة اللي كتوصل",
-"Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
+"Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
 "📲 Informer le client":"📲 علم الكليان","Assigner un livreur":"عطي موزع","Confirmer":"أكد","Annuler":"لغي","Valider":"صادق","Modifier":"بدل","Copier":"نسخ","Actualiser":"تحديث","Exporter":"تصدير","Rechercher":"قلب",
 "Agents":"الوكلاء","Agent":"الوكيل","Appels":"المكالمات","Leads":"الليدز","Ajouter un agent":"زيد وكيل","Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur":"وضع تجريبي: Supabase ما مربوطش، كلشي كيبقى فهاد المتصفح",
 "Le direct fonctionne quand le site est connecté à Supabase.":"المباشر كيخدم ملي يكون الموقع مربوط بـ Supabase.","Direct / WhatsApp":"مباشر / واتساب","Français (FR)":"فرنسية (FR)","Arabe (AR)":"عربية (AR)",
@@ -3256,14 +3282,14 @@ document.addEventListener("click",e=>{if(!e.target.closest("#aLang"))return;admL
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
-  const O=staffOrders(),act=O.filter(o=>ACTIVE.includes(o.status)),len=+aPer;
+  const O=staffOrders(),act=O.filter(o=>ACTIVE.includes(o.status)),len=aDays();
   liveWatch();$("#sNav").innerHTML=NAV.map(([k,n,i])=>`<button data-at="${k}" ${k===aTab?'aria-current="page"':""}>${ic(i)}<span>${n}</span>${k==="orders"&&act.length?`<em class="num">${act.length}</em>`:""}</button>`).join("");
   liveBadge();$("#aTitle").textContent=aTab==="dash"?"👑 Espace Admin":NAV.find(n=>n[0]===aTab)[1];
   const nNew=O.filter(o=>o.status==="new").length;$("#aBellN").hidden=!nNew;$("#aBellN").textContent=nNew;
-  $("#aPer").value=aPer;$("#aPerLbl").textContent=perLbl(len);
+  $("#aPer").value=aPer;$("#aPerLbl").textContent=aLbl();$("#aDates").hidden=!["d","r"].includes(aPer);$("#aD2").hidden=$("#aDsep").hidden=aPer!=="r";{const [s0,e0]=aRange();if(!$("#aD1").matches(":focus"))$("#aD1").value=ymd(s0);if(!$("#aD2").matches(":focus"))$("#aD2").value=ymd(e0-1)}
   $("#aDate").textContent=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"});
   $$("[data-ap]").forEach(p=>p.hidden=p.dataset.ap!==aTab);
-  const R=per(len),P=per(len,1);
+  const R=aR(),P=aR(1);
   A[aTab]({O,act,len,R,OR:O.filter(o=>inR(o,R)),OP:O.filter(o=>inR(o,P))});
 }
 function setStatus(o,st){
@@ -3708,7 +3734,7 @@ document.addEventListener("click",async e=>{
     case "installBtn":if(installEvt){installEvt.prompt();installEvt=null;renderShop()}break;
     case "copySubs":await loadSubs();try{await navigator.clipboard.writeText((subs||[]).join("\n"));toast(`${subs.length} emails copiés`)}catch(err){toast("Copie impossible ici")}renderAdmin();break;
     case "askNotif":try{const r=await Notification.requestPermission();toast(r==="granted"?"Notifications activées ✓":"Notifications refusées")}catch(err){toast("Notifications non disponibles")}break;
-    case "repCsv":{const R=per(+aPer);const rows=[["commande","date","client","telephone","quartier","total","statut","livreur","code"],
+    case "repCsv":{const R=aR();const rows=[["commande","date","client","telephone","quartier","total","statut","livreur","code"],
         ...staffOrders().filter(o=>inR(o,R)).map(o=>[o.id,new Date(o.at||0).toLocaleString("fr-FR"),o.name,o.phone,o.hood,o.total,AST[o.status]||o.status,drivers.list?.[o.driver]?.n||"",o.code||""])];
       const csv=rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(";")).join("\n");
       try{await navigator.clipboard.writeText(csv);toast(`${rows.length-1} commandes copiées, collez dans Excel`)}catch(err){toast("Copie impossible ici")}break}
@@ -3731,7 +3757,9 @@ $("#ccAgForm").addEventListener("submit",async e=>{e.preventDefault();const n=$(
 $("#aQ").addEventListener("input",e=>{aQ=e.target.value;if(["orders","clients","products","stock"].includes(aTab))renderAdmin()});
 document.addEventListener("change",async e=>{
   const t=e.target,D=t.dataset;
-  if(t.id==="aPer"){aPer=t.value;renderAdmin();return}
+  if(t.id==="aPer"){aPer=t.value;store.set("aPer",aPer);if(aPer==="d"||aPer==="r")setTimeout(()=>{try{$("#aD1").showPicker?.()}catch(_){}$("#aD1").focus()},50);renderAdmin();return}
+  if(t.id==="aD1"||t.id==="aD2"){if(t.id==="aD1")aD1=t.value;else aD2=t.value;store.set("aD1",aD1);store.set("aD2",aD2);if(aPer==="d")aD2=aD1;t.blur();renderAdmin();return}
+  if(t.id==="topCat"||t.id==="topSort"||t.id==="repCat"||t.id==="repSort"){const c=t.id.endsWith("Cat");if(c)topCat=t.value;else topSort=t.value;renderAdmin();return}
   if(t.id==="chartPer"){chartPer=t.value;renderAdmin();return}
   if(D.abost){const a=abos?.find(x=>x.id===D.abost);if(a&&await patchAbo(a,{status:t.value})){renderAdmin();toast(`Abonnement : ${AST2[t.value]}`)}return}
   if(D.plf){const pl=plans[+D.pli];if(!pl)return;const f=D.plf;pl[f]=f==="on"?t.checked:f==="price"?Math.max(0,+t.value||0):f==="per"?(+t.value===2?2:1):f==="img"?safeImg(t.value):String(t.value).trim().slice(0,60);if(f==="img"&&!pl.img)delete pl.img;saveCatalog("plans");t.blur?.();renderAll();toast("Formule enregistrée");return}
@@ -3806,7 +3834,7 @@ $("#expForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
   b.disabled=true;try{if(cloud){const {data,error}=await SB.from("expenses").insert(x).select("id,day,cat,label,amount").single();if(error)throw error;x.id=data.id}else x.id=rid();
     expenses=[x,...(expenses||[])];if(!cloud)store.set("exp",expenses);$("#exLbl").value="";$("#exAmt").value="";renderAdmin();toast("Dépense ajoutée")}
   catch(err){console.warn(err);E.textContent=/expenses/i.test(String(err?.message))?"La table « expenses » n'existe pas : exécutez le SQL « comptabilité ».":"Enregistrement impossible, vérifiez Internet."}finally{b.disabled=false}});
-$("#expCsv").addEventListener("click",()=>{const R=per(+aPer),E=(expenses||[]).filter(e=>{const t=dayT(e.day);return t>=R[0]&&t<R[1]});if(!E.length){toast("Aucune dépense à exporter");return}
+$("#expCsv").addEventListener("click",()=>{const R=aR(),E=(expenses||[]).filter(e=>{const t=dayT(e.day);return t>=R[0]&&t<R[1]});if(!E.length){toast("Aucune dépense à exporter");return}
   const q=v=>`"${String(v).replace(/"/g,'""')}"`,csv="﻿Date;Catégorie;Libellé;Montant (MAD)\n"+E.map(e=>[e.day,EXCAT[e.cat]||e.cat,e.label,String(e.amount).replace(".",",")].map(q).join(";")).join("\n");
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download=`depenses-khedar48-${ymd(Date.now())}.csv`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)});
 $("#setForm").addEventListener("submit",e=>{e.preventDefault();
