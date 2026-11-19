@@ -2974,7 +2974,7 @@ const REL_AR="السلام عليكم {nom} 👋\nمعاك فريق خضار 48 
 const REL_FR="Bonjour {nom} 👋\nIci l'équipe Khedar48 🥬\n\nVotre dernière qoffa date de {jours} 🧺, elle doit bientôt être finie 😊\nOn vous en prépare une nouvelle ?\n\n🛒 Votre dernière commande :\n{produits}\n\nRépondez simplement *Oui* et on vous la renvoie avec les mêmes produits, ou dites-nous ce que vous voulez ajouter ou enlever ✅\n🚚 Livraison gratuite dès 200 MAD\n\n— L'équipe Khedar48 🥬 · Oujda";
 let cliF="all",relLoading=false;
 function clientsAgg(O){const m={};
-  O.forEach(o=>{const k=pk(o.phone)||o.name;const c=m[k]=m[k]||{key:k,name:o.name,phone:o.phone,hood:o.hood,addr:o.addr,lang:o.lang,n:0,sum:0,last:0,lastOk:0,lastO:null,first:Infinity,orders:[]};
+  O.filter(o=>o.status!=="cancel").forEach(o=>{const k=pk(o.phone)||o.name;const c=m[k]=m[k]||{key:k,name:o.name,phone:o.phone,hood:o.hood,addr:o.addr,lang:o.lang,n:0,sum:0,last:0,lastOk:0,lastO:null,first:Infinity,orders:[]};
     c.orders.push(o);c.n++;if(o.status!=="cancel"){c.sum+=+o.total||0;if((o.at||0)>c.lastOk){c.lastOk=o.at;c.lastO=o}}
     if((o.at||0)>c.last){c.last=o.at;c.name=o.name;c.hood=o.hood;c.addr=o.addr;c.phone=o.phone;c.lang=o.lang}c.first=Math.min(c.first,o.at||0)});
   const L=Object.values(m);L.forEach(c=>c.orders.sort((a,b)=>(b.at||0)-(a.at||0)));return L}
