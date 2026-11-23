@@ -370,6 +370,9 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .fd-c.on{border-color:#1a9e44;box-shadow:0 0 0 2px #1a9e44 inset;background:#f3faf5}.fd-e{font-size:24px}.fd-c b{font-size:28px;line-height:1.1}.fd-l{font-weight:800;font-size:14px}.fd-c small{color:var(--muted);font-size:12px}
 .fd-c i{position:absolute;bottom:0;inset-inline-start:0;height:5px;background:linear-gradient(90deg,#7fd49a,#1a9e44)}
 @media (max-width:1000px){.fd-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:560px){.fd-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.co-priv{font-size:12.5px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+.dr-al{background:linear-gradient(90deg,#fff0ec,#fff8f5);border-color:#f7c3b4}
+.dr-o.hot{box-shadow:inset 3px 0 0 #e8590c}.dr-it{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.dr-it span{display:inline-flex;align-items:center;gap:6px;background:#f3faf5;border-radius:999px;padding:2px 10px 2px 2px;font-size:12.5px}.dr-it .oc-ph{width:26px;height:26px;border-radius:50%;font-size:14px}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1802,6 +1805,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="cc-f" id="ccOF"></div>
           <div id="ccOrders"></div>
         </section>
+        <!-- abandoned checkouts -->
+        <section data-cp="paniers" hidden><div class="cc-pg"><h2>🛒 السلات المتروكة</h2></div><p class="hint" style="margin:-6px 0 12px">كليان كتبو السمية والتيليفون فالطلب وما كملوش. كيبانو هنا من بعد 30 دقيقة. عيط ليهم ولا صيفط ليهم واتساب، ومن بعد كليكي ☑️.</p><div class="cc-f" id="ccDF"></div><div id="ccDrafts"></div></section>
         <!-- clients -->
         <section data-cp="clients" hidden><div class="cc-pg"><h2>العملاء</h2></div><div class="cc-card"><div class="cc-tbl"><table><thead><tr><th>العميل</th><th>الهاتف</th><th>الحي</th><th>الطلبات</th><th>المجموع</th><th>آخر طلب</th><th></th></tr></thead><tbody id="ccCli"></tbody></table></div></div></section>
         <!-- calls -->
@@ -2138,7 +2143,7 @@ const T={
   added:n=>`تزاد ${n} للسلة`,yourCart:"السلة ديالك",emptyCart:"السلة خاوية.<br>زيد شي خضرة ولا فاكهة.",backShop:"رجع للسوق",code:"كود التخفيض",apply:"طبّق",
   sub:"المجموع",disc:"التخفيض",delivery:"التوصيل",free:"فابور",total:"الإجمالي",addMore:v=>`زيد ${v} ويولي التوصيل فابور`,freeOk:"🎉 التوصيل فابور على هاد الطلب",checkout:v=>`كمّل الطلب · ${v}`,
   codeBad:"هاد الكود ماخدامش",codeMin:v=>`هاد الكود خدام غير فوق ${v}`,codePct:v=>`تخفيض ${v}%`,codeAmt:v=>`تخفيض ${v}`,
-  deliveryInfo:"معلومات التوصيل",name:"السمية",namePh:"مثلاً: فاطمة الزهراء",phone:"رقم الهاتف",hood:"الحومة",hoodPh:"كتب الحومة ديالك، مثلاً: لازاري",eHood:"كتب الحومة باش نعرفو فين نوصلو.",addr:"العنوان بالتفصيل",addrPh:"الزنقة، رقم الدار، علامة قريبة",
+  deliveryInfo:"معلومات التوصيل",draftNote:"إلا ما كملتيش الطلب، يقدر فريق خضار 48 يتاصل بيك فالتيليفون باش يعاونك.",name:"السمية",namePh:"مثلاً: فاطمة الزهراء",phone:"رقم الهاتف",hood:"الحومة",hoodPh:"كتب الحومة ديالك، مثلاً: لازاري",eHood:"كتب الحومة باش نعرفو فين نوصلو.",addr:"العنوان بالتفصيل",addrPh:"الزنقة، رقم الدار، علامة قريبة",
   slot:"وقت التوصيل",note:"ملاحظة (اختياري)",notePh:"مثلاً: البنان ماشي طايب بزاف",cash:"الإجمالي · كاش عند الاستلام",back:"رجوع",confirm:"أكّد الطلب",saving:"كنسجلو الطلب…",
   eName:"كتب السمية باش نعرفو لمن نوصلو.",ePhone:"رقم الهاتف خاصو يكون بحال 0612345678.",eAddr:"زيد العنوان بالتفصيل باش الموزع يلقاك بسهولة.",eSave:"ماتسجلش الطلب. تأكد من الأنترنيت وعاود جرب، ولا صيفطو فواتساب.",
   done:"الطلب تسجّل",thanks:n=>`شكراً ${n}!`,doneMsg:id=>`الطلب <b class="num">${id}</b> وصلنا. تقدر تتبعو من "طلباتي". باش نوجدوه دغيا، صيفطو حتى فواتساب:`,
@@ -2210,7 +2215,7 @@ const T={
   added:n=>`${n} ajouté au panier`,yourCart:"Votre panier",emptyCart:"Votre panier est vide.<br>Ajoutez des fruits ou des légumes.",backShop:"Retour à la boutique",code:"Code promo",apply:"Appliquer",
   sub:"Sous-total",disc:"Remise",delivery:"Livraison",free:"Gratuite",total:"Total",addMore:v=>`Encore ${v} pour la livraison gratuite`,freeOk:"🎉 Livraison gratuite pour cette commande",checkout:v=>`Commander · ${v}`,
   codeBad:"Ce code n'est pas valide",codeMin:v=>`Code valable dès ${v}`,codePct:v=>`Remise de ${v}%`,codeAmt:v=>`Remise de ${v}`,
-  deliveryInfo:"Informations de livraison",name:"Nom",namePh:"Ex : Fatima Zahra",phone:"Téléphone",hood:"Quartier",hoodPh:"Votre quartier, ex : Lazaret",eHood:"Indiquez votre quartier.",addr:"Adresse détaillée",addrPh:"Rue, n° de maison, repère proche",
+  deliveryInfo:"Informations de livraison",draftNote:"Si la commande n'est pas terminée, l'équipe Khedar48 peut vous appeler pour vous aider.",name:"Nom",namePh:"Ex : Fatima Zahra",phone:"Téléphone",hood:"Quartier",hoodPh:"Votre quartier, ex : Lazaret",eHood:"Indiquez votre quartier.",addr:"Adresse détaillée",addrPh:"Rue, n° de maison, repère proche",
   slot:"Heure de livraison",note:"Note (facultatif)",notePh:"Ex : bananes pas trop mûres",cash:"Total · paiement à la livraison",back:"Retour",confirm:"Confirmer la commande",saving:"Enregistrement…",
   eName:"Indiquez votre nom pour la livraison.",ePhone:"Le téléphone doit ressembler à 0612345678.",eAddr:"Ajoutez une adresse détaillée pour que le livreur vous trouve.",eSave:"Commande non enregistrée. Vérifiez Internet et réessayez, ou envoyez-la sur WhatsApp.",
   done:"Commande enregistrée",thanks:n=>`Merci ${n} !`,doneMsg:id=>`Nous avons bien reçu la commande <b class="num">${id}</b>. Suivez-la dans « Mes commandes ». Pour aller plus vite, envoyez-la aussi sur WhatsApp :`,
@@ -2618,7 +2623,8 @@ function renderCheckout(){
     <div class="fld"><button type="button" class="gps-btn" id="coLoc">📍 ${lang==="fr"?"Partager ma position (GPS)":"حدد الموقع ديالي (GPS)"}</button><p class="gps-st" id="coLocS">${locTxt()}</p></div>
     <div class="fld"><label>${t("slot")}</label><div class="slots">${SLOTS.map((s,i)=>`<label><input type="radio" name="slot" value="${i}" ${i===0?"checked":""}>${lang==="fr"?SLOTS_FR[i]:s}</label>`).join("")}</div></div>
     <div class="fld"><label for="coNote">${t("note")}</label><textarea id="coNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
-    <div class="err" id="coErr" role="alert"></div></form>`;
+    <p class="co-priv">📞 ${esc(t("draftNote"))}</p>
+    <div class="err" id="coErr" role="alert"></div></form>`;draftSave();
   const tt=totals();
   $("#shFoot").innerHTML=`<div class="tot num"><div style="font-size:13.5px"><span>${t("delivery")}</span><span>${tt.fee?money(tt.fee):`${money(0)} <small class="free-tag">🎉 ${t("free")}</small>`}</span></div><div class="g" style="border:0;margin:0;padding:0"><span>${t("cash")}</span><span>${money(tt.total)}</span></div></div>
     <div style="display:flex;gap:8px"><button class="btn b-gh" id="backCart">${t("back")}</button><button class="btn b-or" style="flex:1" id="placeOrder">${t("confirm")}</button></div>`;
@@ -2651,7 +2657,7 @@ async function placeOrder(){
       ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));soonOrders()}
     catch(e){console.warn(e);b.disabled=false;b.textContent=t("confirm");E.textContent=t("eSave");return}
   }else{myOrders.unshift({...o,id,owner:"local"});store.set("orders",myOrders)}
-  track("order",id);pix("purchase",pixItems(L),o.total,id);
+  draftClose(id,o.phone);track("order",id);pix("purchase",pixItems(L),o.total,id);
   cart={};promoCode="";store.set("cart",cart);store.set("promo","");renderShop();renderBadges();
   rememberTrack(id,tk);const link=trackUrl(id,tk);
   // the WhatsApp message goes to the shop, so it stays in Arabic
@@ -3357,7 +3363,7 @@ const ADM_AR_RAW={
 "Encaissé ce mois":"المحصّل هاد الشهر","Pas encore payé (ce mois)":"مازال ما خلصش (هاد الشهر)","Livraisons aujourd'hui":"توصيلات اليوم","Aucune livraison d'abonnement prévue aujourd'hui.":"ما كاين حتى توصيل اشتراك اليوم.",
 "🧺 Modifier son pack":"🧺 بدل القفة ديالو","En pause":"موقف مؤقتا","Arrêté":"موقف","Marquer payé":"خلص","🧺 Pack perso":"🧺 قفة خاصة","— Aucun —":"— والو —","✍️ Sur mesure (le client écrit sa liste)":"✍️ على القياس (الكليان كيكتب اللائحة)",
 "Photo de la qoffa":"تصويرة القفة","Annuler le paiement":"لغي الخلاص","Nom arabe":"السمية بالعربية","Nom FR":"السمية بالفرنسية","Prix par mois":"الثمن فالشهر","Livraisons par semaine":"توصيلات فالسيمانة","Panier livré":"القفة اللي كتوصل",
-"📦 Ventes par article":"📦 المبيعات حسب كل منتوج","Chercher un article…":"قلب على منتوج…","Afficher aussi les articles sans vente":"بين حتى المنتوجات اللي ما تباعوش","Article":"المنتوج","Quantité vendue":"الكمية المبيوعة","Prix actuel":"الثمن دابا","% du CA":"% من المبيعات","Dernière vente":"آخر بيعة","vendus":"تباعو","Nom (A → Z)":"السمية (أ → ي)","🔔 À relancer":"🔔 خاصهم تذكير","À relancer":"خاصهم تذكير","Relance":"التذكير","🔁 Relancer":"🔁 فكّرو","🔁 Relancer sur WhatsApp":"🔁 فكّرو فواتساب","Voir le client":"شوف الكليان","Fidèles (3+)":"أوفياء (3+)","Client depuis":"كليان من","🧺 Ce qu'il commande le plus":"🧺 شنو كيطلب بزاف","🧾 Historique des commandes":"🧾 الطلبات ديالو","Voir la liste →":"شوف اللائحة ←","Aucun client à relancer aujourd'hui 👌":"ما كاين حتى كليان خاصو تذكير اليوم 👌","Relancer un client après (jours sans commande)":"فكر الكليان من بعد (أيام بلا طلب)","Message de relance WhatsApp (arabe)":"ميساج التذكير فواتساب (عربية)","Message de relance WhatsApp (français)":"ميساج التذكير فواتساب (فرنسية)","Fidélité":"الكليان الأوفياء","Vos clients regroupés selon le nombre de commandes livrées ou en cours (les commandes annulées ne comptent pas). Toutes les dates.":"الكليان مجموعين على حساب شحال من طلب دارو (الطلبات الملغية ما كتحسبش). كاع التواريخ.","1 commande":"طلب واحد","2 commandes":"جوج طلبات","3 commandes":"3 طلبات","4 commandes":"4 طلبات","5 commandes et +":"5 طلبات ولا كثر","Aucun client dans ce groupe pour l'instant.":"ما كاين حتى كليان فهاد المجموعة دابا.","des clients":"من الكليان","Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
+"📦 Ventes par article":"📦 المبيعات حسب كل منتوج","Chercher un article…":"قلب على منتوج…","Afficher aussi les articles sans vente":"بين حتى المنتوجات اللي ما تباعوش","Article":"المنتوج","Quantité vendue":"الكمية المبيوعة","Prix actuel":"الثمن دابا","% du CA":"% من المبيعات","Dernière vente":"آخر بيعة","vendus":"تباعو","Nom (A → Z)":"السمية (أ → ي)","🔔 À relancer":"🔔 خاصهم تذكير","À relancer":"خاصهم تذكير","Relance":"التذكير","🔁 Relancer":"🔁 فكّرو","🔁 Relancer sur WhatsApp":"🔁 فكّرو فواتساب","Voir le client":"شوف الكليان","Fidèles (3+)":"أوفياء (3+)","Client depuis":"كليان من","🧺 Ce qu'il commande le plus":"🧺 شنو كيطلب بزاف","🧾 Historique des commandes":"🧾 الطلبات ديالو","Voir la liste →":"شوف اللائحة ←","Aucun client à relancer aujourd'hui 👌":"ما كاين حتى كليان خاصو تذكير اليوم 👌","Relancer un client après (jours sans commande)":"فكر الكليان من بعد (أيام بلا طلب)","Message de relance WhatsApp (arabe)":"ميساج التذكير فواتساب (عربية)","Message de relance WhatsApp (français)":"ميساج التذكير فواتساب (فرنسية)","Fidélité":"الكليان الأوفياء","Vos clients regroupés selon le nombre de commandes livrées ou en cours (les commandes annulées ne comptent pas). Toutes les dates.":"الكليان مجموعين على حساب شحال من طلب دارو (الطلبات الملغية ما كتحسبش). كاع التواريخ.","1 commande":"طلب واحد","2 commandes":"جوج طلبات","3 commandes":"3 طلبات","4 commandes":"4 طلبات","5 commandes et +":"5 طلبات ولا كثر","Aucun client dans ce groupe pour l'instant.":"ما كاين حتى كليان فهاد المجموعة دابا.","des clients":"من الكليان","Ouvrir →":"حل ←","Des clients ont écrit leur nom et téléphone mais n'ont pas validé la commande.":"كليان كتبو السمية والتيليفون وما كملوش الطلب.","à rappeler":"خاصهم اتصال","abandonné":"متروكة","abandonnés":"متروكين","Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
 "📲 Informer le client":"📲 علم الكليان","Assigner un livreur":"عطي موزع","Confirmer":"أكد","Annuler":"لغي","Valider":"صادق","Modifier":"بدل","Copier":"نسخ","Actualiser":"تحديث","Exporter":"تصدير","Rechercher":"قلب",
 "Agents":"الوكلاء","Agent":"الوكيل","Appels":"المكالمات","Leads":"الليدز","Ajouter un agent":"زيد وكيل","Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur":"وضع تجريبي: Supabase ما مربوطش، كلشي كيبقى فهاد المتصفح",
 "Le direct fonctionne quand le site est connecté à Supabase.":"المباشر كيخدم ملي يكون الموقع مربوط بـ Supabase.","Direct / WhatsApp":"مباشر / واتساب","Français (FR)":"فرنسية (FR)","Arabe (AR)":"عربية (AR)",
@@ -3398,7 +3404,7 @@ function renderAdmin(){
   $("#aDate").textContent=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"});
   $$("[data-ap]").forEach(p=>p.hidden=p.dataset.ap!==aTab);
   const R=aR(),P=aR(1);
-  $("#relAlert").innerHTML=relN?`<div class="rel-al"><span>🔔</span><div><b>${relN} client${relN>1?"s":""} à relancer</b><small>Leur dernière commande date de plus de ${relDays()} jours : envoyez-leur un message WhatsApp.</small></div><button class="btn b-or sm" data-clif="rel" data-tocli="1">Voir la liste →</button></div>`:"";
+  const drN=draftsTodoN();$("#relAlert").innerHTML=(drN?`<div class="rel-al dr-al"><span>🛒</span><div><b>${drN} panier${drN>1?"s":""} abandonné${drN>1?"s":""} à rappeler</b><small>Des clients ont écrit leur nom et téléphone mais n'ont pas validé la commande.</small></div><button class="btn b-or sm" data-gocc="paniers">Ouvrir →</button></div>`:"")+(relN?`<div class="rel-al"><span>🔔</span><div><b>${relN} client${relN>1?"s":""} à relancer</b><small>Leur dernière commande date de plus de ${relDays()} jours : envoyez-leur un message WhatsApp.</small></div><button class="btn b-or sm" data-clif="rel" data-tocli="1">Voir la liste →</button></div>`:"");
   A[aTab]({O,act,len,R,OR:O.filter(o=>inR(o,R)),OP:O.filter(o=>inR(o,P))});
 }
 function setStatus(o,st){
@@ -3483,6 +3489,7 @@ const UI_FR=[
  ["موصلة","Livrées"],["مخلص","payé"],["جداد","Nouvelles"],["سالاو","Terminées"],["الموزع","Livreur"],["شكاية","Réclamation"],["ليد","Lead"],
  ["تواصلنا","Contacté"],["مهتم","Intéressé"],["ضاع","Perdu"],["معرفة","Bouche-à-oreille"],["المصدر","Source"],["ملاحظة","Note"],["العنوان","Adresse"],
  ["المجموع الفرعي","Sous-total"],["التفاصيل","Détails"],["المنتوج","Produit"],["الكمية","Quantité"],["الثمن","Prix"],["تخفيض","Remise"],["واتساب","WhatsApp"],["المجموع","Total"],["نص كيلو","0,5 kg"],["حزمة","botte(s)"],["حبة","pièce(s)"],["قفة","panier(s)"],
+ ["السلات المتروكة","Paniers abandonnés"],["خاصهم اتصال","À rappeler"],["كيكملو دابا","En cours"],["رجعو طلبو","Commande passée"],["تعالجو","Traités"],["دير الطلب","Créer la commande"],["تعالجات","Traité"],["ما كاين حتى سلة هنا","Aucun panier ici"],["كليان كتبو السمية والتيليفون فالطلب وما كملوش. كيبانو هنا من بعد 30 دقيقة. عيط ليهم ولا صيفط ليهم واتساب، ومن بعد كليكي","Clients qui ont écrit nom et téléphone sans valider. Ils apparaissent après 30 minutes. Appelez-les ou envoyez un WhatsApp, puis cliquez"],
  ["التوصيل","Livraison"],["فابور","Gratuite"],["تأكيد","Confirmer"],["إلغاء","Annuler"],["اتصل","Appeler"],["الكل","Tout"],["متصل","En ligne"],
  ["حيّد","Retirer"],["الحالة","Statut"],["المبلغ","Montant"],["كيتوجد","En préparation"],["توصّل","Livrée"],["ملغى","Annulée"],
  ["مكالمة","appel(s)"],["عميل","Client"],["جديد","Nouveau"],["منتوج","produit(s)"],["كغ","kg"],["درهم","MAD"],["طلب","commande(s)"],
@@ -3571,7 +3578,7 @@ function renderDriver0(){
 const isCC=()=>role==="admin"||role==="agent";
 let agents={list:{}},ccPage="dash",ccOF="wait",ccCalls=null,ccLeads=null,ccErr="",ccCur=null,ccTick=0,ccPoll=0,ccLines=[],ccPre={};
 const CC_NAV=[["dash","لوحة التحكم","M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"],["team","فريق الكول سنتر","M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2z"],
-  ["orders","الطلبات","M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"],["clients","العملاء","M16 19v-1a4 4 0 00-4-4H6a4 4 0 00-4 4v1M9 10a4 4 0 100-8 4 4 0 000 8zM22 19v-1a4 4 0 00-3-3.9M16 2.1a4 4 0 010 7.8"],
+  ["orders","الطلبات","M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6"],["paniers","السلات المتروكة","M3 4h2l2.4 11.2a2 2 0 002 1.6h7.7a2 2 0 002-1.5L21 8H6M9 21h.01M17 21h.01"],["clients","العملاء","M16 19v-1a4 4 0 00-4-4H6a4 4 0 00-4 4v1M9 10a4 4 0 100-8 4 4 0 000 8zM22 19v-1a4 4 0 00-3-3.9M16 2.1a4 4 0 010 7.8"],
   ["calls","المكالمات","M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"],
   ["leads","إدارة الليدز (CRM)","M12 22a10 10 0 100-20 10 10 0 000 20zM12 16a4 4 0 100-8 4 4 0 000 8zM12 12h.01"],["stats","الإحصائيات","M5 20v-6M10 20V10M15 20V6M20 20v-9"],
   ["settings","الإعدادات","M12 15a3 3 0 100-6 3 3 0 000 6zM19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"]];
@@ -3586,10 +3593,11 @@ const ccQ=()=>($("#ccQ")?.value||"").trim().toLowerCase();
 const ccHit=(...v)=>{const q=ccQ();return !q||v.some(x=>String(x??"").toLowerCase().includes(q))};
 const ccDelta=(c,p)=>p?`<i class="${c<p?"dn":""}">${c>=p?"↑ +":"↓ "}${Math.round((c-p)/p*100)}%</i>`:"";
 async function ccLoad(){
-  if(!cloud){ccCalls=store.get("cc:calls",[]);ccLeads=store.get("cc:leads",[]);ccErr="";return}
+  if(!cloud){ccCalls=store.get("cc:calls",[]);ccLeads=store.get("cc:leads",[]);ccDrafts=store.get("cc:drafts",[]);ccErr="";return}
   const since=new Date(per(8)[0]).toISOString();
   const [c,l]=await Promise.all([SB.from("calls").select("*").gte("at",since).order("at",{ascending:false}).limit(4000),SB.from("leads").select("*").order("at",{ascending:false}).limit(2000)]);
   ccErr=c.error||l.error?"خاص SQL ديال الكول سنتر يتدار فـ Supabase باش يخدمو المكالمات والليدز.":"";
+  await draftsLoad().catch(e=>{console.warn(e);ccDrafts=[]});
   ccCalls=(c.data||[]).map(r=>({...r,at:new Date(r.at).getTime()}));ccLeads=(l.data||[]).map(r=>({...r,at:new Date(r.at).getTime(),next_at:r.next_at?new Date(r.next_at).getTime():0}));
 }
 async function ccAddCall(x){const row={phone:x.phone,name:(x.name||"").slice(0,80),kind:x.kind||"new",result:x.result,oid:x.oid||null,lead:x.lead||null,dur:Math.min(36000,Math.max(0,x.dur|0)),note:(x.note||"").slice(0,300)};
@@ -3637,14 +3645,14 @@ function ccLeadForm(){ccSheet("🎯 ليد جديد",`<form class="form" onsubmi
 function ccOrderForm(pre={}){ccLines=[];ccPre=pre;const P=products.filter(p=>p.on!==false&&+p.p>0);
   const opts=CATS.filter(c=>c.id!=="deals").map(c=>{const L=P.filter(p=>p.c===c.id);return L.length?`<optgroup label="${esc(lang==="fr"?CATFR[c.id]||c.n:c.n)}">${L.map(p=>`<option value="${esc(p.id)}">${esc(nm(p))} · ${fmt(p.p)} ${lang==="fr"?"MAD":"د"}</option>`).join("")}</optgroup>`:""}).join("");
   ccSheet("📦 إنشاء طلب جديد",`<form class="form" onsubmit="return false"><div class="fld"><label>اسم العميل</label><input id="ofN" value="${esc(pre.name||"")}"></div><div class="fld"><label>الهاتف</label><input id="ofP" type="tel" dir="ltr" value="${esc(pre.phone||"")}"></div>
-   <div class="fld"><label>الحي</label><select id="ofH">${HOODS.map(h=>`<option ${pre.hood===h?"selected":""}>${esc(h)}</option>`).join("")}</select></div><div class="fld"><label>العنوان</label><input id="ofA" value="${esc(pre.addr||"")}"></div>
+   <div class="fld"><label>الحي</label><input id="ofH" list="ofHL" value="${esc(pre.hood||"")}" maxlength="60"><datalist id="ofHL">${HOODS.map(h=>`<option value="${esc(h)}">`).join("")}</datalist></div><div class="fld"><label>العنوان</label><input id="ofA" value="${esc(pre.addr||"")}"></div>
    <div class="fld"><label>الوقت</label><select id="ofS">${SLOTS.map((s,i)=>`<option value="${i}">${esc(s)}</option>`).join("")}</select></div>
    <div class="fld"><label>المنتوجات</label><div style="display:flex;gap:6px"><select id="ofI" style="flex:1">${opts}</select><input id="ofQ" type="number" min="0.5" step="0.5" value="1" style="width:80px" class="num"><button type="button" class="btn b-or sm" id="ofAdd">زيد</button></div></div>
    <div id="ofL"></div><div class="fld"><label>ملاحظة</label><input id="ofT" value="${esc(pre.note||"")}"></div><p class="err" id="ofE"></p></form>`,`<button class="btn b-gr block" id="ccOrderGo">✅ تأكيد الطلب</button>`,"cc:order");ccRenderLines()}
 function ccTotals(){const L=ccLines.map(([id,q])=>{const it=byId(id);return{it,q,sum:(+it?.p||0)*q}}).filter(x=>x.it),sub=L.reduce((a,x)=>a+x.sum,0),fee=!sub||sub>=(+settings.freeFrom||0)?0:(+settings.fee||0);return{L,sub,fee,total:sub+fee}}
 function ccRenderLines(){const T=ccTotals();$("#ofL").innerHTML=T.L.length?`<div class="cc-card" style="padding:10px;margin:0 0 10px">${T.L.map(({it,q,sum},k)=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:4px 0"><span>${esc(nm(it))} · ${qtyL(it,q)}</span><span class="num">${fmt(sum)} د <button type="button" class="lnk" data-ofdel="${k}" style="color:#c0392b">✕</button></span></div>`).join("")}
   <div style="display:flex;justify-content:space-between;border-top:1px solid #eee;margin-top:6px;padding-top:6px"><span>التوصيل</span><b class="num">${T.fee?fmt(T.fee)+" د":"فابور"}</b></div><div style="display:flex;justify-content:space-between;font-size:18px"><b>المجموع</b><b class="num">${fmt(T.total)} درهم</b></div></div>`:`<p class="hint">زيد المنتوجات اللي بغا العميل.</p>`;trUI($("#ofL"))}
-async function ccSubmitOrder(){const E=$("#ofE");E.textContent="";const name=$("#ofN").value.trim(),phone=$("#ofP").value.replace(/[\s.-]+/g,""),hood=$("#ofH").value,addr=$("#ofA").value.trim(),note=$("#ofT").value.trim(),slot=SLOTS[+$("#ofS").value]||SLOTS[0];
+async function ccSubmitOrder(){const E=$("#ofE");E.textContent="";const name=$("#ofN").value.trim(),phone=$("#ofP").value.replace(/[\s.-]+/g,""),hood=$("#ofH").value.trim().slice(0,60),addr=$("#ofA").value.trim(),note=$("#ofT").value.trim(),slot=SLOTS[+$("#ofS").value]||SLOTS[0];
   if(!name){E.textContent="الاسم ناقص";return}if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent="رقم الهاتف ماشي صحيح";return}if(!addr){E.textContent="العنوان ناقص";return}
   const T=ccTotals();if(!T.L.length){E.textContent="زيد على الأقل منتوج واحد";return}
   const id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken(),b=$("#ccOrderGo");b.disabled=true;
@@ -3652,7 +3660,7 @@ async function ccSubmitOrder(){const E=$("#ofE");E.textContent="";const name=$("
   try{if(cloud){ok(await SB.from("orders").insert({id,uid,at:o.at,status:"new",driver:"",stk:false,data:clean({...o,items:o.items.map(([id,q,n,p])=>({id,q,n,p}))})}));ok(await SB.from("orders").update({status:"prep"}).eq("id",id));soonOrders()}
     else{myOrders.unshift({...o,status:"prep",id,owner:"local"});store.set("orders",myOrders)}
     if(ccPre.lead){const ld=(ccLeads||[]).find(x=>x.id===ccPre.lead);if(ld)await ccLeadSave(ld,{status:"won"})}
-    rememberTrack(id,tk);closeSheet();toast(`الطلب ${id} تسجل ومؤكد ✓`);ccRender();
+    draftClose(id,phone);if(!cloud)ccDrafts=store.get("cc:drafts",[]);rememberTrack(id,tk);closeSheet();toast(`الطلب ${id} تسجل ومؤكد ✓`);ccRender();
     if(confirm(trS("بغيتي تصيفط للعميل رسالة التأكيد فالواتساب؟")))window.open(notifyUrl({...o,id,status:"new"},"new"),"_blank","noopener")}
   catch(e){console.warn(e);E.textContent="ما تسجلش الطلب، عاود جرب";b.disabled=false}}
 /* render */
@@ -3663,7 +3671,7 @@ function ccRender0(){
   if(ccCalls===null){ccCalls=[];ccLeads=[];ccLoad().then(ccRender);}
   ccJoin();clearInterval(ccPoll);ccPoll=setInterval(()=>{if(view==="cc"&&!document.hidden)ccLoad().then(ccRender)},30000);
   const O=staffOrders(),T=per(1),Y=per(1,1),newN=O.filter(o=>o.status==="new").length;
-  $("#ccNav").innerHTML=CC_NAV.map(([k,l,d])=>`<button data-cpage="${k}" ${ccPage===k?'aria-current="page"':""}><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span>${l}</span>${k==="orders"&&newN?`<em class="num">${newN}</em>`:""}</button>`).join("");
+  $("#ccNav").innerHTML=CC_NAV.map(([k,l,d])=>`<button data-cpage="${k}" ${ccPage===k?'aria-current="page"':""}><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span>${l}</span>${k==="orders"&&newN?`<em class="num">${newN}</em>`:""}${k==="paniers"&&draftsTodoN()?`<em class="num">${draftsTodoN()}</em>`:""}</button>`).join("");
   $$("[data-cp]").forEach(x=>x.hidden=x.dataset.cp!==ccPage);
   const me2=role==="admin"?"Admin":ccName(uid);$("#ccUserN").textContent=me2;$("#ccUserR").textContent=role==="admin"?"مدير الفريق":"خدمة العملاء";$("#ccAv").textContent=initial(me2);$("#ccMeN").textContent=me2;
   $("#ccToAdmin").hidden=role!=="admin";$("#ccOut").hidden=!cloud;$("#ccAddAg").hidden=role!=="admin";
@@ -3689,6 +3697,7 @@ function ccRender0(){
     $("#ccLast").innerHTML=O.length?`<div class="cc-tbl"><table><thead><tr><th>#</th><th>العميل</th><th>المبلغ</th><th>الحالة</th></tr></thead><tbody>${O.slice(0,5).map(o=>`<tr><td class="num">${esc(o.id)}</td><td>${esc(o.name)}</td><td class="num">${fmt(o.total)} MAD</td><td>${ccPill(o.status)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="cc-empty">ما كاين حتى طلب.</div>`;
     ccRenderLive();
   }
+  if(ccPage==="paniers")ccRenderDrafts();
   if(ccPage==="orders"){
     const F={wait:["قيد التأكيد",o=>o.status==="new"],ok:["مؤكدة",o=>conf(o.status)],nodrv:["بلا موزع",o=>o.status==="prep"&&!o.driver],cancel:["ملغاة",o=>o.status==="cancel"],all:["الكل",()=>true]};
     const B=O.filter(o=>ccHit(o.id,o.name,o.phone,o.hood,o.addr));
@@ -3733,6 +3742,51 @@ function show(v){if(TEAM_HOST&&v==="shop"&&!isTeam()&&view==="login"){location.h
   applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
 
+/* ---------- abandoned checkouts ("paniers abandonnés"): saved once name + valid phone are typed ---------- */
+let draftId=null,draftT=0,ccDrafts=null,ccDF="todo";
+const DRAFT_MIN=30*60000;
+function draftSave(){clearTimeout(draftT);draftT=setTimeout(async()=>{try{
+  if(isTeam()||mode!=="checkout"||!$("#coName"))return;const name=$("#coName").value.trim(),phone=$("#coPhone").value.replace(/[\s.-]+/g,"");
+  if(!name||!/^(\+212|0)[5-7]\d{8}$/.test(phone))return;const L=lines();if(!L.length)return;
+  if(!draftId){try{draftId=sessionStorage.getItem("k48:draft")}catch(e){}draftId=draftId||("d"+Date.now().toString(36)+Math.random().toString(36).slice(2,8));try{sessionStorage.setItem("k48:draft",draftId)}catch(e){}}
+  const tt=totals(),data={name:name.slice(0,80),phone,hood:$("#coHood").value.trim().slice(0,60),addr:$("#coAddr").value.trim().slice(0,200),lang,items:L.map(l=>[l.it.id,l.q,l.it.n,+l.it.p]),total:tt.total,fee:tt.fee,...(coLoc?{loc:coLoc}:{})};
+  if(!cloud){const D=store.get("cc:drafts",[]),i=D.findIndex(x=>x.id===draftId),row={id:draftId,data,updated_at:Date.now(),at:i>=0?D[i].at:Date.now(),done:false,oid:null};if(i>=0)D[i]={...D[i],...row};else D.unshift(row);store.set("cc:drafts",D);return}
+  const {error}=await SB.from("drafts").upsert({id:draftId,data,updated_at:new Date().toISOString()},{onConflict:"id"});
+  if(error){console.warn("draft",error.message);draftId=null;try{sessionStorage.removeItem("k48:draft")}catch(e){}}}catch(e){console.warn(e)}},1200)}
+function draftClose(oid,phone){if(!cloud){const k=pk(phone),D=store.get("cc:drafts",[]);D.forEach(x=>{if(!x.done&&(x.id===draftId||pk(x.data?.phone)===k)){x.done=true;x.oid=oid}});store.set("cc:drafts",D)}
+  draftId=null;try{sessionStorage.removeItem("k48:draft")}catch(e){}}
+document.addEventListener("input",e=>{if(e.target.closest?.("#coForm"))draftSave()});
+async function draftsLoad(){if(!cloud){ccDrafts=store.get("cc:drafts",[]);return}
+  const {data,error}=await SB.from("drafts").select("*").gte("updated_at",new Date(Date.now()-7*864e5).toISOString()).order("updated_at",{ascending:false}).limit(500);
+  ccDrafts=error?[]:(data||[]).map(r=>({...r,at:new Date(r.at).getTime(),updated_at:new Date(r.updated_at).getTime()}))}
+const draftTodo=d=>!d.done&&Date.now()-d.updated_at>=DRAFT_MIN;
+const draftsTodoN=()=>(ccDrafts||[]).filter(draftTodo).length;
+const agoTxt=t=>{const m=Math.max(0,Math.round((Date.now()-t)/60000));return m<60?`${m} د`:m<1440?`${Math.round(m/60)} س`:`${Math.round(m/1440)} يوم`};
+function draftText(d){const x=d.data||{},fr=x.lang==="fr",first=String(x.name||"").trim().split(/\s+/)[0]||"";
+  const items=(x.items||[]).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `• ${fr?(byId(id)?pn(it)||it.n:nm0):(it.n||nm0)} — ${fr?`${fmt(q)} ${UFR[it.u]||""}`:qtyLabel(it,+q)}`}).join("\n");
+  return fr?`Bonjour ${first} 👋\nIci l'équipe Khedar48 🥬\n\nNous avons vu que vous avez commencé une commande sur notre site sans la terminer 🛒 :\n${items}\n\n💵 Total : *${fmt(x.total)} MAD*\n\nVoulez-vous qu'on la finalise pour vous ? Répondez *Oui* et on la prépare tout de suite ✅\n\n— L'équipe Khedar48 🥬 · Oujda`
+    :`السلام عليكم ${first} 👋\nمعاك فريق خضار 48 🥬\n\nشفنا بديتي طلب فالموقع ديالنا وما كملتيهش 🛒:\n${items}\n\n💵 المجموع: *${fmt(x.total)} درهم*\n\nواش بغيتي نكملوه ليك؟ جاوبنا غير بـ *نعم* ونوجدوه ليك دابا ✅\n\n— فريق خضار 48 🥬 · وجدة`}
+const draftUrl=d=>`https://wa.me/${waNum(d.data?.phone)}?text=${encodeURIComponent(draftText(d))}`;
+async function draftHandled(d){const patch={done:true,handled_by:uid};
+  if(!cloud){const D=store.get("cc:drafts",[]),x=D.find(y=>y.id===d.id);if(x)Object.assign(x,patch);store.set("cc:drafts",D);ccDrafts=D;return true}
+  const {error}=await SB.from("drafts").update(patch).eq("id",d.id);if(error){console.warn(error);toast("ما تسجلش");return false}Object.assign(d,patch);return true}
+function ccRenderDrafts(){const D=ccDrafts||[];
+  const F={todo:["📞 خاصهم اتصال",draftTodo],live:["⏳ كيكملو دابا",d=>!d.done&&!draftTodo(d)],back:["✅ رجعو طلبو",d=>d.done&&d.oid],handled:["☑️ تعالجو",d=>d.done&&!d.oid],all:["الكل",()=>true]};
+  $("#ccDF").innerHTML=Object.entries(F).map(([k,[l,f]])=>`<button data-ccdf="${k}" aria-pressed="${ccDF===k}">${l} <span class="num">${D.filter(f).length}</span></button>`).join("");
+  const L=D.filter(F[ccDF][1]).filter(d=>ccHit(d.data?.name,d.data?.phone,d.data?.hood,d.data?.addr));
+  $("#ccDrafts").innerHTML=L.length?L.map(d=>{const x=d.data||{},n=(x.items||[]).length;
+    return `<div class="cc-o dr-o ${draftTodo(d)?"hot":""}"><div><b>${esc(x.name||"")} <span class="hint num" dir="ltr">${esc(x.phone||"")}</span></b><small>📍 ${esc(x.hood||"")}${x.addr?` · ${esc(x.addr)}`:""}${x.loc?` · 🧭 GPS`:""}</small>
+      <small>🕒 قبل ${agoTxt(d.updated_at)} · ${n} منتوجات · <b class="num" style="display:inline">${fmt(x.total)} درهم</b>${d.oid?` · ✅ #${esc(d.oid)}`:""}</small>
+      <div class="dr-it">${(x.items||[]).slice(0,8).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `<span>${itemThumb(byId(id),it)}${esc(it.n||nm0)} · ${esc(qtyLabel(it,+q))}</span>`}).join("")}</div></div>
+      <div class="act">${d.done?"":`<button class="cc-btn sm" data-drcall="${esc(d.id)}">📞 اتصل</button><a class="cc-btn sm wa" data-drwa="${esc(d.id)}" href="${esc(draftUrl(d))}" target="_blank" rel="noopener">💬 واتساب</a><button class="cc-btn sm" data-drorder="${esc(d.id)}">🛒 دير الطلب</button><button class="cc-btn sm" data-drok="${esc(d.id)}" title="تعالج">☑️</button>`}</div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى سلة هنا 👌</div>`}
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-ccdf],[data-drcall],[data-drwa],[data-drorder],[data-drok],[data-gocc]");if(!b)return;const D=b.dataset,find=id=>(ccDrafts||[]).find(x=>x.id===id);
+  if(D.gocc){ccPage=D.gocc;if(D.gocc==="paniers")ccDF="todo";show("cc");return}
+  if(D.ccdf){ccDF=D.ccdf;ccRender();return}
+  const d=find(D.drcall||D.drwa||D.drorder||D.drok);if(!d)return;const x=d.data||{};
+  if(D.drcall){ccStartCall({phone:x.phone,name:x.name,kind:"follow"});return}
+  if(D.drwa){ccAddCall({phone:x.phone,name:x.name,kind:"follow",result:"info",dur:0,note:"🛒 Panier abandonné · WhatsApp"});return}
+  if(D.drorder){ccOrderForm({phone:x.phone,name:x.name,hood:x.hood,addr:x.addr});ccLines=(x.items||[]).filter(([id])=>byId(id)).map(([id,q])=>[id,+q]);ccRenderLines();return}
+  if(D.drok){if(await draftHandled(d)){toast("☑️ تعالجات");ccRender()}}});
 /* call center: full order sheet (what the customer ordered) */
 function openCcOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="ccv:"+id;
   const rows=(o.items||[]).map(([pid,q,nm,p0])=>{const it=byId(pid)||{n:nm,u:"kg",e:"🥬"},p=+p0||+it.p||0;
