@@ -3489,7 +3489,7 @@ const UI_FR=[
  ["موصلة","Livrées"],["مخلص","payé"],["جداد","Nouvelles"],["سالاو","Terminées"],["الموزع","Livreur"],["شكاية","Réclamation"],["ليد","Lead"],
  ["تواصلنا","Contacté"],["مهتم","Intéressé"],["ضاع","Perdu"],["معرفة","Bouche-à-oreille"],["المصدر","Source"],["ملاحظة","Note"],["العنوان","Adresse"],
  ["المجموع الفرعي","Sous-total"],["التفاصيل","Détails"],["المنتوج","Produit"],["الكمية","Quantité"],["الثمن","Prix"],["تخفيض","Remise"],["واتساب","WhatsApp"],["المجموع","Total"],["نص كيلو","0,5 kg"],["حزمة","botte(s)"],["حبة","pièce(s)"],["قفة","panier(s)"],
- ["السلات المتروكة","Paniers abandonnés"],["خاصهم اتصال","À rappeler"],["كيكملو دابا","En cours"],["رجعو طلبو","Commande passée"],["تعالجو","Traités"],["دير الطلب","Créer la commande"],["تعالجات","Traité"],["ما كاين حتى سلة هنا","Aucun panier ici"],["كليان كتبو السمية والتيليفون فالطلب وما كملوش. كيبانو هنا من بعد 30 دقيقة. عيط ليهم ولا صيفط ليهم واتساب، ومن بعد كليكي","Clients qui ont écrit nom et téléphone sans valider. Ils apparaissent après 30 minutes. Appelez-les ou envoyez un WhatsApp, puis cliquez"],
+ ["السلات المتروكة","Paniers abandonnés"],["نحيدو السلة ديال","Supprimer le panier de"],["تحذفات","Supprimé"],["حذف","Supprimer"],["خاصهم اتصال","À rappeler"],["كيكملو دابا","En cours"],["رجعو طلبو","Commande passée"],["تعالجو","Traités"],["دير الطلب","Créer la commande"],["تعالجات","Traité"],["ما كاين حتى سلة هنا","Aucun panier ici"],["كليان كتبو السمية والتيليفون فالطلب وما كملوش. كيبانو هنا من بعد 30 دقيقة. عيط ليهم ولا صيفط ليهم واتساب، ومن بعد كليكي","Clients qui ont écrit nom et téléphone sans valider. Ils apparaissent après 30 minutes. Appelez-les ou envoyez un WhatsApp, puis cliquez"],
  ["التوصيل","Livraison"],["فابور","Gratuite"],["تأكيد","Confirmer"],["إلغاء","Annuler"],["اتصل","Appeler"],["الكل","Tout"],["متصل","En ligne"],
  ["حيّد","Retirer"],["الحالة","Statut"],["المبلغ","Montant"],["كيتوجد","En préparation"],["توصّل","Livrée"],["ملغى","Annulée"],
  ["مكالمة","appel(s)"],["عميل","Client"],["جديد","Nouveau"],["منتوج","produit(s)"],["كغ","kg"],["درهم","MAD"],["طلب","commande(s)"],
@@ -3760,17 +3760,17 @@ async function draftsLoad(){if(!cloud){ccDrafts=store.get("cc:drafts",[]);return
   const {data,error}=await SB.from("drafts").select("*").gte("updated_at",new Date(Date.now()-7*864e5).toISOString()).order("updated_at",{ascending:false}).limit(500);
   ccDrafts=error?[]:(data||[]).map(r=>({...r,at:new Date(r.at).getTime(),updated_at:new Date(r.updated_at).getTime()}))}
 const draftTodo=d=>!d.done&&Date.now()-d.updated_at>=DRAFT_MIN;
-const draftsTodoN=()=>(ccDrafts||[]).filter(draftTodo).length;
+const draftsTodoN=()=>(ccDrafts||[]).filter(d=>d.note!=="deleted"&&draftTodo(d)).length;
 const agoTxt=t=>{const m=Math.max(0,Math.round((Date.now()-t)/60000));return m<60?`${m} د`:m<1440?`${Math.round(m/60)} س`:`${Math.round(m/1440)} يوم`};
 function draftText(d){const x=d.data||{},fr=x.lang==="fr",first=String(x.name||"").trim().split(/\s+/)[0]||"";
   const items=(x.items||[]).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `• ${fr?(byId(id)?pn(it)||it.n:nm0):(it.n||nm0)} — ${fr?`${fmt(q)} ${UFR[it.u]||""}`:qtyLabel(it,+q)}`}).join("\n");
   return fr?`Bonjour ${first} 👋\nIci l'équipe Khedar48 🥬\n\nNous avons vu que vous avez commencé une commande sur notre site sans la terminer 🛒 :\n${items}\n\n💵 Total : *${fmt(x.total)} MAD*\n\nVoulez-vous qu'on la finalise pour vous ? Répondez *Oui* et on la prépare tout de suite ✅\n\n— L'équipe Khedar48 🥬 · Oujda`
     :`السلام عليكم ${first} 👋\nمعاك فريق خضار 48 🥬\n\nشفنا بديتي طلب فالموقع ديالنا وما كملتيهش 🛒:\n${items}\n\n💵 المجموع: *${fmt(x.total)} درهم*\n\nواش بغيتي نكملوه ليك؟ جاوبنا غير بـ *نعم* ونوجدوه ليك دابا ✅\n\n— فريق خضار 48 🥬 · وجدة`}
 const draftUrl=d=>`https://wa.me/${waNum(d.data?.phone)}?text=${encodeURIComponent(draftText(d))}`;
-async function draftHandled(d){const patch={done:true,handled_by:uid};
+async function draftHandled(d,del){const patch={done:true,handled_by:uid,...(del?{note:"deleted"}:{})};
   if(!cloud){const D=store.get("cc:drafts",[]),x=D.find(y=>y.id===d.id);if(x)Object.assign(x,patch);store.set("cc:drafts",D);ccDrafts=D;return true}
   const {error}=await SB.from("drafts").update(patch).eq("id",d.id);if(error){console.warn(error);toast("ما تسجلش");return false}Object.assign(d,patch);return true}
-function ccRenderDrafts(){const D=ccDrafts||[];
+function ccRenderDrafts(){const D=(ccDrafts||[]).filter(d=>d.note!=="deleted");
   const F={todo:["📞 خاصهم اتصال",draftTodo],live:["⏳ كيكملو دابا",d=>!d.done&&!draftTodo(d)],back:["✅ رجعو طلبو",d=>d.done&&d.oid],handled:["☑️ تعالجو",d=>d.done&&!d.oid],all:["الكل",()=>true]};
   $("#ccDF").innerHTML=Object.entries(F).map(([k,[l,f]])=>`<button data-ccdf="${k}" aria-pressed="${ccDF===k}">${l} <span class="num">${D.filter(f).length}</span></button>`).join("");
   const L=D.filter(F[ccDF][1]).filter(d=>ccHit(d.data?.name,d.data?.phone,d.data?.hood,d.data?.addr));
@@ -3778,15 +3778,16 @@ function ccRenderDrafts(){const D=ccDrafts||[];
     return `<div class="cc-o dr-o ${draftTodo(d)?"hot":""}"><div><b>${esc(x.name||"")} <span class="hint num" dir="ltr">${esc(x.phone||"")}</span></b><small>📍 ${esc(x.hood||"")}${x.addr?` · ${esc(x.addr)}`:""}${x.loc?` · 🧭 GPS`:""}</small>
       <small>🕒 قبل ${agoTxt(d.updated_at)} · ${n} منتوجات · <b class="num" style="display:inline">${fmt(x.total)} درهم</b>${d.oid?` · ✅ #${esc(d.oid)}`:""}</small>
       <div class="dr-it">${(x.items||[]).slice(0,8).map(([id,q,nm0])=>{const it=byId(id)||{n:nm0,u:"kg"};return `<span>${itemThumb(byId(id),it)}${esc(it.n||nm0)} · ${esc(qtyLabel(it,+q))}</span>`}).join("")}</div></div>
-      <div class="act">${d.done?"":`<button class="cc-btn sm" data-drcall="${esc(d.id)}">📞 اتصل</button><a class="cc-btn sm wa" data-drwa="${esc(d.id)}" href="${esc(draftUrl(d))}" target="_blank" rel="noopener">💬 واتساب</a><button class="cc-btn sm" data-drorder="${esc(d.id)}">🛒 دير الطلب</button><button class="cc-btn sm" data-drok="${esc(d.id)}" title="تعالج">☑️</button>`}</div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى سلة هنا 👌</div>`}
-document.addEventListener("click",async e=>{const b=e.target.closest("[data-ccdf],[data-drcall],[data-drwa],[data-drorder],[data-drok],[data-gocc]");if(!b)return;const D=b.dataset,find=id=>(ccDrafts||[]).find(x=>x.id===id);
+      <div class="act">${d.done?"":`<button class="cc-btn sm" data-drcall="${esc(d.id)}">📞 اتصل</button><a class="cc-btn sm wa" data-drwa="${esc(d.id)}" href="${esc(draftUrl(d))}" target="_blank" rel="noopener">💬 واتساب</a><button class="cc-btn sm" data-drorder="${esc(d.id)}">🛒 دير الطلب</button><button class="cc-btn sm" data-drok="${esc(d.id)}" title="تعالج">☑️</button>`}<button class="cc-btn sm r" data-drdel="${esc(d.id)}" title="حذف">🗑️ حذف</button></div></div>`}).join(""):`<div class="cc-empty">ما كاين حتى سلة هنا 👌</div>`}
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-ccdf],[data-drcall],[data-drwa],[data-drorder],[data-drok],[data-drdel],[data-gocc]");if(!b)return;const D=b.dataset,find=id=>(ccDrafts||[]).find(x=>x.id===id);
   if(D.gocc){ccPage=D.gocc;if(D.gocc==="paniers")ccDF="todo";show("cc");return}
   if(D.ccdf){ccDF=D.ccdf;ccRender();return}
-  const d=find(D.drcall||D.drwa||D.drorder||D.drok);if(!d)return;const x=d.data||{};
+  const d=find(D.drcall||D.drwa||D.drorder||D.drok||D.drdel);if(!d)return;const x=d.data||{};
   if(D.drcall){ccStartCall({phone:x.phone,name:x.name,kind:"follow"});return}
   if(D.drwa){ccAddCall({phone:x.phone,name:x.name,kind:"follow",result:"info",dur:0,note:"🛒 Panier abandonné · WhatsApp"});return}
   if(D.drorder){ccOrderForm({phone:x.phone,name:x.name,hood:x.hood,addr:x.addr});ccLines=(x.items||[]).filter(([id])=>byId(id)).map(([id,q])=>[id,+q]);ccRenderLines();return}
-  if(D.drok){if(await draftHandled(d)){toast("☑️ تعالجات");ccRender()}}});
+  if(D.drok){if(await draftHandled(d)){toast("☑️ تعالجات");ccRender()}return}
+  if(D.drdel){if(!confirm(trS(`نحيدو السلة ديال ${d.data?.name||""}؟`)))return;if(await draftHandled(d,true)){toast(trS("🗑️ تحذفات"));ccRender()}}});
 /* call center: full order sheet (what the customer ordered) */
 function openCcOrder(id){const o=staffOrders().find(x=>x.id===id);if(!o){closeSheet();return}mode="ccv:"+id;
   const rows=(o.items||[]).map(([pid,q,nm,p0])=>{const it=byId(pid)||{n:nm,u:"kg",e:"🥬"},p=+p0||+it.p||0;
