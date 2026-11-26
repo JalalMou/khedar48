@@ -374,6 +374,13 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .dr-al{background:linear-gradient(90deg,#fff0ec,#fff8f5);border-color:#f7c3b4}
 .dr-o.hot{box-shadow:inset 3px 0 0 #e8590c}.dr-it{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.dr-it span{display:inline-flex;align-items:center;gap:6px;background:#f3faf5;border-radius:999px;padding:2px 10px 2px 2px;font-size:12.5px}.dr-it .oc-ph{width:26px;height:26px;border-radius:50%;font-size:14px}
 .fs-card{border-color:#f6d49a}.fs-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.fs-row input{height:42px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font:inherit;background:var(--card);color:var(--fg)}
+.pa-h{color:#b26a00}.pa-c input{background:#fff8ec;border-color:#f6d49a}
+.mg{display:inline-flex;flex-direction:column;line-height:1.15;font-weight:800;color:#1a9e44;white-space:nowrap}.mg small{font-size:11.5px;font-weight:700;opacity:.8}.mg.low{color:#c98a00}.mg.neg{color:#d63031}
+.xa-f{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.xa-f #xaQ{flex:1;min-width:200px}.xa-f #xaCat{width:auto}
+.xa-wrap{max-height:70vh;overflow:auto}.xa{width:100%;border-collapse:separate;border-spacing:0}.xa thead th{position:sticky;top:0;z-index:2;background:var(--card);font-size:13px;text-align:start;padding:10px 8px;border-bottom:2px solid var(--line);white-space:nowrap}.xa th small{display:block;font-weight:600;color:var(--muted);font-size:11px}
+.xa td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}.xa td input:not([type=checkbox]){width:100%;min-width:150px;height:42px;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;padding:0 10px;background:var(--card);color:var(--fg)}
+.xa td input[type=number]{min-width:90px;max-width:120px;font-weight:800}.xa td input:focus{outline:2px solid #1a9e44;border-color:#1a9e44}.xa tr:hover td{background:#f7fbf8}.xa-off td{opacity:.5}.xa-off td:last-child{opacity:1}
+.xa-u{color:var(--muted);font-weight:700;white-space:nowrap}.xa-sw{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;white-space:nowrap;cursor:pointer}.an-tag{display:block;color:#b26a00;font-size:12px;font-weight:700}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1537,6 +1544,16 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="card"><div class="cli-f" id="cliF"></div><div class="tbl"><table class="ot"><thead><tr><th>Client</th><th>Téléphone</th><th>Quartier</th><th>Commandes</th><th>Total dépensé</th><th>Dernière commande</th><th>Relance</th><th></th></tr></thead><tbody id="cliRows"></tbody></table></div></div>
         </div>
 
+        <!-- purchase & selling prices (big editable table) -->
+        <div data-ap="achats" hidden>
+          <div class="pg-h"><h2>💲 Achats & prix</h2><p class="hint">Écrivez chaque jour le prix d'achat (marché de gros) et le prix de vente. Tout s'enregistre tout seul dès que vous quittez la case. Le <b>Nom interne</b> n'est affiché que dans l'admin, jamais aux clients.</p></div>
+          <div class="k4" id="xaK"></div>
+          <div class="card">
+            <div class="xa-f"><input id="xaQ" type="search" class="a-sel" placeholder="Chercher un produit…" autocomplete="off"><select id="xaCat" class="a-sel" aria-label="Catégorie"></select><div class="cli-f" id="xaF" style="margin:0"></div></div>
+            <div class="tbl xa-wrap"><table class="xa"><thead><tr><th></th><th>Nom interne<small>vu seulement par vous</small></th><th>Nom client (arabe)<small>affiché sur le site</small></th><th>Unité</th><th class="pa-h">🛒 Prix d'achat</th><th>💰 Prix de vente</th><th>Marge</th><th>Actif</th></tr></thead><tbody id="xaRows"></tbody></table></div>
+          </div>
+        </div>
+
         <!-- loyalty -->
         <div data-ap="fidel" hidden>
           <div class="pg-h"><h2>Fidélité</h2><p class="hint">Vos clients regroupés selon le nombre de commandes livrées ou en cours (les commandes annulées ne comptent pas). Toutes les dates.</p></div>
@@ -1570,7 +1587,8 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
                 <div class="fld"><label for="npC">Catégorie</label><select id="npC"></select></div>
                 <div class="fld"><label for="npN">Nom (arabe)</label><input id="npN" required placeholder="خضرة مقطعة للطاجين" dir="rtl"></div>
                 <div class="fld"><label for="npF">Nom (FR)</label><input id="npF" placeholder="Légumes coupés pour tajine"></div>
-                <div class="fld"><label for="npP">Prix (MAD)</label><input id="npP" type="number" min="0" step="0.5" required></div>
+                <div class="fld"><label for="npA">🛒 Prix d'achat (MAD)</label><input id="npA" type="number" min="0" step="0.1" placeholder="—"></div>
+                <div class="fld"><label for="npP">💰 Prix de vente (MAD)</label><input id="npP" type="number" min="0" step="0.5" required></div>
                 <div class="fld"><label for="npU">Unité</label><select id="npU"><option value="kg">kg</option><option value="pc">pièce</option><option value="bunch">botte</option><option value="basket">panier</option></select></div>
                 <div class="fld"><label for="npE">Emoji</label><input id="npE" maxlength="4" value="🥬"></div>
                 <div class="fld np-wide"><label for="npD">Description (arabe, facultatif)</label><input id="npD" dir="rtl" maxlength="160" placeholder="مقشرة ومقطعة، غير طيب"></div>
@@ -1578,7 +1596,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
               </div>
             </form></div>
           <div class="pf-box"><div class="pf-row"><b>Catégorie</b><div class="filters" id="pCats"></div></div><div class="pf-row"><b>Prix</b><div class="filters" id="pFilters"></div></div></div>
-          <div class="card"><div class="tbl"><table><thead><tr><th>Produit</th><th>Nom (FR)</th><th>Catégorie</th><th>Prix (MAD)</th><th>Ancien prix</th><th>Unité</th><th>Ventes</th><th>Dispo</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div></div>
+          <div class="card"><div class="tbl"><table><thead><tr><th>Produit</th><th>Nom (FR)</th><th>Catégorie</th><th class="pa-h">🛒 Prix d'achat (MAD)</th><th>💰 Prix de vente (MAD)</th><th>Marge</th><th>Ancien prix</th><th>Unité</th><th>Ventes</th><th>Dispo</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div></div>
         </div>
 
         <!-- stock -->
@@ -2752,7 +2770,7 @@ const ICON={
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
-const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["fidel","Fidélité","star"],["drivers","Livreurs","bike"],["products","Produits","basket"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["settings","Paramètres","gear"]];
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["fidel","Fidélité","star"],["drivers","Livreurs","bike"],["products","Produits","basket"],["achats","Achats & prix","coins"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["settings","Paramètres","gear"]];
 let aPer=store.get("aPer","1"),chartPer="7",aQ="",topCat="all",topSort="c";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -2803,6 +2821,7 @@ const notifyUrl=(o,st)=>`https://wa.me/${waNum(o.phone)}?text=${encodeURICompone
 const thumb=p=>{const im=photoOf(p);return `<span class="th" style="${im?"":`background:color-mix(in srgb,${safeColor(p?.t)} 16%,var(--card))`}">${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p?.e||"🥬")}</span>`};
 const minOf=p=>p.min!=null&&p.min!==""?+p.min:5;
 const lowStock=()=>products.filter(p=>typeof p.stock==="number"&&p.stock<=minOf(p)).sort((a,b)=>a.stock-b.stock);
+const marginCell=p=>{const c=+p.cost||0,v=+p.p||0;if(!c||!v)return `<span class="hint">—</span>`;const m=v-c,pc=Math.round(m/v*100);return `<span class="mg ${m<0?"neg":pc<15?"low":""}">${m>=0?"+":""}${fmt(Math.round(m*100)/100)} DH<small>${pc}%</small></span>`};
 const unitCost=(id,price)=>{const p=byId(id);return p&&+p.cost>0?+p.cost:(+price||+p?.p||0)*(1-(+settings.margin||0)/100)};
 const oCost=o=>(o.items||[]).reduce((a,[id,q,,pr])=>a+unitCost(id,pr)*(+q||0),0);
 const oNet=o=>(+o.sub||0)-(+o.disc||0)-oCost(o);
@@ -3046,6 +3065,34 @@ function relRemind(n){const k="relNote:"+new Date().toDateString();if(!n||store.
 /* Fidélité: clients grouped by number of orders (1×, 2×, 3×, 4×, 5× and more) */
 let fdB="2";
 const FD_B=[["1","1 commande","🌱",c=>c.n===1],["2","2 commandes","🙂",c=>c.n===2],["3","3 commandes","😊",c=>c.n===3],["4","4 commandes","🤩",c=>c.n===4],["5","5 commandes et +","👑",c=>c.n>=5]];
+/* Achats & prix: one big table to edit names, purchase price, selling price and availability */
+let xaQ="",xaCat="all",xaF="all";
+const XA_F={all:["Tous",()=>true],on:["✅ Actifs",p=>p.on!==false],off:["⛔ Désactivés",p=>p.on===false],nocost:["Sans prix d'achat",p=>!(+p.cost>0)],loss:["🔴 À perte",p=>+p.cost>0&&+p.p>0&&+p.cost>+p.p]};
+A.achats=()=>{const P=products.filter(p=>p.c!=="panier");
+  const withC=P.filter(p=>+p.cost>0&&+p.p>0),avg=withC.length?Math.round(withC.reduce((a,p)=>a+(p.p-p.cost)/p.p,0)/withC.length*100):0;
+  $("#xaK").innerHTML=kmini([["Produits actifs",P.filter(p=>p.on!==false).length,"basket"],["Avec prix d'achat",`${withC.length} / ${P.length}`,"cart"],["Marge moyenne",`${avg}%`,"coins"],["🔴 À perte",P.filter(XA_F.loss[1]).length,"x"]]);
+  const C=$("#xaCat");if(!C.options.length)C.innerHTML=`<option value="all">Toutes catégories</option>`+["veg","fruit","herb","exotic","cut","spice","oil"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");C.value=xaCat;
+  $("#xaF").innerHTML=Object.entries(XA_F).map(([k,[l,f]])=>`<button data-xaf="${k}" aria-pressed="${xaF===k}">${l} <span class="num">${P.filter(f).length}</span></button>`).join("");
+  const q=xaQ.trim().toLowerCase(),L=P.filter(p=>(xaCat==="all"||p.c===xaCat)&&XA_F[xaF][1](p)&&(!q||`${p.an||""} ${p.n} ${pn(p)}`.toLowerCase().includes(q)));
+  const inp=(p,f,v,o="")=>`<input data-xa="${f}" data-xi="${esc(p.id)}" value="${esc(v??"")}" ${o}>`;
+  $("#xaRows").innerHTML=L.map(p=>`<tr class="${p.on===false?"xa-off":""}"><td>${thumb(p)}</td>
+    <td>${inp(p,"an",p.an,'maxlength="60" placeholder="ex : tomate souk, lot B…"')}</td>
+    <td>${inp(p,"n",p.n,'maxlength="60" dir="rtl" data-notr')}</td>
+    <td class="xa-u">${UFR[p.u]||""}</td>
+    <td class="pa-c">${inp(p,"cost",+p.cost||"",'type="number" min="0" step="0.1" placeholder="—" class="num"')}</td>
+    <td>${inp(p,"p",+p.p||"",'type="number" min="0" step="0.5" placeholder="0" class="num"')}</td>
+    <td class="num">${marginCell(p)}</td>
+    <td><label class="xa-sw"><input type="checkbox" class="sw" data-xa="on" data-xi="${esc(p.id)}" ${p.on!==false?"checked":""}><span>${p.on!==false?"Actif":"Non actif"}</span></label></td></tr>`).join("")||`<tr><td colspan="8" class="hint">Aucun produit.</td></tr>`};
+document.addEventListener("change",e=>{const t=e.target;if(t.id==="xaCat"){xaCat=t.value;renderAdmin();return}
+  const f=t.dataset?.xa;if(!f)return;const p=byId(t.dataset.xi);if(!p)return;const v=String(t.value).trim();
+  if(f==="on"){p.on=t.checked;if(!p.on)delete cart[p.id]}
+  else if(f==="cost"){if(v===""||!(+v>0))delete p.cost;else p.cost=Math.round(+v*100)/100}
+  else if(f==="p")p.p=Math.max(0,Math.round((+v||0)*100)/100);
+  else if(f==="n"){if(!v){toast("Le nom client ne peut pas être vide");t.value=p.n;return}p.n=v.slice(0,60)}
+  else{if(v)p[f]=v.slice(0,60);else delete p[f]}
+  saveCatalog("products");renderAll();toast(`✓ ${p.an||pn(p)} enregistré`)});
+document.addEventListener("input",e=>{if(e.target.id==="xaQ"){xaQ=e.target.value;renderAdmin();const i=$("#xaQ");i.focus();i.setSelectionRange(i.value.length,i.value.length)}});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-xaf]");if(!b)return;xaF=b.dataset.xaf;renderAdmin()});
 A.fidel=({O})=>{relEnsure();const all=clientsAgg(O),tot=all.length||1,rev=all.reduce((a,c)=>a+c.sum,0)||1;if(!FD_B.some(b=>b[0]===fdB))fdB="2";
   $("#fdGrid").innerHTML=FD_B.map(([k,l,e,f])=>{const L=all.filter(f),r=L.reduce((a,c)=>a+c.sum,0);
     return `<button class="fd-c ${fdB===k?"on":""}" data-fdb="${k}"><span class="fd-e">${e}</span><b class="num">${L.length}</b><span class="fd-l">${l}</span><small class="num">${Math.round(L.length/tot*100)}% des clients · ${mad(r)}</small><i style="width:${Math.round(r/rev*100)}%"></i></button>`}).join("");
@@ -3085,14 +3132,16 @@ A.products=({OR})=>{
   $("#pFilters").innerHTML=Object.entries(PF).map(([k,[l,fn]])=>`<button class="fchip" data-pf="${k}" aria-pressed="${pFilter===k}">${l} <span class="num">${base.filter(inCat).filter(fn).length}</span></button>`).join("");
   const ps=prodSales(OR),L=base.filter(p=>inCat(p)&&qMatch(p.n,pn(p))&&PF[pFilter][1](p));
   $("#pRows").innerHTML=L.map(p=>{const im=safeImg(p.img),s=ps.find(x=>x.id===p.id);
-    return `<tr><td><div class="pcell">${thumb(p)}<span><b dir="rtl">${esc(p.n)}</b>${canUpload()?`<label class="upl">📷 ${im?"Changer":"Ajouter"} la photo<input type="file" accept="image/*" data-photo="${esc(p.id)}"></label>`:""}</span></div></td>
+    return `<tr><td><div class="pcell">${thumb(p)}<span><b dir="rtl">${esc(p.n)}</b>${p.an?`<small class="an-tag">🏷️ ${esc(p.an)}</small>`:""}${canUpload()?`<label class="upl">📷 ${im?"Changer":"Ajouter"} la photo<input type="file" accept="image/*" data-photo="${esc(p.id)}"></label>`:""}</span></div></td>
      <td><input type="text" value="${esc(p.fr||FRN[p.id]||"")}" data-fr="${esc(p.id)}" aria-label="Nom français de ${esc(p.n)}" style="width:130px"></td>
      <td>${CATFR[p.c]||""}</td>
-     <td><input type="number" min="0" step="0.5" value="${+p.p}" data-price="${esc(p.id)}" aria-label="Prix ${esc(pn(p))}" class="num"></td>
+     <td class="pa-c"><input type="number" min="0" step="0.1" value="${+p.cost||""}" placeholder="—" data-cost="${esc(p.id)}" aria-label="Prix d'achat ${esc(pn(p))}" class="num"></td>
+     <td><input type="number" min="0" step="0.5" value="${+p.p}" data-price="${esc(p.id)}" aria-label="Prix de vente ${esc(pn(p))}" class="num"></td>
+     <td class="num">${marginCell(p)}</td>
      <td><input type="number" min="0" step="0.5" value="${+p.old||""}" data-old="${esc(p.id)}" aria-label="Ancien prix ${esc(pn(p))}" class="num" placeholder="—"></td>
      <td>${UFR[p.u]||""}</td><td class="num">${s?s.c:0}</td>
      <td><input type="checkbox" class="sw" ${p.on!==false?"checked":""} data-on="${esc(p.id)}" aria-label="${esc(pn(p))} disponible"></td>
-     <td>${p.c==="panier"?`<button class="btn b-gh sm" data-pkedit="${esc(p.id)}">🧺 Contenu (${(p.inc||[]).length})</button>`:`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="9" class="hint">Aucun produit trouvé.</td></tr>`;
+     <td>${p.c==="panier"?`<button class="btn b-gh sm" data-pkedit="${esc(p.id)}">🧺 Contenu (${(p.inc||[]).length})</button>`:`<button class="btn b-gh sm" data-delp="${esc(p.id)}">Supprimer</button>`}</td></tr>`}).join("")||`<tr><td colspan="11" class="hint">Aucun produit trouvé.</td></tr>`;
   if(!$("#npC").options.length)$("#npC").innerHTML=["veg","fruit","herb","exotic","cut","spice","oil","panier"].map(c=>`<option value="${c}">${CATFR[c]}</option>`).join("");
   if(!document.activeElement?.closest?.("#newProd")&&pCat!=="all"&&$("#npC").dataset.cat!==pCat){$("#npC").value=pCat;$("#npC").dataset.cat=pCat;const E={veg:"🥬",fruit:"🍎",cut:"🔪",spice:"🌶️",oil:"🫒",panier:"🧺"}[pCat];if(E)$("#npE").value=E;if(pCat==="spice"||pCat==="oil"||pCat==="panier")$("#npU").value=pCat==="panier"?"basket":"pc";}
 };
@@ -3370,7 +3419,7 @@ const ADM_AR_RAW={
 "Encaissé ce mois":"المحصّل هاد الشهر","Pas encore payé (ce mois)":"مازال ما خلصش (هاد الشهر)","Livraisons aujourd'hui":"توصيلات اليوم","Aucune livraison d'abonnement prévue aujourd'hui.":"ما كاين حتى توصيل اشتراك اليوم.",
 "🧺 Modifier son pack":"🧺 بدل القفة ديالو","En pause":"موقف مؤقتا","Arrêté":"موقف","Marquer payé":"خلص","🧺 Pack perso":"🧺 قفة خاصة","— Aucun —":"— والو —","✍️ Sur mesure (le client écrit sa liste)":"✍️ على القياس (الكليان كيكتب اللائحة)",
 "Photo de la qoffa":"تصويرة القفة","Annuler le paiement":"لغي الخلاص","Nom arabe":"السمية بالعربية","Nom FR":"السمية بالفرنسية","Prix par mois":"الثمن فالشهر","Livraisons par semaine":"توصيلات فالسيمانة","Panier livré":"القفة اللي كتوصل",
-"📦 Ventes par article":"📦 المبيعات حسب كل منتوج","Chercher un article…":"قلب على منتوج…","Afficher aussi les articles sans vente":"بين حتى المنتوجات اللي ما تباعوش","Article":"المنتوج","Quantité vendue":"الكمية المبيوعة","Prix actuel":"الثمن دابا","% du CA":"% من المبيعات","Dernière vente":"آخر بيعة","vendus":"تباعو","Nom (A → Z)":"السمية (أ → ي)","🔔 À relancer":"🔔 خاصهم تذكير","À relancer":"خاصهم تذكير","Relance":"التذكير","🔁 Relancer":"🔁 فكّرو","🔁 Relancer sur WhatsApp":"🔁 فكّرو فواتساب","Voir le client":"شوف الكليان","Fidèles (3+)":"أوفياء (3+)","Client depuis":"كليان من","🧺 Ce qu'il commande le plus":"🧺 شنو كيطلب بزاف","🧾 Historique des commandes":"🧾 الطلبات ديالو","Voir la liste →":"شوف اللائحة ←","Aucun client à relancer aujourd'hui 👌":"ما كاين حتى كليان خاصو تذكير اليوم 👌","Relancer un client après (jours sans commande)":"فكر الكليان من بعد (أيام بلا طلب)","Message de relance WhatsApp (arabe)":"ميساج التذكير فواتساب (عربية)","Message de relance WhatsApp (français)":"ميساج التذكير فواتساب (فرنسية)","Fidélité":"الكليان الأوفياء","Vos clients regroupés selon le nombre de commandes livrées ou en cours (les commandes annulées ne comptent pas). Toutes les dates.":"الكليان مجموعين على حساب شحال من طلب دارو (الطلبات الملغية ما كتحسبش). كاع التواريخ.","1 commande":"طلب واحد","2 commandes":"جوج طلبات","3 commandes":"3 طلبات","4 commandes":"4 طلبات","5 commandes et +":"5 طلبات ولا كثر","Aucun client dans ce groupe pour l'instant.":"ما كاين حتى كليان فهاد المجموعة دابا.","des clients":"من الكليان","Ouvrir →":"حل ←","Des clients ont écrit leur nom et téléphone mais n'ont pas validé la commande.":"كليان كتبو السمية والتيليفون وما كملوش الطلب.","à rappeler":"خاصهم اتصال","abandonné":"متروكة","abandonnés":"متروكين","🔄 Nouveau départ":"🔄 بداية جديدة","🔄 Remettre à 0 à partir de cette date":"🔄 رجع كلشي لـ 0 من هاد التاريخ","↩️ Tout réafficher":"↩️ رجع كلشي يبان","Non utilisé":"ما مستعملش","Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
+"📦 Ventes par article":"📦 المبيعات حسب كل منتوج","Chercher un article…":"قلب على منتوج…","Afficher aussi les articles sans vente":"بين حتى المنتوجات اللي ما تباعوش","Article":"المنتوج","Quantité vendue":"الكمية المبيوعة","Prix actuel":"الثمن دابا","% du CA":"% من المبيعات","Dernière vente":"آخر بيعة","vendus":"تباعو","Nom (A → Z)":"السمية (أ → ي)","🔔 À relancer":"🔔 خاصهم تذكير","À relancer":"خاصهم تذكير","Relance":"التذكير","🔁 Relancer":"🔁 فكّرو","🔁 Relancer sur WhatsApp":"🔁 فكّرو فواتساب","Voir le client":"شوف الكليان","Fidèles (3+)":"أوفياء (3+)","Client depuis":"كليان من","🧺 Ce qu'il commande le plus":"🧺 شنو كيطلب بزاف","🧾 Historique des commandes":"🧾 الطلبات ديالو","Voir la liste →":"شوف اللائحة ←","Aucun client à relancer aujourd'hui 👌":"ما كاين حتى كليان خاصو تذكير اليوم 👌","Relancer un client après (jours sans commande)":"فكر الكليان من بعد (أيام بلا طلب)","Message de relance WhatsApp (arabe)":"ميساج التذكير فواتساب (عربية)","Message de relance WhatsApp (français)":"ميساج التذكير فواتساب (فرنسية)","Fidélité":"الكليان الأوفياء","Vos clients regroupés selon le nombre de commandes livrées ou en cours (les commandes annulées ne comptent pas). Toutes les dates.":"الكليان مجموعين على حساب شحال من طلب دارو (الطلبات الملغية ما كتحسبش). كاع التواريخ.","1 commande":"طلب واحد","2 commandes":"جوج طلبات","3 commandes":"3 طلبات","4 commandes":"4 طلبات","5 commandes et +":"5 طلبات ولا كثر","Aucun client dans ce groupe pour l'instant.":"ما كاين حتى كليان فهاد المجموعة دابا.","des clients":"من الكليان","Ouvrir →":"حل ←","Des clients ont écrit leur nom et téléphone mais n'ont pas validé la commande.":"كليان كتبو السمية والتيليفون وما كملوش الطلب.","à rappeler":"خاصهم اتصال","abandonné":"متروكة","abandonnés":"متروكين","🔄 Nouveau départ":"🔄 بداية جديدة","🔄 Remettre à 0 à partir de cette date":"🔄 رجع كلشي لـ 0 من هاد التاريخ","↩️ Tout réafficher":"↩️ رجع كلشي يبان","Non utilisé":"ما مستعملش","🛒 Prix d'achat (MAD)":"🛒 ثمن الشرا (درهم)","💰 Prix de vente (MAD)":"💰 ثمن البيع (درهم)","💲 Achats & prix":"💲 الشرا والبيع","Achats & prix":"الشرا والبيع","Nom interne":"السمية ديالي","vu seulement par vous":"كتبان غير ليك","Nom client (arabe)":"السمية للكليان","affiché sur le site":"كتبان فالموقع","🛒 Prix d'achat":"🛒 ثمن الشرا","💰 Prix de vente":"💰 ثمن البيع","Actif":"مشعل","Non actif":"مطفي","✅ Actifs":"✅ مشعلين","⛔ Désactivés":"⛔ مطفيين","Sans prix d'achat":"بلا ثمن الشرا","🔴 À perte":"🔴 بالخسارة","Marge moyenne":"متوسط الهامش","Avec prix d'achat":"عندهم ثمن الشرا","Produits actifs":"منتوجات مشعلة","Chercher un produit…":"قلب على منتوج…","Aucun produit.":"ما كاين حتى منتوج.","Hier":"البارح","Ce mois":"هاد الشهر","Mois dernier":"الشهر اللي فات","Toutes les dates":"كاع التواريخ","📅 Choisir un jour…":"📅 اختار نهار…","📅 Période personnalisée…":"📅 من نهار حتى نهار…","Toutes catégories":"كاع الأصناف","Plus commandés":"الأكثر طلبا","Plus grosse quantité":"أكبر كمية","Plus gros CA":"أكبر مبيعات","Trier par":"رتب حسب","Du":"من","Au":"حتى","Panier Famille":"قفة العائلة","Panier Premium +":"قفة البريميوم +","Panier Premium":"قفة البريميوم","Grand panier":"القفة الكبيرة","Panier Légumes":"قفة الخضرة","Panier Fruits":"قفة الفواكه","Emoji":"إيموجي","pcs":"حبة","des visiteurs":"من الزوار","Notifications bloquées : autorisez-les dans les réglages du navigateur.":"الإشعارات مبلوكية: فعلها من إعدادات المتصفح.","Janvier":"يناير","Février":"فبراير","Mars":"مارس","Avril":"أبريل","Mai":"ماي","Juin":"يونيو","Juillet":"يوليوز","Août":"غشت","Septembre":"شتنبر","Octobre":"أكتوبر","Novembre":"نونبر","Décembre":"دجنبر","Lun":"الإثنين","Mar":"الثلاثاء","Mer":"الأربعاء","Jeu":"الخميس","Ven":"الجمعة","Sam":"السبت","Dim":"الأحد","Lundi":"الاثنين","Mardi":"الثلاثاء","Mercredi":"الأربعاء","Jeudi":"الخميس","Vendredi":"الجمعة","Samedi":"السبت","Dimanche":"الأحد","Fermer":"سد","📞 Appeler":"📞 عيط","💬 WhatsApp":"💬 واتساب","🧭 Itinéraire GPS":"🧭 الطريق GPS",
 "📲 Informer le client":"📲 علم الكليان","Assigner un livreur":"عطي موزع","Confirmer":"أكد","Annuler":"لغي","Valider":"صادق","Modifier":"بدل","Copier":"نسخ","Actualiser":"تحديث","Exporter":"تصدير","Rechercher":"قلب",
 "Agents":"الوكلاء","Agent":"الوكيل","Appels":"المكالمات","Leads":"الليدز","Ajouter un agent":"زيد وكيل","Mode démo : Supabase n'est pas configuré, tout reste dans ce navigateur":"وضع تجريبي: Supabase ما مربوطش، كلشي كيبقى فهاد المتصفح",
 "Le direct fonctionne quand le site est connecté à Supabase.":"المباشر كيخدم ملي يكون الموقع مربوط بـ Supabase.","Direct / WhatsApp":"مباشر / واتساب","Français (FR)":"فرنسية (FR)","Arabe (AR)":"عربية (AR)",
@@ -3965,7 +4014,7 @@ document.addEventListener("change",async e=>{
 });
 $("#npImg").addEventListener("change",e=>{const f=e.target.files?.[0];const P=$("#npPrev");if(!f){P.innerHTML="📷<small>Photo</small>";return}const u=URL.createObjectURL(f);P.innerHTML=`<img src="${u}" alt="">`;});
 $("#newProd").addEventListener("submit",async e=>{e.preventDefault();const n=$("#npN").value.trim(),p=+$("#npP").value,fr=$("#npF").value.trim(),dar=$("#npD").value.trim(),file=$("#npImg").files?.[0];if(!n||!(p>=0))return;
-  const b=$("#npBtn");b.disabled=true;const P={id:"x"+Date.now().toString(36),n,...(fr?{fr}:{}),...(dar?{d:{ar:dar}}:{}),e:$("#npE").value.trim()||"🥬",c:$("#npC").value,p,u:$("#npU").value,t:"#8bc34a",on:true};
+  const b=$("#npBtn");b.disabled=true;const P={id:"x"+Date.now().toString(36),n,...(fr?{fr}:{}),...(dar?{d:{ar:dar}}:{}),e:$("#npE").value.trim()||"🥬",c:$("#npC").value,p,u:$("#npU").value,t:"#8bc34a",on:true,...(+$("#npA").value>0?{cost:+$("#npA").value}:{})};
   try{if(file){if(canUpload()){toast("Envoi de la photo…");P.img=await uploadPhoto(P.id,file)}else toast("Photo non envoyée : connectez Supabase")}
     products.push(P);await saveCatalog("products");e.target.reset();$("#npE").value="🥬";$("#npPrev").innerHTML="📷<small>Photo</small>";$("#npC").dataset.cat="";renderAll();toast(`${fr||n} ajouté ✓`)}
   catch(err){console.warn(err);toast("Échec de l'envoi de la photo. Essayez une image plus légère (JPG/PNG).")}finally{b.disabled=false}});
