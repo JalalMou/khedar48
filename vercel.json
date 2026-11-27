@@ -172,6 +172,14 @@
   ],
   "rewrites": [
     {
+      "source": "/cuisine",
+      "destination": "/api/cuisine"
+    },
+    {
+      "source": "/cuisine/:slug",
+      "destination": "/api/cuisine?slug=:slug"
+    },
+    {
       "source": "/admin",
       "destination": "/index.html"
     },

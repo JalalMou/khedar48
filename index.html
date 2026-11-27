@@ -412,6 +412,72 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .co-call{display:block;text-align:center;font-size:13.5px;margin:4px 0 10px;color:#0e7a35;text-decoration:none;background:#fff;border:1px dashed #9bd3ae;border-radius:12px;padding:9px}
 .cart-alt{display:flex;gap:8px;margin-top:8px}.cart-alt .btn{flex:1;text-align:center;text-decoration:none}
 .pk-buy{display:block;width:calc(100% - 16px);margin:6px 8px 0;border:0;border-radius:10px;background:#ff7a00;color:#fff;font:inherit;font-weight:800;font-size:13px;padding:8px 6px;cursor:pointer}
+/* ===== KHEDAR48 CUISINE ===== */
+.k-wrap{padding-top:14px;padding-bottom:40px}
+.k-crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--mut,#6b7a70);margin:0 0 12px}.k-crumb a,.k-crumb .lnk{color:#0e7a35;text-decoration:none;font:inherit;background:none;border:0;padding:0;cursor:pointer}.k-crumb b{color:var(--fg);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw}
+.k-hero{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#0e7a35,#1a9e44 55%,#ff8a1f);color:#fff;border-radius:22px;padding:22px 20px;margin-bottom:18px}
+.k-hero small{font-weight:800;letter-spacing:.08em;opacity:.9}.k-hero h1{font-size:clamp(22px,5vw,32px);line-height:1.15;margin:6px 0}.k-hero p{margin:0;opacity:.92;font-size:14px}.k-hero>span{font-size:64px}
+.k-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:700px){.k-grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1000px){.k-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
+.k-card{display:flex;flex-direction:column;gap:6px;background:var(--card,#fff);border:1px solid var(--line,#e6ece8);border-radius:18px;padding:10px;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}.k-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(14,122,53,.1)}
+.k-ci{position:relative;display:block;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#f3f7f4}.k-ci img{width:100%;height:100%;object-fit:cover}.k-ci>b{display:grid;place-items:center;height:100%;font-size:54px}
+.k-off{position:absolute;top:8px;inset-inline-start:8px;background:#ff7a00;color:#fff;font-style:normal;font-weight:900;font-size:12px;border-radius:999px;padding:3px 8px}.k-off.big{top:12px;font-size:15px;padding:5px 11px;z-index:2}
+.k-so{position:absolute;bottom:8px;inset-inline:8px;background:rgba(0,0,0,.7);color:#fff;font-style:normal;font-size:11px;text-align:center;border-radius:8px;padding:3px}.k-card.out .k-ci img{opacity:.55}
+.k-cn{font-weight:800;font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
+.k-cp{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}.k-cp b{font-size:16px;color:#0e7a35}.k-cp b.red,.k-price b.red{color:#e5533d}.k-cp s,.k-price s{color:#98a39c;font-size:13px}
+.k-stars{color:#d9dfdb;letter-spacing:1px;font-size:14px;white-space:nowrap}.k-stars i{font-style:normal}.k-stars .f{color:#ffb400}.k-stars .h{background:linear-gradient(90deg,#ffb400 50%,#d9dfdb 50%);-webkit-background-clip:text;background-clip:text;color:transparent}[dir=rtl] .k-stars .h{background:linear-gradient(270deg,#ffb400 50%,#d9dfdb 50%);-webkit-background-clip:text;background-clip:text}
+.k-cr{font-size:12px;display:flex;gap:4px;align-items:center}
+.k-top{display:grid;gap:18px}@media(min-width:900px){.k-top{grid-template-columns:1.05fr 1fr;gap:34px;align-items:start}}
+.k-media{position:relative;min-width:0}
+.k-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:20px;background:#f3f7f4;scrollbar-width:none;overscroll-behavior-x:contain}.k-gal::-webkit-scrollbar{display:none}
+.k-gi{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:1;border:0;padding:0;background:none;cursor:zoom-in}.k-gi img{width:100%;height:100%;object-fit:contain;display:block}.k-ge{display:grid;place-items:center;font-size:110px;cursor:default}
+.k-dots{display:flex;justify-content:center;gap:6px;margin:10px 0}.k-dots i{width:7px;height:7px;border-radius:9px;background:#cfd8d2;transition:all .2s}.k-dots i.on{width:20px;background:#1a9e44}
+.k-thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.k-thumbs button{flex:0 0 62px;height:62px;border-radius:12px;border:2px solid transparent;padding:0;overflow:hidden;background:#f3f7f4;cursor:pointer}.k-thumbs button.on{border-color:#1a9e44}.k-thumbs img{width:100%;height:100%;object-fit:cover}
+@media(max-width:899px){.k-thumbs{display:none}}
+.k-h{font-size:clamp(21px,4.6vw,30px);line-height:1.2;margin:0 0 8px}
+.k-rs{display:inline-flex;gap:6px;align-items:center;text-decoration:none;color:inherit;font-size:14px;margin-bottom:8px}
+.k-price{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin:6px 0}.k-price b{font-size:30px;color:#0e7a35;font-weight:900}.k-price s{font-size:17px}.k-save{background:#fff1e3;color:#c25e00;font-weight:800;font-size:13px;border-radius:999px;padding:3px 10px}
+.k-av{font-weight:800;font-size:14px;margin:4px 0 12px}.k-av.in{color:#1a9e44}.k-av.low{color:#e67e22}.k-av.out{color:#c0392b}
+.k-sh{font-size:15.5px;line-height:1.6;margin:0 0 10px}
+.k-ben{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:7px}.k-ben li{position:relative;padding-inline-start:28px;font-size:15px;line-height:1.45}.k-ben li:before{content:"✓";position:absolute;inset-inline-start:0;top:0;width:20px;height:20px;border-radius:50%;background:#e7f6ec;color:#1a9e44;font-weight:900;font-size:12px;display:grid;place-items:center}
+.k-vars{margin:0 0 14px}.k-vars small{display:block;font-weight:800;margin-bottom:6px}.k-vars>div{display:flex;flex-wrap:wrap;gap:8px}
+.k-var{border:1.5px solid var(--line,#dfe6e1);background:var(--card,#fff);border-radius:12px;padding:9px 13px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:inherit}.k-var.on{border-color:#1a9e44;background:#eef9f1;color:#0e7a35}.k-var.out{opacity:.5;text-decoration:line-through}
+.k-buyrow{display:grid;grid-template-columns:auto 1fr;gap:10px;margin:6px 0 14px}.k-buyrow .k-buy{grid-column:1/-1}
+.k-qty{display:flex;align-items:center;border:1.5px solid var(--line,#dfe6e1);border-radius:14px;overflow:hidden;height:50px}.k-qty button{width:44px;height:100%;border:0;background:none;font-size:22px;font-weight:800;cursor:pointer;color:#0e7a35}.k-qty b{min-width:30px;text-align:center;font-size:17px}
+.k-add,.k-buy{height:50px;font-size:16px;font-weight:900;border-radius:14px}.k-add[disabled],.k-buy[disabled]{opacity:.45;cursor:not-allowed}
+.k-trust{display:grid;gap:8px;background:#f5faf6;border:1px solid #dcefe2;border-radius:16px;padding:12px 14px;margin-bottom:12px;font-size:14px}.k-trust div{display:flex;gap:10px;align-items:center}
+.k-wa{display:flex;justify-content:center;text-decoration:none;height:46px;align-items:center;border-radius:14px;font-weight:800}
+.k-sec{margin-top:26px;border-top:1px solid var(--line,#e6ece8);padding-top:20px}.k-sec h2{font-size:19px;margin:0 0 12px}.k-sec p{line-height:1.7;margin:0 0 10px;font-size:15px}
+.k-vid{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:18px;background:#000;position:relative;overflow:hidden;padding:0;cursor:pointer}.k-yt img{width:100%;height:100%;object-fit:cover;opacity:.85}.k-yt span{position:absolute;inset:0;margin:auto;width:70px;height:70px;border-radius:50%;background:#ff7a00;color:#fff;font-size:28px;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.k-spec{width:100%!important;min-width:0!important;table-layout:fixed;border-collapse:collapse;font-size:14.5px;overflow-wrap:anywhere}.k-spec th,.k-spec td{text-align:start;padding:10px 12px;border-bottom:1px solid var(--line,#e6ece8)}.k-spec th{width:40%;color:var(--mut,#5d6b62);font-weight:700;background:#f7faf8}
+.k-how{margin:0;padding-inline-start:22px;display:grid;gap:8px;line-height:1.6;font-size:15px}
+.k-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(160px,46%);gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}@media(min-width:900px){.k-row{grid-auto-columns:minmax(200px,23%)}}.k-x .pc{height:100%}
+.k-rsum{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-bottom:14px}.k-rsum>div:first-child{display:flex;flex-direction:column;align-items:center}.k-rsum>div:first-child b{font-size:40px;line-height:1}.k-rsum small{color:var(--mut,#6b7a70);font-size:12px}
+.k-rbs{flex:1;min-width:200px;display:grid;gap:4px}.k-rb{display:grid;grid-template-columns:30px 1fr 26px;gap:8px;align-items:center;font-size:12px}.k-rb i{height:7px;border-radius:9px;background:#eef1ef;overflow:hidden}.k-rb em{display:block;height:100%;background:#ffb400}
+.k-rl{display:grid;gap:10px}.k-r{border:1px solid var(--line,#e6ece8);border-radius:14px;padding:12px}.k-r>div{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px}.k-r p{margin:8px 0 0;font-size:14.5px}.k-vb{color:#1a9e44;font-weight:700}
+.k-rf{display:grid;gap:10px;margin-top:14px;border:1.5px dashed #9bd3ae;border-radius:16px;padding:14px}.k-rf input:not([type=radio]),.k-rf textarea{border:1px solid var(--line,#dfe6e1);border-radius:12px;padding:10px 12px;font:inherit;background:var(--card,#fff);color:inherit}
+.k-rst{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}[dir=rtl] .k-rst{justify-content:flex-start}.k-rst input{display:none}.k-rst label{font-size:30px;color:#d9dfdb;cursor:pointer}.k-rst input:checked~label,.k-rst label:hover,.k-rst label:hover~label{color:#ffb400}
+.k-sticky{display:none}
+@media(max-width:899px){body.k-pg .k-sticky{display:grid;grid-template-columns:auto auto 1fr 1fr;gap:8px;align-items:center;position:fixed;inset-inline:0;bottom:0;z-index:40;background:var(--card,#fff);border-top:1px solid var(--line,#e6ece8);box-shadow:0 -8px 24px rgba(0,0,0,.08);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  body.k-pg .k-sticky .k-sp{display:flex;flex-direction:column;line-height:1.1}.k-sticky .k-sp b{font-size:18px;color:#0e7a35}.k-sticky .k-sp s{font-size:12px;color:#98a39c}
+  body.k-pg .k-sticky .k-qty{height:44px}.k-sticky .k-qty button{width:32px}.k-sticky .k-add,.k-sticky .k-buy{height:44px;font-size:13.5px;padding:0 8px;white-space:nowrap}
+  body.k-pg{padding-bottom:84px}body.k-pg .wa-fab{bottom:96px}body.k-pg #kBuyRow .k-qty{display:flex}}
+@media(max-width:380px){body.k-pg .k-sticky{grid-template-columns:auto 1fr 1fr}.k-sticky .k-qty{display:none}}
+.k-lb{position:fixed;inset:0;z-index:300;background:rgba(10,20,14,.96);display:grid;place-items:center;touch-action:none}.k-lbs{width:100vw;height:100vh;display:grid;place-items:center;overflow:hidden}.k-lbs img{max-width:96vw;max-height:88vh;object-fit:contain;transition:transform .12s;user-select:none;-webkit-user-drag:none;cursor:zoom-in}
+.k-lb button{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:50%;width:46px;height:46px;font-size:24px;cursor:pointer;z-index:2}.k-lbx{top:14px;inset-inline-end:14px}.k-lbp{left:12px;top:50%}.k-lbn{right:12px;top:50%}.k-lbc{position:absolute;bottom:18px;color:#fff;opacity:.8}body.k-lbon{overflow:hidden}
+.k-ban{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;color:#fff;background:linear-gradient(120deg,#0e7a35,#1a9e44 60%,#ff8a1f);border-radius:20px;padding:16px 18px;overflow:hidden}.k-ban small{font-weight:800;font-size:11px;letter-spacing:.06em;opacity:.9}.k-ban b{display:block;font-size:20px;margin:3px 0}.k-ban span{font-weight:800;font-size:14px}
+.k-banp{display:flex}.k-banp i{width:58px;height:58px;border-radius:14px;background:#fff;border:2px solid rgba(255,255,255,.7);margin-inline-start:-14px;overflow:hidden;display:grid;place-items:center;font-size:28px;font-style:normal}.k-banp img{width:100%;height:100%;object-fit:cover}@media(max-width:420px){.k-banp i:nth-child(n+3){display:none}}
+/* admin editor */
+.ke details{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px}.ke summary{font-weight:800;cursor:pointer}.ke details[open] summary{margin-bottom:10px}
+.ke-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ke-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}@media(max-width:520px){.ke-2{grid-template-columns:1fr}}
+.ke textarea{border:1px solid var(--line);border-radius:12px;padding:10px;font:inherit;font-size:14px;background:var(--card);color:var(--fg);resize:vertical;width:100%;box-sizing:border-box}
+.ke-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-bottom:6px}.ke-gi{position:relative;border:2px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:1}.ke-gi:first-child{border-color:#1a9e44}.ke-gi.seo{box-shadow:0 0 0 3px #ff8a1f inset}.ke-gi img{width:100%;height:100%;object-fit:cover}
+.ke-gi div{position:absolute;bottom:0;inset-inline:0;display:flex;justify-content:space-around;background:rgba(0,0,0,.55)}.ke-gi button{border:0;background:none;color:#fff;font-size:14px;padding:4px;cursor:pointer}.ke-gi button[disabled]{opacity:.3}
+.ke-add{position:relative;display:grid;place-items:center;align-content:center;border:2px dashed #9bd3ae;border-radius:12px;aspect-ratio:1;font-size:24px;color:#1a9e44;cursor:pointer}.ke-add span{font-size:12px;font-weight:700}.ke-add input,.ke-vup input{position:absolute;inset:0;opacity:0;cursor:pointer}.ke-vup{position:relative;overflow:hidden;margin-bottom:6px}
+.ke-v{display:grid;grid-template-columns:1fr 1fr 70px 70px 64px auto auto;gap:6px;align-items:center;margin-bottom:8px}.ke-v input{height:40px;border:1px solid var(--line);border-radius:10px;padding:0 8px;font:inherit;min-width:0;background:var(--card);color:var(--fg)}@media(max-width:560px){.ke-v{grid-template-columns:1fr 1fr 1fr}}
+.ke-rel{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.ke-rel button{border:0;background:none;cursor:pointer;color:#c0392b}.ke [data-kreladd]{height:42px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font:inherit;width:100%;background:var(--card);color:var(--fg)}
+.ke-seo{border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Arial,sans-serif}.ke-seo b{color:#1a0dab;display:block;font-size:17px;font-weight:400}.ke-seo span{color:#006621;font-size:13px}.ke-seo p{margin:4px 0 0;font-size:13px;color:#545454}
+.ke-del{margin-top:6px;color:#c0392b}
+.ka-r{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:10px 0}.ka-r.todo{background:#fffaf0}.ka-r p{margin:6px 0 0;font-size:14px}.ka-ra{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -1387,6 +1453,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
     <button data-show="panier" data-t="k7Packs"></button>
     <button data-show="spice" data-t="k7Spice"></button>
     <button data-show="oil" data-t="k7Oil"></button>
+    <button data-kgo=""><span aria-hidden="true">🍳</span> <span class="k-nl">المطبخ</span></button>
     <button data-nav="abo" data-t="navAbo"></button>
   </nav>
   <div class="k7-act">
@@ -1417,6 +1484,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
   </div></div>
 
   <section class="k7-sec"><div class="wrap"><div class="k7-cats" id="k7Cats"></div></div></section>
+  <section class="k7-sec" id="kPromo" hidden></section>
 
   <section class="k7-sec"><div class="wrap k7-2col">
     <div class="k7-cutban">
@@ -1495,6 +1563,7 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
 </div>
 
 <!-- ============ ADMIN (FR) ============ -->
+<div class="view" id="v-cuisine" hidden></div>
 <div class="view" id="v-admin" hidden dir="ltr" lang="fr">
   <div id="adminGate" class="gate" hidden><svg width="70" height="70"><use href="#logo"/></svg><h3>Espace réservé</h3><p>L'espace admin est réservé à l'équipe Khedar48.</p><p class="hint">Connectez-vous avec le compte admin créé dans Supabase.</p><p style="display:flex;gap:8px;justify-content:center"><button class="btn b-gr" data-go="login">Se connecter</button><button class="btn b-gh" data-go="shop">Boutique</button></p></div>
   <div class="adm" id="adminBody">
@@ -1749,6 +1818,12 @@ footer.ft.k7-ft .k7-ft-in{display:grid;align-items:start;justify-content:stretch
           <div class="card"><div class="c-h"><h3>📦 Kg vendus pendant le test</h3><button class="btn b-gh sm" id="tsCsv" type="button">⬇️ Exporter (CSV)</button></div>
             <div class="tbl"><table><thead><tr><th>#</th><th>Produit</th><th>Catégorie</th><th>Vendu seul</th><th>Dans les packs</th><th>Total vendu</th><th>Commandes</th><th>CA (MAD)</th></tr></thead><tbody id="tsRows"></tbody></table></div></div>
           <div class="card"><h3>🧺 Packs vendus pendant le test</h3><div class="tbl" style="margin-top:12px"><table><thead><tr><th>Pack</th><th>Vendus</th><th>CA (MAD)</th></tr></thead><tbody id="tsPk"></tbody></table></div></div>
+        </div>
+        <div data-ap="cuisine" hidden>
+          <div class="pg-h row"><div><h2>🍳 KHEDAR48 CUISINE</h2><p class="hint">Chaque produit a sa propre page : khedar48.com/cuisine/nom-du-produit. Cliquez sur un produit pour changer ses photos, sa vidéo, ses prix, son stock, ses textes et son SEO. Le panier, les commandes et le stock sont communs avec l'épicerie.</p></div><button class="btn b-gr" id="kNew" type="button">➕ Nouveau produit</button></div>
+          <div class="k4" id="kaK"></div>
+          <div class="stc-g" id="kaList"></div>
+          <div class="card" style="margin-top:18px"><div class="c-h"><h3>⭐ Avis clients</h3><span class="hint">Seuls les clients qui ont reçu le produit peuvent écrire un avis. Vous validez avant publication.</span></div><p class="err" id="kaRevErr"></p><div id="kaRev"></div></div>
         </div>
         <div data-ap="settings" hidden>
           <div class="pg-h"><h2>Paramètres</h2></div>
@@ -2400,7 +2475,7 @@ function setQty(id,q){q=Math.max(0,Math.round(q*2)/2);if(q===0)delete cart[id];e
 function addOne(id){const it=byId(id);if(!it||!(+it.p>0))return;const cur=cart[id]||0;setQty(id,cur+(cur===0&&it.u==="kg"?1:STEP[it.u]||1));if(!cur){toast(t("added",nm(it)));track("cart");const cb=$("#cartBar");if(cb){cb.classList.toggle("bump",false);void cb.offsetWidth;cb.classList.add("bump")}pix("cart",pixItems([{it,q:cart[id]||1}]),(+it.p)*(cart[id]||1))}}
 function subOne(id){const it=byId(id);if(!it)return;const cur=cart[id]||0;setQty(id,it.u==="kg"&&cur<=.5?0:cur-(STEP[it.u]||1))}
 function renderBadges(){const n=lines().length;$$("[data-count]").forEach(b=>{b.textContent=n;b.hidden=!n});$$("[data-count2]").forEach(b=>{b.textContent=n});renderCartBar()}
-function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&view==="shop"&&!sheetOpen()&&!/adm-on|cc-on|drv-on|lg-on/.test(document.body.className);
+function renderCartBar(){const bar=$("#cartBar");if(!bar)return;const L=lines(),fr=lang==="fr",on=L.length>0&&(view==="shop"||(view==="cuisine"&&!kRoute.slug))&&!sheetOpen()&&!/adm-on|cc-on|drv-on|lg-on/.test(document.body.className);
   bar.classList.toggle("on",on);bar.setAttribute("aria-hidden",String(!on));bar.inert=!on;document.body.classList.toggle("cbar-on",on);if(!L.length)return;
   const tt=totals(),free=+settings.freeFrom||0,left=Math.max(0,free-(tt.sub-tt.disc));
   $("#cbTh").innerHTML=L.slice(-3).reverse().map(({it})=>{const im=photoOf(it);return `<i style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(it.e||"🥬")}</i>`}).join("");
@@ -2466,14 +2541,15 @@ function initPixels(){
   if(on.ga){window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",P.ga);js("https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(P.ga))}
 }
 const pixItems=L=>L.map(l=>({item_id:l.it.id,item_name:pn(l.it)||l.it.n,quantity:+l.q,price:+l.it.p}));
+let pixCoSig="";function pixCo(){const L=lines(),tt=totals(),sig=L.map(l=>l.it.id+":"+l.q).join(",")+"|"+tt.total;if(!L.length||sig===pixCoSig)return;if(pixOn)pixCoSig=sig;pix("checkout",pixItems(L),tt.total)}
 function pix(ev,items=[],value=0,oid=""){
   if(!pixOn)return;const v=Math.round((+value||0)*100)/100,ids=items.map(i=>i.item_id);
   try{
-    if(pixOn.fb&&window.fbq){const F={cart:"AddToCart",checkout:"InitiateCheckout",purchase:"Purchase"}[ev],d={content_ids:ids,content_type:"product",value:v,currency:"MAD",num_items:items.length};
+    if(pixOn.fb&&window.fbq){const F={view:"ViewContent",cart:"AddToCart",checkout:"InitiateCheckout",purchase:"Purchase"}[ev],d={content_ids:ids,content_type:"product",value:v,currency:"MAD",num_items:items.length};
       oid?fbq("track",F,d,{eventID:oid}):fbq("track",F,d)}
-    if(pixOn.tt&&window.ttq){const T={cart:"AddToCart",checkout:"InitiateCheckout",purchase:"CompletePayment"}[ev];
+    if(pixOn.tt&&window.ttq){const T={view:"ViewContent",cart:"AddToCart",checkout:"InitiateCheckout",purchase:"CompletePayment"}[ev];
       ttq.track(T,{contents:items.map(i=>({content_id:i.item_id,content_name:i.item_name,quantity:i.quantity,price:i.price})),content_type:"product",value:v,currency:"MAD"},oid?{event_id:oid}:{})}
-    if(pixOn.ga&&window.gtag){const G={cart:"add_to_cart",checkout:"begin_checkout",purchase:"purchase"}[ev];gtag("event",G,{currency:"MAD",value:v,items,...(oid?{transaction_id:oid}:{})})}
+    if(pixOn.ga&&window.gtag){const G={view:"view_item",cart:"add_to_cart",checkout:"begin_checkout",purchase:"purchase"}[ev];gtag("event",G,{currency:"MAD",value:v,items,...(oid?{transaction_id:oid}:{})})}
   }catch(e){console.warn(e)}
 }
 /* ---------------- live view: who is on the site right now ----------------
@@ -2543,7 +2619,7 @@ function pcard(p){const im=photoOf(p),off=priced(p)&&+p.old>+p.p?Math.round((1-p
     <div class="pc-f"><span class="pc-p num"><b class="${off?"red":""}">${dh(p.p)}</b>${per?`<small>/${t("kg")}</small>`:""}${off?`<s>${dh(p.old)}</s>`:""}</span>${p.on===false?`<span class="hint">${t("unavailable")}</span>`:stepper(p.id)}</div></article>`}
 const dh=n=>lang==="fr"?`${fmt(n)} DH`:`${fmt(n)} درهم`;
 function renderShop(){
-  const live=products.filter(p=>p.on!==false);
+  const live=products.filter(p=>p.on!==false&&p.c!=="cuisine");
   $("#k7Cats").innerHTML=TILES.filter(c=>!c.hide).map(c=>`<button class="k7-cat" data-show="${c.id}">${c.isNew?`<span class="new">${t("k7New")}</span>`:""}<span class="ph" style="${c.img?`background-image:url('${c.img}')`:`background:linear-gradient(135deg,#f3faf4,#fff3e6)`}">${c.img?"":c.e}</span><span>${c[lang]}</span></button>`).join("");
   $("#packRow").innerHTML=live.filter(p=>p.c==="panier").slice(0,4).map(pcard).join("");renderPlans();
   const pick=(cs)=>{const L=live.filter(p=>cs.includes(p.c));return [...L.filter(p=>+p.old>+p.p),...L.filter(p=>!(+p.old>+p.p))].slice(0,6)};
@@ -2564,7 +2640,7 @@ function renderShop(){
   const S2=soc.filter(([k])=>/^https:\/\//.test(s[k]||""));
   $("#social").innerHTML=S2.map(([k,n,d])=>`<a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24">${d}</svg></a>`).join("");
   $("#noSoc").hidden=!!S2.length;
-  renderHomeTrack();
+  renderHomeTrack();kPromo();
 }
 /* home "Suivre ma commande" card: shows the last order this browser placed or looked up */
 let homeTrack=null;
@@ -2579,7 +2655,7 @@ function goSec(id){const el=$("#"+id);if(el)el.scrollIntoView({behavior:"smooth"
 
 /* ---------------- sheet ---------------- */
 let mode="cart";const sheetOpen=()=>$("#sheet").classList.contains("open");
-function openSheet(m){mode=m;if(m==="checkout"){track("checkout");pix("checkout",pixItems(lines()),totals().total)}(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function openSheet(m){mode=m;if(m==="checkout"){track("checkout");pixCo()}(m==="cart"?renderCart:renderCheckout)();$("#sheet").classList.add("open");$("#scrim").classList.add("open")}
 /* ---------------- monthly subscriptions (abonnements) ----------------
    Plans live in catalog row 'plans' (set by the admin). A customer subscribes without an account;
    the shop delivers the plan's qoffa every week on the chosen day and collects one payment per month. */
@@ -2691,7 +2767,7 @@ function renderCart(){
 function cartWaUrl(){const L=lines(),tt=totals();
   const msg=["السلام عليكم، بغيت نطلب من خضار 48 🌿","",...L.map(l=>`• ${l.it.n} — ${qtyLabel(l.it,l.q)} = ${fmt(l.sum)} د.م`),"",`المجموع: ${fmt(tt.sub)} د.م`,tt.disc?`التخفيض: −${fmt(tt.disc)} د.م`:"",`التوصيل: ${tt.fee?fmt(tt.fee)+" د.م":"فابور"}`,`الإجمالي: ${fmt(tt.total)} د.م`,"","السمية: ","الحومة / العنوان: "].filter(x=>x!=="").join("\n");
   return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`}
-document.addEventListener("click",e=>{if(e.target.closest("#cartWa")){track("wa");pix("checkout",pixItems(lines()),totals().total)}
+document.addEventListener("click",e=>{if(e.target.closest("#cartWa")){track("wa");pixCo()}
   if(e.target.closest("#coEdit")){const F=document.querySelector(".co-fields");if(F){F.hidden=false;$("#coName")?.focus()}e.target.closest(".co-back")?.remove()}
   const q=e.target.closest("[data-quick]");if(q){const id=q.dataset.quick,it=byId(id);if(!it||!priced(it)||it.on===false)return;if(!cart[id])addOne(id);openSheet("checkout")}});
 function renderCheckout(){
@@ -2778,7 +2854,7 @@ function when(t){const d=new Date(t||0);return d.toLocaleDateString("fr-MA",{day
 /* tracking without an account: order number + phone, or the secret link (#t=ID.TOKEN) */
 let tracked=store.get("tracks",[]),trackRes={},trackTimer=null;
 function newToken(){const a=new Uint8Array(9);crypto.getRandomValues(a);return [...a].map(b=>"abcdefghjkmnpqrstuvwxyz23456789"[b%31]).join("")+"k48"}
-const trackUrl=(id,tk)=>`${location.origin}${location.pathname}#t=${encodeURIComponent(id)}.${tk}`;
+const trackUrl=(id,tk)=>`${location.origin}${/^\/cuisine/.test(location.pathname)?"/":location.pathname}#t=${encodeURIComponent(id)}.${tk}`;
 function rememberTrack(id,s){tracked=[{id,s},...tracked.filter(x=>x.id!==id)].slice(0,20);store.set("tracks",tracked)}
 const digits=s=>String(s||"").replace(/\D/g,"");
 async function fetchTrack(id,secret){
@@ -2809,7 +2885,7 @@ function renderMine(){
 /* ---------------- admin (FR) ---------------- */
 const AST={new:"Nouvelle",prep:"En préparation",road:"En livraison",done:"Livrée",cancel:"Annulée"};
 const ACTIVE=["new","prep","road"];
-const CATFR={veg:"Légumes",fruit:"Fruits",herb:"Herbes",exotic:"Exotiques",cut:"Prêt à cuisiner",spice:"Épices",oil:"Huile d'olive",panier:"Paniers",deals:"Promos"};
+const CATFR={veg:"Légumes",fruit:"Fruits",herb:"Herbes",exotic:"Exotiques",cut:"Prêt à cuisiner",spice:"Épices",oil:"Huile d'olive",panier:"Paniers",cuisine:"Cuisine",deals:"Promos"};
 const UFR={kg:"kg",pc:"pcs",bunch:"botte",basket:"panier"};
 const FRN={tomato:"Tomate",potato:"Pomme de terre",onion:"Oignon",carrot:"Carotte",courgette:"Courgette",eggplant:"Aubergine",pepper:"Poivron",chili:"Piment",cucumber:"Concombre",lettuce:"Laitue",garlic:"Ail",peas:"Petits pois",beans:"Fèves",corn:"Maïs",parsley:"Persil",coriander:"Coriandre",mint:"Menthe",ginger:"Gingembre",apple:"Pomme",orange:"Orange",mandarin:"Mandarine",banana:"Banane",grapes:"Raisin",pear:"Poire",strawberry:"Fraise",watermelon:"Pastèque",melon:"Melon",lemon:"Citron",peach:"Pêche",kiwi:"Kiwi",avocado:"Avocat",mango:"Mangue",pineapple:"Ananas",coconut:"Noix de coco","p-fam":"Panier Famille","p-big":"Grand panier","p-prem":"Panier Premium","p-premp":"Panier Premium +","p-veg":"Panier Légumes","p-fruit":"Panier Fruits"};
 const ICON={
@@ -2832,7 +2908,7 @@ const ICON={
  coins:"M12 8c4.4 0 8-1.3 8-3s-3.6-3-8-3-8 1.3-8 3 3.6 3 8 3zM4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6",
  bars:"M5 20v-6M10 20V10M15 20V6M20 20V3",
  eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z"};
-const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["fidel","Fidélité","star"],["drivers","Livreurs","bike"],["products","Produits","basket"],["achats","Achats & prix","coins"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["settings","Paramètres","gear"],["test","🧪 Période test","chart"]];
+const NAV=[["dash","Tableau de bord","home"],["traffic","Trafic","eye"],["orders","Commandes","orders"],["clients","Clients","users"],["fidel","Fidélité","star"],["drivers","Livreurs","bike"],["products","Produits","basket"],["achats","Achats & prix","coins"],["stock","Stock","box"],["promos","Promotions","tag"],["cats","Catégories","layers"],["reports","Rapports","chart"],["finance","Finances","wallet"],["compta","Comptabilité","coins"],["packs","Packs","basket"],["abo","Abonnements","layers"],["cc","Call center","users"],["cuisine","🍳 Cuisine","basket"],["settings","Paramètres","gear"],["test","🧪 Période test","chart"]];
 let aPer=store.get("aPer","1"),chartPer="7",aQ="",topCat="all",topSort="c";
 const ic=(k,c="i")=>`<svg viewBox="0 0 24 24" class="${c}" aria-hidden="true"><path d="${ICON[k]}"/></svg>`;
 const mad=n=>`${fmt(n)} MAD`;
@@ -3130,7 +3206,7 @@ const FD_B=[["1","1 commande","🌱",c=>c.n===1],["2","2 commandes","🙂",c=>c.
 /* Achats & prix: one big table to edit names, purchase price, selling price and availability */
 let xaQ="",xaCat="all",xaF="all";
 const XA_F={all:["Tous",()=>true],on:["✅ Actifs",p=>p.on!==false],off:["⛔ Désactivés",p=>p.on===false],nocost:["Sans prix d'achat",p=>!(+p.cost>0)],loss:["🔴 À perte",p=>+p.cost>0&&+p.p>0&&+p.cost>+p.p]};
-const XA_CATS=[["veg","🥬"],["fruit","🍎"],["herb","🌿"],["exotic","🥭"],["cut","🔪"],["spice","🌶️"],["oil","🫒"],["panier","🧺"]];
+const XA_CATS=[["veg","🥬"],["fruit","🍎"],["herb","🌿"],["exotic","🥭"],["cut","🔪"],["spice","🌶️"],["oil","🫒"],["cuisine","🍳"],["panier","🧺"]];
 A.achats=()=>{const P=products;
   const qIn=p=>typeof p.sIn==="number"?p.sIn:typeof p.stock==="number"?p.stock:0,qLeft=p=>typeof p.stock==="number"?Math.max(0,p.stock):0;
   const capOf=p=>r2((+p.cost||0)*qIn(p)),S0=P.filter(p=>p.c!=="panier"&&qIn(p)>0),noC=S0.filter(p=>!(+p.cost>0));
@@ -3989,11 +4065,11 @@ function ccRender0(){
 function renderAll(){renderShop();renderBadges();$$("[data-staff]").forEach(b=>b.hidden=b.dataset.staff==="admin"?!staff:!isTeam());setSync(cloud?sync:"local");
   $("#teamLink").textContent=isTeam()&&cloud?tr("teamOut"):tr("team");if(MAIN_HOST)$("#teamLink").closest("li").hidden=!isTeam();
   $$("[data-cloud]").forEach(x=>x.hidden=!cloud);$("#lgDemo").hidden=cloud;$("#meMail").textContent=userEmail||"Super Admin";
-  if(view==="orders")renderMine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(view==="cc")ccRender();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
-function show(v){if(TEAM_HOST&&v==="shop"&&!isTeam()&&view==="login"){location.href="https://www.khedar48.com/";return}if(TEAM_HOST&&v==="shop"&&isTeam()&&view!=="login"){window.open("https://www.khedar48.com/","_blank","noopener");return}if(TEAM_HOST&&(v==="shop"||v==="orders"))v=route("");if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login","cc"].includes(v))v="shop";if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
+  if(view==="orders")renderMine();if(view==="cuisine")renderCuisine();if(view==="admin")renderAdmin();if(view==="driver")renderDriver();if(view==="cc")ccRender();if(typeof renderAppBtns==="function"&&(view==="admin"||view==="driver"))renderAppBtns();if(sheetOpen()&&mode==="cart")renderCart()}
+function show(v){if(TEAM_HOST&&v==="shop"&&!isTeam()&&view==="login"){location.href="https://www.khedar48.com/";return}if(TEAM_HOST&&v==="shop"&&isTeam()&&view!=="login"){window.open("https://www.khedar48.com/","_blank","noopener");return}if(TEAM_HOST&&(v==="shop"||v==="orders"))v=route("");if(/^t=/.test(v||""))v="orders";if(!["shop","orders","admin","driver","login","cc","cuisine"].includes(v))v="shop";if(v!=="cuisine")document.body.classList.remove("k-pg");if(v==="orders")startTracking();view=v;queueMicrotask(renderCartBar);$$(".view").forEach(x=>x.hidden=x.id!=="v-"+v);
   document.body.classList.toggle("adm-on",v==="admin");document.body.classList.toggle("lg-on",v==="login");document.body.classList.toggle("drv-on",v==="driver");document.body.classList.toggle("cc-on",v==="cc");sideOpen(false);if(sheetOpen())closeSheet();
   $$("nav.tabs [data-go]").forEach(b=>b.dataset.go===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
-  applyLang();renderAll();window.scrollTo({top:0});try{history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}catch(e){}}
+  applyLang();renderAll();window.scrollTo({top:0});try{if(v!=="cuisine"){if(kFromPath()){kBase(false);kSeo(null);history.replaceState(null,"",v==="shop"?"/":"/#"+v)}else history.replaceState(null,"",v==="shop"?location.pathname+location.search:"#"+v)}}catch(e){}}
 const failMsg=()=>view==="admin"?"Échec de l'enregistrement, réessayez":"ماتسجلش التغيير، عاود جرب";
 
 /* ---------- abandoned checkouts ("paniers abandonnés"): saved once name + valid phone are typed ---------- */
@@ -4327,8 +4403,271 @@ $("#trkForm").addEventListener("submit",async e=>{e.preventDefault();const E=$("
   try{const o=await fetchTrack(id,ph);if(!o){E.textContent=tr("trackNo");return}rememberTrack(o.id,ph);trackRes[o.id]=o;renderMine();e.target.reset()}
   catch(err){console.warn(err);E.textContent=tr("eSave").split(".")[0]}finally{b.disabled=false}});
 
+/* ================= KHEDAR48 CUISINE: kitchen department, one page per product at /cuisine/<slug> =================
+   Kitchen products live in the same catalog as the groceries (c:"cuisine", u:"pc"), so cart, checkout, stock and orders are shared.
+   Variants are separate catalog items linked to their parent (par), so each one has its own price, stock and cart line. */
+const KC="cuisine";
+const kParents=()=>products.filter(p=>p.c===KC&&!p.par);
+const kKids=id=>products.filter(p=>p.c===KC&&p.par===id);
+const kSlug=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70);
+const kT=o=>o&&typeof o==="object"?(lang==="fr"?(o.fr||o.ar||""):(o.ar||o.fr||"")):String(o||"");
+const kFr=()=>lang==="fr";
+const kOff=p=>+p.old>+p.p&&+p.p>0?Math.round((1-p.p/p.old)*100):0;
+const kStk=p=>typeof p.stock==="number"?p.stock:null;
+const kLines=s=>String(s||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+let kRoute={slug:""},kVar="",kQty=1,kViewed=new Set(),kRev={},kRevMine=store.get("kRevDone",[]),kGi=0;
+let kSeo0=/^\/cuisine/.test(location.pathname)?{t:"خضار 48 · Khedar48 — الخضرة والفواكه حتى لباب دارك فوجدة",d:"خضار 48: توصيل الخضرة والفواكه الطرية فوجدة فنفس النهار. اطلب من التطبيق وخلّص عند الاستلام.",ot:"خضار 48 · Khedar48",od:"الخضرة والفواكه الطرية حتى لباب دارك فوجدة",oi:"img/hero.jpg"}:null;
+function kGal(p){return [...new Set([photoOf(p),...(Array.isArray(p.gal)?p.gal:[])].map(safeImg).filter(Boolean))]}
+function kAvail(p){const s=kStk(p),fr=kFr();
+  if(p.on===false||s===0||!(+p.p>0))return {ok:false,c:"out",t:fr?"Rupture de stock":"نفد من المخزون"};
+  if(s!==null&&s<=5)return {ok:true,c:"low",t:fr?`Plus que ${s} en stock`:`باقي غير ${s} فالمخزون`};
+  return {ok:true,c:"in",t:fr?"En stock · prêt à livrer":"متوفر · واجد للتوصيل"}}
+function kStars(r){const n=Math.round((+r||0)*2)/2;return `<span class="k-stars" aria-label="${n}/5">${[1,2,3,4,5].map(i=>`<i class="${n>=i?"f":n>=i-.5?"h":""}">★</i>`).join("")}</span>`}
+/* the page sits at /cuisine/…: a <base href="/"> keeps every relative link (img/…, sw.js, supabase-config.js) pointing at the site root */
+function kBase(on){let b=document.querySelector("base");if(on&&!b){b=document.createElement("base");b.href="/";document.head.prepend(b)}else if(!on&&b)b.remove()}
+function kFromPath(){const m=/^\/cuisine(?:\/([a-z0-9-]+))?\/?$/.exec(location.pathname);return m?{slug:m[1]||""}:null}
+function kGo(slug,push=true){kBase(true);const url="/cuisine"+(slug?"/"+slug:"");if(push&&location.pathname!==url)history.pushState({k:slug},"",url);
+  kRoute={slug};kVar="";kQty=1;kGi=0;if(view!=="cuisine")show("cuisine");else{if(sheetOpen())closeSheet();renderCuisine();window.scrollTo({top:0})}}
+window.addEventListener("popstate",()=>{const r=kFromPath();if(r)kGo(r.slug,false);else if(view==="cuisine"){kBase(false);show(route(location.hash.slice(1))||"shop")}});
+/* SEO for the page in the browser (crawlers get the same tags from /api/cuisine on the server) */
+function kMeta(sel,attr,val){let m=document.head.querySelector(sel);if(!m){m=document.createElement(sel.startsWith("link")?"link":"meta");const k=/\[(\w+)="([^"]+)"\]/.exec(sel);m.setAttribute(k[1],k[2]);document.head.appendChild(m)}m.setAttribute(attr,val)}
+function kSeo(s){const H=document.head;
+  if(!kSeo0)kSeo0={t:document.title,d:H.querySelector('meta[name="description"]')?.content||"",ot:H.querySelector('meta[property="og:title"]')?.content||"",od:H.querySelector('meta[property="og:description"]')?.content||"",oi:H.querySelector('meta[property="og:image"]')?.content||""};
+  const v=s||{t:kSeo0.t,d:kSeo0.d,ot:kSeo0.ot,od:kSeo0.od,oi:kSeo0.oi};
+  document.title=v.t;kMeta('meta[name="description"]',"content",v.d);kMeta('meta[property="og:title"]',"content",v.ot||v.t);kMeta('meta[property="og:description"]',"content",v.od||v.d);if(v.oi)kMeta('meta[property="og:image"]',"content",v.oi);
+  const c=H.querySelector('link[rel="canonical"]');if(s&&s.url)kMeta('link[rel="canonical"]',"href",s.url);else if(c&&!s)c.remove();
+  const L=$("#kLd");if(s&&s.ld){const x=L||Object.assign(document.createElement("script"),{type:"application/ld+json",id:"kLd"});x.textContent=JSON.stringify(s.ld);if(!L)H.appendChild(x)}else if(L)L.remove()}
+function kAbs(u){try{return new URL(u,location.origin+"/").href}catch(e){return ""}}
+/* ---------- department page ---------- */
+function kCard(p){const im=photoOf(p),off=kOff(p),R=kRev[p.id]||kRevS[p.id],a=kAvail(p);
+  return `<a class="k-card ${a.ok?"":"out"}" href="/cuisine/${esc(p.slug)}" data-kp="${esc(p.slug)}"><span class="k-ci">${im?`<img src="${esc(im)}" alt="${esc(nm(p))}" loading="lazy">`:`<b>${esc(p.e||"🍳")}</b>`}${off?`<em class="k-off num">-${off}%</em>`:""}${a.ok?"":`<em class="k-so">${esc(a.t)}</em>`}</span>
+    <span class="k-cn">${esc(nm(p))}</span>${R&&R.n?`<span class="k-cr">${kStars(R.avg)} <small class="num">(${R.n})</small></span>`:""}
+    <span class="k-cp num"><b class="${off?"red":""}">${dh(p.p)}</b>${off?`<s>${dh(p.old)}</s>`:""}</span></a>`}
+function kCrumb(P){const fr=kFr();return `<nav class="k-crumb" aria-label="${fr?"Fil d'Ariane":"المسار"}"><button type="button" class="lnk" data-go="shop">${fr?"Accueil":"الرئيسية"}</button><span>›</span>${P?`<a href="/cuisine" data-kgo="">${fr?"Cuisine":"المطبخ"}</a><span>›</span><b>${esc(nm(P))}</b>`:`<b>${fr?"Cuisine":"المطبخ"}</b>`}</nav>`}
+function renderCuisine(){const R=$("#v-cuisine");if(!R)return;const fr=kFr();document.body.classList.remove("k-pg");queueMicrotask(renderCartBar);
+  if(kRoute.slug){const P=kParents().find(p=>p.slug===kRoute.slug);if(P)return kPage(R,P);if(products.some(p=>p.c===KC))toast(fr?"Produit introuvable":"هاد المنتوج ما كاينش")}
+  const L=kParents().filter(p=>p.on!==false);kRevAll();
+  kSeo({t:fr?"Accessoires de cuisine à Oujda · KHEDAR48 CUISINE":"أدوات المطبخ فوجدة · خضار 48 المطبخ",d:fr?"Accessoires de cuisine pratiques livrés à Oujda, paiement à la livraison.":"أدوات المطبخ العملية مع التوصيل فوجدة، والخلاص عند الاستلام.",url:location.origin+"/cuisine"});
+  R.innerHTML=`<div class="wrap k-wrap">${kCrumb()}
+    <section class="k-hero"><div><small>KHEDAR48 CUISINE</small><h1>${fr?"Tout pour une cuisine plus simple":"كلشي باش تولي الكوزينة ساهلة"}</h1><p>${fr?"Livraison à Oujda · Paiement à la livraison · Confirmation par téléphone":"التوصيل فوجدة · الخلاص عند الاستلام · التأكيد فالتيليفون"}</p></div><span aria-hidden="true">🍳</span></section>
+    <div class="k-grid">${L.map(kCard).join("")||`<div class="empty"><div class="big">🍳</div><p>${fr?"Nos accessoires de cuisine arrivent bientôt.":"أدوات المطبخ جايين قريب."}</p></div>`}</div></div>`}
+/* ---------- product page ---------- */
+function kCur(P){const K=kKids(P.id).filter(k=>k.on!==false);return K.find(k=>k.id===kVar)||P}
+function kVid(u){u=String(u||"").trim();if(!/^https:\/\//.test(u))return "";const y=/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/.exec(u);
+  if(y)return `<button type="button" class="k-vid k-yt" data-yt="${y[1]}" aria-label="Vidéo"><img src="https://i.ytimg.com/vi/${y[1]}/hqdefault.jpg" alt="" loading="lazy"><span>▶</span></button>`;
+  return `<video class="k-vid" src="${esc(u)}" controls playsinline preload="metadata"></video>`}
+function kPage(R,P){document.body.classList.add("k-pg");const fr=kFr(),cur=kCur(P),K=kKids(P.id).filter(k=>k.on!==false),G=kGal(P),a=kAvail(cur),off=kOff(cur),RV=kRev[P.id],s=settings;
+  if(kGi>=G.length)kGi=0;const mx=kStk(cur);if(mx!==null&&kQty>Math.max(1,mx))kQty=Math.max(1,mx);
+  const ben=kLines(kT(P.ben)),spec=kLines(kT(P.spec)).map(l=>{const i=l.indexOf(":");return i>0?[l.slice(0,i).trim(),l.slice(i+1).trim()]:["",l]}),how=kLines(kT(P.how)),ds=kLines(kT(P.ds));
+  const url=`${location.origin}/cuisine/${P.slug}`,wa=`https://wa.me/${WA}?text=${encodeURIComponent(`السلام عليكم، عندي سؤال على: ${P.n}${cur!==P?` (${kT(cur.vn)})`:""}\n${url}`)}`;
+  const seo=P.seo||{},img=kAbs(safeImg(seo.img)||G[0]||"img/hero.jpg");
+  kSeo({t:seo.t||`${pn(P)||P.n} · KHEDAR48 CUISINE`,d:seo.d||kT(P.sh)||pn(P),oi:img,url,ld:{"@context":"https://schema.org","@type":"Product",name:pn(P)||P.n,image:G.map(kAbs),description:seo.d||kT(P.sh)||"",sku:P.id,brand:{"@type":"Brand",name:"Khedar48"},
+    offers:{"@type":"Offer",url,priceCurrency:"MAD",price:+cur.p||0,availability:a.ok?"https://schema.org/InStock":"https://schema.org/OutOfStock"},...(RV&&RV.n?{aggregateRating:{"@type":"AggregateRating",ratingValue:RV.avg,reviewCount:RV.n}}:{})}});
+  const rel=kParents().filter(p=>p.id!==P.id&&p.on!==false).slice(0,8),cross=(Array.isArray(P.rel)?P.rel:[]).map(byId).filter(p=>p&&p.on!==false&&+p.p>0&&p.id!==P.id);
+  const opt=k=>`<button type="button" class="k-var ${k.id===cur.id?"on":""} ${kAvail(k).ok?"":"out"}" data-kvar="${esc(k.id)}">${esc(kT(k.vn)||(fr?"Standard":"عادي"))}${+k.p!==+P.p?` · <span class="num">${dh(k.p)}</span>`:""}</button>`;
+  const buy=(sh)=>`<div class="k-qty"><button type="button" data-kq="-1" aria-label="−">−</button><b class="num">${kQty}</b><button type="button" data-kq="1" aria-label="+">+</button></div>
+      <button type="button" class="btn b-gr k-add" data-kadd ${a.ok?"":"disabled"}>🛒 ${sh?(fr?"Panier":"السلة"):(fr?"Ajouter au panier":"زيد للسلة")}</button><button type="button" class="btn b-or k-buy" data-kbuy ${a.ok?"":"disabled"}>⚡ ${sh?(fr?"Acheter":"شري"):(fr?"Acheter maintenant":"شري دابا")}</button>`;
+  R.innerHTML=`<div class="wrap k-wrap">${kCrumb(P)}
+  <div class="k-top">
+    <div class="k-media">
+      <div class="k-gal" id="kGal">${G.map((u,i)=>`<button type="button" class="k-gi" data-kz="${i}" aria-label="Zoom"><img src="${esc(u)}" alt="${esc(nm(P))} ${i+1}" ${i?'loading="lazy"':""}></button>`).join("")||`<div class="k-gi k-ge">${esc(P.e||"🍳")}</div>`}</div>
+      ${G.length>1?`<div class="k-dots" id="kDots">${G.map((_,i)=>`<i class="${i===kGi?"on":""}"></i>`).join("")}</div><div class="k-thumbs">${G.map((u,i)=>`<button type="button" data-kth="${i}" class="${i===kGi?"on":""}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}
+      ${off?`<em class="k-off big num">-${off}%</em>`:""}
+    </div>
+    <div class="k-info">
+      <h1 class="k-h">${esc(nm(P))}</h1>
+      ${RV&&RV.n?`<a href="#kRev" class="k-rs" data-kscroll="kRev">${kStars(RV.avg)} <b class="num">${RV.avg}</b> <small>(${RV.n} ${fr?"avis":"رأي"})</small></a>`:""}
+      <div class="k-price num"><b class="${off?"red":""}">${dh(cur.p)}</b>${off?`<s>${dh(cur.old)}</s><span class="k-save">${fr?"Économisez":"وفّر"} ${dh(cur.old-cur.p)}</span>`:""}</div>
+      <p class="k-av ${a.c}">● ${esc(a.t)}</p>
+      ${kT(P.sh)?`<p class="k-sh">${esc(kT(P.sh))}</p>`:""}
+      ${ben.length?`<ul class="k-ben">${ben.map(b=>`<li>${esc(b)}</li>`).join("")}</ul>`:""}
+      ${K.length?`<div class="k-vars"><small>${fr?"Choisissez :":"ختار:"}</small><div>${[P,...K].map(opt).join("")}</div></div>`:""}
+      <div class="k-buyrow" id="kBuyRow">${buy(0)}</div>
+      <div class="k-trust"><div>🚚 <span>${fr?`Livraison à Oujda : ${dh(s.fee)} · gratuite dès ${dh(s.freeFrom)}`:`التوصيل فوجدة: ${dh(s.fee)} · فابور من ${dh(s.freeFrom)}`}</span></div><div>💵 <span>${fr?"Paiement à la livraison (cash)":"الخلاص عند الاستلام (كاش)"}</span></div><div>📞 <span>${fr?"Confirmation par téléphone avant l'envoi":"كنعيطو ليك نأكدو قبل ما نصيفطو"}</span></div></div>
+      <a class="btn b-wa k-wa" href="${esc(wa)}" target="_blank" rel="noopener">💬 ${fr?"Une question ? WhatsApp":"عندك سؤال؟ واتساب"}</a>
+    </div>
+  </div>
+  ${kVid(P.vid)?`<section class="k-sec"><h2>🎬 ${fr?"Vidéo de démonstration":"فيديو كيفاش كيخدم"}</h2>${kVid(P.vid)}</section>`:""}
+  ${ds.length?`<section class="k-sec"><h2>📝 ${fr?"Description":"الوصف"}</h2>${ds.map(x=>`<p>${esc(x)}</p>`).join("")}</section>`:""}
+  ${spec.length?`<section class="k-sec"><h2>📐 ${fr?"Caractéristiques":"المميزات التقنية"}</h2><table class="k-spec">${spec.map(([k,v])=>`<tr>${k?`<th>${esc(k)}</th>`:""}<td ${k?"":'colspan="2"'}>${esc(v)}</td></tr>`).join("")}</table></section>`:""}
+  ${how.length?`<section class="k-sec"><h2>🧑‍🍳 ${fr?"Mode d'emploi":"طريقة الاستعمال"}</h2><ol class="k-how">${how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></section>`:""}
+  ${cross.length?`<section class="k-sec"><h2>🧺 ${fr?"Souvent achetés ensemble":"كيتشراو مع بعض"}</h2><div class="k-row">${cross.map(p=>p.c===KC?kCard(p.par?byId(p.par)||p:p):`<div class="k-x">${pcard(p)}</div>`).join("")}</div></section>`:""}
+  <section class="k-sec" id="kRev"><h2>⭐ ${fr?"Avis clients":"آراء الزبناء"}</h2><div id="kRevBox">${kRevHtml(P)}</div></section>
+  ${rel.length?`<section class="k-sec"><h2>✨ ${fr?"Vous aimerez aussi":"غادي يعجبك حتى"}</h2><div class="k-row">${rel.map(kCard).join("")}</div></section>`:""}
+  </div>
+  <div class="k-sticky" id="kSticky"><div class="k-sp num"><b>${dh(cur.p)}</b>${off?`<s>${dh(cur.old)}</s>`:""}</div>${buy(1)}</div>`;
+  kGalWire();kLoadRev(P.id);
+  if(pixOn&&!kViewed.has(cur.id)){kViewed.add(cur.id);pix("view",[{item_id:cur.id,item_name:pn(cur)||cur.n,quantity:1,price:+cur.p}],+cur.p)}}
+function kGalWire(){const g=$("#kGal");if(!g)return;if(kGi)g.scrollTo({left:(document.dir==="rtl"?-1:1)*kGi*g.clientWidth});
+  g.addEventListener("scroll",()=>{const i=Math.round(Math.abs(g.scrollLeft)/Math.max(1,g.clientWidth));if(i!==kGi){kGi=i;$$("#kDots i").forEach((d,j)=>d.classList.toggle("on",j===i));$$(".k-thumbs button").forEach((d,j)=>d.classList.toggle("on",j===i))}},{passive:true})}
+/* ---------- add to cart / buy now (AddToCart fired once per real addition, InitiateCheckout by the checkout itself) ---------- */
+function kAdd(buy){const P=kParents().find(p=>p.slug===kRoute.slug);if(!P)return;const cur=kCur(P),fr=kFr();if(!kAvail(cur).ok){toast(kAvail(cur).t);return}
+  const before=cart[cur.id]||0,mx=kStk(cur);let n=buy?Math.max(before,kQty):before+kQty;if(mx!==null)n=Math.min(n,mx);const added=n-before;
+  if(added<=0&&!buy){toast(fr?"Quantité maximale déjà dans le panier":"الكمية القصوى ديجا فالسلة");return}
+  if(added>0){setQty(cur.id,n);track("cart");pix("cart",[{item_id:cur.id,item_name:pn(cur)||cur.n,quantity:added,price:+cur.p}],+cur.p*added)}
+  if(buy)openSheet("checkout");else{toast(fr?`✓ Ajouté au panier (${n})`:`✓ تزاد للسلة (${n})`);renderCartBar()}}
+/* ---------- gallery zoom (tap = open, double tap / pinch = zoom, drag = move, swipe = next) ---------- */
+let kLb=null;
+function kZoom(i){const P=kParents().find(p=>p.slug===kRoute.slug);if(!P)return;const G=kGal(P);if(!G.length)return;
+  const el=document.createElement("div");el.className="k-lb";el.setAttribute("role","dialog");el.innerHTML=`<button type="button" class="k-lbx" aria-label="Fermer">✕</button>${G.length>1?`<button type="button" class="k-lbp" data-d="-1" aria-label="‹">‹</button><button type="button" class="k-lbn" data-d="1" aria-label="›">›</button>`:""}<div class="k-lbs"><img alt=""></div><small class="k-lbc num"></small>`;
+  document.body.appendChild(el);document.body.classList.add("k-lbon");const img=el.querySelector("img"),st={i,s:1,x:0,y:0};
+  const draw=()=>{img.style.transform=`translate(${st.x}px,${st.y}px) scale(${st.s})`};
+  const go=i=>{st.i=(i+G.length)%G.length;st.s=1;st.x=st.y=0;img.src=G[st.i];el.querySelector(".k-lbc").textContent=`${st.i+1} / ${G.length}`;draw()};
+  const close=()=>{el.remove();document.body.classList.remove("k-lbon");kLb=null;document.removeEventListener("keydown",key)};
+  const key=e=>{if(e.key==="Escape")close();if(e.key==="ArrowRight")go(st.i+1);if(e.key==="ArrowLeft")go(st.i-1)};document.addEventListener("keydown",key);
+  el.addEventListener("click",e=>{if(e.target.closest(".k-lbx")||e.target===el)close();const d=e.target.closest("[data-d]");if(d)go(st.i+ +d.dataset.d)});
+  const toggle=(cx,cy)=>{if(st.s>1){st.s=1;st.x=st.y=0}else{const r=img.getBoundingClientRect();st.s=2.5;st.x=(r.left+r.width/2-cx)*1.5;st.y=(r.top+r.height/2-cy)*1.5}draw()};
+  img.addEventListener("dblclick",e=>toggle(e.clientX,e.clientY));
+  let t0=null,lastTap=0;
+  img.addEventListener("touchstart",e=>{const T=e.touches;if(T.length===2){t0={d:Math.hypot(T[0].clientX-T[1].clientX,T[0].clientY-T[1].clientY),s:st.s}}else{const now=Date.now();if(now-lastTap<300){toggle(T[0].clientX,T[0].clientY);lastTap=0;t0=null;return}lastTap=now;t0={x:T[0].clientX,y:T[0].clientY,ox:st.x,oy:st.y}}},{passive:true});
+  img.addEventListener("touchmove",e=>{if(!t0)return;const T=e.touches;e.preventDefault();
+    if(T.length===2&&t0.d){st.s=Math.min(4,Math.max(1,t0.s*Math.hypot(T[0].clientX-T[1].clientX,T[0].clientY-T[1].clientY)/t0.d));if(st.s===1){st.x=st.y=0}draw()}
+    else if(T.length===1&&t0.x!==undefined&&st.s>1){st.x=t0.ox+T[0].clientX-t0.x;st.y=t0.oy+T[0].clientY-t0.y;draw()}},{passive:false});
+  img.addEventListener("touchend",e=>{if(t0&&t0.x!==undefined&&st.s===1&&e.changedTouches[0]){const dx=e.changedTouches[0].clientX-t0.x;if(Math.abs(dx)>50)go(st.i+(dx<0?1:-1))}if(!e.touches.length)t0=null});
+  kLb=el;go(i)}
+/* ---------- reviews: only customers who received the product can write one; the admin approves before it shows ---------- */
+function kRevSum(L){const n=L.length,avg=n?Math.round(L.reduce((a,r)=>a+r.rating,0)/n*10)/10:0;return {n,avg,L}}
+async function kLoadRev(pid,force){if(kRev[pid]&&!force)return;try{let L;
+    if(cloud){const {data,error}=await SB.from("reviews").select("id,name,rating,body,at").eq("pid",pid).eq("ok",true).order("at",{ascending:false}).limit(60);if(error)throw error;L=data||[]}
+    else L=store.get("rev:"+pid,[]).filter(r=>r.ok);
+    kRev[pid]=kRevSum(L);if(view==="cuisine"){const P=kParents().find(p=>p.slug===kRoute.slug);if(P&&P.id===pid){const B=$("#kRevBox");if(B)B.innerHTML=kRevHtml(P)}else if(!kRoute.slug)renderCuisine()}}catch(e){console.warn(e);kRev[pid]=kRevSum([])}}
+let kRevAllT=0,kRevS={};function kRevAll(){if(Date.now()-kRevAllT<6e4)return;kRevAllT=Date.now();
+  (async()=>{try{let L;if(cloud){const {data,error}=await SB.from("reviews").select("pid,rating").eq("ok",true).limit(2000);if(error)throw error;L=data||[]}else L=kParents().flatMap(p=>store.get("rev:"+p.id,[]).filter(r=>r.ok).map(r=>({pid:p.id,rating:r.rating})));
+    const by={};L.forEach(r=>(by[r.pid]=by[r.pid]||[]).push(r));let ch=false;kParents().forEach(p=>{const S=kRevSum(by[p.id]||[]);if(!kRevS[p.id]||kRevS[p.id].n!==S.n||kRevS[p.id].avg!==S.avg){kRevS[p.id]=S;ch=true}});if(ch&&view==="cuisine"&&!kRoute.slug)renderCuisine()}catch(e){console.warn(e)}})()}
+function kBought(P){const ids=new Set([P.id,...kKids(P.id).map(k=>k.id)]);return (myOrders||[]).some(o=>o.status==="done"&&(o.items||[]).some(([id])=>ids.has(id)))}
+function kRevHtml(P){const fr=kFr(),R=kRev[P.id];if(!R)return `<p class="hint">${fr?"Chargement des avis…":"كنجيبو الآراء…"}</p>`;
+  const bars=[5,4,3,2,1].map(s=>{const c=R.L.filter(r=>r.rating===s).length;return `<div class="k-rb"><span class="num">${s}★</span><i><em style="width:${R.n?c/R.n*100:0}%"></em></i><small class="num">${c}</small></div>`}).join("");
+  const done=kRevMine.includes(P.id),can=kBought(P)&&!done,pf=store.get("profile",{});
+  return `${R.n?`<div class="k-rsum"><div><b class="num">${R.avg}</b>${kStars(R.avg)}<small>${R.n} ${fr?"avis vérifiés":"رأي مؤكد"}</small></div><div class="k-rbs">${bars}</div></div>`:`<p class="hint">${fr?"Pas encore d'avis sur ce produit.":"مازال ما كاين حتى رأي على هاد المنتوج."}</p>`}
+    <div class="k-rl">${R.L.slice(0,20).map(r=>`<div class="k-r"><div>${kStars(r.rating)} <b>${esc(r.name)}</b> <small class="k-vb">✔ ${fr?"Achat vérifié":"شرا مؤكد"}</small><small class="num">${new Date(r.at).toLocaleDateString(fr?"fr-FR":"ar-MA")}</small></div>${r.body?`<p>${esc(r.body)}</p>`:""}</div>`).join("")}</div>
+    ${can?`<form class="k-rf" id="kRevF"><b>${fr?"Donnez votre avis":"عطينا رأيك"}</b><div class="k-rst">${[5,4,3,2,1].map(s=>`<input type="radio" name="kr" id="kr${s}" value="${s}" ${s===5?"checked":""}><label for="kr${s}" title="${s}">★</label>`).join("")}</div>
+      <input id="kRn" maxlength="40" placeholder="${fr?"Votre prénom":"سميتك"}" value="${esc(String(pf.name||"").split(" ")[0])}"><textarea id="kRb" maxlength="800" rows="3" placeholder="${fr?"Votre expérience avec ce produit":"التجربة ديالك مع هاد المنتوج"}"></textarea>
+      <button class="btn b-gr" data-krev="${esc(P.id)}" type="button">${fr?"Envoyer mon avis":"صيفط رأيي"}</button></form>`
+      :done?`<p class="hint">✅ ${fr?"Merci pour votre avis ! Il apparaît ici après vérification.":"شكرا على رأيك! كيبان هنا من بعد المراجعة."}</p>`
+      :`<p class="hint">✍️ ${fr?"Les avis sont réservés aux clients qui ont reçu ce produit.":"الآراء غير للزبناء اللي توصلو بهاد المنتوج."}</p>`}`}
+async function kSendRev(pid,b){const fr=kFr(),name=$("#kRn").value.trim().slice(0,40),body=$("#kRb").value.trim().slice(0,800),rating=+(document.querySelector('input[name="kr"]:checked')?.value||5);
+  if(!name){toast(fr?"Écrivez votre prénom":"كتب سميتك");$("#kRn").focus();return}b.disabled=true;
+  try{if(cloud){if(!uid)throw new Error("no-auth");ok(await SB.from("reviews").insert({pid,name,rating,body}))}
+    else{const L=store.get("rev:"+pid,[]);L.unshift({id:Date.now(),pid,name,rating,body,at:new Date().toISOString(),ok:false});store.set("rev:"+pid,L)}
+    kRevMine=[...kRevMine,pid];store.set("kRevDone",kRevMine);const P=byId(pid);if(P)$("#kRevBox").innerHTML=kRevHtml(P);toast(fr?"Merci pour votre avis ✓":"شكرا على رأيك ✓")}
+  catch(e){console.warn(e);b.disabled=false;toast(fr?"Avis non envoyé. Réessayez.":"ما تصيفطش الرأي، عاود جرب")}}
+/* ---------- shop entry: banner + menu link ---------- */
+function kPromo(){const B=$("#kPromo");if(!B)return;const fr=kFr(),L=kParents().filter(p=>p.on!==false&&+p.p>0);$$("[data-kgo] .k-nl").forEach(x=>x.textContent=fr?"Cuisine":"المطبخ");
+  B.hidden=!L.length;if(!L.length)return;
+  B.innerHTML=`<div class="wrap"><a class="k-ban" href="/cuisine" data-kgo=""><div><small>KHEDAR48 CUISINE · ${fr?"Nouveau":"جديد"}</small><b>${fr?"Accessoires de cuisine":"أدوات المطبخ"}</b><span>${fr?"Découvrir →":"اكتشف ←"}</span></div><div class="k-banp">${L.slice(0,4).map(p=>{const im=photoOf(p);return `<i>${im?`<img src="${esc(im)}" alt="" loading="lazy">`:esc(p.e||"🍳")}</i>`}).join("")}</div></a></div>`}
+document.addEventListener("click",e=>{const t=e.target;
+  const g=t.closest("[data-kgo],[data-kp]");if(g&&!e.metaKey&&!e.ctrlKey){e.preventDefault();kGo(g.dataset.kp||g.dataset.kgo||"");return}
+  if(view!=="cuisine")return;
+  if(t.closest("[data-kadd]")){kAdd(false);return}if(t.closest("[data-kbuy]")){kAdd(true);return}
+  const q=t.closest("[data-kq]");if(q){const P=kParents().find(p=>p.slug===kRoute.slug),mx=P?kStk(kCur(P)):null;kQty=Math.max(1,Math.min(mx===null?99:Math.max(1,mx),kQty+ +q.dataset.kq));$$(".k-qty b").forEach(b=>b.textContent=kQty);return}
+  const v=t.closest("[data-kvar]");if(v){kVar=v.dataset.kvar;kQty=1;renderCuisine();return}
+  const z=t.closest("[data-kz]");if(z){kZoom(+z.dataset.kz);return}
+  const th=t.closest("[data-kth]");if(th){kGi=+th.dataset.kth;const G=$("#kGal");G.scrollTo({left:(document.dir==="rtl"?-1:1)*kGi*G.clientWidth,behavior:"smooth"});return}
+  const y=t.closest("[data-yt]");if(y){y.outerHTML=`<iframe class="k-vid" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(y.dataset.yt)}?autoplay=1&rel=0" title="Vidéo" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;return}
+  const sc=t.closest("[data-kscroll]");if(sc){e.preventDefault();$("#"+sc.dataset.kscroll)?.scrollIntoView({behavior:"smooth"});return}
+  const r=t.closest("[data-krev]");if(r){kSendRev(r.dataset.krev,r);return}});
+
+/* ================= admin · 🍳 Cuisine: every product page is edited here (texts, photos, video, prices, stock, variants, SEO, reviews) ================= */
+let kaRev=null;
+function kSyncKids(P){kKids(P.id).forEach(k=>{const v=k.vn||{};k.n=`${P.n}${v.ar||v.fr?" - "+(v.ar||v.fr):""}`;k.fr=`${pn(P)}${v.fr||v.ar?" - "+(v.fr||v.ar):""}`;k.img=P.img;k.e=P.e||"🍳"})}
+function kUniqSlug(s,id){let b=kSlug(s)||"produit",x=b,i=2;while(products.some(p=>p.c===KC&&!p.par&&p.id!==id&&p.slug===x))x=`${b}-${i++}`;return x}
+async function kUpload(id,file,max=1400){const blob=await resizeImage(file,max);const path=`${id}-${Date.now()}.jpg`;ok(await SB.storage.from("products").upload(path,blob,{contentType:"image/jpeg"}));return SB.storage.from("products").getPublicUrl(path).data.publicUrl}
+A.cuisine=()=>{const L=kParents(),q=($("#aQ")?.value||"").trim().toLowerCase();
+  $("#kaK").innerHTML=kmini([["Produits",L.length,"basket"],["En ligne",L.filter(p=>p.on!==false&&+p.p>0).length,"eye"],["Variantes",products.filter(p=>p.c===KC&&p.par).length,"layers"],["Avis à valider",(kaRev||[]).filter(r=>!r.ok).length,"star","r"]]);
+  $("#kaList").innerHTML=L.filter(p=>!q||`${p.an||""} ${p.n} ${pn(p)} ${p.slug}`.toLowerCase().includes(q)).map(p=>{const im=photoOf(p),K=kKids(p.id),a=kAvail(p),off=kOff(p);
+    return `<div class="stc xa-c ${p.on===false?"xa-off":""}" data-kedit="${esc(p.id)}" tabindex="0"><div class="stc-h"><span class="th" style="${im?`background-image:url('${esc(im)}')`:""}">${im?"":esc(p.e||"🍳")}</span><div class="stc-n"><b>${esc(pn(p))}</b><small dir="rtl" style="text-align:start">${esc(p.n)}</small><small>/cuisine/${esc(p.slug)}</small></div><span class="ps ps-${p.on===false?"off":a.ok?"done":"cancel"}">${p.on===false?"Brouillon":a.ok?"En ligne":"Rupture"}</span></div>
+      <div class="stc-k xa-k"><div class="stc-b"><small>Prix</small><b class="num">${fmt(p.p)}</b></div><div class="stc-b"><small>Ancien</small><b class="num">${+p.old?fmt(p.old):"—"}</b></div><div class="stc-b ${off?"o":""}"><small>Remise</small><b class="num">${off?off+"%":"—"}</b></div><div class="stc-b"><small>Stock</small><b class="num">${kStk(p)===null?"—":fmt(p.stock)}</b></div><div class="stc-b"><small>Variantes</small><b class="num">${K.length}</b></div></div>
+      <div class="stc-a"><button type="button" class="btn b-gh sm" data-kedit="${esc(p.id)}">✏️ Modifier la page</button><a class="btn b-gh sm" href="https://www.khedar48.com/cuisine/${esc(p.slug)}" target="_blank" rel="noopener">🔗 Voir</a></div></div>`}).join("")||`<p class="hint">Aucun produit. Cliquez sur « ➕ Nouveau produit ».</p>`;
+  if(kaRev===null){kaRev=[];kaLoadRev()}
+  $("#kaRev").innerHTML=(kaRev||[]).map(r=>{const p=byId(r.pid);return `<div class="ka-r ${r.ok?"":"todo"}"><div><b>${esc(r.name)}</b> ${kStars(r.rating)} <small class="hint">· ${esc(p?pn(p):r.pid)} · ${new Date(r.at).toLocaleDateString("fr-FR")}</small>${r.body?`<p>${esc(r.body)}</p>`:""}</div>
+    <div class="ka-ra">${r.ok?`<span class="ps ps-done">Publié</span><button class="btn b-gh sm" data-krok="${esc(r.id)}" data-v="0">Masquer</button>`:`<button class="btn b-gr sm" data-krok="${esc(r.id)}" data-v="1">✅ Publier</button>`}<button class="btn b-gh sm" data-krdel="${esc(r.id)}">🗑️</button></div></div>`}).join("")||`<p class="hint">Aucun avis pour l'instant. Seuls les clients qui ont reçu un produit peuvent laisser un avis.</p>`};
+async function kaLoadRev(){try{if(cloud){const {data,error}=await SB.from("reviews").select("id,pid,name,rating,body,ok,at").order("at",{ascending:false}).limit(300);if(error)throw error;kaRev=data||[]}
+    else kaRev=kParents().flatMap(p=>store.get("rev:"+p.id,[]).map(r=>({...r,pid:p.id}))).sort((a,b)=>a.at<b.at?1:-1)}
+  catch(e){console.warn(e);kaRev=[];$("#kaRevErr").textContent="Avis indisponibles : exécutez supabase-cuisine.sql dans Supabase."}if(aTab==="cuisine")renderAdmin()}
+async function kaRevSet(id,patch){const r=(kaRev||[]).find(x=>String(x.id)===String(id));if(!r)return;
+  if(patch===null&&!confirm(`Supprimer définitivement l'avis de « ${r.name} » ?`))return;
+  try{if(cloud){ok(patch===null?await SB.from("reviews").delete().eq("id",r.id):await SB.from("reviews").update(patch).eq("id",r.id))}
+    else{const L=store.get("rev:"+r.pid,[]),i=L.findIndex(x=>String(x.id)===String(id));if(i>=0){if(patch===null)L.splice(i,1);else Object.assign(L[i],patch)}store.set("rev:"+r.pid,L)}
+    if(patch===null)kaRev=kaRev.filter(x=>x!==r);else Object.assign(r,patch);delete kRev[r.pid];kRevAllT=0;renderAdmin();toast(patch===null?"Avis supprimé":patch.ok?"✅ Avis publié":"Avis masqué")}
+  catch(e){console.warn(e);toast("Échec, réessayez")}}
+function openKEd(id){const P=byId(id);if(!P){closeSheet();return}mode="ked:"+id;const K=kKids(P.id),G=kGal(P),up=canUpload(),s=P.seo||{};
+  const f=(l,k,v,o="",h="")=>`<label class="xs-f"><span>${l}${h?` <small class="hint">${h}</small>`:""}</span><input data-kf="${k}" value="${esc(v??"")}" ${o}></label>`;
+  const ta=(l,k,v,h="",dir="")=>`<label class="xs-f"><span>${l}${h?` <small class="hint">${h}</small>`:""}</span><textarea data-kf="${k}" rows="4" maxlength="2000" ${dir?`dir="${dir}"`:""}>${esc(v||"")}</textarea></label>`;
+  const two=(l,k,h="")=>`<div class="ke-2">${ta(l+" · FR",k+".fr",P[k]?.fr,h)}${ta(l+" · AR",k+".ar",P[k]?.ar,h,"rtl")}</div>`;
+  $("#shTitle").textContent=`🍳 ${pn(P)}`;
+  $("#shBody").innerHTML=`<div class="xs ke" dir="ltr">
+    <details open><summary>🧾 Infos & prix</summary>
+      <div class="ke-2">${f("Nom (français)","fr",P.fr,'maxlength="80"')}${f("Nom (arabe)","n",P.n,'maxlength="80" dir="rtl"')}</div>
+      ${f("Nom interne","an",P.an,'maxlength="60"',"vu seulement par vous")}
+      ${f("Adresse de la page","slug",P.slug,'maxlength="70" dir="ltr"',"khedar48.com/cuisine/…")}
+      <div class="ke-3">${f("Prix (MAD)","p",+P.p||"",'type="number" min="0" step="1" class="num"')}${f("Ancien prix","old",+P.old||"",'type="number" min="0" step="1" class="num"',"barré")}${f("Prix d'achat","cost",+P.cost||"",'type="number" min="0" step="0.5" class="num"')}</div>
+      <label class="xs-f"><span>📦 Stock (pièces) <small class="hint">vide = non suivi</small></span><input type="number" min="0" step="1" value="${kStk(P)===null?"":P.stock}" data-stock="${esc(P.id)}" class="num"></label>
+      <label class="xa-sw xs-on"><input type="checkbox" class="sw" data-kf="on" ${P.on!==false?"checked":""}><span>${P.on!==false?"En ligne (visible sur le site)":"Brouillon (caché)"}</span></label></details>
+    <details open><summary>📸 Photos & vidéo</summary>
+      <div class="ke-g">${G.map((u,i)=>`<div class="ke-gi ${safeImg(s.img)===u?"seo":""}"><img src="${esc(u)}" alt=""><div><button type="button" data-kgl="${i}" title="Mettre en premier" ${i?"":"disabled"}>⭐</button><button type="button" data-kgs="${i}" title="Image de partage (SEO)">🔗</button><button type="button" data-kgd="${i}" title="Retirer">✕</button></div></div>`).join("")}
+        ${up?`<label class="ke-add">➕<span>Photos</span><input type="file" accept="image/*" multiple data-kgadd></label>`:`<p class="hint">Photos : connectez Supabase</p>`}</div>
+      <p class="hint">⭐ = photo principale · 🔗 = image de partage (Facebook, WhatsApp)</p>
+      ${f("Vidéo de démonstration","vid",P.vid,'maxlength="300" dir="ltr" placeholder="https://youtube.com/… ou lien .mp4"')}
+      ${up?`<label class="btn b-gh sm ke-vup">🎬 Envoyer une vidéo (MP4, max 50 Mo)<input type="file" accept="video/mp4,video/webm,video/quicktime" data-kvup></label>`:""}</details>
+    <details open><summary>📝 Textes de la page</summary>
+      ${two("Description courte","sh")}
+      ${two("Avantages","ben","une ligne = un avantage")}
+      ${two("Description détaillée","ds","une ligne = un paragraphe")}
+      ${two("Caractéristiques","spec","une ligne = « Matière : inox »")}
+      ${two("Mode d'emploi","how","une ligne = une étape")}</details>
+    <details ${K.length?"open":""}><summary>🎨 Variantes (${K.length})</summary>
+      ${K.length?`<div class="ke-2">${f("Nom de ce modèle · FR","vn.fr",P.vn?.fr,'maxlength="40" placeholder="ex : 24 cm"')}${f("Nom de ce modèle · AR","vn.ar",P.vn?.ar,'maxlength="40" dir="rtl"')}</div>`:""}
+      ${K.map(k=>`<div class="ke-v"><input data-kv="vn.fr" data-kid="${esc(k.id)}" value="${esc(k.vn?.fr||"")}" placeholder="Nom FR"><input data-kv="vn.ar" data-kid="${esc(k.id)}" value="${esc(k.vn?.ar||"")}" placeholder="الاسم" dir="rtl"><input data-kv="p" data-kid="${esc(k.id)}" type="number" min="0" value="${+k.p||""}" placeholder="Prix" class="num"><input data-kv="old" data-kid="${esc(k.id)}" type="number" min="0" value="${+k.old||""}" placeholder="Ancien" class="num"><input type="number" min="0" step="1" value="${kStk(k)===null?"":k.stock}" placeholder="Stock" data-stock="${esc(k.id)}" class="num"><label class="xa-sw"><input type="checkbox" class="sw" data-kv="on" data-kid="${esc(k.id)}" ${k.on!==false?"checked":""}></label><button type="button" class="btn b-gh sm" data-kvdel="${esc(k.id)}">✕</button></div>`).join("")}
+      <button type="button" class="btn b-gh sm" data-kvadd>➕ Ajouter une variante (taille, couleur…)</button></details>
+    <details><summary>🧺 Souvent achetés ensemble (${(P.rel||[]).length})</summary>
+      <div class="ke-rel">${(P.rel||[]).map(id=>{const x=byId(id);return x?`<span class="tagx">${esc(pn(x))} <button type="button" data-krel="${esc(id)}">✕</button></span>`:""}).join("")}</div>
+      <select data-kreladd><option value="">➕ Ajouter un produit recommandé…</option>${products.filter(x=>x.id!==P.id&&!x.par&&+x.p>0).map(x=>`<option value="${esc(x.id)}">${esc((x.c===KC?"🍳 ":"")+pn(x))}</option>`).join("")}</select></details>
+    <details><summary>🔎 SEO & partage</summary>
+      ${f("Titre SEO","seo.t",s.t,'maxlength="70"',"60 caractères conseillés")}
+      ${ta("Meta description","seo.d",s.d,"155 caractères conseillés")}
+      <div class="ke-seo"><b>${esc(s.t||`${pn(P)} · KHEDAR48 CUISINE`)}</b><span>khedar48.com/cuisine/${esc(P.slug)}</span><p>${esc(s.d||kT(P.sh)||"")}</p></div></details>
+    <button type="button" class="btn b-gh sm ke-del" data-kdel="${esc(P.id)}">🗑️ Supprimer ce produit</button></div>`;
+  $("#shFoot").innerHTML=`<a class="btn b-gh" href="https://www.khedar48.com/cuisine/${esc(P.slug)}" target="_blank" rel="noopener">🔗 Voir la page</a><button class="btn b-gr" id="closeSheet2">✓ Terminé</button>`;
+  $("#sheet").classList.add("open");$("#scrim").classList.add("open")}
+function kEdP(){return String(mode).startsWith("ked:")?byId(mode.slice(4)):null}
+function kSave(P,re){if(P)kSyncKids(P);saveCatalog("products");renderAdmin();if(re&&P)openKEd(P.id)}
+document.addEventListener("change",async e=>{const t=e.target,P=kEdP();if(!P||!t.closest("#shBody"))return;
+  if(t.dataset.kf){const k=t.dataset.kf,v=String(t.value).trim();
+    if(k==="on")P.on=t.checked;
+    else if(k==="slug"){P.slug=kUniqSlug(v||P.fr||P.n,P.id);t.value=P.slug}
+    else if(["p","old","cost"].includes(k)){const n=Math.max(0,Math.round((+v||0)*100)/100);if(n>0)P[k]=n;else if(k==="p")P.p=0;else delete P[k]}
+    else if(k.includes(".")){const [a,b]=k.split(".");P[a]={...(P[a]||{})};if(v)P[a][b]=v.slice(0,2000);else delete P[a][b];if(!Object.keys(P[a]).length)delete P[a]}
+    else if(k==="vid"){if(!v||/^https:\/\//.test(v))v?P.vid=v.slice(0,300):delete P.vid;else{toast("Le lien doit commencer par https://");return}}
+    else{if(v)P[k]=v.slice(0,80);else if(k!=="n")delete P[k]}
+    if(k==="fr"&&!P.slugSet&&/^nouveau-produit/.test(P.slug||"")){P.slug=kUniqSlug(v,P.id)}
+    if(k==="slug")P.slugSet=1;
+    kSave(P,k==="on"||k==="slug"||(k==="fr"&&!P.slugSet));toast("✓ Enregistré");return}
+  if(t.dataset.kv){const k=byId(t.dataset.kid);if(!k)return;const f=t.dataset.kv,v=String(t.value).trim();
+    if(f==="on")k.on=t.checked;else if(f==="p"||f==="old"){const n=Math.max(0,+v||0);if(n>0)k[f]=n;else if(f==="p")k.p=0;else delete k.old}
+    else{const [a,b]=f.split(".");k[a]={...(k[a]||{})};k[a][b]=v.slice(0,40)}
+    kSave(P);toast("✓ Variante enregistrée");return}
+  if(t.matches("[data-kgadd]")&&t.files?.length){toast("Envoi des photos…");try{const U=[];for(const fl of [...t.files].slice(0,10))U.push(await kUpload(P.id,fl));const G=[...kGal(P),...U];P.img=G[0];P.gal=G.slice(1);kSave(P,true);toast(`📸 ${U.length} photo(s) ajoutée(s) ✓`)}catch(err){console.warn(err);toast("Échec de l'envoi. Essayez une image plus légère.")}return}
+  if(t.matches("[data-kvup]")&&t.files?.[0]){const fl=t.files[0];if(fl.size>50*1024*1024){toast("Vidéo trop lourde (max 50 Mo)");return}toast("Envoi de la vidéo… (patientez)");
+    try{const ext=(fl.name.split(".").pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,5)||"mp4",path=`${P.id}-v-${Date.now()}.${ext}`;ok(await SB.storage.from("products").upload(path,fl,{contentType:fl.type||"video/mp4"}));P.vid=SB.storage.from("products").getPublicUrl(path).data.publicUrl;kSave(P,true);toast("🎬 Vidéo ajoutée ✓")}
+    catch(err){console.warn(err);toast("Échec de l'envoi de la vidéo")}return}
+  if(t.matches("[data-kreladd]")&&t.value){P.rel=[...new Set([...(P.rel||[]),t.value])].slice(0,12);kSave(P,true);return}});
+document.addEventListener("click",async e=>{const t=e.target;
+  if(t.closest("#kNew")){const id="k"+Date.now().toString(36);const P={id,c:KC,u:"pc",n:"منتج جديد",fr:"Nouveau produit",slug:kUniqSlug("nouveau-produit",id),p:0,on:false,e:"🍳"};products.push(P);await saveCatalog("products");renderAdmin();openKEd(id);return}
+  const ed=t.closest("[data-kedit]");if(ed&&!t.closest("a")){openKEd(ed.dataset.kedit);return}
+  const ok1=t.closest("[data-krok]");if(ok1){kaRevSet(ok1.dataset.krok,{ok:ok1.dataset.v==="1"});return}
+  const rd=t.closest("[data-krdel]");if(rd){kaRevSet(rd.dataset.krdel,null);return}
+  const P=kEdP();if(!P||!t.closest("#sheet"))return;
+  const G=kGal(P),setG=L=>{P.img=L[0]||"";P.gal=L.slice(1);if(!P.img)delete P.img;if(!P.gal.length)delete P.gal};
+  const gl=t.closest("[data-kgl]");if(gl){const i=+gl.dataset.kgl;setG([G[i],...G.filter((_,j)=>j!==i)]);kSave(P,true);return}
+  const gs=t.closest("[data-kgs]");if(gs){P.seo={...(P.seo||{}),img:G[+gs.dataset.kgs]};kSave(P,true);toast("🔗 Image de partage choisie");return}
+  const gd=t.closest("[data-kgd]");if(gd){const u=G[+gd.dataset.kgd];setG(G.filter(x=>x!==u));if(P.seo?.img===u)delete P.seo.img;kSave(P,true);return}
+  if(t.closest("[data-kvadd]")){const k={id:`${P.id}--${Date.now().toString(36).slice(-5)}`,c:KC,u:"pc",par:P.id,vn:{fr:"",ar:""},p:+P.p||0,...(+P.old?{old:+P.old}:{}),...(+P.cost?{cost:+P.cost}:{}),on:true};products.push(k);kSave(P,true);return}
+  const vd=t.closest("[data-kvdel]");if(vd){const k=byId(vd.dataset.kvdel);if(k&&confirm(`Supprimer la variante « ${kT(k.vn)||k.id} » ?`)){products=products.filter(x=>x!==k);delete cart[k.id];kSave(P,true)}return}
+  const rl=t.closest("[data-krel]");if(rl){P.rel=(P.rel||[]).filter(x=>x!==rl.dataset.krel);kSave(P,true);return}
+  const dl=t.closest("[data-kdel]");if(dl){if(!confirm(`Supprimer « ${pn(P)} » et ses variantes ? Cette action est définitive.`))return;const ids=new Set([P.id,...kKids(P.id).map(k=>k.id)]);products=products.filter(x=>!ids.has(x.id));ids.forEach(i=>delete cart[i]);closeSheet();saveCatalog("products");renderAll();toast("Produit supprimé");return}});
+
 loadLocal();
-show(TEAM_HOST&&location.pathname==="/"&&!location.hash.slice(1)?"login":CC_URL&&!location.hash.slice(1)?(isTeam()?"cc":"login"):LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
+show(!TEAM_HOST&&kFromPath()?(kRoute=kFromPath(),kBase(true),"cuisine"):TEAM_HOST&&location.pathname==="/"&&!location.hash.slice(1)?"login":CC_URL&&!location.hash.slice(1)?(isTeam()?"cc":"login"):LIV_URL&&!location.hash.slice(1)?(isTeam()?"driver":"login"):ADMIN_URL&&!location.hash.slice(1)?(staff?"admin":"login"):route(location.hash.slice(1))||"shop");
 initCloud().then(()=>{if(!cloud)track("visit");if(!cloud&&pendingTrack){const h=pendingTrack;pendingTrack=null;trackFromHash(h)}}).catch(e=>{console.warn(e);setSync("error");renderAll();toast("مشكل فالاتصال، عاود حل الصفحة")});
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 /* ---------------- app install + push notifications (admin & drivers) ----------------
