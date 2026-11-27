@@ -406,6 +406,12 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .xa-capg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:10px}.xcp{border:1px solid var(--line);border-radius:14px;padding:12px}.xcp small{display:block;font-size:12px;color:var(--mut,#777);font-weight:700}.xcp b{display:block;font-size:22px;margin:4px 0}.xcp span{font-size:12px;color:var(--mut,#777)}
 .xcp.main{background:#1a9e44;color:#fff;border-color:#1a9e44}.xcp.main small,.xcp.main span{color:#e6f6ec}.xcp.g b{color:#1a9e44}.xcp.r b{color:#c0392b}.xa-warn{margin:10px 0 0;color:#b86e00;font-size:13px}
 .xa-cl{display:flex;justify-content:space-between;gap:8px;font-size:12px;background:#f2faf5;border-radius:9px;padding:6px 9px;margin:-2px 0 8px}.xa-cl b{color:#137a35}.xa-cs{margin-inline-start:auto;margin-inline-end:10px;font-weight:800;color:#137a35}
+.co-opt{font-weight:500;color:var(--mut,#888);font-size:12px}.co-fast{background:#f1faf3;border-radius:12px;padding:10px 12px;margin:0 0 12px;font-weight:700;color:#0e7a35;font-size:14px}
+.co-back{display:flex;gap:10px;align-items:center;background:#f1faf3;border:1px solid #cfe9d7;border-radius:14px;padding:12px;margin-bottom:12px}.co-back>div{flex:1;min-width:0}.co-back b{display:block}.co-back small{display:block;color:#4b6355;font-size:13px}.co-hi{font-size:26px}
+.co-more{margin:4px 0 12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.co-more summary{cursor:pointer;font-weight:700;font-size:14px}.co-more[open] summary{margin-bottom:10px}
+.co-call{display:block;text-align:center;font-size:13.5px;margin:4px 0 10px;color:#0e7a35;text-decoration:none;background:#fff;border:1px dashed #9bd3ae;border-radius:12px;padding:9px}
+.cart-alt{display:flex;gap:8px;margin-top:8px}.cart-alt .btn{flex:1;text-align:center;text-decoration:none}
+.pk-buy{display:block;width:calc(100% - 16px);margin:6px 8px 0;border:0;border-radius:10px;background:#ff7a00;color:#fff;font:inherit;font-weight:800;font-size:13px;padding:8px 6px;cursor:pointer}
 /* sticky cart bar: appears as soon as the cart has something, one tap to the order form */
 .cbar{position:fixed;left:0;right:0;bottom:16px;z-index:34;display:flex;justify-content:center;padding:0 12px;pointer-events:none;transform:translateY(calc(100% + 160px));visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s}
 .cbar.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
@@ -2533,7 +2539,7 @@ function pcard(p){const im=photoOf(p),off=priced(p)&&+p.old>+p.p?Math.round((1-p
   return `<article class="pc ${p.on===false?"na":""}"><div class="pc-im">
     ${im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="emo" aria-hidden="true">${esc(p.e)}</span>`}
     ${pkO}${off?`<span class="off num">-${off}%</span>`:""}<button class="fav" data-fav="${esc(p.id)}" aria-pressed="${fv}" aria-label="${esc(t("favs"))}">${HEART}</button></div>
-    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>${pkS}
+    <b class="pc-n" title="${esc(nm(p))}">${esc(nm(p))}</b>${pkS}${pk&&p.on!==false?`<button class="pk-buy" data-quick="${esc(p.id)}">⚡ ${lang==="fr"?"Commander ce pack":"طلب هاد الباك"}</button>`:""}
     <div class="pc-f"><span class="pc-p num"><b class="${off?"red":""}">${dh(p.p)}</b>${per?`<small>/${t("kg")}</small>`:""}${off?`<s>${dh(p.old)}</s>`:""}</span>${p.on===false?`<span class="hint">${t("unavailable")}</span>`:stepper(p.id)}</div></article>`}
 const dh=n=>lang==="fr"?`${fmt(n)} DH`:`${fmt(n)} درهم`;
 function renderShop(){
@@ -2678,18 +2684,32 @@ function renderCart(){
     <div class="g"><span>${t("total")}</span><span>${money(tt.total)}</span></div></div>
     <div class="bar"><i style="width:${Math.min(100,(tt.sub-tt.disc)/Math.max(1,+settings.freeFrom||0)*100)}%"></i></div>
     <p class="hint num" style="margin:0 0 10px">${left?t("addMore",money(left)):t("freeOk")}</p>
-    <button class="btn b-or block" id="toCheckout">${t("checkout",money(tt.total))}</button>`;
+    <button class="btn b-or block" id="toCheckout">${t("checkout",money(tt.total))}</button>
+    <div class="cart-alt"><a class="btn b-wa" id="cartWa" href="${esc(cartWaUrl())}" target="_blank" rel="noopener">💬 ${lang==="fr"?"Commander sur WhatsApp":"طلب فالواتساب"}</a><a class="btn b-gh" href="tel:+${WA}">📞 ${lang==="fr"?"Appeler":"عيّط لينا"}</a></div>`;
 }
+/* order on WhatsApp straight from the cart (no form): the message goes to the shop in Arabic */
+function cartWaUrl(){const L=lines(),tt=totals();
+  const msg=["السلام عليكم، بغيت نطلب من خضار 48 🌿","",...L.map(l=>`• ${l.it.n} — ${qtyLabel(l.it,l.q)} = ${fmt(l.sum)} د.م`),"",`المجموع: ${fmt(tt.sub)} د.م`,tt.disc?`التخفيض: −${fmt(tt.disc)} د.م`:"",`التوصيل: ${tt.fee?fmt(tt.fee)+" د.م":"فابور"}`,`الإجمالي: ${fmt(tt.total)} د.م`,"","السمية: ","الحومة / العنوان: "].filter(x=>x!=="").join("\n");
+  return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`}
+document.addEventListener("click",e=>{if(e.target.closest("#cartWa")){track("wa");pix("checkout",pixItems(lines()),totals().total)}
+  if(e.target.closest("#coEdit")){const F=document.querySelector(".co-fields");if(F){F.hidden=false;$("#coName")?.focus()}e.target.closest(".co-back")?.remove()}
+  const q=e.target.closest("[data-quick]");if(q){const id=q.dataset.quick,it=byId(id);if(!it||!priced(it)||it.on===false)return;if(!cart[id])addOne(id);openSheet("checkout")}});
 function renderCheckout(){
-  $("#shTitle").textContent=t("deliveryInfo");const d=store.get("profile",{});
+  $("#shTitle").textContent=t("deliveryInfo");const d=store.get("profile",{}),fr=lang==="fr",opt=`<small class="co-opt">${fr?"(facultatif)":"(اختياري)"}</small>`;
+  const back=!!(d.name&&/^(\+212|0)[5-7]\d{8}$/.test(String(d.phone||"").replace(/[\s.-]+/g,"")));
   $("#shBody").innerHTML=`<form class="form" id="coForm" novalidate>
+    ${back?`<div class="co-back"><span class="co-hi">👋</span><div><b>${fr?"Bon retour":"مرحبا بيك من جديد"}, ${esc(String(d.name).split(" ")[0])} !</b><small dir="ltr">${esc(d.phone)}</small>${d.hood||d.addr?`<small>📍 ${esc([d.hood,d.addr].filter(Boolean).join(" · "))}</small>`:""}</div><button type="button" class="lnk" id="coEdit">✏️ ${fr?"Modifier":"بدّل"}</button></div>`:`<p class="co-fast">⚡ ${fr?"Juste votre nom et votre téléphone : on vous appelle pour le reste.":"غير السمية والتيليفون، والباقي كنتاصلو بيك."}</p>`}
+    <div class="co-fields" ${back?"hidden":""}>
     <div class="fld"><label for="coName">${t("name")}</label><input id="coName" autocomplete="name" value="${esc(d.name)}" placeholder="${esc(t("namePh"))}"></div>
     <div class="fld"><label for="coPhone">${t("phone")}</label><input id="coPhone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" value="${esc(d.phone)}" placeholder="06 12 34 56 78"></div>
-    <div class="fld"><label for="coHood">${t("hood")}</label><input id="coHood" maxlength="60" autocomplete="address-level3" value="${esc(d.hood||"")}" placeholder="${t("hoodPh")}"></div>
-    <div class="fld"><label for="coAddr">${t("addr")}</label><input id="coAddr" value="${esc(d.addr)}" placeholder="${esc(t("addrPh"))}"></div>
+    <div class="fld"><label for="coHood">${t("hood")} ${opt}</label><input id="coHood" maxlength="60" autocomplete="address-level3" value="${esc(d.hood||"")}" placeholder="${t("hoodPh")}"></div>
+    <div class="fld"><label for="coAddr">${t("addr")} ${opt}</label><input id="coAddr" value="${esc(d.addr)}" placeholder="${esc(t("addrPh"))}"></div>
     <div class="fld"><button type="button" class="gps-btn" id="coLoc">📍 ${lang==="fr"?"Partager ma position (GPS)":"حدد الموقع ديالي (GPS)"}</button><p class="gps-st" id="coLocS">${locTxt()}</p></div>
+    </div>
+    <details class="co-more"><summary>➕ ${fr?"Heure de livraison et remarque":"وقت التوصيل وملاحظة"} ${opt}</summary>
     <div class="fld"><label>${t("slot")}</label><div class="slots">${SLOTS.map((s,i)=>`<label><input type="radio" name="slot" value="${i}" ${i===0?"checked":""}>${lang==="fr"?SLOTS_FR[i]:s}</label>`).join("")}</div></div>
-    <div class="fld"><label for="coNote">${t("note")}</label><textarea id="coNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div>
+    <div class="fld"><label for="coNote">${t("note")}</label><textarea id="coNote" rows="2" placeholder="${esc(t("notePh"))}"></textarea></div></details>
+    <a class="co-call" href="tel:+${WA}">📞 ${fr?"Pas envie d'écrire ? Appelez-nous :":"ما بغيتيش تكتب؟ عيّط لينا:"} <b dir="ltr">${WA_PRETTY}</b></a>
     <p class="co-priv">📞 ${esc(t("draftNote"))}</p>
     <div class="err" id="coErr" role="alert"></div></form>`;draftSave();
   const tt=totals();
@@ -2710,12 +2730,11 @@ function askLoc(){const S=$("#coLocS"),B=$("#coLoc"),fr=lang==="fr";
       S.textContent=e.code===1?(fr?"Localisation refusée : autorisez-la dans les réglages, ou écrivez bien l'adresse.":"رفضتي الموقع: سمح بيه فالإعدادات، ولا كتب العنوان مزيان."):(fr?"Position introuvable, réessayez dehors ou écrivez l'adresse.":"ما لقيناش الموقع، عاود جرب ولا كتب العنوان.")},
     {enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
 async function placeOrder(){
+  if(!$("#coName").value.trim()||!/^(\+212|0)[5-7]\d{8}$/.test($("#coPhone").value.replace(/[\s.-]+/g,""))){const F=document.querySelector(".co-fields");if(F)F.hidden=false}
   const name=$("#coName").value.trim(),phone=$("#coPhone").value.replace(/[\s.-]+/g,""),hood=$("#coHood").value.trim().slice(0,60),addr=$("#coAddr").value.trim(),note=$("#coNote").value.trim();
   const slot=SLOTS[+document.querySelector("input[name=slot]:checked").value];const E=$("#coErr");
   if(!name){E.textContent=t("eName");$("#coName").focus();return}
   if(!/^(\+212|0)[5-7]\d{8}$/.test(phone)){E.textContent=t("ePhone");$("#coPhone").focus();return}
-  if(!hood){E.textContent=t("eHood");$("#coHood").focus();return}
-  if(!addr){E.textContent=t("eAddr");$("#coAddr").focus();return}
   store.set("profile",{name,phone,hood,addr});
   const L=lines(),tt=totals(),id="K48-"+Date.now().toString(36).slice(-6).toUpperCase(),tk=newToken();
   const o={at:Date.now(),name,phone,hood,addr,slot,note,lang,tk,items:L.map(l=>[l.it.id,l.q,l.it.n,l.it.p]),sub:tt.sub,disc:tt.disc,code:tt.disc?promoCode.toUpperCase():"",fee:tt.fee,total:tt.total,status:"new",driver:"",...(coLoc?{loc:coLoc}:{})};
