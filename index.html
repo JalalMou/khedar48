@@ -3187,7 +3187,11 @@ function stockSold(){const st=stockFrom(),m={},res={},pk={},pend=settings.stkPen
 const soldOrd=(S,id)=>{const x=S.m[id];return x?r2(x.d+x.k):0};
 /* everything that left the stock: delivered orders + shop sales + losses typed by the admin */
 const soldTot=(S,id)=>{const p=byId(id);return r2(soldOrd(S,id)+(+p?.sMan||0)+(+p?.sLoss||0))};
-function stockSync(S){S=S||stockSold();let ch=false;
+/* stock typed in "Achats & prix" (p.stock) becomes the Total automatically; orders already taken out by apply_stock are added back so they are not counted twice */
+function stockAdopt(S){const st=stockFrom(),pend=settings.stkPend||[],back={};let ch=false;const L=products.filter(p=>p.c!=="panier"&&typeof p.sIn!=="number"&&typeof p.stock==="number");if(!L.length)return false;
+  staffOrdersAll().forEach(o=>{if(o.status!=="done"||!o.stk||((+o.at||0)<st&&!pend.includes(o.id)))return;Object.entries(stockOut(o.items)).forEach(([id,q])=>back[id]=r2((back[id]||0)+q))});
+  L.forEach(p=>{p.sIn=r2(p.stock+(back[p.id]||0));ch=true});return ch}
+function stockSync(S){S=S||stockSold();let ch=stockAdopt(S);
   products.forEach(p=>{if(typeof p.sIn!=="number"||p.c==="panier")return;const v=Math.max(0,r2(p.sIn-soldTot(S,p.id)));if(p.stock!==v){p.stock=v;ch=true}});
   if(ch&&role==="admin")saveCatalog("products");return S}
 function openStk(id,adj){const p=byId(id);if(!p){closeSheet();return}mode="stk:"+id;const S=stockSold(),st=stockFrom(),u=UFR[p.u]||"",x=S.m[p.id]||{d:0,k:0,w:0,c:0},r=S.res[p.id],has=typeof p.sIn==="number",sold=soldTot(S,p.id),rest=has?r2(p.sIn-sold):null;
@@ -3549,7 +3553,7 @@ document.addEventListener("click",e=>{if(!e.target.closest("#aLang"))return;admL
 function renderAdmin(){
   $("#adminGate").hidden=staff;$("#adminBody").hidden=!staff;if(!staff)return;
   if(!NAV.some(n=>n[0]===aTab))aTab="dash";
-  const O=staffOrders(),act=O.filter(o=>ACTIVE.includes(o.status)),len=aDays();relEnsure();if(products.some(p=>typeof p.sIn==="number"))stockSync();const relN=clientsAgg(O).filter(relDue).length;relRemind(relN);
+  const O=staffOrders(),act=O.filter(o=>ACTIVE.includes(o.status)),len=aDays();relEnsure();if(products.some(p=>typeof p.sIn==="number"||typeof p.stock==="number"))stockSync();const relN=clientsAgg(O).filter(relDue).length;relRemind(relN);
   liveWatch();$("#sNav").innerHTML=NAV.map(([k,n,i])=>`<button data-at="${k}" ${k===aTab?'aria-current="page"':""}>${ic(i)}<span>${n}</span>${k==="orders"&&act.length?`<em class="num">${act.length}</em>`:""}${k==="clients"&&relN?`<em class="num rel" title="Clients à relancer">${relN}</em>`:""}</button>`).join("");
   liveBadge();$("#aTitle").textContent=aTab==="dash"?"👑 Espace Admin":NAV.find(n=>n[0]===aTab)[1];
   const nNew=O.filter(o=>o.status==="new").length;$("#aBellN").hidden=!nNew;$("#aBellN").textContent=nNew;
